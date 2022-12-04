@@ -18,7 +18,7 @@ const DoctorLogin = () => {
                     id="email"
                     label="Email Address"
                     name="email"
-                    autoComplete="email"
+                    // autoComplete="email"
                     autoFocus
                 />
                 <TextField
@@ -32,7 +32,7 @@ const DoctorLogin = () => {
                     label="Password"
                     type="password"
                     id="password"
-                    autoComplete="current-password"
+                    // autoComplete="current-password"
                 />
                 <Button
                     // onClick={loginHandler}
