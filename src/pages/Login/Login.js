@@ -1,31 +1,65 @@
 import React from 'react'
 import useStyles from './styles'
-import Radio from '@mui/material/Radio';
-import RadioGroup from '@mui/material/RadioGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormControl from '@mui/material/FormControl';
-import {LoginLogic} from "./LoginLogic"
-
+import { LoginLogic } from "./LoginLogic"
+import { Button } from '@mui/material'
 import DoctorLogin from '../../components/DoctorLogin/DoctorLogin'
 import OpManagerLogin from '../../components/OpManagerLogin/OpManagerLogin'
 
 const Login = () => {
   const classes = useStyles()
   const {
-    handleRadioChange,
-    value
-} = LoginLogic()
+    value,
+    handleChange
+  } = LoginLogic()
   return (
     <div className={classes.root}>
-      {value === "doctor" ? <DoctorLogin /> : <OpManagerLogin /> }
-        {/* <form > */}
-                <FormControl component="fieldset"  className={classes.formControl}>
-                        <RadioGroup aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
-                            <FormControlLabel value="doctor" control={<Radio sx={{color: "#fff"}} color="neutral" />} sx={{color: "#fff"}} label="Login As Doctor" />
-                            <FormControlLabel value="op_manager" control={<Radio sx={{color: "#fff"}} color="neutral" />}sx={{color: "#fff"}}  label="Login As Operation Manager" />
-                        </RadioGroup>
-                </FormControl>
-            {/* </form> */}
+      {/* {value === "1" ? <DoctorLogin /> : value==="2"? <OpManagerLogin /> : ""} */}
+      {/* 2 parts 
+        1st part > for doctors  */}
+      {/* doctor login button */}
+      <div className={classes.container}>
+        <div className={classes.first}>
+
+          {
+            value === "1" ? <DoctorLogin /> : (
+              <div className={classes.form}>
+                <h1>
+                  For Doctors
+                </h1>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => handleChange("1")}
+                >
+                  Login
+                </Button>
+              </div>
+            )
+
+          }
+        </div>
+        <div className={classes.second}>
+
+          {
+            value === "2" ? <OpManagerLogin /> :
+              (
+                <div className={classes.form}>
+                  <h1>
+                    For Operation Manager
+                  </h1>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => handleChange("2")}
+                  >
+                    Login
+                  </Button>
+                </div>
+              )
+          }
+        </div>
+
+      </div>
     </div>
   )
 }

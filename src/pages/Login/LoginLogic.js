@@ -1,14 +1,13 @@
-import {  useState } from 'react'
+import { useState } from 'react'
 
 export const LoginLogic = () => {
-    const [value, setValue] = useState('doctor'); 
-     
-    const handleRadioChange = (event) => {
-      setValue(event.target.value);
-    };
+  const [value, setValue] = useState(null);
 
-    return {
-        handleRadioChange,
-        value   
-    }
+  const handleChange = (newValue) => {
+    setValue(newValue);
+  };
+  return {
+    value,
+    handleChange
+  }
 }
