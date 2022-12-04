@@ -72,18 +72,7 @@ export default makeStyles((theme) => ({
             width:'50vw',
             backgroundColor:'#DFF6FF',
             color: "#256D85",
-            '& button':{
-                width:'10rem',
-                height:'3rem',
-                backgroundColor:'#256D85',
-                color:'#DFF6FF',
-                fontSize:'1rem',
-                fontWeight:'bold',
-                '&:hover':{
-                    backgroundColor:'#256D85',
-                    color:'#DFF6FF',
-                }
-            }
+           
         },
     
 }))
