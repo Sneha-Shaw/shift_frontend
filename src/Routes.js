@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Routes, Route ,Redirect} from "react-router-dom";
+import { BrowserRouter, Routes, Route ,Redirect,Navigate} from "react-router-dom";
 import Login from './pages/Login/Login'
 import { ThemeProvider } from '@mui/material/styles'
 import theme from './theme'
@@ -11,6 +11,7 @@ const Router = () => {
         <ThemeProvider theme={theme}>
             <BrowserRouter>
                 <Routes>
+                    <Route exact path="" element={<Navigate to="/login"/>} />
                     <Route exact path="/login" element={<Login />} />
                     
                 </Routes>
