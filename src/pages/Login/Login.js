@@ -16,16 +16,16 @@ const Login = () => {
     value
 } = LoginLogic()
   return (
-    <div>
+    <div className={classes.root}>
       {value === "doctor" ? <DoctorLogin /> : <OpManagerLogin /> }
-        <form >
+        {/* <form > */}
                 <FormControl component="fieldset"  className={classes.formControl}>
                         <RadioGroup aria-label="quiz" name="quiz" value={value} onChange={handleRadioChange}>
-                            <FormControlLabel value="doctor" control={<Radio color="primary" />} label="Login As Doctor" />
-                            <FormControlLabel value="op_manager" control={<Radio color="primary" />} label="Login As Operation Manager" />
+                            <FormControlLabel value="doctor" control={<Radio sx={{color: "#fff"}} color="neutral" />} sx={{color: "#fff"}} label="Login As Doctor" />
+                            <FormControlLabel value="op_manager" control={<Radio sx={{color: "#fff"}} color="neutral" />}sx={{color: "#fff"}}  label="Login As Operation Manager" />
                         </RadioGroup>
                 </FormControl>
-            </form>
+            {/* </form> */}
     </div>
   )
 }
