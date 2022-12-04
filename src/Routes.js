@@ -9,7 +9,7 @@ import Navbar from './components/Navbar/Navbar'
 
 const Router = () => {
     // doctor info from redux
-    const doctorInfo = null
+    const doctorInfo = "hi"
     return (
         <ThemeProvider theme={theme}>
             <BrowserRouter>
