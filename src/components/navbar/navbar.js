@@ -5,6 +5,7 @@ import Link from '@mui/material/Link'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import SettingsIcon from '@mui/icons-material/Settings';
 import face from '../../assets/face.jpg'
+import SearchIcon from '@mui/icons-material/Search';
 
 const Navbar = () => {
   const classes = useStyles()
@@ -16,10 +17,17 @@ const Navbar = () => {
           <img src={logo} alt="" />
         </Link>
       </div>
+      {/* search */}
+      <div className={classes.search}>
+        <input type="text" placeholder="Search Doctors" />
+        <div className={classes.searchIcon}>
+          <SearchIcon fontSize="large" />
+        </div>
+      </div>
       {/* nav links */}
       <div className={classes.navLinks}>
-        <Link to="/settings" className={classes.link}><SettingsIcon/></Link>
-        <Link to="/notifications" className={classes.link}><NotificationsNoneIcon/></Link>
+        <Link to="/settings" className={classes.link}><SettingsIcon fontSize="large" /></Link>
+        <Link to="/notifications" className={classes.link}><NotificationsNoneIcon fontSize="large"/></Link>
         <Link to="/profile" className={classes.link}><img src={face} alt="" /></Link>
       </div>
 
