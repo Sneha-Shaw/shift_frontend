@@ -1,10 +1,13 @@
 import React from 'react'
 import useStyles from './styles'
+import Sidebar from '../../components/Sidebar/Sidebar'
 
 const Home = () => {
     const classes = useStyles()
   return (
-    <div>Home</div>
+    <div className={classes.root}>
+      <Sidebar />
+    </div>
   )
 }
 
