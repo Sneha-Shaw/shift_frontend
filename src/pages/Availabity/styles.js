@@ -11,15 +11,28 @@ export default makeStyles((theme) => ({
         
     },
     main:{
-        width: "60%",
-        height: "80%",
+        width: "55%",
+        height: "60%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
+        // justifyContent: "center",
         margin: "3rem auto",
         background: "#f7f7f7",
-        // position: "relative",
-        // left: '16rem'
-    }
+        borderRadius: "1rem",
+        padding: "2rem",
+        '&>h1':{
+            fontSize: "3rem",
+            fontWeight: "bold",
+            marginBottom: "2rem",
+
+        }
+    },
+    form:{
+        width: "60%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+    },
+
 }))

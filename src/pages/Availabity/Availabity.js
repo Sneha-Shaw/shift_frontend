@@ -5,6 +5,7 @@ import SubSidebar from '../../components/SubSidebar/SubSidebar'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { Button } from '@mui/material';
 
 const Availabity = () => {
   const classes = useStyles()
@@ -36,7 +37,7 @@ const Availabity = () => {
             sx={{
               display: 'flex',
               flexDirection: 'column',
-              alignItems: 'center',
+              // alignItems: 'center',
             }}
 
           >
@@ -47,6 +48,13 @@ const Availabity = () => {
                 name="monday"
               />}
               label="Monday"
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                width: '100%',
+
+              }}
 
             />
             <FormControlLabel
@@ -98,7 +106,17 @@ const Availabity = () => {
               label="Sunday"
             />
           </FormGroup>
-
+          <Button variant="contained" sx={{
+            width: '80%',
+            margin: '2rem auto',
+            background: '#06383D',
+            color: '#fff',
+            fontSize: "1.5rem",
+            '&:hover': {
+              background: '#06383D',
+              color: '#fff',
+            }
+          }}>Submit</Button>
         </div>
       </div>
     </div>
