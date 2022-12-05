@@ -28,7 +28,7 @@ export default makeStyles((theme) => ({
         width:'25rem',
         height:'50%',
         // backgroundColor:'#F2F2F2',
-        border: "1.5px solid #256D85",
+        border: "1.5px solid #06283D",
         borderRadius:'1rem',
         padding: ".5rem 1rem",
         '& input':{
@@ -52,7 +52,7 @@ export default makeStyles((theme) => ({
         cursor: "pointer",
         marginLeft:'1rem',
         '& svg':{
-            color: "#256D85",
+            color: "#06283D",
             fontSize:'2.2rem'
         }
     },
@@ -61,7 +61,7 @@ export default makeStyles((theme) => ({
         alignItems: "center",
         "& a": {
             margin: "0 2rem",
-            color: "#256D85",
+            color: "#06283D",
             cursor: "pointer",
         },
         "& img": {
