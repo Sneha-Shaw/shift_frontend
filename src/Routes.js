@@ -5,6 +5,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import theme from './theme'
 import Home from "./pages/Home/Home";
 import Navbar from './components/Navbar/Navbar'
+import SelfService from "./pages/SelfService/SelfService";
 
 
 const Router = () => {
@@ -23,6 +24,19 @@ const Router = () => {
                                         <Navbar />
                                         <Home />
                                     </>                                 
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/self-service"
+                        element={
+                            doctorInfo ? (
+                                    <>
+                                        <Navbar />
+                                        <SelfService />
+                                    </>
                             ) : (
                                 <Navigate to="/login" />
                             )
