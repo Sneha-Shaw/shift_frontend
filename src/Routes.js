@@ -6,6 +6,7 @@ import theme from './theme'
 import Home from "./pages/Home/Home";
 import Navbar from './components/Navbar/Navbar'
 import SelfService from "./pages/SelfService/SelfService";
+import Availabity from "./pages/Availabity/Availabity";
 
 
 const Router = () => {
@@ -36,6 +37,19 @@ const Router = () => {
                                     <>
                                         <Navbar />
                                         <SelfService />
+                                    </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/availabilty"
+                        element={
+                            doctorInfo ? (
+                                    <>
+                                        <Navbar />
+                                        <Availabity />
                                     </>
                             ) : (
                                 <Navigate to="/login" />
