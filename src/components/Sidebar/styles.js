@@ -5,9 +5,9 @@ export default makeStyles((theme) => ({
         width: "5%",
         height: "100vh",
         backgroundColor: "#06283D",
-        position: "fixed",
+        // position: "fixed",
         // top: 0,
-        left: 0,
+        // left: 0,
         zIndex: 100,
         [theme.breakpoints.down("sm")]: {
             width: "100%",
@@ -21,7 +21,7 @@ export default makeStyles((theme) => ({
         // justifyContent: "center",
         height: "100%",
         width: "100%",
-        marginTop: "1rem",
+        // marginTop: "1rem",
         [theme.breakpoints.down("sm")]: {
             flexDirection: "row",
         },
