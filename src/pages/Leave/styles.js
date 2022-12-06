@@ -37,15 +37,16 @@ export default makeStyles((theme) => ({
         justifyContent: "space-between",
         alignItems: "center",
         '&>h1': {
-            fontSize: "2rem",
+            fontSize: "2.5rem",
             fontWeight: "bold",
+            color: "#06283D"
         },
         '& button': {
             background: "#f7f7f7",
-            color: "#000",
+            color: "#06283D",
             '&:hover': {
                 background: "#f7f7f7",
-                color: "#000",
+                color: "#06283D",
             }
         }
     },
@@ -76,7 +77,7 @@ export default makeStyles((theme) => ({
                 '&>p': {
                     fontSize: "2rem",
                     fontWeight: "bold",
-                    color: "#000",
+                    color: "#06283D",
                 },
             },
             '& button': {
@@ -101,10 +102,83 @@ export default makeStyles((theme) => ({
             '&>p': {
                 fontSize: "1rem",
                 fontWeight: "bold",
-                color: "#000",
+                color: "#06283D",
                 marginLeft: "1rem",
             }
         }
+    },
+    main__content__form: {
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "2rem",
+        '&>div': {
+            width: "60%",
+            display: "flex",
+            justifyContent: "space-between",
+            margin: "1rem 0",
+            // flexDirection: "column",
+            '& label': {
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                marginRight: "0.5rem",
+                width: "40%",
+                color: "#06283D"
+            },
+           
+            
+            '& textarea': {
+                width: "100%",
+                height: "8rem",
+                resize: "none",
+                borderRadius: "0.5rem",
+                border: "1px solid",
+                padding: "0.5rem",
+                outline: "none",
+               
+            },
+            '&>button': {
+                width: "50%",
+                height: "4rem",
+                background: "#06283D",
+                color: "#fff",
+                borderRadius: "0.5rem",
+                margin: "2rem auto",
+                fontSize: "1.5rem",
+                '&:hover':{
+                    background: "rgba(6, 40, 61,0.9)",
+                    color: "#fff",
+                }
+            }
+        },
+    },
+    main__form: {
+        background: "#f7f7f7",
+
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "2rem",
+        borderRadius: "1rem",
+       
+       
+    },
+    main__content__form__input__div:{
+        width: "80%",
+        '&>select': {
+            width: "90%",
+            height: "3rem",
+            borderRadius: "0.5rem",
+            padding: "0.5rem",
+            outline: "none",
+            border: "1px solid",
+
+        },
     }
+
 
 }))
