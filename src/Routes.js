@@ -6,6 +6,7 @@ import theme from './theme'
 import Home from "./pages/Home/Home";
 import Navbar from './components/Navbar/Navbar'
 import Availabity from "./pages/Availabity/Availabity";
+import Leave from "./pages/Leave/Leave";
 
 
 const Router = () => {
@@ -52,7 +53,19 @@ const Router = () => {
                             )
                         }
                     />
-
+                    <Route
+                        path="/self-service/requests/l"
+                        element={
+                            doctorInfo ? (
+                                    <>
+                                        <Navbar />
+                                        <Leave />
+                                    </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
                 </Routes>
             </BrowserRouter>
         </ThemeProvider>
