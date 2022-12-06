@@ -34,7 +34,7 @@ const Leave = () => {
             status: "declined"
         }
     ]
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useState(false)
     const options = [
         'Casual', 'Sick'
       ];
