@@ -5,7 +5,7 @@ import SubSidebar from '../../components/SubSidebar/SubSidebar'
 import AddIcon from '@mui/icons-material/Add';
 import { Button } from '@mui/material';
 import DateTimePicker from 'react-datetime-picker';
-// import Dropdown from 'react-dropdown';
+import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 
 const Leave = () => {
@@ -35,7 +35,10 @@ const Leave = () => {
         }
     ]
     const [show, setShow] = useState(true)
-  
+    const options = [
+        'Casual', 'Sick'
+      ];
+      const defaultOption = options[0];
     const [fromvalue, onChangefrom] = useState(new Date());
     const [tovalue, onChangeto] = useState(new Date());
     return (
@@ -47,8 +50,8 @@ const Leave = () => {
                     show ? (
                         <div className={classes.main__form}>
                             <div className={classes.header}>
-           
-                                <h1 style={{ color: "#06283D"}}>Apply for Leave</h1>
+
+                                <h1 style={{ color: "#06283D" }}>Apply for Leave</h1>
                             </div>
                             {/* <div className={classes.main__content}> */}
                             <div className={classes.main__content__form}>
@@ -65,30 +68,31 @@ const Leave = () => {
 
                                 {/* to: day,date,month time input am pm dropdown */}
                                 <div className={classes.main__content__form__input}>
-                                            <label >To:</label>
-                                          
-                                                    <div className={classes.main__content__form__input__div}>
-                                                      <DateTimePicker style={{width: "100%"}} onChange={onChangeto} value={tovalue} />  
-                                                       
-                                                    </div>
-                                            
-                                        </div>
+                                    <label >To:</label>
+
+                                    <div className={classes.main__content__form__input__div}>
+                                        <DateTimePicker style={{ width: "100%" }} onChange={onChangeto} value={tovalue} />
+
+                                    </div>
+
+                                </div>
 
                                 <div className={classes.main__content__form__input}>
                                     <label htmlFor="type">Type of Leave:</label>
                                     <div className={classes.main__content__form__input__div}>
-
-                                    <select name="type" id="type">
+                                      
+                                      <Dropdown options={options}value={defaultOption} placeholder="Select an option" />
+                                        {/* <select name="type" id="type">
                                         <option value="casual">Casual</option>
                                         <option value="sick">Sick</option>
-                                    </select>
+                                    </select> */}
                                     </div>
                                 </div>
                                 <div className={classes.main__content__form__input}>
                                     <label htmlFor="reason">Reason:</label>
                                     <div className={classes.main__content__form__input__div}>
 
-                                    <textarea name="reason" id="reason" cols="30" rows="10"/>
+                                        <textarea name="reason" id="reason" cols="30" rows="10" />
                                     </div>
                                 </div>
                                 <div className={classes.main__content__form__input}>

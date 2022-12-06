@@ -130,7 +130,7 @@ export default makeStyles((theme) => ({
            
             
             '& textarea': {
-                width: "100%",
+                width: "97%",
                 height: "8rem",
                 resize: "none",
                 borderRadius: "0.5rem",
@@ -170,7 +170,7 @@ export default makeStyles((theme) => ({
     main__content__form__input__div:{
         width: "80%",
         '&>select': {
-            width: "90%",
+            width: "104%",
             height: "3rem",
             borderRadius: "0.5rem",
             padding: "0.5rem",
@@ -178,6 +178,9 @@ export default makeStyles((theme) => ({
             border: "1px solid",
 
         },
+        '&>div':{
+            width: "100%",
+        }
     }
 
 
