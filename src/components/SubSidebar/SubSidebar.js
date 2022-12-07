@@ -55,12 +55,12 @@ const SubSidebar = () => {
                     </ul>
                 </li>
                 <li className={classes.listItem}>
-                    <Link to="/self-service/schedule" className={classes.navLink}>
+                    <Link to="" className={classes.navLink}>
                         <span className={classes.listItemText}>Schedule</span>
                     </Link>
                     <ul className={classes.subList}>
                         <li className={classes.subListItem}>
-                            <NavLink to='/self-service/schedule'
+                            <NavLink to='/self-service/view/daily'
                                 style={({ isActive }) => ({
                                     color: isActive ? '#47B5FF' : 'none',
                                 })} className={classes.navLink}>
@@ -69,7 +69,7 @@ const SubSidebar = () => {
                             </NavLink>
                         </li>
                         <li className={classes.subListItem}>
-                            <NavLink to='/self-service/schedule'
+                            <NavLink to='/self-service/view/weekly'
                                 style={({ isActive }) => ({
                                     color: isActive ? '#47B5FF' : 'none',
                                 })} className={classes.navLink}>
@@ -78,7 +78,7 @@ const SubSidebar = () => {
                             </NavLink>
                         </li>
                         <li className={classes.subListItem}>
-                            <NavLink to='/self-service/schedule'
+                            <NavLink to='/self-service/view/monthly'
                                 style={({ isActive }) => ({
                                     color: isActive ? '#47B5FF' : 'none',
                                 })} className={classes.navLink}>

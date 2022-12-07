@@ -9,6 +9,10 @@ import Availabity from "./pages/Availabity/Availabity";
 import Leave from "./pages/Leave/Leave";
 import ShiftReplace from "./pages/ShiftReplace/ShiftReplace";
 import SpecialRequest from "./pages/SpecialRequest/SpecialRequest";
+import DailyView from "./pages/DailyView/DailyView";
+import WeeklyView from "./pages/WeeklyView/WeeklyView";
+import MonthlyView from "./pages/MonthlyView/MonthlyView";
+
 
 const Router = () => {
     // doctor info from redux
@@ -93,6 +97,48 @@ const Router = () => {
                                 <>
                                     <Navbar />
                                     <SpecialRequest />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/self-service/view/daily"
+                        element={
+                            doctorInfo ? (
+                                <>
+                                    <Navbar />
+                                    <DailyView />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/self-service/view/weekly"
+                        element={
+                            doctorInfo ? (
+                                <>
+                                    <Navbar />
+                                    <WeeklyView />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/self-service/view/monthly"
+                        element={
+                            doctorInfo ? (
+                                <>
+                                    <Navbar />
+                                    <MonthlyView />
                                 </>
                             ) : (
                                 <Navigate to="/login" />
