@@ -33,8 +33,8 @@ export default makeStyles((theme) => ({
         width: "100%",
         textDecoration: "none",
         color: "white",
-        marginTop: "1rem",
-        padding: "1rem 0",
+        // marginTop: "1rem",
+        padding: "1.5rem 0",
         "&:hover": {
             background: "#256D85",
         },
