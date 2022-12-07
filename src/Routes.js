@@ -8,6 +8,7 @@ import Navbar from './components/Navbar/Navbar'
 import Availabity from "./pages/Availabity/Availabity";
 import Leave from "./pages/Leave/Leave";
 import ShiftReplace from "./pages/ShiftReplace/ShiftReplace";
+import SpecialRequest from "./pages/SpecialRequest/SpecialRequest";
 
 const Router = () => {
     // doctor info from redux
@@ -18,62 +19,81 @@ const Router = () => {
                 <Routes>
                     <Route exact path="/login" element={<Login />} />
                     <Route
+                        exact
                         path="/"
                         element={
                             doctorInfo ? (
-                                    <>
-                                        <Navbar />
-                                        <Home />
-                                    </>                                 
+                                <>
+                                    <Navbar />
+                                    <Home />
+                                </>
                             ) : (
                                 <Navigate to="/login" />
                             )
                         }
                     />
                     <Route
+                        exact
                         path="/self-service"
                         element={
                             doctorInfo ? (
-                                <Navigate to="/self-service/availability"/>
+                                <Navigate to="/self-service/availability" />
                             ) : (
                                 <Navigate to="/login" />
                             )
                         }
                     />
                     <Route
+                        exact
                         path="/self-service/availability"
                         element={
                             doctorInfo ? (
-                                    <>
-                                        <Navbar />
-                                        <Availabity />
-                                    </>
+                                <>
+                                    <Navbar />
+                                    <Availabity />
+                                </>
                             ) : (
                                 <Navigate to="/login" />
                             )
                         }
                     />
                     <Route
-                        path="/self-service/requests/l"
+                        exact
+                        path="/self-service/requests/leave"
                         element={
                             doctorInfo ? (
-                                    <>
-                                        <Navbar />
-                                        <Leave />
-                                    </>
+                                <>
+                                    <Navbar />
+                                    <Leave />
+                                </>
                             ) : (
                                 <Navigate to="/login" />
                             )
                         }
                     />
                     <Route
-                        path="/self-service/requests/sr"
+                        exact
+                        path="/self-service/requests/shift"
                         element={
                             doctorInfo ? (
-                                    <>
-                                        <Navbar />
-                                        <ShiftReplace />
-                                    </>
+                                <>
+                                    <Navbar />
+                                    <ShiftReplace />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/self-service/requests/special"
+                        element={
+                            doctorInfo ? (
+                                <>
+                                    <Navbar />
+                                    <SpecialRequest />
+                                </>
                             ) : (
                                 <Navigate to="/login" />
                             )
