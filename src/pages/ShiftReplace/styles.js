@@ -35,48 +35,52 @@ export default makeStyles((theme) => ({
         alignItems: "center",
         justifyContent: "center",
         '&>button':{
-            width: "50%",
+            width: "40%",
             height: "3.5rem",
             fontSize: "1.5rem",
             fontWeight: "bold",
             background: "#06283D",
             color: "#fff",
-            marginTop: "1.5rem",
+            margin: "1.5rem 0",
             '&:hover':{
                 background: "rgba(6, 40, 61,0.9)",
             }
         }
     },
     formItem:{
-        width: "100%",
+        width: "90%",
         height: "100%",
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
-        flexDirection: "column",
+        // justifyContent: "center",
+            justifyContent: "space-between",
+
+        // flexDirection: "column",
         '&>div':{
             width: "54%",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
             '&>input':{
-                width: "70%",
+                width: "60%",
             }
         },
         '& label':{
             fontSize: "1.5rem",
             // fontWeight: "bold",
             margin: "1rem 0",
+            width: "30%",
             // capitalize
             textTransform: "capitalize",
+            lineHeight: "1.6"
         },
         '& input':{
             width: "50%",
             height: "3rem",
             fontSize: "1.5rem",
             padding: "0 1rem",
-            borderBottom: "1px solid rgba(0, 0, 0, 0.2)",
-            border: "none",
+            border: "1px solid rgba(0, 0, 0, 0.2)",
+            // border: "none",
             outline: "none",
             background: "transparent",
         }
