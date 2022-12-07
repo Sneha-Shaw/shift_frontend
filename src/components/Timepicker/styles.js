@@ -14,6 +14,17 @@ export default makeStyles((theme) => ({
             fontWeight: 'bold',
             color: '#06383D',
             marginRight: '1rem',
+        },
+        '& input':{
+            height: "3rem",
+            fontSize: "1.5rem",
+            padding: "0 0.5rem ",
+            border: "1px solid #ccc",
+            borderRadius: "0.5rem",
+            '&:focus':{
+                outline: "none",
+                border: "1px solid #000",
+            }
         }
     }
 }))
