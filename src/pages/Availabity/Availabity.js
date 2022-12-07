@@ -23,11 +23,38 @@ const Availabity = () => {
   const handleChange = (event) => {
     setDay({ ...day, [event.target.name]: event.target.checked });
   };
-  // map time add timepicker on click add
-  const [time, setTime] = useState([1])
-  const addTime = () => {
-    setTime([...time, 1])
+  // map time add timepicker on click add accorfing to day
+  // diff time for diff day
+  // mondaytime,tuedaytime
+  const[montime,setMontime]=useState([1])
+  const addMontime=()=>{
+    setMontime([...montime,1])
   }
+  const[tuestime,setTuestime]=useState([1])
+  const addTuestime=()=>{
+    setTuestime([...tuestime,1])
+  }
+  const[wedtime,setWedtime]=useState([1])
+  const addWedtime=()=>{
+    setWedtime([...wedtime,1])
+  }
+  const[thutime,setThutime]=useState([1])
+  const addThutime=()=>{
+    setThutime([...thutime,1])
+  }
+  const[fritime,setFritime]=useState([1])
+  const addFritime=()=>{
+    setFritime([...fritime,1])
+  }
+  const[sattime,setSattime]=useState([1])
+  const addSattime=()=>{
+    setSattime([...sattime,1])
+  }
+  const[suntime,setSuntime]=useState([1])
+  const addSuntime=()=>{
+    setSuntime([...suntime,1])
+  }
+  
 
   return (
     <div className={classes.root}>
@@ -72,25 +99,25 @@ const Availabity = () => {
             />
             {day.monday && <div className={classes.time}>
               {
-                time.map((item, index) => (
+                montime.map((item, index) => (
                   <div key={index}>
                     {/* show add icon at the last element */}
-                    {index === time.length - 1 && <div className={classes.Addtime}>
+                    {index === montime.length - 1 && <div className={classes.Addtime}>
                       <AddIcon
                         onClick={
-                          addTime
+                          addMontime
                         }
                       />
                     </div>}
 
-                
+
                     <Timepicker placeholder="Start Time" />
                     <Timepicker placeholder="End Time" />
-                    <hr className={classes.hr}/>
+                    <hr className={classes.hr} />
                   </div>
                 ))
               }
-             
+
             </div>}
             <FormControlLabel
               control={<Checkbox
@@ -108,26 +135,26 @@ const Availabity = () => {
             />
             {
               day.tuesday && <div className={classes.time}>
-                   {
-                time.map((item, index) => (
-                  <div key={index}>
-                    {/* show add icon at the last element */}
-                    {index === time.length - 1 && <div className={classes.Addtime}>
-                      <AddIcon
-                        onClick={
-                          addTime
-                        }
-                      />
-                    </div>}
+                {
+                  tuestime.map((item, index) => (
+                    <div key={index}>
+                      {/* show add icon at the last element */}
+                      {index === tuestime.length - 1 && <div className={classes.Addtime}>
+                        <AddIcon
+                          onClick={
+                            addTuestime
+                          }
+                        />
+                      </div>}
 
-                
-                    <Timepicker placeholder="Start Time" />
-                    <Timepicker placeholder="End Time" />
-                    <hr className={classes.hr}/>
-                  </div>
-                ))
-              }
-             
+
+                      <Timepicker placeholder="Start Time" />
+                      <Timepicker placeholder="End Time" />
+                      <hr className={classes.hr} />
+                    </div>
+                  ))
+                }
+
               </div>
             }
             <FormControlLabel
@@ -148,26 +175,26 @@ const Availabity = () => {
             />
             {
               day.wednesday && <div className={classes.time}>
-                  {
-                time.map((item, index) => (
-                  <div key={index}>
-                    {/* show add icon at the last element */}
-                    {index === time.length - 1 && <div className={classes.Addtime}>
-                      <AddIcon
-                        onClick={
-                          addTime
-                        }
-                      />
-                    </div>}
+                {
+                  wedtime.map((item, index) => (
+                    <div key={index}>
+                      {/* show add icon at the last element */}
+                      {index === wedtime.length - 1 && <div className={classes.Addtime}>
+                        <AddIcon
+                          onClick={
+                            addWedtime
+                          }
+                        />
+                      </div>}
 
-                
-                    <Timepicker placeholder="Start Time" />
-                    <Timepicker placeholder="End Time" />
-                    <hr className={classes.hr}/>
-                  </div>
-                ))
-              }
-             
+
+                      <Timepicker placeholder="Start Time" />
+                      <Timepicker placeholder="End Time" />
+                      <hr className={classes.hr} />
+                    </div>
+                  ))
+                }
+
               </div>
             }
             <FormControlLabel
@@ -188,26 +215,26 @@ const Availabity = () => {
             />
             {
               day.thursday && <div className={classes.time}>
-                  {
-                time.map((item, index) => (
-                  <div key={index}>
-                    {/* show add icon at the last element */}
-                    {index === time.length - 1 && <div className={classes.Addtime}>
-                      <AddIcon
-                        onClick={
-                          addTime
-                        }
-                      />
-                    </div>}
+                {
+                  thutime.map((item, index) => (
+                    <div key={index}>
+                      {/* show add icon at the last element */}
+                      {index === thutime.length - 1 && <div className={classes.Addtime}>
+                        <AddIcon
+                          onClick={
+                            addThutime
+                          }
+                        />
+                      </div>}
 
-                
-                    <Timepicker placeholder="Start Time" />
-                    <Timepicker placeholder="End Time" />
-                    <hr className={classes.hr}/>
-                  </div>
-                ))
-              }
-             
+
+                      <Timepicker placeholder="Start Time" />
+                      <Timepicker placeholder="End Time" />
+                      <hr className={classes.hr} />
+                    </div>
+                  ))
+                }
+
               </div>
             }
             <FormControlLabel
@@ -228,26 +255,26 @@ const Availabity = () => {
             />
             {
               day.friday && <div className={classes.time}>
-                  {
-                time.map((item, index) => (
-                  <div key={index}>
-                    {/* show add icon at the last element */}
-                    {index === time.length - 1 && <div className={classes.Addtime}>
-                      <AddIcon
-                        onClick={
-                          addTime
-                        }
-                      />
-                    </div>}
+                {
+                  fritime.map((item, index) => (
+                    <div key={index}>
+                      {/* show add icon at the last element */}
+                      {index === fritime.length - 1 && <div className={classes.Addtime}>
+                        <AddIcon
+                          onClick={
+                            addFritime
+                          }
+                        />
+                      </div>}
 
-                
-                    <Timepicker placeholder="Start Time" />
-                    <Timepicker placeholder="End Time" />
-                    <hr className={classes.hr}/>
-                  </div>
-                ))
-              }
-             
+
+                      <Timepicker placeholder="Start Time" />
+                      <Timepicker placeholder="End Time" />
+                      <hr className={classes.hr} />
+                    </div>
+                  ))
+                }
+
               </div>
             }
             <FormControlLabel
@@ -268,26 +295,26 @@ const Availabity = () => {
             />
             {
               day.saturday && <div className={classes.time}>
-                  {
-                time.map((item, index) => (
-                  <div key={index}>
-                    {/* show add icon at the last element */}
-                    {index === time.length - 1 && <div className={classes.Addtime}>
-                      <AddIcon
-                        onClick={
-                          addTime
-                        }
-                      />
-                    </div>}
+                {
+                  sattime.map((item, index) => (
+                    <div key={index}>
+                      {/* show add icon at the last element */}
+                      {index === sattime.length - 1 && <div className={classes.Addtime}>
+                        <AddIcon
+                          onClick={
+                            addSattime
+                          }
+                        />
+                      </div>}
 
-                
-                    <Timepicker placeholder="Start Time" />
-                    <Timepicker placeholder="End Time" />
-                    <hr className={classes.hr}/>
-                  </div>
-                ))
-              }
-             
+
+                      <Timepicker placeholder="Start Time" />
+                      <Timepicker placeholder="End Time" />
+                      <hr className={classes.hr} />
+                    </div>
+                  ))
+                }
+
               </div>
             }
             <FormControlLabel
@@ -308,26 +335,26 @@ const Availabity = () => {
             />
             {
               day.sunday && <div className={classes.time}>
-                  {
-                time.map((item, index) => (
-                  <div key={index}>
-                    {/* show add icon at the last element */}
-                    {index === time.length - 1 && <div className={classes.Addtime}>
-                      <AddIcon
-                        onClick={
-                          addTime
-                        }
-                      />
-                    </div>}
+                {
+                  suntime.map((item, index) => (
+                    <div key={index}>
+                      {/* show add icon at the last element */}
+                      {index === suntime.length - 1 && <div className={classes.Addtime}>
+                        <AddIcon
+                          onClick={
+                            addSuntime
+                          }
+                        />
+                      </div>}
 
-                
-                    <Timepicker placeholder="Start Time" />
-                    <Timepicker placeholder="End Time" />
-                    <hr className={classes.hr}/>
-                  </div>
-                ))
-              }
-             
+
+                      <Timepicker placeholder="Start Time" />
+                      <Timepicker placeholder="End Time" />
+                      <hr className={classes.hr} />
+                    </div>
+                  ))
+                }
+
               </div>
             }
           </FormGroup>
