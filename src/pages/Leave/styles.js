@@ -9,12 +9,12 @@ export default makeStyles((theme) => ({
     },
     main: {
         width: "55%",
-        height: "60%",
+        // height: "60%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         // justifyContent: "center",
-        margin: "3rem auto",
+        margin: "8rem auto",
         borderRadius: "1rem",
         padding: "2rem",
         '&>h1': {
@@ -171,18 +171,7 @@ export default makeStyles((theme) => ({
     },
     main__content__form__input__div: {
         width: "80%",
-        '&>select': {
-            width: "104%",
-            height: "3rem",
-            borderRadius: "0.5rem",
-            padding: "0.5rem",
-            outline: "none",
-            border: "1px solid",
-
-        },
-        '&>div': {
-            width: "100%",
-        }
+       
     }
 
 
