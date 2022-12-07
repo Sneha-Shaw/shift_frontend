@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
         width: "100%",
         height: "100vh",
         display: "flex",
-
+        background: "#f7f7f7",
     },
     main: {
         width: "55%",
@@ -15,7 +15,6 @@ export default makeStyles((theme) => ({
         alignItems: "center",
         // justifyContent: "center",
         margin: "3rem auto",
-        // background: "#f7f7f7",
         borderRadius: "1rem",
         padding: "2rem",
         '&>h1': {
@@ -42,7 +41,7 @@ export default makeStyles((theme) => ({
             color: "#06283D"
         },
         '& button': {
-            background: "#f7f7f7",
+            background: "#fff",
             color: "#06283D",
             '&:hover': {
                 background: "#f7f7f7",
@@ -63,10 +62,12 @@ export default makeStyles((theme) => ({
             justifyContent: "space-between",
             alignItems: "center",
             padding: "1rem",
-            background: "#f7f7f7",
+            background: "#fff",
+            boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
+
             borderRadius: "1rem",
             marginBottom: "1rem",
-            border: "1px solid",
+            border: "1px solid rgba(0,0,0,0.2)",
             '&>div': {
                 display: "flex",
                 flexDirection: "column",
@@ -127,8 +128,8 @@ export default makeStyles((theme) => ({
                 width: "40%",
                 color: "#06283D"
             },
-           
-            
+
+
             '& textarea': {
                 width: "97%",
                 height: "8rem",
@@ -137,7 +138,7 @@ export default makeStyles((theme) => ({
                 border: "1px solid",
                 padding: "0.5rem",
                 outline: "none",
-               
+
             },
             '&>button': {
                 width: "50%",
@@ -147,7 +148,7 @@ export default makeStyles((theme) => ({
                 borderRadius: "0.5rem",
                 margin: "2rem auto",
                 fontSize: "1.5rem",
-                '&:hover':{
+                '&:hover': {
                     background: "rgba(6, 40, 61,0.9)",
                     color: "#fff",
                 }
@@ -155,7 +156,8 @@ export default makeStyles((theme) => ({
         },
     },
     main__form: {
-        background: "#f7f7f7",
+        background: "#fff",
+        boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
 
         width: "100%",
         display: "flex",
@@ -164,10 +166,10 @@ export default makeStyles((theme) => ({
         justifyContent: "center",
         padding: "2rem",
         borderRadius: "1rem",
-       
-       
+
+
     },
-    main__content__form__input__div:{
+    main__content__form__input__div: {
         width: "80%",
         '&>select': {
             width: "104%",
@@ -178,7 +180,7 @@ export default makeStyles((theme) => ({
             border: "1px solid",
 
         },
-        '&>div':{
+        '&>div': {
             width: "100%",
         }
     }
