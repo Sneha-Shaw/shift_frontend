@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 export default makeStyles((theme) => ({
     root:{
         width: "25%",
-        height: "100%",
+        height: "unset",
         backgroundColor: "#256D85",
         display: "flex",
         flexDirection: "column",

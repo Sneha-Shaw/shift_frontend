@@ -3,11 +3,8 @@ import { makeStyles } from "@mui/styles";
 export default makeStyles((theme) => ({
     root: {
         width: "5%",
-        height: "100vh",
+        height: "",
         backgroundColor: "#06283D",
-        // position: "fixed",
-        // top: 0,
-        // left: 0,
         zIndex: 100,
         [theme.breakpoints.down("sm")]: {
             width: "100%",

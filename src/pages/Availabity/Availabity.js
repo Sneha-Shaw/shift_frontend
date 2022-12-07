@@ -5,7 +5,9 @@ import SubSidebar from '../../components/SubSidebar/SubSidebar'
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import { Button } from '@mui/material';
+import { Button, Typography } from '@mui/material';
+import Timepicker from '../../components/Timepicker/TimePicker'
+import AddIcon from '@mui/icons-material/Add';
 
 const Availabity = () => {
   const classes = useStyles()
@@ -21,6 +23,11 @@ const Availabity = () => {
   const handleChange = (event) => {
     setDay({ ...day, [event.target.name]: event.target.checked });
   };
+  // map time add timepicker on click add
+  const [time, setTime] = useState([1])
+  const addTime = () => {
+    setTime([...time, 1])
+  }
 
   return (
     <div className={classes.root}>
@@ -42,12 +49,18 @@ const Availabity = () => {
 
           >
             <FormControlLabel
-              control={<Checkbox defaultChecked
+              control={<Checkbox
                 checked={day.monday}
                 onChange={handleChange}
                 name="monday"
+                sx={{
+                  color: "#06383D",
+                  '&.Mui-checked': {
+                    color: "#06383D",
+                  },
+                }}
               />}
-              label="Monday"
+              label={<Typography className={classes.formControlLabel}>Monday</Typography>}
               sx={{
                 display: 'flex',
                 flexDirection: 'row',
@@ -57,54 +70,266 @@ const Availabity = () => {
               }}
 
             />
+            {day.monday && <div className={classes.time}>
+              {
+                time.map((item, index) => (
+                  <div key={index}>
+                    {/* show add icon at the last element */}
+                    {index === time.length - 1 && <div className={classes.Addtime}>
+                      <AddIcon
+                        onClick={
+                          addTime
+                        }
+                      />
+                    </div>}
+
+                
+                    <Timepicker placeholder="Start Time" />
+                    <Timepicker placeholder="End Time" />
+                    <hr className={classes.hr}/>
+                  </div>
+                ))
+              }
+             
+            </div>}
             <FormControlLabel
-              control={<Checkbox defaultChecked
+              control={<Checkbox
                 checked={day.tuesday}
                 onChange={handleChange}
                 name="tuesday"
+                sx={{
+                  color: "#06383D",
+                  '&.Mui-checked': {
+                    color: "#06383D",
+                  },
+                }}
               />}
-              label="Tuesday"
+              label={<Typography className={classes.formControlLabel}>Tuesday</Typography>}
             />
+            {
+              day.tuesday && <div className={classes.time}>
+                   {
+                time.map((item, index) => (
+                  <div key={index}>
+                    {/* show add icon at the last element */}
+                    {index === time.length - 1 && <div className={classes.Addtime}>
+                      <AddIcon
+                        onClick={
+                          addTime
+                        }
+                      />
+                    </div>}
+
+                
+                    <Timepicker placeholder="Start Time" />
+                    <Timepicker placeholder="End Time" />
+                    <hr className={classes.hr}/>
+                  </div>
+                ))
+              }
+             
+              </div>
+            }
             <FormControlLabel
-              control={<Checkbox defaultChecked
+              control={<Checkbox
                 checked={day.wednesday}
                 onChange={handleChange}
                 name="wednesday"
+                sx={{
+                  color: "#06383D",
+                  '&.Mui-checked': {
+                    color: "#06383D",
+                  },
+                }}
               />}
-              label="Wednesday"
+              label={
+                <Typography className={classes.formControlLabel}>Wednesday</Typography>
+              }
             />
+            {
+              day.wednesday && <div className={classes.time}>
+                  {
+                time.map((item, index) => (
+                  <div key={index}>
+                    {/* show add icon at the last element */}
+                    {index === time.length - 1 && <div className={classes.Addtime}>
+                      <AddIcon
+                        onClick={
+                          addTime
+                        }
+                      />
+                    </div>}
+
+                
+                    <Timepicker placeholder="Start Time" />
+                    <Timepicker placeholder="End Time" />
+                    <hr className={classes.hr}/>
+                  </div>
+                ))
+              }
+             
+              </div>
+            }
             <FormControlLabel
-              control={<Checkbox defaultChecked
+              control={<Checkbox
                 checked={day.thursday}
                 onChange={handleChange}
                 name="thursday"
+                sx={{
+                  color: "#06383D",
+                  '&.Mui-checked': {
+                    color: "#06383D",
+                  },
+                }}
               />}
-              label="Thursday"
+              label={
+                <Typography className={classes.formControlLabel}>Thursday</Typography>
+              }
             />
+            {
+              day.thursday && <div className={classes.time}>
+                  {
+                time.map((item, index) => (
+                  <div key={index}>
+                    {/* show add icon at the last element */}
+                    {index === time.length - 1 && <div className={classes.Addtime}>
+                      <AddIcon
+                        onClick={
+                          addTime
+                        }
+                      />
+                    </div>}
+
+                
+                    <Timepicker placeholder="Start Time" />
+                    <Timepicker placeholder="End Time" />
+                    <hr className={classes.hr}/>
+                  </div>
+                ))
+              }
+             
+              </div>
+            }
             <FormControlLabel
-              control={<Checkbox defaultChecked
+              control={<Checkbox
                 checked={day.friday}
                 onChange={handleChange}
                 name="friday"
+                sx={{
+                  color: "#06383D",
+                  '&.Mui-checked': {
+                    color: "#06383D",
+                  },
+                }}
               />}
-              label="Friday"
+              label={
+                <Typography className={classes.formControlLabel}>Friday</Typography>
+              }
             />
+            {
+              day.friday && <div className={classes.time}>
+                  {
+                time.map((item, index) => (
+                  <div key={index}>
+                    {/* show add icon at the last element */}
+                    {index === time.length - 1 && <div className={classes.Addtime}>
+                      <AddIcon
+                        onClick={
+                          addTime
+                        }
+                      />
+                    </div>}
+
+                
+                    <Timepicker placeholder="Start Time" />
+                    <Timepicker placeholder="End Time" />
+                    <hr className={classes.hr}/>
+                  </div>
+                ))
+              }
+             
+              </div>
+            }
             <FormControlLabel
-              control={<Checkbox defaultChecked
+              control={<Checkbox
                 checked={day.saturday}
                 onChange={handleChange}
                 name="saturday"
+                sx={{
+                  color: "#06383D",
+                  '&.Mui-checked': {
+                    color: "#06383D",
+                  },
+                }}
               />}
-              label="Saturday"
+              label={
+                <Typography className={classes.formControlLabel}>Saturday</Typography>
+              }
             />
+            {
+              day.saturday && <div className={classes.time}>
+                  {
+                time.map((item, index) => (
+                  <div key={index}>
+                    {/* show add icon at the last element */}
+                    {index === time.length - 1 && <div className={classes.Addtime}>
+                      <AddIcon
+                        onClick={
+                          addTime
+                        }
+                      />
+                    </div>}
+
+                
+                    <Timepicker placeholder="Start Time" />
+                    <Timepicker placeholder="End Time" />
+                    <hr className={classes.hr}/>
+                  </div>
+                ))
+              }
+             
+              </div>
+            }
             <FormControlLabel
-              control={<Checkbox defaultChecked
+              control={<Checkbox
                 checked={day.sunday}
                 onChange={handleChange}
                 name="sunday"
+                sx={{
+                  color: "#06383D",
+                  '&.Mui-checked': {
+                    color: "#06383D",
+                  },
+                }}
               />}
-              label="Sunday"
+              label={
+                <Typography className={classes.formControlLabel}>Sunday</Typography>
+              }
             />
+            {
+              day.sunday && <div className={classes.time}>
+                  {
+                time.map((item, index) => (
+                  <div key={index}>
+                    {/* show add icon at the last element */}
+                    {index === time.length - 1 && <div className={classes.Addtime}>
+                      <AddIcon
+                        onClick={
+                          addTime
+                        }
+                      />
+                    </div>}
+
+                
+                    <Timepicker placeholder="Start Time" />
+                    <Timepicker placeholder="End Time" />
+                    <hr className={classes.hr}/>
+                  </div>
+                ))
+              }
+             
+              </div>
+            }
           </FormGroup>
           <Button variant="contained" sx={{
             width: '80%',
