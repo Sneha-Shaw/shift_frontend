@@ -58,7 +58,7 @@ export default makeStyles((theme) => ({
     Addtime:{
         position: "absolute",
         left: "0",
-        top: "0",
+        top: ".5rem",
         border: "1px solid #06383D",
         borderRadius: "50%",
         width: "2rem",
