@@ -35,12 +35,12 @@ const SubSidebar = () => {
                             </NavLink>
                         </li>
                         <li className={classes.subListItem}>
-                            <NavLink to='/self-service/requests/sh'
+                            <NavLink to='/self-service/requests/sr'
                                 style={({ isActive }) => ({
                                     color: isActive ? '#47B5FF' : 'none',
                                 })} className={classes.navLink}>
                                 <ArrowForwardIosIcon />
-                                <span className={classes.listItemText}>Shift replacment</span>
+                                <span className={classes.listItemText}>Shift Replacment</span>
                             </NavLink>
                         </li>
                         <li className={classes.subListItem}>

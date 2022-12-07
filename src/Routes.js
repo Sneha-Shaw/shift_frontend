@@ -7,7 +7,7 @@ import Home from "./pages/Home/Home";
 import Navbar from './components/Navbar/Navbar'
 import Availabity from "./pages/Availabity/Availabity";
 import Leave from "./pages/Leave/Leave";
-
+import ShiftReplace from "./pages/ShiftReplace/ShiftReplace";
 
 const Router = () => {
     // doctor info from redux
@@ -60,6 +60,19 @@ const Router = () => {
                                     <>
                                         <Navbar />
                                         <Leave />
+                                    </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        path="/self-service/requests/sr"
+                        element={
+                            doctorInfo ? (
+                                    <>
+                                        <Navbar />
+                                        <ShiftReplace />
                                     </>
                             ) : (
                                 <Navigate to="/login" />
