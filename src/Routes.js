@@ -12,11 +12,13 @@ import SpecialRequest from "./pages/SpecialRequest/SpecialRequest";
 import DailyView from "./pages/DailyView/DailyView";
 import WeeklyView from "./pages/WeeklyView/WeeklyView";
 import MonthlyView from "./pages/MonthlyView/MonthlyView";
+import Shift from './pages/Shift/Shift'
 
 
 const Router = () => {
     // doctor info from redux
-    const doctorInfo = "hi"
+    const doctorInfo = null
+    const managerInfo= "hi"
     return (
         <ThemeProvider theme={theme}>
             <BrowserRouter>
@@ -26,7 +28,7 @@ const Router = () => {
                         exact
                         path="/"
                         element={
-                            doctorInfo ? (
+                            doctorInfo || managerInfo ? (
                                 <>
                                     <Navbar />
                                     <Home />
@@ -140,6 +142,31 @@ const Router = () => {
                                     <Navbar />
                                     <MonthlyView />
                                 </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/attendance/shift"
+                        element={
+                            managerInfo ? (
+                                <>
+                                    <Navbar />
+                                    <Shift />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                     <Route
+                        exact
+                        path="/attendance"
+                        element={
+                            managerInfo ? (
+                                <Navigate to="/attendance/shift" />
                             ) : (
                                 <Navigate to="/login" />
                             )
