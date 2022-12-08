@@ -40,7 +40,7 @@ const SubSidebar = () => {
                                     color: isActive ? '#47B5FF' : 'none',
                                 })} className={classes.navLink}>
                                 <ArrowForwardIosIcon />
-                                <span className={classes.listItemText}>Shift Replacment</span>
+                                <span className={classes.listItemText}>Shift Replacement</span>
                             </NavLink>
                         </li>
                         <li className={classes.subListItem}>

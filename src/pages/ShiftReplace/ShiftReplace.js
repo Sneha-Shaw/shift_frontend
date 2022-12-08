@@ -21,11 +21,11 @@ const ShiftReplace = () => {
         <h1>Shift Replace</h1>
         <div className={classes.form}>
           <div className={classes.formItem}>
-            <label htmlFor="name">Name of person who cannot work shift:*</label>
+            <label htmlFor="name">Name of person who cannot work:*</label>
             <input type="text" id="name" />
           </div>
           <div className={classes.formItem}>
-            <label htmlFor="name">Name of person who will work shift:*</label>
+            <label htmlFor="name">Name of person who will work:*</label>
             <input type="text" id="name" />
           </div>
           <div className={classes.formItem}>
