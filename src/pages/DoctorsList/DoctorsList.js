@@ -5,7 +5,6 @@ import SubSidebar from '../../components/SubSidebar/SubSidebar'
 import { Button } from '@mui/material'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
 const DoctorsList = () => {
@@ -46,7 +45,7 @@ const DoctorsList = () => {
                 {
                     !show && (
                         <div className={classes.header}>
-                            <h1>Doctors List</h1>
+                            <h1>Doctors</h1>
                             <Button
                                 variant="contained"
                                 onClick={() => setShow(!show)}
@@ -131,7 +130,7 @@ const DoctorsList = () => {
                                                 }
                                             }}
                                         >
-                                            <DeleteForeverIcon fontSize="large" />
+                                            Delete
                                         </Button>
                                     </div>
                                 </div>
