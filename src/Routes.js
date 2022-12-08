@@ -13,6 +13,7 @@ import DailyView from "./pages/DailyView/DailyView";
 import WeeklyView from "./pages/WeeklyView/WeeklyView";
 import MonthlyView from "./pages/MonthlyView/MonthlyView";
 import Break from './pages/Break/Break'
+import DoctorsList from './pages/DoctorsList/DoctorsList'
 
 
 const Router = () => {
@@ -167,6 +168,20 @@ const Router = () => {
                         element={
                             managerInfo ? (
                                 <Navigate to="/attendance/breaks" />
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/attendance/doctors"
+                        element={
+                            managerInfo ? (
+                                <>
+                                    <Navbar />
+                                    <DoctorsList />
+                                </>
                             ) : (
                                 <Navigate to="/login" />
                             )

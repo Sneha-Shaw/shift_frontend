@@ -32,10 +32,6 @@ export default makeStyles((theme) => ({
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        marginBottom: "2rem",
-       
-        padding: "1rem",
-        // borderRadius: "0.5rem",
         '&>button':{
             background: "#fff",
             color: "#000",  
@@ -57,7 +53,6 @@ export default makeStyles((theme) => ({
         alignItems: "center",
         justifyContent: "center",
         margin: "2rem auto",
-        
         background: "#fff",
         // boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
     },
@@ -110,8 +105,9 @@ export default makeStyles((theme) => ({
         alignItems: "center",
         justifyContent: "center",
         margin: "2rem auto",
-        padding: "2rem",
+        padding: "4rem 2rem",
         background: "#fff",
+        borderRadius: "1rem",
         boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
     },
     formItem:{
@@ -119,7 +115,7 @@ export default makeStyles((theme) => ({
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        marginBottom: "1rem",
+        marginBottom: "1.5rem",
         '& label':{
             width: "20%",
             fontSize: '1.5rem',
@@ -140,12 +136,12 @@ export default makeStyles((theme) => ({
             }
         },
         '&>button':{
-            width: "20%",
-            height: "3rem",
-            // fontSize: "1.5rem",
+            width: "30%",
+            height: "4rem",
+            fontSize: "1.2rem",
             fontWeight: "bold",
             background: "#06283D",
-            margin: "auto" ,
+            margin: "2rem auto 0 auto" ,
             '&:hover':{
                 background: "rgba(6, 40, 61,0.9)"
             }
@@ -156,6 +152,7 @@ export default makeStyles((theme) => ({
         }
     },
     formItemTime:{
+        marginBottom: "1.5rem",
         width: "71%",
     }
 
