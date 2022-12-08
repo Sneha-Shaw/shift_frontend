@@ -12,7 +12,7 @@ import SpecialRequest from "./pages/SpecialRequest/SpecialRequest";
 import DailyView from "./pages/DailyView/DailyView";
 import WeeklyView from "./pages/WeeklyView/WeeklyView";
 import MonthlyView from "./pages/MonthlyView/MonthlyView";
-import Shift from './pages/Shift/Shift'
+import Break from './pages/Break/Break'
 
 
 const Router = () => {
@@ -149,12 +149,12 @@ const Router = () => {
                     />
                     <Route
                         exact
-                        path="/attendance/shift"
+                        path="/attendance/breaks"
                         element={
                             managerInfo ? (
                                 <>
                                     <Navbar />
-                                    <Shift />
+                                    <Break />
                                 </>
                             ) : (
                                 <Navigate to="/login" />
@@ -166,7 +166,7 @@ const Router = () => {
                         path="/attendance"
                         element={
                             managerInfo ? (
-                                <Navigate to="/attendance/shift" />
+                                <Navigate to="/attendance/breaks" />
                             ) : (
                                 <Navigate to="/login" />
                             )

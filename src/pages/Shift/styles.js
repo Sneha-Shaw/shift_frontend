@@ -6,6 +6,7 @@ export default makeStyles((theme) => ({
         height: "100vh",
         display: "flex",
         background: "#f7f7f7",
+        position: "relative"
     },
     main:{
         width: "55%",
@@ -101,6 +102,7 @@ export default makeStyles((theme) => ({
             // display: "flex",
             justifyContent: "space-between",
         }
-    }
+    },
+    
 
 }))

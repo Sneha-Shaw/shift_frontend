@@ -36,7 +36,6 @@ const Shift = () => {
         <div className={classes.root}>
             <Sidebar />
             <SubSidebar />
-            {/* shifts list table co taining shift name timing and edit and delelete option */}
             <div className={classes.main}>
                 {/* header */}
                 <div className={classes.header}>

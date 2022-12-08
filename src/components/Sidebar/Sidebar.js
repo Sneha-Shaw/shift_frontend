@@ -3,7 +3,7 @@ import useStyles from './styles'
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-import EventBusyIcon from '@mui/icons-material/EventBusy';
+// import EventBusyIcon from '@mui/icons-material/EventBusy';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {

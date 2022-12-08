@@ -21,16 +21,7 @@ const SubSidebar = () => {
                             </Link>
                             {/* sub list */}
                             <ul className={classes.subList}>
-                                <li className={classes.subListItem}>
-                                    <NavLink to='/attendance/shift'
-                                        style={({ isActive }) => ({
-                                            color: isActive ? '#47B5FF' : 'none',
-                                        })} className={classes.navLink}>
-                                        {/* icon */}
-                                        <ArrowForwardIosIcon />
-                                        <span className={classes.listItemText}>Shifts</span>
-                                    </NavLink>
-                                </li>
+                               
                                 <li className={classes.subListItem}>
                                     <NavLink to='/attendance/breaks'
                                         style={({ isActive }) => ({
