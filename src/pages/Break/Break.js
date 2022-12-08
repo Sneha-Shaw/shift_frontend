@@ -18,7 +18,8 @@ const Break = () => {
             start: '1:30',
             end: '2:30',
             automatic: true,
-            manual: false
+            manual: false,
+            status: true
         },
         {
             name: 'Tea Break',
@@ -26,7 +27,8 @@ const Break = () => {
             start: '10:30',
             end: '11:00',
             automatic: false,
-            manual: true
+            manual: true,
+            status: false
         },
         {
             name: 'Snack Break',
@@ -34,7 +36,8 @@ const Break = () => {
             start: '3:30',
             end: '4:00',
             automatic: false,
-            manual: true
+            manual: true,
+            status: true
         },
     ]
     const options = [
@@ -67,7 +70,7 @@ const Break = () => {
                             </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="duration">Duration:</label>
-                                <input type="text" id="duration" />
+                                <input type="time" id="duration" />
                             </div>
                             <div className={classes.formItemTime}>
                                 <Timepicker placeholder="Start Time" />
@@ -81,6 +84,7 @@ const Break = () => {
                                     options={options}
                                     value={defaultOption}
                                     placeholder="Select an option"
+                                   
                                 />
                             </div>
                             <div className={classes.formItem}>
@@ -116,9 +120,7 @@ const Break = () => {
                                     </div>
                                     <div className={classes.tableRowItem}>
                                         <Switch
-                                            defaultChecked
-                                            // color="default"
-                                            inputProps={{ 'aria-label': 'checkbox with default color' }}
+                                            checked={breaks.status}
                                         />
                                     </div>
                                 </div>
