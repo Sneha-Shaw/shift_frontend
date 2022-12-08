@@ -44,7 +44,7 @@ const Break = () => {
         'Manual', 'Automatic'
     ];
     const defaultOption = options[0];
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useState(false)
 
     return (
         <div className={classes.root}>
@@ -52,18 +52,26 @@ const Break = () => {
             <SubSidebar />
             <div className={classes.main}>
                 {/* header */}
-                <div className={classes.header}>
-                    <h1>Break Details</h1>
-                    <Button
-                        variant="contained"
-                        onClick={() => setShow(!show)}
-                    >
-                        Add Break
-                    </Button>
-                </div>
+                {
+                    !show && (
+                        <div className={classes.header}>
+                            <h1>Break Details</h1>
+                            <Button
+                                variant="contained"
+                                onClick={() => setShow(!show)}
+                            >
+                                Add Break
+                            </Button>
+                        </div>
+                    )
+                }
+
                 {
                     show ? (
                         <div className={classes.form}>
+                            <div className={classes.header}>
+                                <h1 style={{ margin: "0 auto 2rem" }}>Add Break</h1>
+                            </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="breakName">Break Name:</label>
                                 <input type="text" id="breakName" />
@@ -84,7 +92,7 @@ const Break = () => {
                                     options={options}
                                     value={defaultOption}
                                     placeholder="Select an option"
-                                   
+
                                 />
                             </div>
                             <div className={classes.formItem}>
