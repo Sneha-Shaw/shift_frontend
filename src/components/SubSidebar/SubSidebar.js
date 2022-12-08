@@ -28,7 +28,7 @@ const SubSidebar = () => {
                                         })} className={classes.navLink}>
                                         {/* icon */}
                                         <ArrowForwardIosIcon />
-                                        <span className={classes.listItemText}>Shift(s)</span>
+                                        <span className={classes.listItemText}>Shifts</span>
                                     </NavLink>
                                 </li>
                                 <li className={classes.subListItem}>
@@ -53,7 +53,7 @@ const SubSidebar = () => {
                         </li>
                         <li className={classes.listItem}>
                             <Link to="" className={classes.navLink}>
-                                <span className={classes.listItemText}>Schedule</span>
+                                <span className={classes.listItemText}>Views</span>
                             </Link>
                             <ul className={classes.subList}>
                                 <li className={classes.subListItem}>
@@ -144,7 +144,7 @@ const SubSidebar = () => {
                         </li>
                         <li className={classes.listItem}>
                             <Link to="" className={classes.navLink}>
-                                <span className={classes.listItemText}>Schedule</span>
+                                <span className={classes.listItemText}>Views</span>
                             </Link>
                             <ul className={classes.subList}>
                                 <li className={classes.subListItem}>
