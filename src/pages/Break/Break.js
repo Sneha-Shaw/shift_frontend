@@ -51,7 +51,7 @@ const Break = () => {
             <Sidebar />
             <SubSidebar />
             <div className={classes.main}>
-                {/* header */}
+             
                 {
                     !show && (
                         <div className={classes.header}>

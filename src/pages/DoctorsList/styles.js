@@ -87,7 +87,7 @@ export default makeStyles((theme) => ({
     },
     tableRowItem:{
         width: "25%",
-        padding: "1rem",
+        padding: "1rem .5rem    ",
         border: "1px solid #000",
         display: "flex",
         justifyContent: "center",
