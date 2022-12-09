@@ -35,7 +35,7 @@ const DoctorsList = () => {
     ]
     const defaultType = Type[0];
     const [show, setShow] = useState(false)
-    const[employType,setEmploytype]=useState('Permanent')
+    const [employType, setEmploytype] = useState('Permanent')
     return (
         <div className={classes.root}>
             <Sidebar />
@@ -55,7 +55,18 @@ const DoctorsList = () => {
                         </div>
                     )
                 }
-
+                {
+                    show && (
+                        <div className={classes.back}>
+                            <Button
+                                // variant="contained"
+                                onClick={() => setShow(!show)}
+                            >
+                                Back
+                            </Button>
+                        </div>
+                    )
+                }
                 {
                     show ?
                         (<div className={classes.form}>
@@ -82,11 +93,11 @@ const DoctorsList = () => {
                             <div className={classes.formItem}>
                                 <label htmlFor="type">Type:</label>
                                 <Dropdown options={Type} value={defaultType} placeholder="Select an option"
-                                onChange={(e)=>setEmploytype(e.value)} 
+                                    onChange={(e) => setEmploytype(e.value)}
                                 />
                             </div>
                             {
-                                employType==='Contractual' && (
+                                employType === 'Contractual' && (
                                     <div className={classes.formItem}>
                                         <label htmlFor="duration">Duty hours per month:</label>
                                         <input type="text" name="duration" id="duration" />
@@ -97,9 +108,7 @@ const DoctorsList = () => {
                                 <Button variant="contained" color="primary" size="small" onClick={() => setShow(!show)}>
                                     Add
                                 </Button>
-                                {/* <Button variant="contained" color="secondary" size="small" onClick={() => setShow(!show)}>
-                                    Cancel
-                                </Button> */}
+
                             </div>
                         </div>)
                         :
@@ -125,7 +134,7 @@ const DoctorsList = () => {
                                             sx={{
                                                 backgroundColor: "#f44336",
                                                 color: "#fff",
-                                                '&:hover':{
+                                                '&:hover': {
                                                     backgroundColor: "#f44336"
                                                 }
                                             }}

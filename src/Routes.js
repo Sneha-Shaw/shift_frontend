@@ -14,6 +14,8 @@ import WeeklyView from "./pages/WeeklyView/WeeklyView";
 import MonthlyView from "./pages/MonthlyView/MonthlyView";
 import Break from './pages/Break/Break'
 import DoctorsList from './pages/DoctorsList/DoctorsList'
+import Approvals from './pages/Approvals/Approvals'
+import Notifications from './pages/Notifications/Notifications'
 
 
 const Router = () => {
@@ -181,6 +183,34 @@ const Router = () => {
                                 <>
                                     <Navbar />
                                     <DoctorsList />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/attendance/approvals"
+                        element={
+                            managerInfo ? (
+                                <>
+                                    <Navbar />
+                                    <Approvals />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/notifications"
+                        element={
+                          doctorInfo ||  managerInfo ? (
+                                <>
+                                    <Navbar />
+                                    <Notifications />
                                 </>
                             ) : (
                                 <Navigate to="/login" />

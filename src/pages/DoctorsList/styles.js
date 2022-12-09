@@ -14,11 +14,9 @@ export default makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        // justifyContent: "center",
         margin: "8rem auto",
-
+        position: "relative",
         borderRadius: "1rem",
-        // padding: "2rem",
         '& h1':{
             fontSize: "3rem",
             fontWeight: "bold",
@@ -26,6 +24,25 @@ export default makeStyles((theme) => ({
 
         }
 
+    },
+    back:{
+        width: "100%",
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        '&>button':{
+            background: "#fff",
+            color: "#000",
+            border: "1px solid #000",
+            borderRadius: "0.5rem",
+            padding: "0.5rem 1rem",
+            fontSize: "1rem",
+            fontWeight: "bold",
+            '&:hover':{
+                background: "#000",
+                color: "#fff",
+            }
+        }
     },
     header:{
         width: "100%",

@@ -51,7 +51,7 @@ const Break = () => {
             <Sidebar />
             <SubSidebar />
             <div className={classes.main}>
-             
+
                 {
                     !show && (
                         <div className={classes.header}>
@@ -65,10 +65,23 @@ const Break = () => {
                         </div>
                     )
                 }
-
+                {
+                    show && (
+                        <div className={classes.back}>
+                            <Button
+                                // variant="contained"
+                                onClick={() => setShow(!show)}
+                            >
+                                Back
+                            </Button>
+                        </div>
+                    )
+                }
                 {
                     show ? (
                         <div className={classes.form}>
+                            {/* back button setshow false */}
+
                             <div className={classes.header}>
                                 <h1 style={{ margin: "0 auto 2rem" }}>Add Break</h1>
                             </div>
