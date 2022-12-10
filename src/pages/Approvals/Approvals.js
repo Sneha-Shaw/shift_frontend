@@ -98,7 +98,6 @@ const Approvals = () => {
                                               
                                             </div>
                                             <div className={classes.leaveReqItemContent}>
-                                                <div>
                                                 <div className={classes.leaveReqItemContentItem}>
                                                     <h4>Start Date</h4>
                                                     <p>{item.startDate}</p>
@@ -118,7 +117,6 @@ const Approvals = () => {
                                                 <div className={classes.leaveReqItemContentItem}>
                                                     <h4>Status</h4>
                                                     <p>{item.status}</p>
-                                                </div>
                                                 </div>
                                                 <div className={classes.HeaderBtn}>
                                                     <Button variant="contained" className={classes.acceptBtn}>Accept</Button>
