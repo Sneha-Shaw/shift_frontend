@@ -3,7 +3,7 @@ import useStyles from './styles'
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
-// import EventBusyIcon from '@mui/icons-material/EventBusy';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
@@ -36,7 +36,7 @@ const Sidebar = () => {
                                 Attendance
                             </h3>
                         </NavLink>
-                       
+
                     )
                         :
                         <NavLink to='/self-service'
@@ -49,6 +49,13 @@ const Sidebar = () => {
                             </h3>
                         </NavLink>
                 }
+                {/* logout */}
+                <NavLink to='' className={classes.navLink}>
+                    <LogoutIcon fontSize="large" />
+                    <h3>
+                        Logout
+                    </h3>
+                </NavLink>
 
             </div>
         </div>

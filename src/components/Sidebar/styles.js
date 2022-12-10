@@ -35,9 +35,9 @@ export default makeStyles((theme) => ({
         color: "white",
         // marginTop: "1rem",
         padding: "1.5rem 0",
-        "&:hover": {
-            background: "#256D85",
-        },
+        // "&:hover": {
+        //     background: "#256D85",
+        // },
         '& svg':{
             marginBottom: "0.5rem",
         },
