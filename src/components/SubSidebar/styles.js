@@ -2,27 +2,29 @@
 import { makeStyles } from "@mui/styles";
 export default makeStyles((theme) => ({
     root:{
-        width: "25%",
+        width: "20%",
         height: "unset",
-        backgroundColor: "#256D85",
         display: "flex",
         flexDirection: "column",
-        alignItems: "center",
+        position: "relative",
         [theme.breakpoints.down("sm")]: {
-           width: "0"
-        },
+            width: "0%",
+           
+        }
     },
     list:{
         listStyle: "none",
-        padding: 0,
-        marginTop: "3rem",
-        width: "45%",
+        backgroundColor: "#256D85",
+        padding: "2rem 0",
+        // marginTop: "3rem",
+        width: "100%",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
+        // justifyContent: "center",
         '&>li':{
-            width: "100%",
+            width: "70%",
             display: "flex",
             flexDirection: "column",
             alignItems: "left",
@@ -70,4 +72,5 @@ export default makeStyles((theme) => ({
         }
     }
     
+
 }))

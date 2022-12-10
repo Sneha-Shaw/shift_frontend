@@ -7,10 +7,10 @@ const SubSidebar = () => {
     const classes = useStyles()
     const managerInfo = "hi"
 
+
     return (
         <div className={classes.root}>
-            {/*  availabilty, Requests>leave,shift replacment,special request  */}
-            {/* list */}
+         
             {
                 managerInfo ?
                     <ul className={classes.list}>
