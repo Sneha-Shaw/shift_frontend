@@ -102,10 +102,7 @@ export default makeStyles((theme) => ({
                 justifyContent: "space-between",
                 alignItems: "center",
                 fontSize: "initial",
-                [theme.breakpoints.down("sm")]: {
-                    flexDirection: "column",
-                    alignItems: "flex-start"
-                 }
+               
             }
            },
            
@@ -142,12 +139,20 @@ export default makeStyles((theme) => ({
     },
     specialReqItemContent:{
         width: "100%",
-        display: "flex"
+        display: "flex",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column",
+            alignItems: "flex-start"
+         }
     },
     leaveReqItemContentItem:{
         width: "15%",
         
     },
+    row:{
+        width: "80%",
+        display: "flex",
+    }
    
 
 

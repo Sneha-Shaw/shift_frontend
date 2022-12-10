@@ -42,6 +42,7 @@ const Approvals = () => {
     const changeTab = (index) => {
         setTab(index)
     }
+    const isMobile = window.innerWidth <= 600;
 
     return (
         <div className={classes.root}>
@@ -59,9 +60,9 @@ const Approvals = () => {
                 </div>
                 {/* </div> */}
                 <div className={classes.content}
-                style={{
-                    height: '60vh'
-                }}
+                    style={{
+                        height: '60vh'
+                    }}
                 >
                     {
                         tab === 0 && (
@@ -76,11 +77,11 @@ const Approvals = () => {
                                             <div className={classes.specialReqItemContent}>
                                                 <p><strong>Request: </strong>{item.request}</p>
                                                 <div className={classes.HeaderBtn}>
-                                                    <Button  variant="contained" className={classes.acceptBtn}>Accept</Button>
-                                                    <Button  variant="contained" className={classes.rejectBtn}>Reject</Button>
+                                                    <Button variant="contained" className={classes.acceptBtn}>Accept</Button>
+                                                    <Button variant="contained" className={classes.rejectBtn}>Reject</Button>
                                                 </div>
                                             </div>
-                                           
+
                                         </div>
                                     ))
                                 }
@@ -95,7 +96,7 @@ const Approvals = () => {
                                         <div className={classes.leaveReqItem} key={index}>
                                             <div className={classes.leaveReqItemHeader}>
                                                 <h3>{item.name}</h3>
-                                              
+
                                             </div>
                                             <div className={classes.leaveReqItemContent}>
                                                 <div className={classes.leaveReqItemContentItem}>
@@ -118,11 +119,24 @@ const Approvals = () => {
                                                     <h4>Status</h4>
                                                     <p>{item.status}</p>
                                                 </div>
-                                                <div className={classes.HeaderBtn}>
+                                                {
+                                                    !isMobile && (
+                                                        <div className={classes.HeaderBtn}>
+                                                            <Button variant="contained" className={classes.acceptBtn}>Accept</Button>
+                                                            <Button variant="contained" className={classes.rejectBtn}>Reject</Button>
+                                                        </div>
+                                                    )
+                                                }
+
+                                            </div>
+                                            {
+                                                isMobile && (
+                                                    <div className={classes.HeaderBtn}>
                                                     <Button variant="contained" className={classes.acceptBtn}>Accept</Button>
                                                     <Button variant="contained" className={classes.rejectBtn}>Reject</Button>
                                                 </div>
-                                            </div>
+                                                )
+                                            }
                                         </div>
                                     ))
                                 }
