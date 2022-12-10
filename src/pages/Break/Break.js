@@ -132,8 +132,8 @@ const Break = () => {
                                     </tr>
                                 </thead>
 
-                                {breaks.map((breaks) => (
-                                    <tbody>
+                                {breaks.map((breaks,index) => (
+                                    <tbody key={index}>
                                         <tr className={classes.tableRow}>
                                             <td className={classes.tableRowItem}>{breaks.name}</td>
 

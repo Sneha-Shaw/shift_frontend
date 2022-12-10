@@ -19,11 +19,10 @@ const Sidebar = () => {
     const location = useLocation();
     const path = location.pathname;
     const pathArr = path.split('/');
-    const firstPath = '/' + pathArr[1];
+    const firstPath = pathArr[1];
 
     // check if window is laptop or mobile
     const isMobile = window.innerWidth <= 600;
-
     return (
         <div className={classes.root}>
             {/* home and self service icons */}
@@ -41,13 +40,13 @@ const Sidebar = () => {
                 {
                     managerInfo ? (
                         <NavLink
-                            to={isMobile ? firstPath === 'attendance' ? '/attendance' : '#' : '/attendance'}
+                            to={isMobile ? firstPath === 'attendance' ? '#' : '/attendance' : '/attendance'}
                             className={
-                                firstPath === 'attendance' ? classes.active : classes.navLink
+                                // if mobile then check if path contains attendance then active else not
+                                isMobile ? firstPath === 'attendance' ? classes.active : classes.navLink : classes.navLink
                             }
-                            // style if sm breakpoints the check is active 
                             style={({ isActive }) => ({
-                                background: isActive ? '#256D85' : 'none',
+                                background: isMobile ? '' : isActive ? '#256D85' : 'none',
                             })}
                             onClick={toggleSubList}>
                             <EventAvailableIcon fontSize="large" />
@@ -58,7 +57,7 @@ const Sidebar = () => {
 
                     )
                         :
-                        <NavLink 
+                        <NavLink
                             to={isMobile ? firstPath === 'self-service' ? '/self-service' : '#' : '/self-service'}
                             className={
                                 firstPath === 'self-service' ? classes.active : classes.navLink

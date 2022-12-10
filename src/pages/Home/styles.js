@@ -16,7 +16,7 @@ export default makeStyles((theme) => ({
         flexDirection: "column",
         alignItems: "center",
         // justifyContent: "center",
-        padding: "2rem",
+        padding: "2rem 0",
     },
     welcome: {
         width: "60%",
