@@ -3,12 +3,12 @@ import { makeStyles } from "@mui/styles";
 export default makeStyles((theme) => ({
     root: {
         width: "5%",
-        height: "",
+        // height: "",
         backgroundColor: "#06283D",
         zIndex: 100,
         [theme.breakpoints.down("sm")]: {
-            width: "100%",
-            height: "5%",
+            width: "8%",
+            // height: "5%",
         },
     },
     icons:{
@@ -19,9 +19,14 @@ export default makeStyles((theme) => ({
         height: "100%",
         width: "100%",
         // marginTop: "1rem",
+      '& h3':{
+        display: "block",
         [theme.breakpoints.down("sm")]: {
-            flexDirection: "row",
+            display: "none",
+
+
         },
+      }
     },
 
     navLink: {
