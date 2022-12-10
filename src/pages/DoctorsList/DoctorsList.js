@@ -112,39 +112,48 @@ const DoctorsList = () => {
                             </div>
                         </div>)
                         :
-                        (<div className={classes.table}>
-                            <div className={classes.tableHeader}>
-                                <div className={classes.tableHeaderItem}>Name</div>
-                                <div className={classes.tableHeaderItem}>Designation</div>
-                                <div className={classes.tableHeaderItem}>Email</div>
-                                <div className={classes.tableHeaderItem}>Mobile</div>
-                                <div className={classes.tableHeaderItem}>Type</div>
-                                <div className={classes.tableHeaderItem}>Actions</div>
-                            </div>
-                            {doctors.map((doctor) => (
-                                <div className={classes.tableRow}>
-                                    <div className={classes.tableRowItem}>{doctor.name}</div>
-                                    <div className={classes.tableRowItem}>{doctor.designation}</div>
-                                    <div className={classes.tableRowItem}>{doctor.email}</div>
-                                    <div className={classes.tableRowItem}>{doctor.phn}</div>
-                                    <div className={classes.tableRowItem}>{doctor.type}</div>
-                                    <div className={classes.tableRowItem}>
-                                        <Button
-                                            variant="contained"
-                                            sx={{
-                                                backgroundColor: "#f44336",
-                                                color: "#fff",
-                                                '&:hover': {
-                                                    backgroundColor: "#f44336"
-                                                }
-                                            }}
-                                        >
-                                            Delete
-                                        </Button>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>)
+                        (
+                            <div className={classes.tableDiv}>
+                                <table className={classes.table}>
+                                    <thead className={classes.tableHeader}>
+                                        <tr>
+                                            <th className={classes.tableHeaderItem}>Name</th>
+                                            <th className={classes.tableHeaderItem}>Designation</th>
+                                            <th className={classes.tableHeaderItem}>Email</th>
+                                            <th className={classes.tableHeaderItem}>Mobile</th>
+                                            <th className={classes.tableHeaderItem}>Type</th>
+                                            <th className={classes.tableHeaderItem}>Actions</th>
+                                        </tr>
+                                    </thead>
+
+                                    {doctors.map((doctor) => (
+                                        <tbody className={classes.tableRow}>
+                                            <tr>
+                                                <td className={classes.tableRowItem}>{doctor.name}</td>
+                                                <td className={classes.tableRowItem}>{doctor.designation}</td>
+                                                <td className={classes.tableRowItem}>{doctor.email}</td>
+                                                <td className={classes.tableRowItem}>{doctor.phn}</td>
+                                                <td className={classes.tableRowItem}>{doctor.type}</td>
+                                                <td className={classes.tableRowItem}>
+                                                    <Button
+                                                        variant="contained"
+                                                        sx={{
+                                                            backgroundColor: "#f44336",
+                                                            color: "#fff",
+                                                            '&:hover': {
+                                                                backgroundColor: "#f44336"
+                                                            }
+                                                        }}
+                                                    >
+                                                        Delete
+                                                    </Button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    ))}
+                                </table>
+                            </div>)
                 }
 
             </div>

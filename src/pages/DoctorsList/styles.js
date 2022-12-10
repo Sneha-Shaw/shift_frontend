@@ -8,7 +8,7 @@ export default makeStyles((theme) => ({
         background: "#f7f7f7",
         position: "relative"
     },
-    main:{
+    main: {
         width: "55%",
         height: "fit-content",
         display: "flex",
@@ -17,20 +17,25 @@ export default makeStyles((theme) => ({
         margin: "8rem auto",
         position: "relative",
         borderRadius: "1rem",
-        '& h1':{
+        '& h1': {
             fontSize: "3rem",
             fontWeight: "bold",
             marginBottom: "2rem",
-
+            [theme.breakpoints.down("sm")]: {
+                fontSize: "2rem"
+            }
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: "75%",
         }
 
     },
-    back:{
+    back: {
         width: "100%",
         display: "flex",
         justifyContent: "flex-start",
         alignItems: "center",
-        '&>button':{
+        '&>button': {
             background: "#fff",
             color: "#000",
             border: "1px solid #000",
@@ -38,84 +43,98 @@ export default makeStyles((theme) => ({
             padding: "0.5rem 1rem",
             fontSize: "1rem",
             fontWeight: "bold",
-            '&:hover':{
+            '&:hover': {
                 background: "#000",
                 color: "#fff",
             }
         }
     },
-    header:{
+    header: {
         width: "100%",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-        '&>button':{
+        '&>button': {
             background: "#fff",
-            color: "#000",  
+            color: "#000",
             border: "1px solid #000",
             borderRadius: "0.5rem",
             padding: "0.5rem 1rem",
             fontSize: "1rem",
             fontWeight: "bold",
-            '&:hover':{
+            '&:hover': {
                 background: "#000",
                 color: "#fff",
+            },
+            [theme.breakpoints.down("sm")]: {
+                width: "35%",
+                marginBottom: "1rem"
             }
         }
     },
-    table:{
+    tableDiv: {
         width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        margin: "2rem auto",
-        background: "#fff",
-        // boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
-    },
-    tableHeader:{
-        width: "100%",
-        display: "flex",
-        background: "#000",
-        color: "#fff",
-        // padding: ".5rem",
-        fontSize: "1.5rem",
-        fontWeight: "bold",
-       
-    },
-    tableHeaderItem:{
-        width: "25%",
-        padding: "1rem",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+    
         
-    },
-    tableRow:{
-        width: "100%",
-        display: "flex",
-        background: "#fff",
-        color: "#000",
-        fontSize: "1.3rem",
-        '&:nth-child(odd)':{
-            background: "#f7f7f7",
+        [theme.breakpoints.down("sm")]: {
+           
+            overflow: "scroll"
         }
+    },
+    table: {
+        width: "100%",
+        borderCollapse: "collapse",
+        border: "1px solid #000",
+        overflowX: "auto",
+        margin: "2rem 0",
+        background: "#fff",
+        '& thead': {
+            width: "100%",
+            '& tr': {
+                width: "100%",
+                '& th': {
+                    // width: "100%",
+                }
+            }
+        },
+        '& tbody': {
+            width: "100%",
+            '& tr': {
+                width: "100%",
+                '& td': {
+                    // width: "30%",
+                }
+            }
+        },
+        '&>thead>tr>th': {
+            background: "#000",
+            color: "#fff",
+            padding: "1rem",
+            fontSize: "1.2rem",
+            fontWeight: "bold",
+            textAlign: "center",
+            border: "1px solid #000",
+            [theme.breakpoints.down("sm")]: {
+                fontSize: "1rem"
+            }
+        },
+        '&>tbody>tr>td': {
+            padding: "1rem",
+            fontSize: "1.2rem",
+            fontWeight: "bold",
+            textAlign: "center",
+            border: "1px solid",
+            // odd row
+            '&:nth-child(odd)': {
+                background: "#f7f7f7"
+            },
+            [theme.breakpoints.down("sm")]: {
+                fontSize: "1rem"
+            }
+        },
 
     },
-    tableRowItem:{
-        width: "25%",
-        padding: "1rem .5rem    ",
-        border: "1px solid #000",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        '&:nth-child(4)':{
-            // width: "25%",
-            // display: "flex",
-            justifyContent: "space-between",
-        }
-    },
-    form:{
+    form: {
         width: "100%",
         display: "flex",
         flexDirection: "column",
@@ -126,49 +145,65 @@ export default makeStyles((theme) => ({
         background: "#fff",
         borderRadius: "1rem",
         boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
+        [theme.breakpoints.down("sm")]: {
+            padding: "4rem 1rem",
+            margin: "2rem"
+        }
     },
-    formItem:{
+    formItem: {
         width: "60%",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
         marginBottom: "1.5rem",
-        '& label':{
+        '& label': {
             width: "20%",
             fontSize: '1.5rem',
             fontWeight: 'bold',
             color: '#06383D',
             marginRight: '1rem',
         },
-        '& input':{
+        '& input': {
             width: "70%",
             height: "3rem",
             fontSize: "1.5rem",
             padding: "0 0.5rem ",
             border: "1px solid #ccc",
             borderRadius: "0.5rem",
-            '&:focus':{
+            '&:focus': {
                 outline: "none",
                 border: "1px solid #000",
             }
         },
-        '&>button':{
+        '&>button': {
             width: "30%",
             height: "4rem",
             fontSize: "1.2rem",
             fontWeight: "bold",
             background: "#06283D",
-            margin: "2rem auto 0 auto" ,
-            '&:hover':{
+            margin: "2rem auto 0 auto",
+            '&:hover': {
                 background: "rgba(6, 40, 61,0.9)"
             }
         },
-        '&>div':{
+        '&>div': {
             width: "72%",
             // height: "3rem",
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: "90%",
+            '& input': {
+                width: "60%",
+            },
+            '&>div': {
+                width: "65%"
+            },
+            '&>button': {
+                width: "50%",
+            }
         }
     },
-    formItemTime:{
+    formItemTime: {
         marginBottom: "1.5rem",
         width: "71%",
     }

@@ -14,8 +14,22 @@ export default makeStyles((theme) => ({
         [theme.breakpoints.down("sm")]: {
             display: "flex",
             position: "absolute",
-            top: "2rem",
-            left: "1rem"
+            // top: "50%",
+            // left: "1rem",
+            // transform: "translateY(-50%)",
+            justifyContent: "space-between",
+            width: "95%",
+            alignItems: "center",
+            padding: "2rem 0.5rem"
+        }
+    },
+    close:{
+        display: "none",
+        [theme.breakpoints.down("sm")]: {
+            display: "flex",
+            position: "absolute",
+            top: "10%",
+            left: "1.5rem",
         }
     },
     Navmenu: {
@@ -90,11 +104,17 @@ export default makeStyles((theme) => ({
             borderRadius: "50%",
         },
     },
+    
     link: {
         textDecoration: "none",
         '& svg': {
             fontSize: "2.5rem"
-        }
+        },
+        "& img": {
+            width: "4rem",
+            height: "4rem",
+            borderRadius: "50%",
+        },
     },
     mobilenav: {
         display: "none",
@@ -103,12 +123,11 @@ export default makeStyles((theme) => ({
             alignItems: "center",
             justifyContent: "space-between",
             width: "100%",
-            // padding: "0 2rem",
-            // height: "100%",
+            flexDirection: "column",
             position: "absolute",
             top: "0",
             left: 0,
-            zIndex: 10000,
+            zIndex: 100000,
             backgroundColor: "white",
             boxShadow: "0 0 10px rgba(0,0,0,0.2)",
             '&>ul': {

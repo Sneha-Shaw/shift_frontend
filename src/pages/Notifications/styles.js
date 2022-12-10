@@ -33,6 +33,9 @@ export default makeStyles((theme) => ({
             borderRadius: "2rem",
             boxShadow: "0 0 10px 0 rgba(0,0,0,0.1)",
             marginBottom: "1rem",
+            [theme.breakpoints.down("sm")]: {
+                width: "85%",
+            },
             "&:last-child": {
                 marginBottom: 0,
             },
@@ -49,7 +52,8 @@ export default makeStyles((theme) => ({
                 fontWeight: "bold",
                 margin: "1rem 0",
             }
-        }
+        },
+       
     },
     notificationHeader:{
         width: "100%",

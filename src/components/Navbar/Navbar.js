@@ -32,24 +32,24 @@ const Navbar = () => {
         <div className={classes.navLinks}>
           <Link to="/settings" className={classes.link}><SettingsIcon fontSize="large" /></Link>
           <Link to="/notifications" className={classes.link}><NotificationsNoneIcon fontSize="large" /></Link>
-          <Link to="/profile" className={classes.link}><img src={face} alt="" /></Link>
+          <Link to="" className={classes.link}><img src={face} alt="" /></Link>
         </div>
       </div>
 
       {/* menu */}
       <div className={classes.menu} onClick={() => setShow(!show)}>
         <MenuIcon fontSize="large" />
+        <Link to="/profile" className={classes.link}><img src={face} alt="" /></Link>
+
       </div>
+
 
       {
         show && <div className={classes.mobilenav}>
-          <div className={classes.menu} onClick={() => setShow(!show)}>
+          <div className={classes.close} onClick={() => setShow(!show)}>
             <CloseIcon fontSize="large" />
           </div>
           <ul className={classes.list}>
-            <li className={classes.subListItem}>
-              <Link to="/profile" onClick={() => setShow(!show)}>Profile</Link>
-            </li>
             <li className={classes.subListItem}>
               <Link to="/settings" onClick={() => setShow(!show)}>Settings</Link>
             </li>

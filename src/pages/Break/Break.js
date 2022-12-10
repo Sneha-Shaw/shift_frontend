@@ -119,51 +119,52 @@ const Break = () => {
                         </div>
                     )
                         :
-                        <table className={classes.table}>
-                            <thead>
-                                <tr className={classes.tableHeader}>
-                                    <th className={classes.tableHeaderItem}>Break Name</th>
-                                    <th className={classes.tableHeaderItem}>Duration</th>
-                                    <th className={classes.tableHeaderItem}>Start Time</th>
-                                    <th className={classes.tableHeaderItem}>End Time</th>
-                                    <th className={classes.tableHeaderItem}>Type</th>
-                                    <th className={classes.tableHeaderItem}>Status</th>
-                                </tr>
-                            </thead>
-
-                            {breaks.map((breaks) => (
-                                <tbody>
-                                    <tr className={classes.tableRow}>
-                                        <td className={classes.tableRowItem}>{breaks.name}</td>
-
-
-                                        <td className={classes.tableRowItem}>{breaks.duration}</td>
-
-
-                                        <td className={classes.tableRowItem}>{breaks.start}</td>
-
-
-                                        <td className={classes.tableRowItem}>{breaks.end}</td>
-
-
-                                        <td className={classes.tableRowItem}>
-                                            {
-                                                breaks.automatic ? <div>Automatic</div> : <div>Manual</div>
-                                            }
-                                        </td>
-
-
-                                        <td className={classes.tableRowItem}>
-                                            <Switch
-                                                checked={breaks.status}
-                                            />
-                                        </td>
+                        <div className={classes.tableDiv}>
+                            <table className={classes.table}>
+                                <thead>
+                                    <tr className={classes.tableHeader}>
+                                        <th className={classes.tableHeaderItem}>Break Name</th>
+                                        <th className={classes.tableHeaderItem}>Duration</th>
+                                        <th className={classes.tableHeaderItem}>Start Time</th>
+                                        <th className={classes.tableHeaderItem}>End Time</th>
+                                        <th className={classes.tableHeaderItem}>Type</th>
+                                        <th className={classes.tableHeaderItem}>Status</th>
                                     </tr>
-                                </tbody>
+                                </thead>
 
-                            ))}
-                        </table>
+                                {breaks.map((breaks) => (
+                                    <tbody>
+                                        <tr className={classes.tableRow}>
+                                            <td className={classes.tableRowItem}>{breaks.name}</td>
 
+
+                                            <td className={classes.tableRowItem}>{breaks.duration}</td>
+
+
+                                            <td className={classes.tableRowItem}>{breaks.start}</td>
+
+
+                                            <td className={classes.tableRowItem}>{breaks.end}</td>
+
+
+                                            <td className={classes.tableRowItem}>
+                                                {
+                                                    breaks.automatic ? <div>Automatic</div> : <div>Manual</div>
+                                                }
+                                            </td>
+
+
+                                            <td className={classes.tableRowItem}>
+                                                <Switch
+                                                    checked={breaks.status}
+                                                />
+                                            </td>
+                                        </tr>
+                                    </tbody>
+
+                                ))}
+                            </table>
+                        </div>
                 }
 
             </div>

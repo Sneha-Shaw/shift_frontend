@@ -40,6 +40,9 @@ export default makeStyles((theme) => ({
                 color: "#fff",
             },
         },
+        [theme.breakpoints.down("sm")]: {
+            width: "90%",
+        }
     },
     notifications: {
         width: "60%",
@@ -53,6 +56,9 @@ export default makeStyles((theme) => ({
             fontSize: "2.4rem",
             fontWeight: "bold",
         },
+        [theme.breakpoints.down("sm")]: {
+            width: "90%",
+        }
     },
     header: {
         width: "100%",
@@ -100,6 +106,9 @@ export default makeStyles((theme) => ({
                 fontWeight: "bold",
                 margin: "1rem 0",
             }
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: "90%",
         }
     },
    

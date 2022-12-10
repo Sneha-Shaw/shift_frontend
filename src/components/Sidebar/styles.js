@@ -8,7 +8,7 @@ export default makeStyles((theme) => ({
         zIndex: 10000,
         position: "relative",
         [theme.breakpoints.down("sm")]: {
-            width: "10%",
+            width: "15%",
             height: "100%",
         },
     },
@@ -118,7 +118,23 @@ export default makeStyles((theme) => ({
         color: "white",
        
     },
-
+    active:{
+        backgroundColor: "#256D85",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        // height: "100%",
+        width: "100%",
+        textDecoration: "none",
+        color: "white",
+       
+        padding: "1.5rem 0",
+     
+        '& svg':{
+            marginBottom: "0.5rem",
+        },
+    }
 
     
 }))

@@ -109,7 +109,15 @@ export default makeStyles((theme) => ({
         },
       
     },
-
+    tableDiv: {
+        width: "100%",
+    
+        
+        [theme.breakpoints.down("sm")]: {
+           
+            overflow: "scroll"
+        }
+    },
     form: {
         width: "100%",
         display: "flex",

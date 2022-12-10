@@ -6,23 +6,21 @@ import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { NavLink, Link } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useLocation } from 'react-router-dom'
 
 const Sidebar = () => {
     const classes = useStyles()
     const managerInfo = "hi"
     const [showSubList, setShowSubList] = useState(false)
-    // console.log(showSubList);
-    // alternate b/w active and inactive classname
     const toggleSubList = () => {
         setShowSubList(!showSubList)
     }
-    // check path
-    const checkPath = (path) => {
-        if (window.location.pathname === path) {
-            return true
-        }
-        return false
-    }
+
+    const location = useLocation();
+    const path = location.pathname;
+    // extract the first route from path
+    const pathArr = path.split('/');
+    const firstPath = '/' + pathArr[1];
     return (
         <div className={classes.root}>
             {/* home and self service icons */}
@@ -40,12 +38,14 @@ const Sidebar = () => {
                 {
                     managerInfo ? (
                         <NavLink
-                            to={
-                                checkPath('/attendance') ? '/attendance' : ''
+                            to='/attendance'
+                            className={
+                                firstPath === 'attendance' ? classes.active : classes.navLink
                             }
+                            // style if sm breakpoints the check is active 
                             style={({ isActive }) => ({
                                 background: isActive ? '#256D85' : 'none',
-                            })} className={classes.navLink}
+                            })}
                             onClick={toggleSubList}>
                             <EventAvailableIcon fontSize="large" />
                             <h3>
@@ -56,11 +56,11 @@ const Sidebar = () => {
                     )
                         :
                         <NavLink to={
-                            checkPath('/attendance') ? '/attendance' : ''
+                            firstPath === 'self-service' ? '/self-service' : '#'
                         }
-                            style={({ isActive }) => ({
-                                background: isActive ? '#256D85' : 'none',
-                            })} className={classes.navLink}
+                            className={
+                                firstPath === 'self-service' ? classes.active : classes.navLink
+                            }
                             onClick={() => setShowSubList(!showSubList)}>
                             <PersonIcon fontSize="large" />
                             <h3>
