@@ -18,9 +18,12 @@ const Sidebar = () => {
 
     const location = useLocation();
     const path = location.pathname;
-    // extract the first route from path
     const pathArr = path.split('/');
     const firstPath = '/' + pathArr[1];
+
+    // check if window is laptop or mobile
+    const isMobile = window.innerWidth <= 600;
+
     return (
         <div className={classes.root}>
             {/* home and self service icons */}
@@ -38,7 +41,7 @@ const Sidebar = () => {
                 {
                     managerInfo ? (
                         <NavLink
-                            to='/attendance'
+                            to={isMobile ? firstPath === 'attendance' ? '/attendance' : '#' : '/attendance'}
                             className={
                                 firstPath === 'attendance' ? classes.active : classes.navLink
                             }
@@ -55,9 +58,8 @@ const Sidebar = () => {
 
                     )
                         :
-                        <NavLink to={
-                            firstPath === 'self-service' ? '/self-service' : '#'
-                        }
+                        <NavLink 
+                            to={isMobile ? firstPath === 'self-service' ? '/self-service' : '#' : '/self-service'}
                             className={
                                 firstPath === 'self-service' ? classes.active : classes.navLink
                             }

@@ -6,6 +6,9 @@ export default makeStyles((theme) => ({
         // height: "100vh",
         display: "flex",
         background: "#f7f7f7",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column"
+         }
     },
     main: {
         width: "55%",
@@ -16,6 +19,9 @@ export default makeStyles((theme) => ({
         // justifyContent: "center",
         margin: "8rem auto",
         borderRadius: "1rem",
+        [theme.breakpoints.down("sm")]: {
+            width: "90%"
+         }
 
     },
     tabs: {
@@ -55,6 +61,9 @@ export default makeStyles((theme) => ({
         // margin: "2rem auto",
        
         padding: "2rem",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column"
+         },
         '& h3': {
             fontSize: "2rem",
             fontWeight: "bold",
@@ -93,6 +102,10 @@ export default makeStyles((theme) => ({
                 justifyContent: "space-between",
                 alignItems: "center",
                 fontSize: "initial",
+                [theme.breakpoints.down("sm")]: {
+                    flexDirection: "column",
+                    alignItems: "flex-start"
+                 }
             }
            },
            
@@ -117,7 +130,15 @@ export default makeStyles((theme) => ({
             color: "#fff",
             border: "1px solid red",
             borderRadius: "0.5rem",
-        }
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: "60%",
+            margin: "auto",
+            justifyContent: "space-between",
+            '&>button':{
+                width: "45%"
+            }
+         }
     },
     specialReqItemContent:{
         width: "100%",
@@ -126,7 +147,8 @@ export default makeStyles((theme) => ({
     leaveReqItemContentItem:{
         width: "15%",
         
-    }
+    },
+   
 
 
     }))

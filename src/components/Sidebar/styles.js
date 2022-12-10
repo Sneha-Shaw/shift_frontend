@@ -8,8 +8,8 @@ export default makeStyles((theme) => ({
         zIndex: 10000,
         position: "relative",
         [theme.breakpoints.down("sm")]: {
-            width: "15%",
-            height: "100%",
+            width: "100%",
+            height: "9vh",
         },
     },
     list:{
@@ -78,7 +78,8 @@ export default makeStyles((theme) => ({
             '& span':{
                 fontSize: "1.5rem",
             }
-        }
+        },
+        
     },
     
     icons:{
@@ -94,6 +95,9 @@ export default makeStyles((theme) => ({
         [theme.breakpoints.down("sm")]: {
             display: "none",
         },
+      },
+      [theme.breakpoints.down("sm")]: {
+        flexDirection: "row",
       }
     },
 

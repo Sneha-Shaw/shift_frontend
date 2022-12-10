@@ -5,7 +5,9 @@ export default makeStyles((theme) => ({
         width: "100%",
         height: "100vh",
         display: "flex",
-        // background: "#f7f7f7",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column"
+         }
     },
     main: {
         width: "100%",
