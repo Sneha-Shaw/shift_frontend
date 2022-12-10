@@ -109,11 +109,7 @@ export default makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        '&:nth-child(4)':{
-            // width: "25%",
-            // display: "flex",
-            justifyContent: "space-between",
-        }
+       
     },
     form:{
         width: "100%",
