@@ -22,6 +22,9 @@ export default makeStyles((theme) => ({
             fontWeight: "bold",
             marginBottom: "2rem",
 
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: "60%",
         }
 
     },

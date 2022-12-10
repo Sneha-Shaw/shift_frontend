@@ -8,15 +8,13 @@ export default makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        // justifyContent: "center",
-        // position: "fixed",
-        // top: 0,
-        // left: 0,
+        [theme.breakpoints.down("sm")]: {
+           width: "0"
+        },
     },
     list:{
         listStyle: "none",
         padding: 0,
-        // marginLeft: "5rem",
         marginTop: "3rem",
         width: "45%",
         display: "flex",
@@ -40,6 +38,9 @@ export default makeStyles((theme) => ({
                 textDecoration: "none",
                 color: "#fff",
             }
+        },
+        [theme.breakpoints.down("sm")]: {
+            display: "none"
         },
     },
     subListItem:{

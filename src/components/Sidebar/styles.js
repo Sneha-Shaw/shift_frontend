@@ -7,7 +7,7 @@ export default makeStyles((theme) => ({
         backgroundColor: "#06283D",
         zIndex: 100,
         [theme.breakpoints.down("sm")]: {
-            width: "8%",
+            width: "10%",
             // height: "5%",
         },
     },
