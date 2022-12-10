@@ -119,39 +119,55 @@ const Break = () => {
                         </div>
                     )
                         :
-                        <div className={classes.table}>
-                            <div className={classes.tableHeader}>
-                                <div className={classes.tableHeaderItem}>Break Name</div>
-                                <div className={classes.tableHeaderItem}>Duration</div>
-                                <div className={classes.tableHeaderItem}>Start Time</div>
-                                <div className={classes.tableHeaderItem}>End Time</div>
-                                <div className={classes.tableHeaderItem}>Type</div>
-                                <div className={classes.tableHeaderItem}>Status</div>
-                            </div>
+                        <table className={classes.table}>
+                            <thead>
+                                <tr className={classes.tableHeader}>
+                                    <th className={classes.tableHeaderItem}>Break Name</th>
+                                    <th className={classes.tableHeaderItem}>Duration</th>
+                                    <th className={classes.tableHeaderItem}>Start Time</th>
+                                    <th className={classes.tableHeaderItem}>End Time</th>
+                                    <th className={classes.tableHeaderItem}>Type</th>
+                                    <th className={classes.tableHeaderItem}>Status</th>
+                                </tr>
+                            </thead>
+
                             {breaks.map((breaks) => (
-                                <div className={classes.tableRow}>
-                                    <div className={classes.tableRowItem}>{breaks.name}</div>
-                                    <div className={classes.tableRowItem}>{breaks.duration}</div>
-                                    <div className={classes.tableRowItem}>{breaks.start}</div>
-                                    <div className={classes.tableRowItem}>{breaks.end}</div>
-                                    <div className={classes.tableRowItem}>
-                                        {
-                                            breaks.automatic ? <div>Automatic</div> : <div>Manual</div>
-                                        }
-                                    </div>
-                                    <div className={classes.tableRowItem}>
-                                        <Switch
-                                            checked={breaks.status}
-                                        />
-                                    </div>
-                                </div>
+                                <tbody>
+                                    <tr className={classes.tableRow}>
+                                        <td className={classes.tableRowItem}>{breaks.name}</td>
+
+
+                                        <td className={classes.tableRowItem}>{breaks.duration}</td>
+
+
+                                        <td className={classes.tableRowItem}>{breaks.start}</td>
+
+
+                                        <td className={classes.tableRowItem}>{breaks.end}</td>
+
+
+                                        <td className={classes.tableRowItem}>
+                                            {
+                                                breaks.automatic ? <div>Automatic</div> : <div>Manual</div>
+                                            }
+                                        </td>
+
+
+                                        <td className={classes.tableRowItem}>
+                                            <Switch
+                                                checked={breaks.status}
+                                            />
+                                        </td>
+                                    </tr>
+                                </tbody>
+
                             ))}
-                        </div>
+                        </table>
 
                 }
 
             </div>
-        </div>
+        </div >
     )
 }
 
