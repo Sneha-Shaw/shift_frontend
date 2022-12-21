@@ -56,25 +56,7 @@ const SubSidebar = () => {
                                         <span className={classes.listItemText}>Daily View</span>
                                     </NavLink>
                                 </li>
-                                <li className={classes.subListItem}>
-                                    <NavLink to='/attendance/view/weekly'
-                                        style={({ isActive }) => ({
-                                            color: isActive ? '#47B5FF' : 'none',
-                                        })} className={classes.navLink}>
-                                        <ArrowForwardIosIcon />
-                                        <span className={classes.listItemText}>Weekly View</span>
-                                    </NavLink>
-                                </li>
-                                <li className={classes.subListItem}>
-                                    <NavLink to='/attendance/view/monthly'
-                                        style={({ isActive }) => ({
-                                            color: isActive ? '#47B5FF' : 'none',
-                                        })} className={classes.navLink}>
-                                        <ArrowForwardIosIcon />
-                                        <span className={classes.listItemText}>Monthly View</span>
-                                    </NavLink>
-                                </li>
-
+                               
                             </ul>
 
                         </li>
@@ -145,24 +127,6 @@ const SubSidebar = () => {
                                         })} className={classes.navLink}>
                                         <ArrowForwardIosIcon />
                                         <span className={classes.listItemText}>Daily View</span>
-                                    </NavLink>
-                                </li>
-                                <li className={classes.subListItem}>
-                                    <NavLink to='/self-service/view/weekly'
-                                        style={({ isActive }) => ({
-                                            color: isActive ? '#47B5FF' : 'none',
-                                        })} className={classes.navLink}>
-                                        <ArrowForwardIosIcon />
-                                        <span className={classes.listItemText}>Weekly View</span>
-                                    </NavLink>
-                                </li>
-                                <li className={classes.subListItem}>
-                                    <NavLink to='/self-service/view/monthly'
-                                        style={({ isActive }) => ({
-                                            color: isActive ? '#47B5FF' : 'none',
-                                        })} className={classes.navLink}>
-                                        <ArrowForwardIosIcon />
-                                        <span className={classes.listItemText}>Monthly View</span>
                                     </NavLink>
                                 </li>
                             </ul>

@@ -10,8 +10,6 @@ import Leave from "./pages/Leave/Leave";
 import ShiftReplace from "./pages/ShiftReplace/ShiftReplace";
 import SpecialRequest from "./pages/SpecialRequest/SpecialRequest";
 import DailyView from "./pages/DailyView/DailyView";
-import WeeklyView from "./pages/WeeklyView/WeeklyView";
-import MonthlyView from "./pages/MonthlyView/MonthlyView";
 import Break from './pages/Break/Break'
 import DoctorsList from './pages/DoctorsList/DoctorsList'
 import Approvals from './pages/Approvals/Approvals'
@@ -21,7 +19,7 @@ import Notifications from './pages/Notifications/Notifications'
 const Router = () => {
     // doctor info from redux
     const doctorInfo = null
-    const managerInfo= "hi"
+    const managerInfo = "hi"
     return (
         <ThemeProvider theme={theme}>
             <BrowserRouter>
@@ -124,34 +122,6 @@ const Router = () => {
                     />
                     <Route
                         exact
-                        path="/self-service/view/weekly"
-                        element={
-                            doctorInfo ? (
-                                <>
-                                    <Navbar />
-                                    <WeeklyView />
-                                </>
-                            ) : (
-                                <Navigate to="/login" />
-                            )
-                        }
-                    />
-                    <Route
-                        exact
-                        path="/self-service/view/monthly"
-                        element={
-                            doctorInfo ? (
-                                <>
-                                    <Navbar />
-                                    <MonthlyView />
-                                </>
-                            ) : (
-                                <Navigate to="/login" />
-                            )
-                        }
-                    />
-                    <Route
-                        exact
                         path="/attendance/breaks"
                         element={
                             managerInfo ? (
@@ -164,7 +134,7 @@ const Router = () => {
                             )
                         }
                     />
-                     <Route
+                    <Route
                         exact
                         path="/attendance"
                         element={
@@ -207,7 +177,7 @@ const Router = () => {
                         exact
                         path="/notifications"
                         element={
-                          doctorInfo ||  managerInfo ? (
+                            doctorInfo || managerInfo ? (
                                 <>
                                     <Navbar />
                                     <Notifications />
