@@ -15,11 +15,14 @@ import DoctorsList from './pages/DoctorsList/DoctorsList'
 import Approvals from './pages/Approvals/Approvals'
 import Notifications from './pages/Notifications/Notifications'
 
+import { useSelector } from "react-redux";
+
 
 const Router = () => {
     // doctor info from redux
-    const doctorInfo = null
-    const managerInfo = "hi"
+    const { doctorInfo } = "null"
+    const { managerInfo } = useSelector(state => state.signInManager)
+
     return (
         <ThemeProvider theme={theme}>
             <BrowserRouter>
@@ -111,6 +114,20 @@ const Router = () => {
                         path="/self-service/view/daily"
                         element={
                             doctorInfo ? (
+                                <>
+                                    <Navbar />
+                                    <DailyView />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/attendance/view/daily"
+                        element={
+                            managerInfo ? (
                                 <>
                                     <Navbar />
                                     <DailyView />

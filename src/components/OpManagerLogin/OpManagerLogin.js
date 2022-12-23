@@ -1,16 +1,18 @@
 import React from 'react'
 import useStyles from './styles'
 import { Button, TextField } from '@mui/material'
+import {ManagerLogic} from './ManagerLogic'
 
 const DoctorLogin = () => {
     const classes = useStyles()
+    const { email, setEmail, password, setPassword, loginHandler, error } = ManagerLogic()
     return (
         <div className={classes.root}>
             <h1>Sign in</h1>
             <p className={classes.form}>
                 <TextField
-                    // onChange={(e) => setEmailValue(e.target.value)}
-                    // value={emailValue}
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                     variant="outlined"
                     margin="normal"
                     required
@@ -22,8 +24,8 @@ const DoctorLogin = () => {
                     autoFocus
                 />
                 <TextField
-                    // onChange={(e) => setPasswordValue(e.target.value)}
-                    // value={passwordValue}
+                    onChange={(e) => setPassword(e.target.value)}
+                    value={password}
                     variant="outlined"
                     margin="normal"
                     required
@@ -34,8 +36,9 @@ const DoctorLogin = () => {
                     id="password"
                     autoComplete="current-password"
                 />
+                <p className={classes.error}>{error}</p>
                 <Button
-                    // onClick={loginHandler}
+                    onClick={loginHandler}
                     fullWidth
                     variant="contained"
                     color="primary"

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import useStyles from './styles'
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
@@ -7,11 +7,24 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { NavLink, Link } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { useLocation } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+// import Swal from 'sweetalert2';
+import { logoutManager } from '../../redux/actions/managerAction';
 
 const Sidebar = () => {
     const classes = useStyles()
-    const managerInfo = "hi"
     const [showSubList, setShowSubList] = useState(false)
+    const { managerInfo }  = useSelector(state => state.signInManager)
+
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+
+    const logoutHandler = () => {
+        dispatch(logoutManager())
+        navigate('/login')
+    }
+
     const toggleSubList = () => {
         setShowSubList(!showSubList)
     }
@@ -70,7 +83,9 @@ const Sidebar = () => {
                         </NavLink>
                 }
                 {/* logout */}
-                <NavLink to='' className={classes.navLink}>
+                <NavLink to='' className={classes.navLink}
+                    onClick={logoutHandler}
+                >
                     <LogoutIcon fontSize="large" />
                     <h3>
                         Logout
