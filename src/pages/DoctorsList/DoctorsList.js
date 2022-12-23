@@ -5,37 +5,39 @@ import SubSidebar from '../../components/SubSidebar/SubSidebar'
 import { Button } from '@mui/material'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import { DoctorsLogic } from './DoctorsLogic'
+import Switch from '@mui/material/Switch';
 
 
 const DoctorsList = () => {
     const classes = useStyles()
-    // doctor list : name, designation,email,phn
-    const doctors = [
-        {
-            name: 'Dr. John Doe',
-            designation: 'Senior',
-            email: 'johndoe@gmail.com',
-            phn: '1234567890',
-            type: 'Permanent'
-        },
-        {
-            name: 'Dr. Jane Doe',
-            designation: 'Regular',
-            email: 'jandoe@gmail.com',
-            phn: '1234567890',
-            type: 'Contractual'
-        },
-    ]
-    const designationOptions = [
-        'Senior', 'Regular', 'Junior'
-    ]
-    const defaultdesignationOptions = designationOptions[0];
-    const Type = [
-        'Permanent', 'Contractual'
-    ]
-    const defaultType = Type[0];
-    const [show, setShow] = useState(false)
-    const [employType, setEmploytype] = useState('Permanent')
+
+    const {
+        // doctorInfo,
+        doctors,
+        name,
+        setName,
+        setDesignation,
+        email,
+        setEmail,
+        phn,
+        setPhn,
+        dutyHoursPerMonth,
+        setDutyHoursPerMonth,
+        addDoctorHandler,
+        designationOptions,
+        defaultdesignationOptions,
+        Type,
+        defaultType,
+        show,
+        setShow,
+        employType,
+        setEmploytype,
+        dutyHoursPerDay,
+        setDutyHoursPerDay,
+        handleChange,
+        checked
+    } = DoctorsLogic()
     return (
         <div className={classes.root}>
             <Sidebar />
@@ -76,19 +78,30 @@ const DoctorsList = () => {
                             </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="name">Name:</label>
-                                <input type="text" name="name" id="name" />
+                                <input type="text" name="name" id="name"
+                                    onChange={(e) => setName(e.target.value)}
+                                    value={name}
+                                />
                             </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="designation">Designation:</label>
-                                <Dropdown options={designationOptions} value={defaultdesignationOptions} placeholder="Select an option" />
+                                <Dropdown options={designationOptions} value={defaultdesignationOptions} placeholder="Select an option"
+                                    onChange={(e) => setDesignation(e.value)}
+                                />
                             </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="email">Email:</label>
-                                <input type="email" name="email" id="email" />
+                                <input type="email" name="email" id="email"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    value={email}
+                                />
                             </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="phn">Mobile:</label>
-                                <input type="text" name="phn" id="phn" />
+                                <input type="text" name="phn" id="phn"
+                                    onChange={(e) => setPhn(e.target.value)}
+                                    value={phn}
+                                />
                             </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="type">Type:</label>
@@ -100,12 +113,30 @@ const DoctorsList = () => {
                                 employType === 'Contractual' && (
                                     <div className={classes.formItem}>
                                         <label htmlFor="duration">Duty hours per month:</label>
-                                        <input type="text" name="duration" id="duration" />
+                                        <input type="text" name="duration" id="duration"
+                                            onChange={(e) => setDutyHoursPerMonth(e.target.value)}
+                                            value={dutyHoursPerMonth}
+                                        />
                                     </div>
                                 )
                             }
                             <div className={classes.formItem}>
-                                <Button variant="contained" color="primary" size="small" onClick={() => setShow(!show)}>
+                                <label htmlFor="duration">Duty hours per day:</label>
+                                <input type="text" name="duration" id="duration"
+                                    onChange={(e) => setDutyHoursPerDay(e.target.value)}
+                                    value={dutyHoursPerDay}
+                                />
+                            </div>
+                            <div className={classes.formItem}>
+                                <label htmlFor="nightDuty">Night Duty:</label>
+                                <Switch
+                                    checked={checked}
+                                    onChange={handleChange}
+                                    inputProps={{ 'aria-label': 'controlled' }}
+                                />
+                            </div>
+                            <div className={classes.formItem}>
+                                <Button variant="contained" color="primary" size="small" onClick={addDoctorHandler} >
                                     Add
                                 </Button>
 
@@ -122,18 +153,31 @@ const DoctorsList = () => {
                                             <th className={classes.tableHeaderItem}>Email</th>
                                             <th className={classes.tableHeaderItem}>Mobile</th>
                                             <th className={classes.tableHeaderItem}>Type</th>
+                                            <th className={classes.tableHeaderItem}>DutyHoursPerDay</th>
+                                            <th className={classes.tableHeaderItem}>DutyHoursPerMonth</th>
+                                            <th className={classes.tableHeaderItem}>Night Duty</th>
                                             <th className={classes.tableHeaderItem}>Actions</th>
                                         </tr>
                                     </thead>
 
-                                    {doctors.map((doctor) => (
+                                    {doctors && doctors.getAllDoctors.map((doctor) => (
                                         <tbody className={classes.tableRow}>
                                             <tr>
                                                 <td className={classes.tableRowItem}>{doctor.name}</td>
                                                 <td className={classes.tableRowItem}>{doctor.designation}</td>
                                                 <td className={classes.tableRowItem}>{doctor.email}</td>
-                                                <td className={classes.tableRowItem}>{doctor.phn}</td>
-                                                <td className={classes.tableRowItem}>{doctor.type}</td>
+                                                <td className={classes.tableRowItem}>{doctor.mobile}</td>
+                                                <td className={classes.tableRowItem}>
+                                                    {doctor.type.charAt(0).toUpperCase() + doctor.type.slice(1)}
+                                                </td>
+                                                <td className={classes.tableRowItem}>{doctor.dutyHoursPerDay}</td>
+                                                <td className={classes.tableRowItem}>{doctor.dutyHoursPerMonth}</td>
+                                                {
+                                                    doctor.nightDuty ?
+                                                        <td className={classes.tableRowItem}>Yes</td>
+                                                        :
+                                                        <td className={classes.tableRowItem}>No</td>
+                                                }
                                                 <td className={classes.tableRowItem}>
                                                     <Button
                                                         variant="contained"
@@ -146,6 +190,14 @@ const DoctorsList = () => {
                                                         }}
                                                     >
                                                         Delete
+                                                    </Button>
+                                                    <Button
+                                                        variant="contained"
+                                                        sx={{
+
+                                                        }}
+                                                    >
+                                                        Edit
                                                     </Button>
                                                 </td>
                                             </tr>

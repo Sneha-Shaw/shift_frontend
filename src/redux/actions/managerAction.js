@@ -4,6 +4,9 @@ import {
     MANAGER_SIGNIN_SUCCESS,
     MANAGER_SIGNIN_FAILED,
     MANAGER_LOGOUT,
+    GET_MANAGER_INFO_REQUEST,
+    GET_MANAGER_INFO_SUCCESS,
+    GET_MANAGER_INFO_FAILED,
     ADD_DOCTOR_REQUEST,
     ADD_DOCTOR_SUCCESS,
     ADD_DOCTOR_FAILED,
@@ -71,7 +74,6 @@ export const addDoctor = (
     email,
     mobile,
     password,
-    department,
     designation,
     type,
     dutyHoursPerMonth,
@@ -90,7 +92,6 @@ export const addDoctor = (
             email,
             mobile,
             password,
-            department,
             designation,
             type,
             dutyHoursPerMonth,
@@ -104,6 +105,33 @@ export const addDoctor = (
     } catch (error) {
         dispatch({
             type: ADD_DOCTOR_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// get manager info
+export const getManagerInfo = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_MANAGER_INFO_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const { data } = await axios.get(`${API}/public/admin/get-profile/${id}`, config)
+        dispatch({
+            type: GET_MANAGER_INFO_SUCCESS,
+            payload: data
+        })
+    }
+    catch (error) {
+        dispatch({
+            type: GET_MANAGER_INFO_FAILED,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
@@ -148,7 +176,8 @@ export const updateDoctor = (
     designation,
     type,
     dutyHoursPerMonth,
-    dutyHoursPerDay
+    dutyHoursPerDay,
+    nightDuty
 ) => async (dispatch) => {
     try {
         dispatch({
@@ -167,7 +196,8 @@ export const updateDoctor = (
             designation,
             type,
             dutyHoursPerMonth,
-            dutyHoursPerDay
+            dutyHoursPerDay,
+            nightDuty
         }
         const { data } = await axios.put(`${API}/public/admin/update-doctor`, body, config)
         dispatch({

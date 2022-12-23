@@ -12,7 +12,7 @@ export default makeStyles((theme) => ({
          }
     },
     main: {
-        width: "55%",
+        width: "60%",
         height: "fit-content",
         display: "flex",
         flexDirection: "column",
@@ -127,9 +127,10 @@ export default makeStyles((theme) => ({
             fontWeight: "bold",
             textAlign: "center",
             border: "1px solid",
-            // odd row
-            '&:nth-child(odd)': {
-                background: "#f7f7f7"
+            '&>button': {
+                width: "100%",
+                height: "3rem",
+                marginBottom: "0.5rem",
             },
             [theme.breakpoints.down("sm")]: {
                 fontSize: "1rem"
@@ -138,7 +139,7 @@ export default makeStyles((theme) => ({
 
     },
     form: {
-        width: "100%",
+        width: "90%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -156,7 +157,7 @@ export default makeStyles((theme) => ({
     formItem: {
         width: "60%",
         display: "flex",
-        justifyContent: "space-between",
+        // justifyContent: "space-between",
         alignItems: "center",
         marginBottom: "1.5rem",
         '& label': {

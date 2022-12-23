@@ -3,6 +3,9 @@ import {
     MANAGER_SIGNIN_SUCCESS,
     MANAGER_SIGNIN_FAILED,
     MANAGER_LOGOUT,
+    GET_MANAGER_INFO_REQUEST,
+    GET_MANAGER_INFO_SUCCESS,
+    GET_MANAGER_INFO_FAILED,
     ADD_DOCTOR_REQUEST,
     ADD_DOCTOR_SUCCESS,
     ADD_DOCTOR_FAILED,
@@ -21,7 +24,7 @@ import {
 } from '../constants/managerConstants'
 
 // SIGNIN MANAGER
-const signInManagerState={
+const signInManagerState = {
     loading: false,
     managerInfo: null,
     error: null,
@@ -62,8 +65,46 @@ export const signInManagerReducer = (state = signInManagerState, action) => {
     }
 }
 
+// GET MANAGER INFO
+const getManagerInfoState = {
+    loading: false,
+    manager: null,
+    error: null,
+    isAuthenticated: false
+}
+export const getManagerInfoReducer = (state = getManagerInfoState, action) => {
+    switch (action.type) {
+        case GET_MANAGER_INFO_REQUEST:
+            return {
+                ...state,
+                manager: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case GET_MANAGER_INFO_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                manager: action.payload
+            }
+        case GET_MANAGER_INFO_FAILED:
+            return {
+                ...state,
+                loading: false,
+                manager: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
 // ADD DOCTOR
-const addDoctorState={
+const addDoctorState = {
     loading: false,
     doctorInfo: null,
     error: null,
@@ -101,7 +142,7 @@ export const addDoctorReducer = (state = addDoctorState, action) => {
 }
 
 // DELETE DOCTOR
-const deleteDoctorState={
+const deleteDoctorState = {
     loading: false,
     doctorInfo: null,
     error: null,
@@ -139,7 +180,7 @@ export const deleteDoctorReducer = (state = deleteDoctorState, action) => {
 }
 
 // UPDATE DOCTOR
-const updateDoctorState={
+const updateDoctorState = {
     loading: false,
     doctorInfo: null,
     error: null,
@@ -177,7 +218,7 @@ export const updateDoctorReducer = (state = updateDoctorState, action) => {
 }
 
 // GET ALL DOCTORS
-const getAllDoctorsState={
+const getAllDoctorsState = {
     loading: false,
     doctorsInfo: null,
     error: null,
@@ -215,7 +256,7 @@ export const getAllDoctorsReducer = (state = getAllDoctorsState, action) => {
 }
 
 // GET DOCTOR BY ID
-const getDoctorByIdState={
+const getDoctorByIdState = {
     loading: false,
     doctorInfo: null,
     error: null,

@@ -13,10 +13,6 @@ const Login = () => {
   } = LoginLogic()
   return (
     <div className={classes.root}>
-      {/* {value === "1" ? <DoctorLogin /> : value==="2"? <OpManagerLogin /> : ""} */}
-      {/* 2 parts 
-        1st part > for doctors  */}
-      {/* doctor login button */}
       <div className={classes.container}>
         <div className={classes.first}>
 

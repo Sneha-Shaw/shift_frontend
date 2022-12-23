@@ -20,8 +20,8 @@ import { useSelector } from "react-redux";
 
 const Router = () => {
     // doctor info from redux
-    const { doctorInfo } = "null"
-    const { managerInfo } = useSelector(state => state.signInManager)
+    const doctorInfo = null
+    const { managerInfo } = useSelector((state) => state.signInManager)
 
     return (
         <ThemeProvider theme={theme}>

@@ -7,6 +7,10 @@ const initialState = {
     signInUser: {
         userInfo:
             JSON.parse(localStorage.getItem('userInfo'))
+    },
+    signInManager: {
+        managerInfo:
+            JSON.parse(localStorage.getItem('managerInfo'))
     }
 }
 

@@ -3,10 +3,13 @@ import useStyles from './styles'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import { Button } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const Home = () => {
   const classes = useStyles()
-  const user = "Jane Doe"
+  const { managerInfo } = useSelector((state) => state.signInManager)
+  // get user name
+  const user = managerInfo?.name
   const navigate = useNavigate()
   const notifications = [
     {
@@ -26,7 +29,6 @@ const Home = () => {
       end: "11:00 AM"
     }
   ]
-  const managerInfo= null
   return (
     <div className={classes.root}>
       <Sidebar />
