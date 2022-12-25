@@ -18,6 +18,10 @@ import {
     getAllSpecialRequestsReducer,
     approveDenySpecialRequestReducer
 } from './managerReducer'
+import {
+    getCalenderReducer,
+    getAllSlotsReducer
+} from './shiftReducer'
 
 
 const rootReducer = combineReducers({
@@ -38,7 +42,9 @@ const rootReducer = combineReducers({
     getAllLeaves: getAllLeavesReducer,
     approveDenyLeave: approveDenyLeaveReducer,
     getAllSpecialRequests: getAllSpecialRequestsReducer,
-    approveDenySpecialRequest: approveDenySpecialRequestReducer
+    approveDenySpecialRequest: approveDenySpecialRequestReducer,
+    getCalender: getCalenderReducer,
+    getAllSlots: getAllSlotsReducer
 })
 
 export default rootReducer
