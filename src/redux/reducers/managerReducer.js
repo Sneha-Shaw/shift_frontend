@@ -35,7 +35,19 @@ import {
     GET_BREAKS_BY_ID_FAILED,
     UPDATE_BREAK_STATUS_REQUEST,
     UPDATE_BREAK_STATUS_SUCCESS,
-    UPDATE_BREAK_STATUS_FAILED
+    UPDATE_BREAK_STATUS_FAILED,
+    GET_ALL_LEAVES_REQUEST,
+    GET_ALL_LEAVES_SUCCESS,
+    GET_ALL_LEAVES_FAILED,
+    APPROVE_DENY_LEAVE_REQUEST,
+    APPROVE_DENY_LEAVE_SUCCESS,
+    APPROVE_DENY_LEAVE_FAILED,
+    GET_ALL_SPECIAL_REQUESTS_REQUEST,
+    GET_ALL_SPECIAL_REQUESTS_SUCCESS,
+    GET_ALL_SPECIAL_REQUESTS_FAILED,
+    APPROVE_DENY_SPECIAL_REQUEST_REQUEST,
+    APPROVE_DENY_SPECIAL_REQUEST_SUCCESS,
+    APPROVE_DENY_SPECIAL_REQUEST_FAILED
 
 } from '../constants/managerConstants'
 
@@ -491,6 +503,158 @@ export const updateBreaksStatusReducer = (state = updateBreaksStatusState, actio
                 ...state,
                 loading: false,
                 breaks: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// GET ALL LEAVES
+const getAllLeavesState = {
+    loading: false,
+    leaves: null,
+    error: null,
+    isAuthenticated: false
+}
+export const getAllLeavesReducer = (state = getAllLeavesState, action) => {
+    switch (action.type) {
+        case GET_ALL_LEAVES_REQUEST:
+            return {
+                ...state,
+                leaves: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case GET_ALL_LEAVES_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                leaves: action.payload
+            }
+        case GET_ALL_LEAVES_FAILED:
+            return {
+                ...state,
+                loading: false,
+                leaves: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// APPROVE DENY LEAVE
+const approveDenyLeaveState = {
+    loading: false,
+    leaves: null,
+    error: null,
+    isAuthenticated: false
+}
+export const approveDenyLeaveReducer = (state = approveDenyLeaveState, action) => {
+    switch (action.type) {
+        case APPROVE_DENY_LEAVE_REQUEST:
+            return {
+                ...state,
+                leaves: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case APPROVE_DENY_LEAVE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                leaves: action.payload
+            }
+        case APPROVE_DENY_LEAVE_FAILED:
+            return {
+                ...state,
+                loading: false,
+                leaves: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// GET ALL SPECIAL REQUESTS
+const getAllSpecialRequestsState = {
+    loading: false,
+    specialRequests: null,
+    error: null,
+    isAuthenticated: false
+}
+export const getAllSpecialRequestsReducer = (state = getAllSpecialRequestsState, action) => {
+    switch (action.type) {
+        case GET_ALL_SPECIAL_REQUESTS_REQUEST:
+            return {
+                ...state,
+                specialRequests: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case GET_ALL_SPECIAL_REQUESTS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                specialRequests: action.payload
+            }
+        case GET_ALL_SPECIAL_REQUESTS_FAILED:
+            return {
+                ...state,
+                loading: false,
+                specialRequests: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// APPROVE DENY SPECIAL REQUEST
+const approveDenySpecialRequestState = {
+    loading: false,
+    specialRequests: null,
+    error: null,
+    isAuthenticated: false
+}
+export const approveDenySpecialRequestReducer = (state = approveDenySpecialRequestState, action) => {
+    switch (action.type) {
+        case APPROVE_DENY_SPECIAL_REQUEST_REQUEST:
+            return {
+                ...state,
+                specialRequests: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case APPROVE_DENY_SPECIAL_REQUEST_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                specialRequests: action.payload
+            }
+        case APPROVE_DENY_SPECIAL_REQUEST_FAILED:
+            return {
+                ...state,
+                loading: false,
+                specialRequests: null,
                 isAuthenticated: false,
                 error: action.payload
             }

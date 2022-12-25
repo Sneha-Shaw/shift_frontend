@@ -3,39 +3,19 @@ import useStyles from './styles'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import SubSidebar from '../../components/SubSidebar/SubSidebar'
 import { Button } from '@mui/material'
+import { ApprovalLogic } from './ApprovalLogic'
 
 const Approvals = () => {
     const classes = useStyles()
-    // special requests array
-    const specialReq = [
-        {
-            name: 'Dr. John Doe',
-            request: 'He is given a break from 4 PM to 5 PM for Yoga during the month of November'
-        },
-        {
-            name: 'Dr. Jane Doe',
-            request: 'She is given a break from 4 PM to 5 PM for Yoga during the month of November'
-        }
-    ]
-    // leave requests array
-    const leaveReq = [
-        {
-            name: 'Dr. John Doe',
-            startDate: "Mon, 5th Dec",
-            endDate: "Mon, 5th Dec",
-            duration: "1 Day",
-            type: "Casual",
-            status: "awaiting"
-        },
-        {
-            name: 'Dr. Jane Doe',
-            startDate: "Mon, 5th Dec",
-            endDate: "Mon, 5th Dec",
-            duration: "1 Day",
-            type: "Casual",
-            status: "awaiting"
-        }
-    ]
+    const {
+        leaves,
+        specialRequests,
+        approveLeaveHandler,
+        denyLeaveHandler,
+        approveSpecialRequestHandler,
+        denySpecialRequestHandler
+    } = ApprovalLogic();
+
     // tabs
     const [tab, setTab] = useState(0)
     // changetab
@@ -43,7 +23,6 @@ const Approvals = () => {
         setTab(index)
     }
     const isMobile = window.innerWidth <= 600;
-
     return (
         <div className={classes.root}>
             <Sidebar />
@@ -68,18 +47,44 @@ const Approvals = () => {
                         tab === 0 && (
                             <div className={classes.specialReq}>
                                 {
-                                    specialReq.map((item, index) => (
+                                    specialRequests && specialRequests.getSpecialRequests.map((item, index) => (
                                         <div className={classes.specialReqItem} key={index}>
                                             <div className={classes.specialReqItemHeader}>
-                                                <h3>{item.name}</h3>
+                                                <h3>{item.username}</h3>
 
                                             </div>
                                             <div className={classes.specialReqItemContent}>
                                                 <p><strong>Request: </strong>{item.request}</p>
-                                                <div className={classes.HeaderBtn}>
-                                                    <Button variant="contained" className={classes.acceptBtn}>Accept</Button>
-                                                    <Button variant="contained" className={classes.rejectBtn}>Reject</Button>
-                                                </div>
+                                                {
+                                                    item.requestStatus === 'awaiting' &&
+                                                    <div className={classes.HeaderBtn}>
+                                                        <Button variant="contained" className={classes.acceptBtn}
+                                                            onClick={() => approveSpecialRequestHandler(item._id)}
+                                                        >Accept</Button>
+                                                        <Button variant="contained" className={classes.rejectBtn}
+                                                            onClick={() => denySpecialRequestHandler(item._id)}
+                                                        >Reject</Button>
+                                                    </div>
+                                                }
+                                                {
+                                                    item.requestStatus === 'approved' &&
+                                                    <div className={classes.HeaderBtn}>
+                                                        <Button variant="contained" className={classes.acceptBtn}
+                                                            disabled
+                                                        >Accepted</Button>
+                                                    </div>
+
+                                                }
+                                                {
+                                                    item.requestStatus === 'declined' &&
+                                                    <div className={classes.HeaderBtn}>
+                                                        <Button variant="contained" className={classes.rejectBtn}
+                                                            disabled
+                                                        >Rejected</Button>
+                                                    </div>
+
+                                                }
+
                                             </div>
 
                                         </div>
@@ -92,10 +97,10 @@ const Approvals = () => {
                         tab === 1 && (
                             <div className={classes.leaveReq}>
                                 {
-                                    leaveReq.map((item, index) => (
+                                    leaves && leaves.getAllLeaves.map((item, index) => (
                                         <div className={classes.leaveReqItem} key={index}>
                                             <div className={classes.leaveReqItemHeader}>
-                                                <h3>{item.name}</h3>
+                                                <h3>{item.username}</h3>
 
                                             </div>
                                             <div className={classes.leaveReqItemContent}>
@@ -107,36 +112,60 @@ const Approvals = () => {
                                                     <h4>End Date</h4>
                                                     <p>{item.endDate}</p>
                                                 </div>
-                                                <div className={classes.leaveReqItemContentItem}>
-                                                    <h4>Duration</h4>
-                                                    <p>{item.duration}</p>
-                                                </div>
+
                                                 <div className={classes.leaveReqItemContentItem}>
                                                     <h4>Type</h4>
-                                                    <p>{item.type}</p>
-                                                </div>
-                                                <div className={classes.leaveReqItemContentItem}>
-                                                    <h4>Status</h4>
-                                                    <p>{item.status}</p>
+                                                    <p>
+                                                        {/* first letter cap */}
+                                                        {item.leaveType.charAt(0).toUpperCase() + item.leaveType.slice(1)}
+                                                    </p>
                                                 </div>
                                                 {
-                                                    !isMobile && (
+                                                    item.leaveStatus === 'awaiting' && !isMobile && (
                                                         <div className={classes.HeaderBtn}>
-                                                            <Button variant="contained" className={classes.acceptBtn}>Accept</Button>
-                                                            <Button variant="contained" className={classes.rejectBtn}>Reject</Button>
+                                                            <Button variant="contained" className={classes.acceptBtn}
+                                                                onClick={() => approveLeaveHandler(item._id)}
+                                                            >Accept</Button>
+                                                            <Button variant="contained" className={classes.rejectBtn}
+                                                                onClick={() => denyLeaveHandler(item._id)}
+                                                            >Reject</Button>
                                                         </div>
                                                     )
                                                 }
+                                                {
+                                                    item.leaveStatus === 'approved' &&
+                                                    <div className={classes.HeaderBtn}>
+                                                        <Button variant="contained" className={classes.acceptBtn}
+                                                            disabled
+                                                        >Accepted</Button>
+                                                    </div>
+                                                }
+                                                {
+                                                    item.leaveStatus === 'declined' &&
+                                                    <div className={classes.HeaderBtn}>
+                                                        <Button variant="contained" className={classes.rejectBtn}
+                                                            disabled
+                                                        >Rejected</Button>
+                                                    </div>
+                                                }
 
                                             </div>
+                                            <div className={classes.leaveReqItemFooter}>
+                                                <p><strong>Reason: </strong>{item.leaveReason}</p>
+                                            </div>
                                             {
-                                                isMobile && (
+                                                item.leaveStatus === 'awaiting' && isMobile && (
                                                     <div className={classes.HeaderBtn}>
-                                                    <Button variant="contained" className={classes.acceptBtn}>Accept</Button>
-                                                    <Button variant="contained" className={classes.rejectBtn}>Reject</Button>
-                                                </div>
+                                                        <Button variant="contained" className={classes.acceptBtn}
+                                                            onClick={() => approveLeaveHandler(item._id)}
+                                                        >Accept</Button>
+                                                        <Button variant="contained" className={classes.rejectBtn}
+                                                            onClick={() => denyLeaveHandler(item._id)}
+                                                        >Reject</Button>
+                                                    </div>
                                                 )
                                             }
+                                          
                                         </div>
                                     ))
                                 }

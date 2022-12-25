@@ -117,15 +117,13 @@ export default makeStyles((theme) => ({
         marginLeft: "1rem",
         //   nth child
         '&>button:nth-child(1)': {
-            background: "green",
+            // background: "green",
             color: "#fff",
-            border: "1px solid green",
             borderRadius: "0.5rem",
         },
         '&>button:nth-child(2)': {
-            background: "red",
+            // background: "red",
             color: "#fff",
-            border: "1px solid red",
             borderRadius: "0.5rem",
         },
         [theme.breakpoints.down("sm")]: {
@@ -136,6 +134,14 @@ export default makeStyles((theme) => ({
                 width: "45%"
             }
          }
+    },
+    acceptBtn:{
+        background: "green !important",
+        border: "1px solid green",
+    },
+    rejectBtn:{
+        background: "red !important",
+        border: "1px solid red"
     },
     specialReqItemContent:{
         width: "100%",

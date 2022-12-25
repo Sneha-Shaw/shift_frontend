@@ -36,7 +36,19 @@ import {
     GET_BREAKS_BY_ID_FAILED,
     UPDATE_BREAK_STATUS_REQUEST,
     UPDATE_BREAK_STATUS_SUCCESS,
-    UPDATE_BREAK_STATUS_FAILED
+    UPDATE_BREAK_STATUS_FAILED,
+    GET_ALL_LEAVES_REQUEST,
+    GET_ALL_LEAVES_SUCCESS,
+    GET_ALL_LEAVES_FAILED,
+    APPROVE_DENY_LEAVE_REQUEST,
+    APPROVE_DENY_LEAVE_SUCCESS,
+    APPROVE_DENY_LEAVE_FAILED,
+    GET_ALL_SPECIAL_REQUESTS_REQUEST,
+    GET_ALL_SPECIAL_REQUESTS_SUCCESS,
+    GET_ALL_SPECIAL_REQUESTS_FAILED,
+    APPROVE_DENY_SPECIAL_REQUEST_REQUEST,
+    APPROVE_DENY_SPECIAL_REQUEST_SUCCESS,
+    APPROVE_DENY_SPECIAL_REQUEST_FAILED
 } from '../constants/managerConstants'
 
 
@@ -424,6 +436,116 @@ export const deleteBreaks = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: DELETE_BREAKS_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+//  get all leaves
+export const getAllLeaves = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_ALL_LEAVES_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const { data } = await axios.get(`${API}/public/admin/get-all-leaves`, config)
+        dispatch({
+            type: GET_ALL_LEAVES_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_ALL_LEAVES_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// approve deny leave
+export const approveDenyLeave = (id, leaveStatus) => async (dispatch) => {
+    try {
+        dispatch({
+            type: APPROVE_DENY_LEAVE_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const body = {
+            leaveStatus
+        }
+        const { data } = await axios.put(`${API}/public/admin/approve-deny-leave/${id}`, body, config)
+        dispatch({
+            type: APPROVE_DENY_LEAVE_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: APPROVE_DENY_LEAVE_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// get all special requests
+export const getAllSpecialRequests = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_ALL_SPECIAL_REQUESTS_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const { data } = await axios.get(`${API}/public/admin/get-all-special-requests`, config)
+        dispatch({
+            type: GET_ALL_SPECIAL_REQUESTS_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_ALL_SPECIAL_REQUESTS_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// approve deny special request
+export const approveDenySpecialRequest = (id, requestStatus) => async (dispatch) => {
+    try {
+        dispatch({
+            type: APPROVE_DENY_SPECIAL_REQUEST_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const body = {
+            requestStatus
+        }
+        const { data } = await axios.put(`${API}/public/admin/approve-deny-special-request/${id}`, body, config)
+        dispatch({
+            type: APPROVE_DENY_SPECIAL_REQUEST_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: APPROVE_DENY_SPECIAL_REQUEST_FAILED,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

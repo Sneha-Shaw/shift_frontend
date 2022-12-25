@@ -12,7 +12,11 @@ import {
     getBreaksReducer,
     deleteBreaksReducer,
     getAllBreaksReducer,
-    updateBreaksStatusReducer
+    updateBreaksStatusReducer,
+    getAllLeavesReducer,
+    approveDenyLeaveReducer,
+    getAllSpecialRequestsReducer,
+    approveDenySpecialRequestReducer
 } from './managerReducer'
 
 
@@ -30,7 +34,11 @@ const rootReducer = combineReducers({
     getBreaksById: getBreaksReducer,
     deleteBreaks: deleteBreaksReducer,
     getAllBreaks: getAllBreaksReducer,
-    updateBreaksStatus: updateBreaksStatusReducer
+    updateBreaksStatus: updateBreaksStatusReducer,
+    getAllLeaves: getAllLeavesReducer,
+    approveDenyLeave: approveDenyLeaveReducer,
+    getAllSpecialRequests: getAllSpecialRequestsReducer,
+    approveDenySpecialRequest: approveDenySpecialRequestReducer
 })
 
 export default rootReducer
