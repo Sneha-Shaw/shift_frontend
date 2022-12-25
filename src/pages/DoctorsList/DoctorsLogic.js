@@ -5,8 +5,7 @@ import {
     addDoctor,
     deleteDoctor,
     updateDoctor,
-    getAllDoctors,
-    getDoctorById
+    getAllDoctors
 } from '../../redux/actions/managerAction';
 
 export const DoctorsLogic = () => {
@@ -14,7 +13,6 @@ export const DoctorsLogic = () => {
     const { doctorsInfo: doctors } = useSelector(state => state.getAllDoctors)
     const { doctorInfo: doctorDeleteState } = useSelector(state => state.deleteDoctor)
     const { doctorInfo: doctorUpdateState } = useSelector(state => state.updateDoctor)
-    const { doctorInfo: doctorById } = useSelector(state => state.getDoctorById)
 
     const dispatch = useDispatch()
     const [checked, setChecked] = useState(false);
@@ -83,7 +81,7 @@ export const DoctorsLogic = () => {
             })
             dispatch(getAllDoctors())
         }
-    }, [doctorInfo])
+    }, [doctorInfo,dispatch])
 
 
     // delete doctor
@@ -113,7 +111,7 @@ export const DoctorsLogic = () => {
         if (doctorDeleteState) {
             dispatch(getAllDoctors())
         }
-    }, [doctorDeleteState])
+    }, [doctorDeleteState,dispatch])
 
     // update doctor
     const updateDoctorHandler = (id) => {
@@ -151,7 +149,7 @@ export const DoctorsLogic = () => {
 
             dispatch(getAllDoctors())
         }
-    }, [doctorUpdateState])
+    }, [doctorUpdateState,dispatch])
 
 
     return {
@@ -186,8 +184,7 @@ export const DoctorsLogic = () => {
         updateDoctorHandler,
         setChecked,
         id,
-        setId,
-        doctorById
+        setId
 
     }
 }

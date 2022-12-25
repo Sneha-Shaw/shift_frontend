@@ -21,7 +21,22 @@ import {
     GET_ALL_DOCTORS_FAILED,
     GET_DOCTOR_BY_ID_REQUEST,
     GET_DOCTOR_BY_ID_SUCCESS,
-    GET_DOCTOR_BY_ID_FAILED
+    GET_DOCTOR_BY_ID_FAILED,
+    ADD_BREAKS_REQUEST,
+    ADD_BREAKS_SUCCESS,
+    ADD_BREAKS_FAILED,
+    DELETE_BREAKS_REQUEST,
+    DELETE_BREAKS_SUCCESS,
+    DELETE_BREAKS_FAILED,
+    GET_ALL_BREAKS_REQUEST,
+    GET_ALL_BREAKS_SUCCESS,
+    GET_ALL_BREAKS_FAILED,
+    GET_BREAKS_BY_ID_REQUEST,
+    GET_BREAKS_BY_ID_SUCCESS,
+    GET_BREAKS_BY_ID_FAILED,
+    UPDATE_BREAK_STATUS_REQUEST,
+    UPDATE_BREAK_STATUS_SUCCESS,
+    UPDATE_BREAK_STATUS_FAILED
 } from '../constants/managerConstants'
 
 
@@ -261,6 +276,154 @@ export const getDoctorById = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: GET_DOCTOR_BY_ID_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// ADD BREAKS
+export const addBreaks = (
+    breakName,
+    startTime,
+    endTime,
+    breakDuration,
+    breakType,
+    breakStatus
+) => async (dispatch) => {
+    try {
+        dispatch({
+            type: ADD_BREAKS_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const body = {
+            breakName,
+            startTime,
+            endTime,
+            breakDuration,
+            breakType,
+            breakStatus
+        }
+        const { data } = await axios.put(`${API}/public/admin/add-breaks`, body, config)
+        dispatch({
+            type: ADD_BREAKS_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: ADD_BREAKS_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// get all breaks
+export const getAllBreaks = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_ALL_BREAKS_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const { data } = await axios.get(`${API}/public/admin/get-all-breaks`, config)
+        dispatch({
+            type: GET_ALL_BREAKS_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_ALL_BREAKS_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// get break by id
+export const getBreaksById = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_BREAKS_BY_ID_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const { data } = await axios.get(`${API}/public/admin/get-break/${id}`, config)
+        dispatch({
+            type: GET_BREAKS_BY_ID_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_BREAKS_BY_ID_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// update breaks status
+export const updateBreaksStatus = (id, breakStatus) => async (dispatch) => {
+    try {
+        dispatch({
+            type: UPDATE_BREAK_STATUS_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const body = {
+            breakStatus
+        }
+        const { data } = await axios.put(`${API}/public/admin/update-break-status/${id}`, body, config)
+        dispatch({
+            type: UPDATE_BREAK_STATUS_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: UPDATE_BREAK_STATUS_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// delete breaks
+export const deleteBreaks = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: DELETE_BREAKS_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const { data } = await axios.post(`${API}/public/admin/delete-break/${id}`, config)
+        dispatch({
+            type: DELETE_BREAKS_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: DELETE_BREAKS_FAILED,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

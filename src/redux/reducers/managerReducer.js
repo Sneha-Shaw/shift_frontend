@@ -20,7 +20,23 @@ import {
     GET_ALL_DOCTORS_FAILED,
     GET_DOCTOR_BY_ID_REQUEST,
     GET_DOCTOR_BY_ID_SUCCESS,
-    GET_DOCTOR_BY_ID_FAILED
+    GET_DOCTOR_BY_ID_FAILED,
+    ADD_BREAKS_REQUEST,
+    ADD_BREAKS_SUCCESS,
+    ADD_BREAKS_FAILED,
+    DELETE_BREAKS_REQUEST,
+    DELETE_BREAKS_SUCCESS,
+    DELETE_BREAKS_FAILED,
+    GET_ALL_BREAKS_REQUEST,
+    GET_ALL_BREAKS_SUCCESS,
+    GET_ALL_BREAKS_FAILED,
+    GET_BREAKS_BY_ID_REQUEST,
+    GET_BREAKS_BY_ID_SUCCESS,
+    GET_BREAKS_BY_ID_FAILED,
+    UPDATE_BREAK_STATUS_REQUEST,
+    UPDATE_BREAK_STATUS_SUCCESS,
+    UPDATE_BREAK_STATUS_FAILED
+
 } from '../constants/managerConstants'
 
 // SIGNIN MANAGER
@@ -285,6 +301,196 @@ export const getDoctorByIdReducer = (state = getDoctorByIdState, action) => {
                 ...state,
                 loading: false,
                 doctorInfo: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// ADD BREAKS
+const addBreaksState = {
+    loading: false,
+    breaks: null,
+    error: null,
+    isAuthenticated: false
+}
+export const addBreaksReducer = (state = addBreaksState, action) => {
+    switch (action.type) {
+        case ADD_BREAKS_REQUEST:
+            return {
+                ...state,
+                breaks: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case ADD_BREAKS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                breaks: action.payload
+            }
+        case ADD_BREAKS_FAILED:
+            return {
+                ...state,
+                loading: false,
+                breaks: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// GET BREAKS
+const getBreaksState = {
+    loading: false,
+    breaks: null,
+    error: null,
+    isAuthenticated: false
+}
+export const getBreaksReducer = (state = getBreaksState, action) => {
+    switch (action.type) {
+        case GET_BREAKS_BY_ID_REQUEST:
+            return {
+                ...state,
+                breaks: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case GET_BREAKS_BY_ID_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                breaks: action.payload
+            }
+        case GET_BREAKS_BY_ID_FAILED:
+            return {
+                ...state,
+                loading: false,
+                breaks: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// DELETE BREAKS
+const deleteBreaksState = {
+    loading: false,
+    breaks: null,
+    error: null,
+    isAuthenticated: false
+}
+export const deleteBreaksReducer = (state = deleteBreaksState, action) => {
+    switch (action.type) {
+        case DELETE_BREAKS_REQUEST:
+            return {
+                ...state,
+                breaks: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case DELETE_BREAKS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                breaks: action.payload
+            }
+        case DELETE_BREAKS_FAILED:
+            return {
+                ...state,
+                loading: false,
+                breaks: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// GET ALL BREAKS
+const getAllBreaksState = {
+    loading: false,
+    breaks: null,
+    error: null,
+    isAuthenticated: false
+}
+export const getAllBreaksReducer = (state = getAllBreaksState, action) => {
+    switch (action.type) {
+        case GET_ALL_BREAKS_REQUEST:
+            return {
+                ...state,
+                breaks: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case GET_ALL_BREAKS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                breaks: action.payload
+            }
+        case GET_ALL_BREAKS_FAILED:
+            return {
+                ...state,
+                loading: false,
+                breaks: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// UPDATE BREAKS STATUS
+const updateBreaksStatusState = {
+    loading: false,
+    breaks: null,
+    error: null,
+    isAuthenticated: false
+}
+export const updateBreaksStatusReducer = (state = updateBreaksStatusState, action) => {
+    switch (action.type) {
+        case UPDATE_BREAK_STATUS_REQUEST:
+            return {
+                ...state,
+                breaks: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case UPDATE_BREAK_STATUS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                breaks: action.payload
+            }
+        case UPDATE_BREAK_STATUS_FAILED:
+            return {
+                ...state,
+                loading: false,
+                breaks: null,
                 isAuthenticated: false,
                 error: action.payload
             }

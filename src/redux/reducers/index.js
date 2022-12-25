@@ -7,7 +7,12 @@ import {
     updateDoctorReducer,
     getAllDoctorsReducer,
     getDoctorByIdReducer,
-    getManagerInfoReducer
+    getManagerInfoReducer,
+    addBreaksReducer,
+    getBreaksReducer,
+    deleteBreaksReducer,
+    getAllBreaksReducer,
+    updateBreaksStatusReducer
 } from './managerReducer'
 
 
@@ -20,7 +25,12 @@ const rootReducer = combineReducers({
     updateDoctor: updateDoctorReducer,
     getAllDoctors: getAllDoctorsReducer,
     getDoctorById: getDoctorByIdReducer,
-    getManagerInfo: getManagerInfoReducer
+    getManagerInfo: getManagerInfoReducer,
+    addBreaks: addBreaksReducer,
+    getBreaksById: getBreaksReducer,
+    deleteBreaks: deleteBreaksReducer,
+    getAllBreaks: getAllBreaksReducer,
+    updateBreaksStatus: updateBreaksStatusReducer
 })
 
 export default rootReducer
