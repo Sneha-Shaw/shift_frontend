@@ -14,6 +14,12 @@ const DoctorsList = () => {
 
     const {
         // doctorInfo,
+        deleteDoctorHandler,
+        updateDoctorHandler,
+        addShow,
+        setaddShow,
+        updateShow,
+        setupdateShow,
         doctors,
         name,
         setName,
@@ -27,16 +33,18 @@ const DoctorsList = () => {
         addDoctorHandler,
         designationOptions,
         defaultdesignationOptions,
+        designation,
         Type,
         defaultType,
-        show,
-        setShow,
         employType,
         setEmploytype,
         dutyHoursPerDay,
         setDutyHoursPerDay,
         handleChange,
-        checked
+        checked,
+        setChecked,
+        id,
+        setId
     } = DoctorsLogic()
     return (
         <div className={classes.root}>
@@ -45,12 +53,12 @@ const DoctorsList = () => {
             <div className={classes.main}>
                 {/* header */}
                 {
-                    !show && (
+                    (!addShow && !updateShow) && (
                         <div className={classes.header}>
                             <h1>Doctors</h1>
                             <Button
                                 variant="contained"
-                                onClick={() => setShow(!show)}
+                                onClick={() => setaddShow(!addShow)}
                             >
                                 Add Doctor
                             </Button>
@@ -58,11 +66,12 @@ const DoctorsList = () => {
                     )
                 }
                 {
-                    show && (
+                    (addShow || updateShow) && (
                         <div className={classes.back}>
                             <Button
                                 // variant="contained"
-                                onClick={() => setShow(!show)}
+                                //    if addshow is true then setaddshow false else if updateshow is true then setupdateshow false
+                                onClick={() => addShow ? setaddShow(!addShow) : setupdateShow(!updateShow)}
                             >
                                 Back
                             </Button>
@@ -70,12 +79,16 @@ const DoctorsList = () => {
                     )
                 }
                 {
-                    show ?
+                    (addShow || updateShow) ?
                         (<div className={classes.form}>
                             {/* header */}
                             <div className={classes.header}>
-                                <h1 style={{ margin: "0 auto 2rem" }}>Add Doctor</h1>
+                                {
+                                    // if add doctor is clicked then addShow add doctor else if update doctor is clicked then addShow update doctor
+                                    addShow ? <h1 style={{ margin: "0 auto 2rem" }}>Add Doctor</h1> : <h1 style={{ margin: "0 auto 2rem" }}>Update Doctor</h1>
+                                }
                             </div>
+
                             <div className={classes.formItem}>
                                 <label htmlFor="name">Name:</label>
                                 <input type="text" name="name" id="name"
@@ -83,10 +96,12 @@ const DoctorsList = () => {
                                     value={name}
                                 />
                             </div>
+
                             <div className={classes.formItem}>
                                 <label htmlFor="designation">Designation:</label>
-                                <Dropdown options={designationOptions} value={defaultdesignationOptions} placeholder="Select an option"
+                                <Dropdown options={designationOptions} placeholder="Select an option"
                                     onChange={(e) => setDesignation(e.value)}
+                                    value={designation ? designation : defaultdesignationOptions}
                                 />
                             </div>
                             <div className={classes.formItem}>
@@ -105,8 +120,10 @@ const DoctorsList = () => {
                             </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="type">Type:</label>
-                                <Dropdown options={Type} value={defaultType} placeholder="Select an option"
+                                <Dropdown options={Type} placeholder="Select an option"
                                     onChange={(e) => setEmploytype(e.value)}
+                                    // if employType has value then employType else defaultType
+                                    value={employType ? (employType.charAt(0).toUpperCase() + employType.slice(1)) : defaultType}
                                 />
                             </div>
                             {
@@ -136,9 +153,23 @@ const DoctorsList = () => {
                                 />
                             </div>
                             <div className={classes.formItem}>
-                                <Button variant="contained" color="primary" size="small" onClick={addDoctorHandler} >
-                                    Add
-                                </Button>
+                                {
+                                    // if addShow is true then add doctor button else if updateShow is true then update doctor button
+                                    addShow ?
+                                        <Button
+                                            variant="contained"
+                                            onClick={addDoctorHandler}
+                                        >
+                                            Add Doctor
+                                        </Button>
+                                        :
+                                        <Button
+                                            variant="contained"
+                                            onClick={() => updateDoctorHandler(id)}
+                                        >
+                                            Update Doctor
+                                        </Button>
+                                }
 
                             </div>
                         </div>)
@@ -188,6 +219,7 @@ const DoctorsList = () => {
                                                                 backgroundColor: "#f44336"
                                                             }
                                                         }}
+                                                        onClick={() => deleteDoctorHandler(doctor.name,doctor.email)}
                                                     >
                                                         Delete
                                                     </Button>
@@ -195,6 +227,19 @@ const DoctorsList = () => {
                                                         variant="contained"
                                                         sx={{
 
+                                                        }}
+                                                        onClick={() => {
+                                                            setaddShow(false)
+                                                            setupdateShow(true)
+                                                            setName(doctor.name)
+                                                            setDesignation(doctor.designation)
+                                                            setEmail(doctor.email)
+                                                            setPhn(doctor.mobile)
+                                                            setEmploytype(doctor.type)
+                                                            setDutyHoursPerDay(doctor.dutyHoursPerDay)
+                                                            setDutyHoursPerMonth(doctor.dutyHoursPerMonth)
+                                                            setChecked(doctor.nightDuty)
+                                                            setId(doctor._id)
                                                         }}
                                                     >
                                                         Edit

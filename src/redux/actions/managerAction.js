@@ -77,7 +77,8 @@ export const addDoctor = (
     designation,
     type,
     dutyHoursPerMonth,
-    dutyHoursPerDay
+    dutyHoursPerDay,
+    nightDuty
 ) => async (dispatch) => {
     try {
         dispatch({
@@ -95,7 +96,8 @@ export const addDoctor = (
             designation,
             type,
             dutyHoursPerMonth,
-            dutyHoursPerDay
+            dutyHoursPerDay,
+            nightDuty
         }
         const { data } = await axios.post(`${API}/public/admin/add-doctor`, body, config)
         dispatch({
@@ -141,7 +143,7 @@ export const getManagerInfo = (id) => async (dispatch) => {
 }
 
 // delete doctor
-export const deleteDoctor = (id) => async (dispatch) => {
+export const deleteDoctor = (email) => async (dispatch) => {
     try {
         dispatch({
             type: DELETE_DOCTOR_REQUEST
@@ -150,7 +152,10 @@ export const deleteDoctor = (id) => async (dispatch) => {
         const config = {
             'Content-Type': 'application/json'
         }
-        const { data } = await axios.delete(`${API}/public/admin/delete-doctor/${id}`, config)
+        const body = {
+            email
+        }
+        const { data } = await axios.post(`${API}/public/admin/delete-doctor`, body, config)
         dispatch({
             type: DELETE_DOCTOR_SUCCESS,
             payload: data
@@ -171,13 +176,12 @@ export const updateDoctor = (
     name,
     email,
     mobile,
-    password,
-    department,
     designation,
     type,
     dutyHoursPerMonth,
     dutyHoursPerDay,
-    nightDuty
+    nightDuty,
+    id
 ) => async (dispatch) => {
     try {
         dispatch({
@@ -191,15 +195,13 @@ export const updateDoctor = (
             name,
             email,
             mobile,
-            password,
-            department,
             designation,
             type,
             dutyHoursPerMonth,
             dutyHoursPerDay,
             nightDuty
         }
-        const { data } = await axios.put(`${API}/public/admin/update-doctor`, body, config)
+        const { data } = await axios.put(`${API}/public/admin/update-doctor/${id}`, body, config)
         dispatch({
             type: UPDATE_DOCTOR_SUCCESS,
             payload: data

@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react'
+import Swal from 'sweetalert2';
 import {
     addDoctor,
     deleteDoctor,
@@ -10,13 +11,16 @@ import {
 
 export const DoctorsLogic = () => {
     const { doctorInfo } = useSelector(state => state.addDoctor)
-    const {doctorsInfo: doctors } = useSelector(state => state.getAllDoctors)
-    
+    const { doctorsInfo: doctors } = useSelector(state => state.getAllDoctors)
+    const { doctorInfo: doctorDeleteState } = useSelector(state => state.deleteDoctor)
+    const { doctorInfo: doctorUpdateState } = useSelector(state => state.updateDoctor)
+    const { doctorInfo: doctorById } = useSelector(state => state.getDoctorById)
+
     const dispatch = useDispatch()
     const [checked, setChecked] = useState(false);
 
     const handleChange = (event) => {
-      setChecked(event.target.checked);
+        setChecked(event.target.checked);
     };
     useEffect(() => {
         dispatch(getAllDoctors())
@@ -33,13 +37,13 @@ export const DoctorsLogic = () => {
         return retVal;
     }
 
-
     const [name, setName] = useState('')
-    const [designation, setDesignation] = useState('senior')
+    const [designation, setDesignation] = useState('Senior')
     const [email, setEmail] = useState('')
     const [phn, setPhn] = useState('')
     const [dutyHoursPerMonth, setDutyHoursPerMonth] = useState(192)
     const [dutyHoursPerDay, setDutyHoursPerDay] = useState(8)
+    const [id, setId] = useState('')
 
     const designationOptions = [
         'Senior', 'Regular'
@@ -50,11 +54,12 @@ export const DoctorsLogic = () => {
     ]
 
     const defaultType = Type[0];
-    const [show, setShow] = useState(false)
+    const [addShow, setaddShow] = useState(false)
+    const [updateShow, setupdateShow] = useState(false)
     const [employType, setEmploytype] = useState('Permanent')
     // addDoctor
     const addDoctorHandler = () => {
-        setShow(!show)
+        setaddShow(!addShow)
         dispatch(addDoctor(
             name,
             email,
@@ -67,6 +72,87 @@ export const DoctorsLogic = () => {
             checked
         ))
     }
+
+    useEffect(() => {
+        if (doctorInfo) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Doctor Added Successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            dispatch(getAllDoctors())
+        }
+    }, [doctorInfo])
+
+
+    // delete doctor
+    const deleteDoctorHandler = (name,email) => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    dispatch(deleteDoctor(email))
+                    Swal.fire(
+                        'Deleted!',
+                        `${name} has been removed.`,
+                        'success'
+                    )
+                } 
+            });
+
+    }
+    useEffect(() => {
+        if (doctorDeleteState) {
+            dispatch(getAllDoctors())
+        }
+    }, [doctorDeleteState])
+
+    // update doctor
+    const updateDoctorHandler = (id) => {
+        setupdateShow(!updateShow)
+        dispatch(updateDoctor(
+            name,
+            email,
+            phn,
+            designation,
+            employType.toLowerCase(),
+            dutyHoursPerMonth,
+            dutyHoursPerDay,
+            checked,
+            id
+        ))
+    }
+    useEffect(() => {
+        if (doctorUpdateState) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Doctor Updated Successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            // update name, email and set it to nuill
+            setName('')
+            setEmail('')
+            setPhn('')
+            setDesignation('')
+            setEmploytype('')
+            setDutyHoursPerMonth('')
+            setDutyHoursPerDay('')
+            setChecked(false)
+            setId('')
+
+            dispatch(getAllDoctors())
+        }
+    }, [doctorUpdateState])
+
 
     return {
         doctorInfo,
@@ -86,14 +172,22 @@ export const DoctorsLogic = () => {
         defaultdesignationOptions,
         Type,
         defaultType,
-        show,
-        setShow,
+        addShow,
+        setaddShow,
+        updateShow,
+        setupdateShow,
         employType,
         setEmploytype,
         dutyHoursPerDay,
         setDutyHoursPerDay,
         handleChange,
-        checked
+        checked,
+        deleteDoctorHandler,
+        updateDoctorHandler,
+        setChecked,
+        id,
+        setId,
+        doctorById
 
     }
 }
