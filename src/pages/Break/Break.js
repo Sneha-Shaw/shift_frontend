@@ -7,44 +7,36 @@ import Switch from '@mui/material/Switch';
 import Timepicker from '../../components/Timepicker/TimePicker'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import { BreakLogic } from './BreakLogic'
 
 const Break = () => {
     const classes = useStyles()
-    // breaks array
-    const breaks = [
-        {
-            name: 'Lunch Break',
-            duration: '1:00',
-            start: '1:30',
-            end: '2:30',
-            automatic: true,
-            manual: false,
-            status: true
-        },
-        {
-            name: 'Tea Break',
-            duration: '0:30',
-            start: '10:30',
-            end: '11:00',
-            automatic: false,
-            manual: true,
-            status: false
-        },
-        {
-            name: 'Snack Break',
-            duration: '0:30',
-            start: '3:30',
-            end: '4:00',
-            automatic: false,
-            manual: true,
-            status: true
-        },
-    ]
-    const options = [
-        'Manual', 'Automatic'
-    ];
-    const defaultOption = options[0];
-    const [show, setShow] = useState(false)
+    const {
+        breaks,
+        show,
+        setShow,
+        defaultOption,
+        options,
+        addBreak,
+        breakName,
+        setBreakName,
+        breakDuration,
+        setBreakDuration,
+        startTime,
+        setStartTime,
+        endTime,
+        setEndTime,
+        setBreakType,
+        breakStatus,
+        setBreakStatus,
+        updateBreakStatus,
+        deleteBreak,
+        setStartmeridian,
+        setEndmeridian,
+        MeridianOptions,
+        addUnits,
+        defaultMeridianOption
+    } = BreakLogic()
 
     return (
         <div className={classes.root}>
@@ -87,17 +79,41 @@ const Break = () => {
                             </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="breakName">Break Name:</label>
-                                <input type="text" id="breakName" />
+                                <input type="text" id="breakName"
+                                    value={breakName}
+                                    onChange={(e) => setBreakName(e.target.value)}
+                                />
                             </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="duration">Duration:</label>
-                                <input type="time" id="duration" />
+                                <input type="time" id="duration"
+                                    value={breakDuration}
+                                    onChange={(e) => {setBreakDuration(e.currentTarget.value);addUnits(e.currentTarget.value)}}
+                                />
                             </div>
                             <div className={classes.formItemTime}>
-                                <Timepicker placeholder="Start Time" />
+                                <label htmlFor="time">Start Time:</label>
+                                <input
+                                    type="time"
+                                    value={startTime}
+                                    onChange={(e) => { setStartTime(e.target.value); }}
+                                    className={classes.input}
+                                />
+                                <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                                    onChange={(e) => { setStartmeridian(e.value) }}
+                                />
                             </div>
                             <div className={classes.formItemTime}>
-                                <Timepicker placeholder="End Time" />
+                                <label htmlFor="time">End Time:</label>
+                                <input
+                                    type="time"
+                                    value={endTime}
+                                    onChange={(e) => { setEndTime(e.target.value); }}
+                                    className={classes.input}
+                                />
+                                <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                                    onChange={(e) => { setEndmeridian(e.value) }}
+                                />
                             </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="type">Type:</label>
@@ -105,13 +121,13 @@ const Break = () => {
                                     options={options}
                                     value={defaultOption}
                                     placeholder="Select an option"
-
+                                    onChange={(e) => setBreakType(e.value)}
                                 />
                             </div>
                             <div className={classes.formItem}>
                                 <Button
                                     variant="contained"
-                                    onClick={() => setShow(!show)}
+                                    onClick={() => addBreak()}
                                 >
                                     Add Break
                                 </Button>
@@ -129,35 +145,51 @@ const Break = () => {
                                         <th className={classes.tableHeaderItem}>End Time</th>
                                         <th className={classes.tableHeaderItem}>Type</th>
                                         <th className={classes.tableHeaderItem}>Status</th>
+                                        <th className={classes.tableHeaderItem}>Action</th>
                                     </tr>
                                 </thead>
 
-                                {breaks.map((breaks,index) => (
+                                {breaks && breaks?.getAllBreaks.map((breaks, index) => (
                                     <tbody key={index}>
                                         <tr className={classes.tableRow}>
-                                            <td className={classes.tableRowItem}>{breaks.name}</td>
+                                            <td className={classes.tableRowItem}>{breaks.breakName}</td>
 
 
-                                            <td className={classes.tableRowItem}>{breaks.duration}</td>
+                                            <td className={classes.tableRowItem}>{breaks.breakDuration}</td>
 
 
-                                            <td className={classes.tableRowItem}>{breaks.start}</td>
+                                            <td className={classes.tableRowItem}>{breaks.startTime}</td>
 
 
-                                            <td className={classes.tableRowItem}>{breaks.end}</td>
+                                            <td className={classes.tableRowItem}>{breaks.endTime}</td>
 
 
                                             <td className={classes.tableRowItem}>
                                                 {
-                                                    breaks.automatic ? <div>Automatic</div> : <div>Manual</div>
+                                                    breaks.breakType ? <div>Automatic</div> : <div>Manual</div>
                                                 }
                                             </td>
 
 
                                             <td className={classes.tableRowItem}>
                                                 <Switch
-                                                    checked={breaks.status}
+                                                    checked={breaks.breakStatus || breakStatus}
+                                                    onChange={() => updateBreakStatus(breaks._id, !breaks.breakStatus)}
                                                 />
+                                            </td>
+                                            <td className={classes.tableRowItem}>   
+                                                <Button
+                                                    variant="contained"
+                                                    onClick={() => deleteBreak(breaks._id)}
+                                                    sx={{
+                                                        backgroundColor: "#f44336",
+                                                        '&:hover': {
+                                                            backgroundColor: "#f44336"
+                                                        }
+                                                    }}
+                                                >
+                                                    Delete
+                                                </Button>
                                             </td>
                                         </tr>
                                     </tbody>

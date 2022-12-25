@@ -309,7 +309,7 @@ export const addBreaks = (
             breakType,
             breakStatus
         }
-        const { data } = await axios.put(`${API}/public/admin/add-breaks`, body, config)
+        const { data } = await axios.post(`${API}/public/admin/add-breaks`, body, config)
         dispatch({
             type: ADD_BREAKS_SUCCESS,
             payload: data
