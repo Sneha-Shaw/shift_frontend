@@ -4,16 +4,13 @@ import Swal from 'sweetalert2';
 import {
     addBreaks,
     getAllBreaks,
-    getBreaksById,
     updateBreaksStatus,
     deleteBreaks
 } from '../../redux/actions/managerAction';
-import { Usb } from '@mui/icons-material';
 
 export const BreakLogic = () => {
 
     const { breaks } = useSelector(state => state.getAllBreaks)
-    const { breaks: breaksById } = useSelector(state => state.getBreaksById)
     const { breaks: breaksDeleteState } = useSelector(state => state.deleteBreaks)
     const { breaks: breaksUpdateState } = useSelector(state => state.updateBreaksStatus)
     const { breaks: breaksAddState } = useSelector(state => state.addBreaks)
@@ -30,7 +27,6 @@ export const BreakLogic = () => {
     const [startTime, setStartTime] = useState('00:00')
     const [endTime, setEndTime] = useState('00:00')
     const [breakType, setBreakType] = useState('Manual')
-    const [breakStatus, setBreakStatus] = useState(false)
     const [startMeridian, setStartmeridian] = useState('AM');
     const [endMeridian, setEndmeridian] = useState('AM');
     const [show, setShow] = useState(false)
@@ -84,7 +80,7 @@ export const BreakLogic = () => {
             endTime + ' ' + endMeridian,
             duration,
             breakType,
-            breakStatus
+            false
         ))
         Swal.fire({
             position: 'center',
@@ -150,8 +146,6 @@ export const BreakLogic = () => {
         setEndTime,
         breakType,
         setBreakType,
-        breakStatus,
-        setBreakStatus,
         startMeridian,
         setStartmeridian,
         endMeridian,

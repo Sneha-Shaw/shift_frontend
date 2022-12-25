@@ -214,7 +214,6 @@ const DoctorsList = () => {
                                                         variant="contained"
                                                         sx={{
                                                             backgroundColor: "#f44336",
-                                                            color: "#fff",
                                                             '&:hover': {
                                                                 backgroundColor: "#f44336"
                                                             }

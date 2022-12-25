@@ -1,10 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 import useStyles from './styles'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import SubSidebar from '../../components/SubSidebar/SubSidebar'
 import { Button } from '@mui/material'
 import Switch from '@mui/material/Switch';
-import Timepicker from '../../components/Timepicker/TimePicker'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { BreakLogic } from './BreakLogic'
@@ -27,8 +26,6 @@ const Break = () => {
         endTime,
         setEndTime,
         setBreakType,
-        breakStatus,
-        setBreakStatus,
         updateBreakStatus,
         deleteBreak,
         setStartmeridian,
@@ -173,7 +170,7 @@ const Break = () => {
 
                                             <td className={classes.tableRowItem}>
                                                 <Switch
-                                                    checked={breaks.breakStatus || breakStatus}
+                                                    checked={breaks.breakStatus}
                                                     onChange={() => updateBreakStatus(breaks._id, !breaks.breakStatus)}
                                                 />
                                             </td>
