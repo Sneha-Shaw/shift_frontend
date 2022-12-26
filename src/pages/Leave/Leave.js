@@ -153,11 +153,11 @@ const Leave = () => {
                                                     <div className={classes.main__content__item__right}>
                                                         <Button variant="contained"
                                                             sx={{
-                                                                background: item.status === "awaiting" ? "#FCEFCF" : item.status === "approved" ? "#D4FFE7" : "#FEEFED",
-                                                                color: item.status === "awaiting" ? "#F0AB00" : item.status === "approved" ? "#00B74A" : "#FF0000",
+                                                                background: item.leaveStatus === "awaiting" ? "#FCEFCF" : item.leaveStatus === "approved" ? "#D4FFE7" : "#FEEFED",
+                                                                color: item.leaveStatus === "awaiting" ? "#F0AB00" : item.leaveStatus === "approved" ? "#00B74A" : "#FF0000",
                                                                 '&:hover': {
-                                                                    background: item.status === "awaiting" ? "#FCEFCF" : item.status === "approved" ? "#D4FFE7" : "#FEEFED",
-                                                                    color: item.status === "awaiting" ? "#F0AB00" : item.status === "approved" ? "#00B74A" : "#FF0000",
+                                                                    background: item.leaveStatus === "awaiting" ? "#FCEFCF" : item.leaveStatus === "approved" ? "#D4FFE7" : "#FEEFED",
+                                                                    color: item.leaveStatus === "awaiting" ? "#F0AB00" : item.leaveStatus === "approved" ? "#00B74A" : "#FF0000",
                                                                 }
                                                             }}
                                                         >{item.leaveStatus}</Button>
