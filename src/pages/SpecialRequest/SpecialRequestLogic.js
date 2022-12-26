@@ -10,7 +10,7 @@ export const SpecialRequestLogic = ()=>{
     const {userInfo} = useSelector((state) => state.signInUser)
     const {special} = useSelector((state) => state.requestSpecial)
     const {specialRequests} = useSelector((state) => state.getSpecialRequests)
-    const [show, setShow] = useState(true)
+    const [show, setShow] = useState(false)
     const [request, setRequest] = useState('')
     const dispatch = useDispatch()
 
@@ -27,7 +27,7 @@ export const SpecialRequestLogic = ()=>{
 
     useEffect(() => {
         dispatch(getSpecialRequests(userInfo._id))
-    }, [dispatch])
+    }, [dispatch, userInfo._id])
 
     const submitHandler = (e) => {
         setShow(!show)

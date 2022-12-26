@@ -116,7 +116,7 @@ const SpecialRequest = () => {
                                                     textAlign: "center",
                                                     width: "100%"
                                                 }}>
-                                                    <h2>No leaves applied yet</h2>
+                                                    <h2>No Special Requests yet</h2>
                                                 </div>
 
                                             </div>
