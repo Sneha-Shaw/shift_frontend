@@ -27,9 +27,9 @@ export default makeStyles((theme) => ({
     },
     date: {
         width: "100%",
-        display: 'flex',
-        transform: "translate(16.5%, 0)",
-        position: "relative",
+        // display: 'flex',
+        // transform: "translate(16.5%, 0)",
+        // position: "relative",
 
     },
     dateHeader:{
@@ -37,19 +37,19 @@ export default makeStyles((theme) => ({
         padding: "1rem",
         fontSize: "1.5rem",
         border: "1px solid #e0e0e0",
-        width: "8rem",
-        height: "2rem",
+        // width: "20%",
+        // height: "2rem",
         background: "#06283D",
         color: "#fff",
         textAlign: "center"
     },
     dateBody:{
-        position: "absolute",
+        // position: "absolute",
     },
     slot:{
-        width: "16%",
+        width: "100%",
         height: "100%",
-        display: 'flex',
+        // display: 'flex',
         flexDirection: 'column',
     },
     slotHeader:{
@@ -57,14 +57,14 @@ export default makeStyles((theme) => ({
         padding: "1rem",
         fontSize: "1.5rem",
         border: "1px solid #e0e0e0",
-        width: "90%",
-        height: "2rem",
+        width: "100%",
+        // height: "2rem",
         background: "#06283D",
         color: "#fff",
         textAlign: "center",
     },
     shift:{
-        display: 'flex',
+        // display: 'flex',
         padding: "1rem",
         fontSize: "1.2rem",
         border: "1px solid #e0e0e0",

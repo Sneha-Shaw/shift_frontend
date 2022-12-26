@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useStyles from './styles'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import SubSidebar from '../../components/SubSidebar/SubSidebar'
@@ -15,8 +15,9 @@ const DailyView = () => {
     } = ViewLogic()
     const doctorInfo = null
     // shift array
-   
 
+// useEffect(() => {
+    
 
     return (
         <div className={classes.root}>
@@ -24,86 +25,51 @@ const DailyView = () => {
             <SubSidebar />
             <div className={classes.main}>
                 <div className={classes.grid}>
-                    {/* dates in column header and slots in row header */}
-                    <div className={classes.date}>
-                        {
-                            calender?.getCalendar?.calendarArray?.map((date, index) => (
-                                <div>
-                                    <div className={classes.dateHeader} key={index}>
-                                        {date.dayName.slice(0, 3)}, {' ' + month} {date.dayNumber}
-                                    </div>
-                                    <div className={classes.dateBody}>
-                                        {
-                                            shifts.map((shift, index) => (
-                                                <div className={classes.shift} key={index}>
-                                                    {
-                                                        shift.shiftDay === date.dayName && parseInt(shift.shiftStartDate[0]) === date.dayNumber ?
-                                                            <div className={classes.shiftInfo}>
-                                                                <div className={classes.shiftInfoName}>
-                                                                    {shift.shiftName}
-                                                                </div>
-                                                                <div className={classes.shiftInfoTime}>
-                                                                    {shift.shiftStartTime} - {shift.shiftEndTime}
-                                                                </div>
-                                                            </div>
-                                                            : null
-                                                    }
-                                                </div>
-                                            ))
-                                        }
-
-                                    </div>
-                                </div>
-                            ))
-                        }
-                    </div>
-                    <div className={classes.slot}>
-                        {
-                            slots?.getAllSlots.map((slot, index) => (
-                                <div>
-                                    <div className={classes.slotHeader} key={index}>
-                                        {slot.slotTime}
-                                    </div>
-                                </div>
-                            ))
-                        }
-                    </div>
-                </div>
-                {/* {
-                    calender?.getCalendar?.calendarArray?.map((date, index) => (
-                        <div className={classes.date} key={index}>
-                            <div className={classes.dateHeader}>
-                                <div className={classes.dateHeaderDay}>
-                                    {date.dayName}
-                                </div>
-                                <div className={classes.dateHeaderDate}>
-                                    {date.dayNumber}
-                                </div>
-                            </div>
-                            <div className={classes.dateBody}>
+                    <table className={classes.table}>
+                        <thead>
+                            <tr>
+                                <th className={classes.dateHeader}>Date</th>
                                 {
-                                    shifts.map((shift, index) => (
-                                        <div className={classes.shift} key={index}>
-                                            {
-                                                shift.shiftDay === date.dayName && parseInt(shift.shiftStartDate[0]) === date.dayNumber ?
-                                                    <div className={classes.shiftInfo}>
-                                                        <div className={classes.shiftInfoName}>
-                                                            {shift.shiftName}
-                                                        </div>
-                                                        <div className={classes.shiftInfoTime}>
-                                                            {shift.shiftStartTime} - {shift.shiftEndTime}
-                                                        </div>
-                                                    </div>
-                                                    : null
-                                            }
-                                        </div>
+                                    slots?.getAllSlots?.map((slot,index) => (
+                                        <th className={classes.dateHeader} key={index}>{slot.slotTime}</th>
                                     ))
                                 }
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {
+                                calender?.getCalendar?.calendarArray?.map((date, clindex) => (
+                                    <tr key={clindex}>
+                                        <td className={classes.dateBody}>{date.dayNumber}</td>
+                                        {
 
-                            </div>
-                        </div>
-                    ))
-                } */}
+                                            slots?.getAllSlots?.map((slot,slindex) => (
+                                                <td className={classes.dateBody} key={slindex}>
+                                                    {
+                                                        shifts.map((shift,shindex) => (
+                                                            <div key={shindex}>
+                                                                {
+                                                                    // check day and slot
+                                                                    shift.shiftDay === date.dayName?
+                                                                        <div>
+                                                                                {shift.shiftStartTime}-{shift.shiftEndTime}
+                                                                        </div>
+                                                                        :
+                                                                        null
+                                                                }
+
+                                                            </div>
+                                                        ))
+                                                    }
+                                                </td>
+                                            ))
+                                        }
+                                    </tr>
+                                ))
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     )
