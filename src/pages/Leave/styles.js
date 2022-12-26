@@ -62,6 +62,8 @@ export default makeStyles((theme) => ({
         '& button': {
             background: "#fff",
             color: "#06283D",
+            fontSize: "1.2rem",
+            fontWeight: "bold",
             '&:hover': {
                 background: "#f7f7f7",
                 color: "#06283D",

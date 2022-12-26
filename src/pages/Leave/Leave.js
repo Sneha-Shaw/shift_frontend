@@ -119,7 +119,7 @@ const Leave = () => {
                                         className={classes.main__header__buttons__add}
                                         onClick={() => setShow(true)}
                                     >
-                                        Add Leave
+                                        Request Leave
                                     </Button>
                                 </div>
                             </div>
