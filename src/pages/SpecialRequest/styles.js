@@ -7,55 +7,157 @@ export default makeStyles((theme) => ({
         display: "flex",
         background: "#f7f7f7",
     },
-    main:{
+    main: {
         width: "55%",
-        height: "fit-content",
+        // height: "60%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         // justifyContent: "center",
-        margin: "7.9rem auto",
-        background: "#fff",
-        boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
-
+        margin: "8rem auto",
         borderRadius: "1rem",
         padding: "2rem",
-        '&>h1':{
+        position: "relative",
+        '&>h1': {
             fontSize: "3rem",
             fontWeight: "bold",
             marginBottom: "2rem",
 
         },
-        '&>div':{
-            width: "80%",
+        '&>p': {
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            marginBottom: "2rem",
+        },
+    },
+    back: {
+        width: "100%",
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        '&>button': {
+            background: "#fff",
+            color: "#000",
+            border: "1px solid #000",
+            borderRadius: "0.5rem",
+            padding: "0.5rem 1rem",
+            fontSize: "1rem",
+            fontWeight: "bold",
+            '&:hover': {
+                background: "#000",
+                color: "#fff",
+            }
+        }
+    },
+    main__header: {
+        width: "100%",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+        '&>h1': {
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+            color: "#06283D"
+        },
+        '& button': {
+            background: "#fff",
+            color: "#06283D",
+            fontSize: "1.2rem",
+            fontWeight: "bold",
+            '&:hover': {
+                background: "#f7f7f7",
+                color: "#06283D",
+            }
+        }
+    },
+    main__content: {
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "2rem",
+        '&>div': {
+            width: "100%",
             display: "flex",
             justifyContent: "space-between",
-            margin: "1rem 0",
-            // alignItems: "center",
-            '&>textarea':{
-                width: "51.5%",
-                height: "10rem",
-                fontSize: "1.5rem",
-                padding: "0.5rem",
-                resize: "none",
-                border: "1px solid #ccc",
-                borderRadius: "0.5rem",
-                '&:focus':{
-                    outline: "none",
-                    border: "1px solid #000",
+            alignItems: "center",
+            padding: "1rem",
+            background: "#fff",
+            boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
+
+            borderRadius: "1rem",
+            marginBottom: "1rem",
+            border: "1px solid rgba(0,0,0,0.2)",
+            '& button': {
+                boxShadow: "none",
+                '&:hover': {
+                    boxShadow: "none",
+                    cursor: "text"
                 }
-            },
-            '&>label':{
-                width: "20%",
+            }
+
+        }
+    },
+    main__content__item__left: {
+        display: "flex",
+        flexDirection: "column",
+        '&>p':{
+            fontSize: "1.5rem",
+        }
+       
+    },
+    form: {
+        width: "80%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#fff",
+        boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
+        borderRadius: "1rem",
+        padding: "2rem",
+        marginTop: "2rem",
+        '&>h1': {
+            fontSize: "2rem",
+            fontWeight: "bold",
+            color: "#06283D",
+            marginBottom: "2rem",
+        },
+        '& div': {
+            width: "80%",
+            display: "flex",
+            // flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            '&>label': {
+                width: "15%",
                 fontSize: "1.5rem",
                 fontWeight: "bold",
-               color: "#06383D"
+                color: "#06283D",
+                marginBottom: "1rem",
 
             },
-            
+            '&>textarea': {
+                width: "70%",
+                height: "10rem",
+                padding: "1rem",
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                color: "#06283D",
+                border: "1px solid rgba(0,0,0,0.2)",
+                borderRadius: "1rem",
+                marginBottom: "1rem",
+                resize: "none",
+                '&:focus': {
+                    outline: "none",
+                    border: "1px solid #06283D",
+                }
+            },
+
         },
-        '&>button': {
-            width: "30%",
+        '& button': {
+            width: "50%",
             height: "4rem",
             background: "#06283D",
             color: "#fff",
@@ -67,17 +169,7 @@ export default makeStyles((theme) => ({
                 color: "#fff",
             }
         }
-    },
-    input:{
-        width: "51%",
-        height: "3rem",
-        fontSize: "1.5rem",
-        padding: "0 0.5rem ",
-        border: "1px solid #ccc",
-        borderRadius: "0.5rem",
-        '&:focus':{
-            outline: "none",
-            border: "1px solid #000",
-        }
+
     }
+
 }))
