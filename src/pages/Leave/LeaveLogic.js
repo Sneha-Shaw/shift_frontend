@@ -28,6 +28,12 @@ export const LeaveLogic = () => {
         dispatch(getLeaves(userInfo._id))
     }, [dispatch])
 
+    useEffect(() => {
+        if (leave) {
+            dispatch(getLeaves(userInfo._id))
+        }
+    }, [leave])
+
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     // extract date, month and year from yyyy-mm-dd
     const extractDate = (date) => {

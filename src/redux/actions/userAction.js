@@ -120,7 +120,7 @@ export const requestLeave = (
         'Content-Type': 'application/json'
       }
       const body = {
-        
+
         leaveType,
         leaveReason,
         startDate,
@@ -177,7 +177,7 @@ export const requestSpecial = (id, request) => async (dispatch) => {
       'Content-Type': 'application/json'
     }
     const body = {
-      id,
+
       request
     }
     const { data } = await axios.post(`${API}/public/auth/${id}/special-request`, body, config)
@@ -231,7 +231,7 @@ export const requestShiftReplace = (id, name, replacement, date, start, end) => 
       'Content-Type': 'application/json'
     }
     const body = {
-      id,
+
       name,
       replacement,
       date,
@@ -264,7 +264,6 @@ export const addAvailability = (id, schedule) => async (dispatch) => {
       'Content-Type': 'application/json'
     }
     const body = {
-      id,
       schedule
     }
     const { data } = await axios.post(`${API}/public/auth/${id}/add-availability`, body, config)

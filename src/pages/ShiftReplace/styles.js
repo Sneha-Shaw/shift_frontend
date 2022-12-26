@@ -9,12 +9,12 @@ export default makeStyles((theme) => ({
     },
     main:{
         width: "55%",
-        height: "85%",
+        height: "60%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         // justifyContent: "center",
-        margin: "3rem auto",
+        margin: "auto",
         background: "#fff",
         borderRadius: "1rem",
         padding: "2rem",
@@ -57,7 +57,7 @@ export default makeStyles((theme) => ({
 
         // flexDirection: "column",
         '&>div':{
-            width: "54%",
+            width: "53%",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
