@@ -8,8 +8,9 @@ import { useSelector } from 'react-redux'
 const Home = () => {
   const classes = useStyles()
   const { managerInfo } = useSelector((state) => state.signInManager)
+  const { userInfo } = useSelector((state) => state.signInUser)
   // get user name
-  const user = managerInfo?.name
+  const user = userInfo ? userInfo.name : managerInfo.name
   const navigate = useNavigate()
   const notifications = [
     {
@@ -44,6 +45,7 @@ const Home = () => {
            
         </div>
         {/* notifications */}
+        
         <div className={classes.notifications}>
           <div className={classes.header}>
             <h2>Latest Notifications (2)</h2>

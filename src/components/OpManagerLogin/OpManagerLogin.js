@@ -9,7 +9,7 @@ const DoctorLogin = () => {
     return (
         <div className={classes.root}>
             <h1>Sign in</h1>
-            <p className={classes.form}>
+            <div className={classes.form}>
                 <TextField
                     onChange={(e) => setEmail(e.target.value)}
                     value={email}
@@ -46,7 +46,7 @@ const DoctorLogin = () => {
                 >
                     Sign In
                 </Button>
-            </p>
+            </div>
         </div>
     )
 }

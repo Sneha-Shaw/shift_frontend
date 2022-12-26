@@ -17,6 +17,7 @@ export default makeStyles((theme) => ({
         margin: "8rem auto",
         borderRadius: "1rem",
         padding: "2rem",
+        position: "relative",
         '&>h1': {
             fontSize: "3rem",
             fontWeight: "bold",
@@ -29,7 +30,25 @@ export default makeStyles((theme) => ({
             marginBottom: "2rem",
         },
     },
-
+    back: {
+        width: "100%",
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        '&>button': {
+            background: "#fff",
+            color: "#000",
+            border: "1px solid #000",
+            borderRadius: "0.5rem",
+            padding: "0.5rem 1rem",
+            fontSize: "1rem",
+            fontWeight: "bold",
+            '&:hover': {
+                background: "#000",
+                color: "#fff",
+            }
+        }
+    },
     main__header: {
         width: "100%",
         display: "flex",
@@ -98,13 +117,19 @@ export default makeStyles((theme) => ({
             display: "flex",
             alignItems: "center",
             marginBottom: "1rem",
-            width: "80%",
-            justifyContent: "space-between",
+            width: "100%",
+            // justifyContent: "space-between",
             '&>p': {
                 fontSize: "1rem",
                 fontWeight: "bold",
                 color: "#06283D",
                 marginLeft: "1rem",
+            },
+            '&>h2':{
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                color: "#06283D",
+                margin: "1.5rem 0",
             }
         }
     },
@@ -135,9 +160,9 @@ export default makeStyles((theme) => ({
                 height: "8rem",
                 resize: "none",
                 borderRadius: "0.5rem",
-                border: "1px solid",
                 padding: "0.5rem",
                 outline: "none",
+                border: "1px solid rgba(0,0,0,0.2)"
 
             },
             '&>button': {
@@ -158,7 +183,7 @@ export default makeStyles((theme) => ({
     main__form: {
         background: "#fff",
         boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
-
+        marginTop: "2rem",
         width: "100%",
         display: "flex",
         flexDirection: "column",
@@ -171,8 +196,14 @@ export default makeStyles((theme) => ({
     },
     main__content__form__input__div: {
         width: "80%",
+        // input type date
+        '& input[type="date"]': {
+            // width: "100%",
+            border: "1px solid rgba(0,0,0,0.2)",
+            borderRadius: "0.2rem",
+            padding: "0.5rem",
+        }
        
     }
-
 
 }))

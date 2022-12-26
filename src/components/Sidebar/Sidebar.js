@@ -11,17 +11,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 // import Swal from 'sweetalert2';
 import { logoutManager } from '../../redux/actions/managerAction';
+import {logoutUser} from '../../redux/actions/userAction'
 
 const Sidebar = () => {
     const classes = useStyles()
     const [showSubList, setShowSubList] = useState(false)
-    const { managerInfo }  = useSelector(state => state.signInManager)
+    const { managerInfo } = useSelector(state => state.signInManager)
+    const { userInfo } = useSelector(state => state.signInUser)
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const logoutHandler = () => {
         dispatch(logoutManager())
+        dispatch(logoutUser())
         navigate('/login')
     }
 

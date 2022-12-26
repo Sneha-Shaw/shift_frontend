@@ -2,10 +2,13 @@ import React from 'react'
 import useStyles from './styles'
 import { NavLink, Link } from 'react-router-dom'
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { useSelector } from 'react-redux'
 
 const SubSidebar = () => {
     const classes = useStyles()
-    const managerInfo = "hi"
+    
+    const { managerInfo } = useSelector(state => state.signInManager)
+    const { userInfo } = useSelector(state => state.signInUser)
 
 
     return (

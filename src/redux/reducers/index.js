@@ -1,5 +1,13 @@
 import { combineReducers } from 'redux'
-import { userSigninReducer, getSingleUserReducer } from './userReducer'
+import {
+    userSigninReducer,
+    getSingleUserReducer,
+    requestLeaveReducer,
+    getLeavesReducer,
+    requestSpecialReducer,
+    getSpecialRequestsReducer,
+    requestShiftReplaceReducer
+} from './userReducer'
 import {
     signInManagerReducer,
     addDoctorReducer,
@@ -17,6 +25,7 @@ import {
     approveDenyLeaveReducer,
     getAllSpecialRequestsReducer,
     approveDenySpecialRequestReducer
+
 } from './managerReducer'
 import {
     getCalenderReducer,
@@ -44,7 +53,12 @@ const rootReducer = combineReducers({
     getAllSpecialRequests: getAllSpecialRequestsReducer,
     approveDenySpecialRequest: approveDenySpecialRequestReducer,
     getCalender: getCalenderReducer,
-    getAllSlots: getAllSlotsReducer
+    getAllSlots: getAllSlotsReducer,
+    requestLeave: requestLeaveReducer,
+    getLeaves: getLeavesReducer,
+    requestSpecial: requestSpecialReducer,
+    getSpecialRequests: getSpecialRequestsReducer,
+    requestShiftReplace: requestShiftReplaceReducer
 })
 
 export default rootReducer

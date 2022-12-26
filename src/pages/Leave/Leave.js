@@ -4,48 +4,48 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import SubSidebar from '../../components/SubSidebar/SubSidebar'
 import AddIcon from '@mui/icons-material/Add';
 import { Button } from '@mui/material';
-import DateTimePicker from 'react-datetime-picker';
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import { LeaveLogic } from './LeaveLogic';
 
 const Leave = () => {
     const classes = useStyles()
     // array of leave duration start date end date type of leave and leave declined or approved
-    const leave = [
-        {
-            startDate: "Mon, 5th Dec",
-            endDate: "Mon, 5th Dec",
-            duration: "1 Day",
-            type: "Casual",
-            status: "awaiting"
-        },
-        {
-            startDate: "Sun, 4th Dec",
-            endDate: "Sun, 4th Dec",
-            duration: "1 Day",
-            type: "Sick",
-            status: "approved"
-        },
-        {
-            startDate: "Sat, 3rd Dec",
-            endDate: "Sat, 3rd Dec",
-            duration: "1 Day",
-            type: "Casual",
-            status: "declined"
-        }
-    ]
-    const [show, setShow] = useState(false)
-    const options = [
-        'Casual', 'Sick'
-      ];
-      const defaultOption = options[0];
-    const [fromvalue, onChangefrom] = useState(new Date());
-    const [tovalue, onChangeto] = useState(new Date());
+
+    const {
+        leaves,
+        show,
+        setShow,
+        options,
+        defaultOption,
+        // leaveType,
+        setLeaveType,
+        leaveReason,
+        setLeaveReason,
+        startDate,
+        setStartDate,
+        endDate,
+        setEndDate,
+        addLeave
+    } = LeaveLogic()
     return (
         <div className={classes.root}>
             <Sidebar />
             <SubSidebar />
             <div className={classes.main}>
+                {
+                    (show) && (
+                        <div className={classes.back}>
+                            <Button
+                                // variant="contained"
+                                //    if addshow is true then setaddshow false else if updateshow is true then setupdateshow false
+                                onClick={() => setShow(!show)}
+                            >
+                                Back
+                            </Button>
+                        </div>
+                    )
+                }
                 {
                     show ? (
                         <div className={classes.main__form}>
@@ -60,7 +60,10 @@ const Leave = () => {
                                     <label >From:</label>
 
                                     <div className={classes.main__content__form__input__div}>
-                                        <DateTimePicker onChange={onChangefrom} value={fromvalue} />
+                                        <input type="date"
+                                            style={{ width: "96%" }}
+                                            onChange={(e) => setStartDate(e.target.value)}
+                                            value={startDate} />
 
                                     </div>
 
@@ -71,7 +74,7 @@ const Leave = () => {
                                     <label >To:</label>
 
                                     <div className={classes.main__content__form__input__div}>
-                                        <DateTimePicker style={{ width: "100%" }} onChange={onChangeto} value={tovalue} />
+                                        <input type="date" style={{ width: "96%" }} onChange={(e)=>setEndDate(e.target.value)} value={endDate} />
 
                                     </div>
 
@@ -80,23 +83,24 @@ const Leave = () => {
                                 <div className={classes.main__content__form__input}>
                                     <label htmlFor="type">Type of Leave:</label>
                                     <div className={classes.main__content__form__input__div}>
-                                      
-                                      <Dropdown options={options}value={defaultOption} placeholder="Select an option" />
-                                        {/* <select name="type" id="type">
-                                        <option value="casual">Casual</option>
-                                        <option value="sick">Sick</option>
-                                    </select> */}
+
+                                        <Dropdown options={options} value={defaultOption} placeholder="Select an option"
+                                            onChange={(e) => setLeaveType(e.value)}
+                                        />
                                     </div>
                                 </div>
                                 <div className={classes.main__content__form__input}>
                                     <label htmlFor="reason">Reason:</label>
                                     <div className={classes.main__content__form__input__div}>
 
-                                        <textarea name="reason" id="reason" cols="30" rows="10" />
+                                        <textarea name="reason" id="reason" cols="30" rows="10"
+                                            onChange={(e) => setLeaveReason(e.target.value)}
+                                            value={leaveReason}
+                                        />
                                     </div>
                                 </div>
                                 <div className={classes.main__content__form__input}>
-                                    <Button variant="contained" color="primary" onClick={() => setShow(false)}>Apply</Button>
+                                    <Button variant="contained" color="primary" onClick={addLeave}>Apply</Button>
                                 </div>
                             </div>
                             {/* </div> */}
@@ -121,37 +125,61 @@ const Leave = () => {
                             </div>
                             <div className={classes.main__content}>
                                 {
-                                    leave.map((item, index) => (
-                                        <div className={classes.main__content__item} key={index}>
-                                            <div className={classes.main__content__item__left}>
-                                                <div>
-                                                    <h2>{item.duration} Application</h2>
-                                                    <p
-                                                        style={{
-                                                            color: item.type === "Casual" ? "#F0AB00" : "#4BACE8",
-                                                            border: item.type === "Casual" ? "1px solid #F0AB00" : "1px solid #4BACE8",
-                                                            padding: "0.3rem",
-                                                            borderRadius: ".5rem",
-                                                        }}
-                                                    >{item.type}</p>
+                                    leaves?.length !== 0
+                                        ?
+                                        (
+                                            leaves?.map((item, index) => (
+                                                <div className={classes.main__content__item} key={index}>
+                                                    <div className={classes.main__content__item__left}>
+                                                        <div>
+                                                            <h2>
+                                                                {/* subtract first position from end date and start date */}
+                                                                {item.endDate.split("/")[0] - item.startDate.split("/")[0]} Days
+                                                                Application</h2>
+                                                            <p
+                                                                style={{
+                                                                    color: item.leaveType === "casual" ? "#F0AB00" : "#4BACE8",
+                                                                    border: item.leaveType === "casual" ? "1px solid #F0AB00" : "1px solid #4BACE8",
+                                                                    padding: "0.3rem",
+                                                                    borderRadius: ".5rem",
+                                                                }}
+                                                            >{item.leaveType}</p>
+                                                        </div>
+                                                        <p>{item.startDate} - {item.endDate}</p>
+                                                        {/* leavereason */}
+                                                        <br />
+                                                        <p>Reason: {item.leaveReason}</p>
+                                                    </div>
+                                                    <div className={classes.main__content__item__right}>
+                                                        <Button variant="contained"
+                                                            sx={{
+                                                                background: item.status === "awaiting" ? "#FCEFCF" : item.status === "approved" ? "#D4FFE7" : "#FEEFED",
+                                                                color: item.status === "awaiting" ? "#F0AB00" : item.status === "approved" ? "#00B74A" : "#FF0000",
+                                                                '&:hover': {
+                                                                    background: item.status === "awaiting" ? "#FCEFCF" : item.status === "approved" ? "#D4FFE7" : "#FEEFED",
+                                                                    color: item.status === "awaiting" ? "#F0AB00" : item.status === "approved" ? "#00B74A" : "#FF0000",
+                                                                }
+                                                            }}
+                                                        >{item.leaveStatus}</Button>
+                                                    </div>
                                                 </div>
-                                                <p>{item.startDate} - {item.endDate}</p>
+                                            ))
+                                        )
+                                        :
+                                        (
+                                            <div className={classes.main__content__item}>
+                                                <div style={{
+                                                    textAlign: "center",
+                                                    width: "100%"
+                                                }}>
+                                                    <h2>No leaves applied yet</h2>
+                                                </div>
+
                                             </div>
-                                            <div className={classes.main__content__item__right}>
-                                                <Button variant="contained"
-                                                    sx={{
-                                                        background: item.status === "awaiting" ? "#FCEFCF" : item.status === "approved" ? "#D4FFE7" : "#FEEFED",
-                                                        color: item.status === "awaiting" ? "#F0AB00" : item.status === "approved" ? "#00B74A" : "#FF0000",
-                                                        '&:hover': {
-                                                            background: item.status === "awaiting" ? "#FCEFCF" : item.status === "approved" ? "#D4FFE7" : "#FEEFED",
-                                                            color: item.status === "awaiting" ? "#F0AB00" : item.status === "approved" ? "#00B74A" : "#FF0000",
-                                                        }
-                                                    }}
-                                                >{item.status}</Button>
-                                            </div>
-                                        </div>
-                                    ))
+                                        )
+
                                 }
+
                             </div>
                         </>
 

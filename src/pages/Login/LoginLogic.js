@@ -1,22 +1,7 @@
-import { useState, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useState } from 'react'
 
 export const LoginLogic = () => {
   const [value, setValue] = useState(null);
-
-  const { userInfo } = useSelector(state => state.signInUser)
-  const { managerInfo } = useSelector((state) => state.signInManager)
-
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-
-  useEffect(() => {
-    if (managerInfo ||  userInfo) {
-      navigate('/')
-    }
-  }, [dispatch, managerInfo, navigate, userInfo])
 
 
 

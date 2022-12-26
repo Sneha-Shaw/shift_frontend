@@ -20,8 +20,8 @@ import { useSelector } from "react-redux";
 
 const Router = () => {
     // doctor info from redux
-    const doctorInfo = null
     const { managerInfo } = useSelector((state) => state.signInManager)
+    const { userInfo } = useSelector((state) => state.signInUser)
 
     return (
         <ThemeProvider theme={theme}>
@@ -32,7 +32,7 @@ const Router = () => {
                         exact
                         path="/"
                         element={
-                            doctorInfo || managerInfo ? (
+                            userInfo || managerInfo ? (
                                 <>
                                     <Navbar />
                                     <Home />
@@ -46,7 +46,7 @@ const Router = () => {
                         exact
                         path="/self-service"
                         element={
-                            doctorInfo ? (
+                            userInfo ? (
                                 <Navigate to="/self-service/availability" />
                             ) : (
                                 <Navigate to="/login" />
@@ -57,7 +57,7 @@ const Router = () => {
                         exact
                         path="/self-service/availability"
                         element={
-                            doctorInfo ? (
+                            userInfo ? (
                                 <>
                                     <Navbar />
                                     <Availabity />
@@ -71,7 +71,7 @@ const Router = () => {
                         exact
                         path="/self-service/requests/leave"
                         element={
-                            doctorInfo ? (
+                            userInfo ? (
                                 <>
                                     <Navbar />
                                     <Leave />
@@ -85,7 +85,7 @@ const Router = () => {
                         exact
                         path="/self-service/requests/shift"
                         element={
-                            doctorInfo ? (
+                            userInfo ? (
                                 <>
                                     <Navbar />
                                     <ShiftReplace />
@@ -99,7 +99,7 @@ const Router = () => {
                         exact
                         path="/self-service/requests/special"
                         element={
-                            doctorInfo ? (
+                            userInfo ? (
                                 <>
                                     <Navbar />
                                     <SpecialRequest />
@@ -113,7 +113,7 @@ const Router = () => {
                         exact
                         path="/self-service/view/daily"
                         element={
-                            doctorInfo ? (
+                            userInfo ? (
                                 <>
                                     <Navbar />
                                     <DailyView />
@@ -194,7 +194,7 @@ const Router = () => {
                         exact
                         path="/notifications"
                         element={
-                            doctorInfo || managerInfo ? (
+                            userInfo || managerInfo ? (
                                 <>
                                     <Navbar />
                                     <Notifications />
