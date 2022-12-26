@@ -23,9 +23,13 @@ export default makeStyles((theme) => ({
         form: {
             width: '100%', 
             marginTop: theme.spacing(1),
+            '& div':{
+                fontSize: "1.5rem",
+            },
             '&>button':{
                 background: "#06283D",
                 marginTop: theme.spacing(1),
+                fontSize: "1.2rem",
                 '&:hover':{
                     background: "rgba(6, 40, 61,0.9)"
                 }
