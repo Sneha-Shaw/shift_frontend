@@ -594,7 +594,7 @@ const Availabity = () => {
                       <tr>
                         <td>
                           {/* first letter caps */}
-                          {item.day.charAt(0).toUpperCase() + item.day.slice(1)}
+                          {item?.day?.charAt(0).toUpperCase() + item?.day?.slice(1)}
                         </td>
                         <td>{item.start}</td>
                         <td>{item.end}</td>
