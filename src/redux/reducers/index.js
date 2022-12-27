@@ -6,7 +6,8 @@ import {
     getLeavesReducer,
     requestSpecialReducer,
     getSpecialRequestsReducer,
-    requestShiftReplaceReducer
+    requestShiftReplaceReducer,
+    resetPasswordReducer
 } from './userReducer'
 import {
     signInManagerReducer,
@@ -58,7 +59,8 @@ const rootReducer = combineReducers({
     getLeaves: getLeavesReducer,
     requestSpecial: requestSpecialReducer,
     getSpecialRequests: getSpecialRequestsReducer,
-    requestShiftReplace: requestShiftReplaceReducer
+    requestShiftReplace: requestShiftReplaceReducer,
+    resetPassword: resetPasswordReducer
 })
 
 export default rootReducer

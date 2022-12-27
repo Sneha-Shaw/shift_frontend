@@ -8,10 +8,28 @@ import face from '../../assets/face.jpg'
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
   const classes = useStyles()
+  const { userInfo } = useSelector((state) => state.signInUser)
+  const { managerInfo } = useSelector((state) => state.signInManager)
+
   const [show, setShow] = useState(false)
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const navigate = useNavigate()
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = (id) => {
+    navigate(`/reset-password/${id}`)
+    setAnchorEl(null);
+  };
   return (
     <div className={classes.root}>
       {/* logo */}
@@ -30,7 +48,7 @@ const Navbar = () => {
         </div>
         {/* nav links */}
         <div className={classes.navLinks}>
-          <Link to="/settings" className={classes.link}><SettingsIcon fontSize="large" /></Link>
+          <Link to="" className={classes.link} onClick={handleClick}><SettingsIcon fontSize="large" /></Link>
           <Link to="/notifications" className={classes.link}><NotificationsNoneIcon fontSize="large" /></Link>
           <Link to="" className={classes.link}><img src={face} alt="" /></Link>
         </div>
@@ -42,7 +60,32 @@ const Navbar = () => {
         <Link to="/profile" className={classes.link}><img src={face} alt="" /></Link>
 
       </div>
-
+      {
+        userInfo && (
+          <Menu
+            id="demo-positioned-menu"
+            aria-labelledby="demo-positioned-button"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={() => { handleClose(userInfo._id) }}>Reset Password</MenuItem>
+          </Menu>
+        )
+      }
+      {
+        managerInfo && (
+          <Menu
+            id="demo-positioned-menu"
+            aria-labelledby="demo-positioned-button"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+          >
+            <MenuItem onClick={() => { handleClose(managerInfo._id) }}>Reset Password</MenuItem>
+          </Menu>
+        )
+      }
 
       {
         show && <div className={classes.mobilenav}>
@@ -56,9 +99,6 @@ const Navbar = () => {
             <li className={classes.subListItem}>
               <Link to="/notifications" onClick={() => setShow(!show)}>Notifications</Link>
             </li>
-            {/* <li className={classes.subListItem}>
-              <Link to="/logout">Logout</Link>
-            </li> */}
           </ul>
         </div>
       }

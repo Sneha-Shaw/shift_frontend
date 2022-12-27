@@ -14,6 +14,7 @@ import Break from './pages/Break/Break'
 import DoctorsList from './pages/DoctorsList/DoctorsList'
 import Approvals from './pages/Approvals/Approvals'
 import Notifications from './pages/Notifications/Notifications'
+import ResetPassword from "./pages/ResetPassword/ResetPassword";
 
 import { useSelector } from "react-redux";
 
@@ -198,6 +199,20 @@ const Router = () => {
                                 <>
                                     <Navbar />
                                     <Notifications />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/reset-password/:id"
+                        element={
+                            userInfo || managerInfo ? (
+                                <>
+                                    <Navbar />
+                                    <ResetPassword />
                                 </>
                             ) : (
                                 <Navigate to="/login" />
