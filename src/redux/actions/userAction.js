@@ -30,7 +30,10 @@ import {
   GET_AVAILABILITY_FAILED,
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_FAILED
+  RESET_PASSWORD_FAILED,
+  DELETE_AVAILABILITY_BY_DAY_REQUEST,
+  DELETE_AVAILABILITY_BY_DAY_SUCCESS,
+  DELETE_AVAILABILITY_BY_DAY_FAILED
 } from '../constants/userConstants'
 
 
@@ -331,6 +334,34 @@ export const getAvailability = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_AVAILABILITY_FAILED,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
+
+// delete availability by day
+export const deleteAvailabilityByDay = (id, day) => async (dispatch) => {
+  try {
+    dispatch({
+      type: DELETE_AVAILABILITY_BY_DAY_REQUEST
+    })
+    const config = {
+      'Content-Type': 'application/json'
+    }
+    const body = {
+      day
+    }
+    const { data } = await axios.put(`${API}/public/auth/${id}/delete-availability-by-day`, body, config)
+    dispatch({
+      type: DELETE_AVAILABILITY_BY_DAY_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: DELETE_AVAILABILITY_BY_DAY_FAILED,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

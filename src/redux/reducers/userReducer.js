@@ -29,7 +29,10 @@ import {
   GET_AVAILABILITY_FAILED,
   RESET_PASSWORD_REQUEST,
   RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_FAILED
+  RESET_PASSWORD_FAILED,
+  DELETE_AVAILABILITY_BY_DAY_REQUEST,
+  DELETE_AVAILABILITY_BY_DAY_SUCCESS,
+  DELETE_AVAILABILITY_BY_DAY_FAILED
 } from '../constants/userConstants'
 
 
@@ -440,3 +443,44 @@ export const getAvailabilityReducer = (state = getAvailabilityState, action) => 
       return state
   }
 }
+
+// delete availability by day
+const deleteAvailabilityByDayState = {
+  loading: false,
+  availability: null,
+  error: null,
+  isAuthenticated: false
+}
+export const deleteAvailabilityByDayReducer = (state = deleteAvailabilityByDayState, action) => {
+  switch (action.type) {
+    case DELETE_AVAILABILITY_BY_DAY_REQUEST:
+      return {
+        ...state,
+        availability: null,
+        error: null,
+        isAuthenticated: false,
+        loading: true
+      }
+    case DELETE_AVAILABILITY_BY_DAY_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: true,
+        error: null,
+        availability: action.payload
+
+      }
+    case DELETE_AVAILABILITY_BY_DAY_FAILED:
+      return {
+        ...state,
+        loading: false,
+        availability: null,
+        isAuthenticated: false,
+        error: action.payload
+      }
+
+    default:
+      return state
+  }
+}
+

@@ -7,7 +7,10 @@ import {
     requestSpecialReducer,
     getSpecialRequestsReducer,
     requestShiftReplaceReducer,
-    resetPasswordReducer
+    resetPasswordReducer,
+    addAvailabilityReducer,
+    getAvailabilityReducer,
+    deleteAvailabilityByDayReducer
 } from './userReducer'
 import {
     signInManagerReducer,
@@ -35,8 +38,19 @@ import {
 
 
 const rootReducer = combineReducers({
+    // user actions
     signInUser: userSigninReducer,
     getSingleUser: getSingleUserReducer,
+    requestLeave: requestLeaveReducer,
+    getLeaves: getLeavesReducer,
+    requestSpecial: requestSpecialReducer,
+    getSpecialRequests: getSpecialRequestsReducer,
+    requestShiftReplace: requestShiftReplaceReducer,
+    resetPassword: resetPasswordReducer,
+    addAvailability: addAvailabilityReducer,
+    getAvailability: getAvailabilityReducer,
+    deleteAvailabilityByDay: deleteAvailabilityByDayReducer,
+    // manager actions
     signInManager: signInManagerReducer,
     addDoctor: addDoctorReducer,
     deleteDoctor: deleteDoctorReducer,
@@ -53,14 +67,10 @@ const rootReducer = combineReducers({
     approveDenyLeave: approveDenyLeaveReducer,
     getAllSpecialRequests: getAllSpecialRequestsReducer,
     approveDenySpecialRequest: approveDenySpecialRequestReducer,
+    // shift actions
     getCalender: getCalenderReducer,
     getAllSlots: getAllSlotsReducer,
-    requestLeave: requestLeaveReducer,
-    getLeaves: getLeavesReducer,
-    requestSpecial: requestSpecialReducer,
-    getSpecialRequests: getSpecialRequestsReducer,
-    requestShiftReplace: requestShiftReplaceReducer,
-    resetPassword: resetPasswordReducer
+
 })
 
 export default rootReducer
