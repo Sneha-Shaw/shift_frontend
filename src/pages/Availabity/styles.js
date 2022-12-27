@@ -41,15 +41,42 @@ export default makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         
-        '&>div':{
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            // justifyContent: "space-between",
-            margin: "1rem 0",
-            position: "relative"
-        }
+       
+    },
+    formItemTime: {
+        marginBottom: "1.5rem",
+        width: "100%",
+        display: 'flex',
+        // height: "100%",
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        '& label':{
+            width: "20%",
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+            color: '#06383D',
+            marginRight: '1rem',
+        },
+        '& input':{
+            height: "3rem",
+            fontSize: "1.5rem",
+            padding: "0 0.5rem ",
+            border: "1px solid #ccc",
+            borderRadius: "0.5rem",
+            width: "38%",
+            '&:focus':{
+                outline: "none",
+                border: "1px solid #000",
+            }
+        },
+        [theme.breakpoints.down("sm")]: {
+            width: "90%",
+            '& label': {
+              width: "30%",
+              fontSize: '1.3rem',
+          },
+       
+          }
     },
     formControlLabel:{
         fontSize: "1.6rem !important",

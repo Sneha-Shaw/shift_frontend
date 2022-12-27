@@ -163,7 +163,7 @@ const Break = () => {
 
                                             <td className={classes.tableRowItem}>
                                                 {
-                                                    breaks.breakType ? <div>Automatic</div> : <div>Manual</div>
+                                                    breaks.breakType==='Automatic' ? <div>Automatic</div> : <div>Manual</div>
                                                 }
                                             </td>
 

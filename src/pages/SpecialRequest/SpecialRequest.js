@@ -21,7 +21,7 @@ const SpecialRequest = () => {
             <Sidebar />
             <SubSidebar />
             <div className={classes.main}>
-            {
+                {
                     (show) && (
                         <div className={classes.back}>
                             <Button
@@ -78,7 +78,7 @@ const SpecialRequest = () => {
                                         className={classes.main__header__buttons__add}
                                         onClick={() => setShow(true)}
                                     >
-                                      Add Special Request
+                                        Add Special Request
                                     </Button>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@ const SpecialRequest = () => {
                                                 <div className={classes.main__content__item} key={index}>
                                                     <div className={classes.main__content__item__left}>
 
-                                                      
+
                                                         <p><strong>Request:</strong> {item.request}</p>
                                                     </div>
                                                     <div className={classes.main__content__item__right}>
@@ -118,7 +118,6 @@ const SpecialRequest = () => {
                                                 }}>
                                                     <h2>No Special Requests yet</h2>
                                                 </div>
-
                                             </div>
                                         )
 

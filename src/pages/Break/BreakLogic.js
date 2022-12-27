@@ -47,13 +47,13 @@ export const BreakLogic = () => {
             if (value[3] === '0' && value[4] === '0') {
                 setDuration('00:00')
             } else {
-                setDuration( value[3] + value[4] + ' min')
+                setDuration(value[3] + value[4] + ' min')
             }
         } else if (value[0] === '0' && value[1] !== '0') {
             if (value[3] === '0' && value[4] === '0') {
                 setDuration(value[1] + ' hr')
             } else {
-                setDuration( value[1] + ' hr ' + value[3] + value[4] + ' min')
+                setDuration(value[1] + ' hr ' + value[3] + value[4] + ' min')
             }
         } else if (value[0] !== '0' && value[1] === '0') {
             if (value[3] === '0' && value[4] === '0') {
@@ -73,7 +73,6 @@ export const BreakLogic = () => {
     // add break
     const addBreak = () => {
         setShow(!show)
-
         dispatch(addBreaks(
             breakName,
             startTime + ' ' + startMeridian,

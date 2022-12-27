@@ -7,54 +7,33 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import { Button, Typography } from '@mui/material';
 import Timepicker from '../../components/Timepicker/TimePicker'
-import AddIcon from '@mui/icons-material/Add';
+import { AvailabilityLogic } from './AvailabilityLogic'
+
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 const Availabity = () => {
   const classes = useStyles()
-  const [day, setDay] = useState({
-    monday: false,
-    tuesday: false,
-    wednesday: false,
-    thursday: false,
-    friday: false,
-    saturday: false,
-    sunday: false,
-  });
-  const handleChange = (event) => {
-    setDay({ ...day, [event.target.name]: event.target.checked });
-  };
-  // map time add timepicker on click add accorfing to day
-  // diff time for diff day
-  // mondaytime,tuedaytime
-  const[montime,setMontime]=useState([1])
-  const addMontime=()=>{
-    setMontime([...montime,1])
-  }
-  const[tuestime,setTuestime]=useState([1])
-  const addTuestime=()=>{
-    setTuestime([...tuestime,1])
-  }
-  const[wedtime,setWedtime]=useState([1])
-  const addWedtime=()=>{
-    setWedtime([...wedtime,1])
-  }
-  const[thutime,setThutime]=useState([1])
-  const addThutime=()=>{
-    setThutime([...thutime,1])
-  }
-  const[fritime,setFritime]=useState([1])
-  const addFritime=()=>{
-    setFritime([...fritime,1])
-  }
-  const[sattime,setSattime]=useState([1])
-  const addSattime=()=>{
-    setSattime([...sattime,1])
-  }
-  const[suntime,setSuntime]=useState([1])
-  const addSuntime=()=>{
-    setSuntime([...suntime,1])
-  }
-  
+  const {
+    isday,
+    defaultMeridianOption,
+    MeridianOptions,
+    handleChange,
+    startTime,
+    setStartTime,
+    endTime,
+    setEndTime,
+    startMeridian,
+    setStartmeridian,
+    endMeridian,
+    setEndmeridian,
+    setStartTimeHandler,
+    setEndTimeHandler,
+    setStartmeridianHandler,
+    setEndmeridianHandler
+  } = AvailabilityLogic()
+
+
 
   return (
     <div className={classes.root}>
@@ -77,7 +56,7 @@ const Availabity = () => {
           >
             <FormControlLabel
               control={<Checkbox
-                checked={day.monday}
+                checked={isday.monday}
                 onChange={handleChange}
                 name="monday"
                 sx={{
@@ -97,31 +76,44 @@ const Availabity = () => {
               }}
 
             />
-            {day.monday && <div className={classes.time}>
-              {
-                montime.map((item, index) => (
-                  <div key={index}>
-                    {/* show add icon at the last element */}
-                    {index === montime.length - 1 && <div className={classes.Addtime}>
-                      <AddIcon
-                        onClick={
-                          addMontime
-                        }
-                      />
-                    </div>}
+            {isday.monday &&
+              <div className={classes.time}>
 
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">Start Time:</label>
+                  <input
+                    type="time"
+                    value={startTime[0]}
+                    onChange={
+                      (e) => {
+                        setStartTimeHandler(e.target.value, 0)
+                      }
+                    }
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setStartmeridianHandler(e.value,0) }}
+                  />
+                </div>
 
-                    <Timepicker placeholder="Start Time" />
-                    <Timepicker placeholder="End Time" />
-                    <hr className={classes.hr} />
-                  </div>
-                ))
-              }
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">End Time:</label>
+                  <input
+                    type="time"
+                    value={endTime[0]}
+                    onChange={(e) => { setEndTimeHandler(e.target.value, 0) }}
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setEndmeridianHandler(e.value,0) }}
+                  />
+                </div>
+              </div>
 
-            </div>}
+            }
             <FormControlLabel
               control={<Checkbox
-                checked={day.tuesday}
+                checked={isday.tuesday}
                 onChange={handleChange}
                 name="tuesday"
                 sx={{
@@ -134,32 +126,37 @@ const Availabity = () => {
               label={<Typography className={classes.formControlLabel}>Tuesday</Typography>}
             />
             {
-              day.tuesday && <div className={classes.time}>
-                {
-                  tuestime.map((item, index) => (
-                    <div key={index}>
-                      {/* show add icon at the last element */}
-                      {index === tuestime.length - 1 && <div className={classes.Addtime}>
-                        <AddIcon
-                          onClick={
-                            addTuestime
-                          }
-                        />
-                      </div>}
-
-
-                      <Timepicker placeholder="Start Time" />
-                      <Timepicker placeholder="End Time" />
-                      <hr className={classes.hr} />
-                    </div>
-                  ))
-                }
+              isday.tuesday && <div className={classes.time}>
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">Start Time:</label>
+                  <input
+                    type="time"
+                    value={startTime[1]}
+                    onChange={(e) => { setStartTimeHandler(e.target.value, 1) }}
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setStartmeridianHandler(e.value,0) }}
+                  />
+                </div>
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">End Time:</label>
+                  <input
+                    type="time"
+                    value={endTime[1]}
+                    onChange={(e) => { setEndTimeHandler(e.target.value, 1) }}
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setEndmeridianHandler(e.value,1) }}
+                  />
+                </div>
 
               </div>
             }
             <FormControlLabel
               control={<Checkbox
-                checked={day.wednesday}
+                checked={isday.wednesday}
                 onChange={handleChange}
                 name="wednesday"
                 sx={{
@@ -174,32 +171,37 @@ const Availabity = () => {
               }
             />
             {
-              day.wednesday && <div className={classes.time}>
-                {
-                  wedtime.map((item, index) => (
-                    <div key={index}>
-                      {/* show add icon at the last element */}
-                      {index === wedtime.length - 1 && <div className={classes.Addtime}>
-                        <AddIcon
-                          onClick={
-                            addWedtime
-                          }
-                        />
-                      </div>}
-
-
-                      <Timepicker placeholder="Start Time" />
-                      <Timepicker placeholder="End Time" />
-                      <hr className={classes.hr} />
-                    </div>
-                  ))
-                }
+              isday.wednesday && <div className={classes.time}>
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">Start Time:</label>
+                  <input
+                    type="time"
+                    value={startTime[2]}
+                    onChange={(e) => { setStartTimeHandler(e.target.value, 2) }}
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setStartmeridianHandler(e.value,2) }}
+                  />
+                </div>
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">End Time:</label>
+                  <input
+                    type="time"
+                    value={endTime[2]}
+                    onChange={(e) => { setEndTimeHandler(e.target.value, 2) }}
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setEndmeridianHandler(e.value,2) }}
+                  />
+                </div>
 
               </div>
             }
             <FormControlLabel
               control={<Checkbox
-                checked={day.thursday}
+                checked={isday.thursday}
                 onChange={handleChange}
                 name="thursday"
                 sx={{
@@ -214,32 +216,41 @@ const Availabity = () => {
               }
             />
             {
-              day.thursday && <div className={classes.time}>
-                {
-                  thutime.map((item, index) => (
-                    <div key={index}>
-                      {/* show add icon at the last element */}
-                      {index === thutime.length - 1 && <div className={classes.Addtime}>
-                        <AddIcon
-                          onClick={
-                            addThutime
-                          }
-                        />
-                      </div>}
+              isday.thursday && <div className={classes.time}>
 
 
-                      <Timepicker placeholder="Start Time" />
-                      <Timepicker placeholder="End Time" />
-                      <hr className={classes.hr} />
-                    </div>
-                  ))
-                }
+
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">Start Time:</label>
+                  <input
+                    type="time"
+                    value={startTime[3]}
+                    onChange={(e) => { setStartTimeHandler(e.target.value, 3) }}
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setStartmeridianHandler(e.value,3) }}
+                  />
+                </div>
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">End Time:</label>
+                  <input
+                    type="time"
+                    value={endTime[3]}
+                    onChange={(e) => { setEndTimeHandler(e.target.value, 3) }}
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setEndmeridianHandler(e.value,3) }}
+                  />
+                </div>
 
               </div>
+
             }
             <FormControlLabel
               control={<Checkbox
-                checked={day.friday}
+                checked={isday.friday}
                 onChange={handleChange}
                 name="friday"
                 sx={{
@@ -254,32 +265,37 @@ const Availabity = () => {
               }
             />
             {
-              day.friday && <div className={classes.time}>
-                {
-                  fritime.map((item, index) => (
-                    <div key={index}>
-                      {/* show add icon at the last element */}
-                      {index === fritime.length - 1 && <div className={classes.Addtime}>
-                        <AddIcon
-                          onClick={
-                            addFritime
-                          }
-                        />
-                      </div>}
-
-
-                      <Timepicker placeholder="Start Time" />
-                      <Timepicker placeholder="End Time" />
-                      <hr className={classes.hr} />
-                    </div>
-                  ))
-                }
+              isday.friday && <div className={classes.time}>
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">Start Time:</label>
+                  <input
+                    type="time"
+                    value={startTime[4]}
+                    onChange={(e) => { setStartTimeHandler(e.target.value, 4) }}
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setStartmeridianHandler(e.value,4) }}
+                  />
+                </div>
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">End Time:</label>
+                  <input
+                    type="time"
+                    value={endTime[4]}
+                    onChange={(e) => { setEndTimeHandler(e.target.value, 4) }}
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setEndmeridianHandler(e.value,4) }}
+                  />
+                </div>
 
               </div>
             }
             <FormControlLabel
               control={<Checkbox
-                checked={day.saturday}
+                checked={isday.saturday}
                 onChange={handleChange}
                 name="saturday"
                 sx={{
@@ -294,32 +310,37 @@ const Availabity = () => {
               }
             />
             {
-              day.saturday && <div className={classes.time}>
-                {
-                  sattime.map((item, index) => (
-                    <div key={index}>
-                      {/* show add icon at the last element */}
-                      {index === sattime.length - 1 && <div className={classes.Addtime}>
-                        <AddIcon
-                          onClick={
-                            addSattime
-                          }
-                        />
-                      </div>}
-
-
-                      <Timepicker placeholder="Start Time" />
-                      <Timepicker placeholder="End Time" />
-                      <hr className={classes.hr} />
-                    </div>
-                  ))
-                }
+              isday.saturday && <div className={classes.time}>
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">Start Time:</label>
+                  <input
+                    type="time"
+                    value={startTime[5]}
+                    onChange={(e) => { setStartTimeHandler(e.target.value, 5) }}
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setStartmeridianHandler(e.value,5) }}
+                  />
+                </div>
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">End Time:</label>
+                  <input
+                    type="time"
+                    value={endTime[5]}
+                    onChange={(e) => { setEndTimeHandler(e.target.value, 5) }}
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setEndmeridianHandler(e.value,5) }}
+                  />
+                </div>
 
               </div>
             }
             <FormControlLabel
               control={<Checkbox
-                checked={day.sunday}
+                checked={isday.sunday}
                 onChange={handleChange}
                 name="sunday"
                 sx={{
@@ -334,26 +355,31 @@ const Availabity = () => {
               }
             />
             {
-              day.sunday && <div className={classes.time}>
-                {
-                  suntime.map((item, index) => (
-                    <div key={index}>
-                      {/* show add icon at the last element */}
-                      {index === suntime.length - 1 && <div className={classes.Addtime}>
-                        <AddIcon
-                          onClick={
-                            addSuntime
-                          }
-                        />
-                      </div>}
-
-
-                      <Timepicker placeholder="Start Time" />
-                      <Timepicker placeholder="End Time" />
-                      <hr className={classes.hr} />
-                    </div>
-                  ))
-                }
+              isday.sunday && <div className={classes.time}>
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">Start Time:</label>
+                  <input
+                    type="time"
+                    value={startTime[6]}
+                    onChange={(e) => { setStartTimeHandler(e.target.value, 6) }}
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setStartmeridianHandler(e.value,6) }}
+                  />
+                </div>
+                <div className={classes.formItemTime}>
+                  <label htmlFor="time">End Time:</label>
+                  <input
+                    type="time"
+                    value={endTime[6]}
+                    onChange={(e) => { setEndTimeHandler(e.target.value, 6) }}
+                    className={classes.input}
+                  />
+                  <Dropdown options={MeridianOptions} value={defaultMeridianOption} placeholder="Select an option"
+                    onChange={(e) => { setEndmeridianHandler(e.value,6) }}
+                  />
+                </div>
 
               </div>
             }
@@ -370,8 +396,8 @@ const Availabity = () => {
             }
           }}>Submit</Button>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   )
 }
 
