@@ -18,7 +18,6 @@ const Leave = () => {
         setShow,
         options,
         defaultOption,
-        // leaveType,
         setLeaveType,
         leaveReason,
         setLeaveReason,
@@ -29,7 +28,11 @@ const Leave = () => {
         addLeave
     } = LeaveLogic()
     return (
-        <div className={classes.root}>
+        <div className={classes.root}
+        sx={{
+            height:leaves?.length >4 ? '90vh' : '100%'
+        }}
+        >
             <Sidebar />
             <SubSidebar />
             <div className={classes.main}>
@@ -37,8 +40,6 @@ const Leave = () => {
                     (show) && (
                         <div className={classes.back}>
                             <Button
-                                // variant="contained"
-                                //    if addshow is true then setaddshow false else if updateshow is true then setupdateshow false
                                 onClick={() => setShow(!show)}
                             >
                                 Back

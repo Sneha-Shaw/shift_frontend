@@ -23,7 +23,7 @@ export default makeStyles((theme) => ({
             padding: "2rem 0.5rem"
         }
     },
-    close:{
+    close: {
         display: "none",
         [theme.breakpoints.down("sm")]: {
             display: "flex",
@@ -104,7 +104,7 @@ export default makeStyles((theme) => ({
             borderRadius: "50%",
         },
     },
-    
+
     link: {
         textDecoration: "none",
         '& svg': {
@@ -130,30 +130,33 @@ export default makeStyles((theme) => ({
             zIndex: 100000,
             backgroundColor: "white",
             boxShadow: "0 0 10px rgba(0,0,0,0.2)",
-            '&>ul': {
+
+        }
+    },
+    mobilenavlinks: {
+        display: "none",
+        [theme.breakpoints.down("sm")]: {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            height: "100%",
+            "& div": {
                 display: "flex",
-                flexDirection: "column",
+                margin: "2rem 0",
                 alignItems: "center",
-                justifyContent: "space-between",
+                justifyContent: "center",
                 width: "100%",
-                padding: "2rem",
-                height: "100%",
-                '& li': {
-                    listStyle: "none",
-                    margin: "2rem 0",
-                    width: "50%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    '& a': {
-                        textDecoration: "none",
-                        color: "#06283D",
-                        cursor: "pointer",
-                        fontSize: "2rem",
-                        '&:hover': {
-                            color: "#d9d9d9"
-                        },
-                    }
+                "& svg": {
+                    fontSize: "2.5rem"
+                },
+                "& p": {
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                    color: "#06283D",
+                    margin: "0.5rem 0",
+                    marginLeft: "1rem"
                 }
             }
         }

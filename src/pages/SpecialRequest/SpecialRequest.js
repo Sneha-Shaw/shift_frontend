@@ -17,7 +17,11 @@ const SpecialRequest = () => {
         setShow
     } = SpecialRequestLogic()
     return (
-        <div className={classes.root}>
+        <div className={classes.root}
+        sx={{
+            height:specialRequests?.length >9 ? '90vh' : '100%'
+        }}
+        >
             <Sidebar />
             <SubSidebar />
             <div className={classes.main}>

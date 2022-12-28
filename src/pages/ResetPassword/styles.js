@@ -1,23 +1,22 @@
 import { makeStyles } from "@mui/styles";
 
 export default makeStyles((theme) => ({
-    root:{
+    root: {
         width: "100%",
-        height: "90vh",
+        height: "92vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#256D85",
-
+        background: "#256D85"
     },
-    container:{
+    container: {
         width: "100%",
         height: "100%",
         display: "flex",
         alignItems: "center",
         justifyContent: "center"
     },
-    form:{
+    form: {
         width: "30%",
         height: "fit-content",
         display: "flex",
@@ -28,53 +27,62 @@ export default makeStyles((theme) => ({
         boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.5)",
         borderRadius: "1rem",
         padding: "2rem",
-        '&>h1':{
+        '&>h1': {
             fontSize: "3rem",
             fontWeight: "bold",
             marginBottom: "2rem",
             color: "#06383D"
         },
-        '&>button':{
+        '&>button': {
             width: "60%",
             background: "#06383D",
             fontSize: "1.3rem",
             // hover
-            '&:hover':{
+            '&:hover': {
                 background: "#06383D",
             }
+        },
+        [theme.breakpoints.down('sm')]: {
+            width: "80%",
         }
     },
-    formBody:{
+    formBody: {
         width: "100%",
         height: "fit-content",
         display: "flex",
-marginBottom: "2rem"
-        
+        marginBottom: "2rem"
+
     },
-    input:{
+    input: {
         width: "100%",
         height: "fit-content",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        '& label':{
+        '& label': {
             width: "15%",
             fontSize: '1.5rem',
             fontWeight: 'bold',
             color: '#06383D',
             marginRight: '1rem',
         },
-       
+        [theme.breakpoints.down('sm')]:{
+          flexDirection: "column",
+          '& label':{
+                width: "100%",
+                textAlign: "center"
+          }
+        }
     },
-    inputBox:{
-        width: "60%",  
+    inputBox: {
+        width: "60%",
         border: "1px solid",
         borderRadius: "1rem",
         padding: ".5rem 1rem ",
         background: "#fff",
         display: "flex",
         margin: "2rem 0",
-        '&>input':{
+        '&>input': {
             width: "100%",
             fontSize: "1.5rem",
             fontWeight: "bold",
@@ -83,10 +91,13 @@ marginBottom: "2rem"
             border: "none",
             outline: "none"
         },
-        '&>div>svg':{
+        '&>div>svg': {
             color: "#06383D",
             fontSize: "2.2rem",
             cursor: "pointer"
+        },
+        [theme.breakpoints.down('sm')]:{
+            width: "90%",
         }
     }
 

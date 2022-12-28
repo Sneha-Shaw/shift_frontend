@@ -21,20 +21,20 @@ import { NavbarLogic } from './NavbarLogic';
 
 const Navbar = () => {
   const classes = useStyles()
- 
-const {
-  handleLogout,
-  show,
-  setShow,
-  anchorEl,
-  open,
-  handleClick,
-  handleClose,
-  userInfo,
-  navigate,
-  color
-} = NavbarLogic()
-  
+
+  const {
+    handleLogout,
+    show,
+    setShow,
+    anchorEl,
+    open,
+    handleClick,
+    handleClose,
+    userInfo,
+    navigate,
+    color
+  } = NavbarLogic()
+
   return (
     <div className={classes.root}>
       {/* logo */}
@@ -81,12 +81,13 @@ const {
               height: 32,
               ml: -0.5,
               mr: 1,
-              
-            // hover color
-            '&:hover': {
-              bgcolor: 'red',
+
+              // hover color
+              '&:hover': {
+                bgcolor: 'red',
+              }
             }
-            }}
+          }
         }}
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
@@ -107,7 +108,7 @@ const {
           onClick={() => navigate(`/notifications`)}
         >
           <ListItemIcon>
-            <NotificationsNoneIcon fontSize="large" sx={{color: "#06283D"}} />
+            <NotificationsNoneIcon fontSize="large" sx={{ color: "#06283D" }} />
           </ListItemIcon>
           Notifications
         </MenuItem>
@@ -115,7 +116,7 @@ const {
           onClick={() => navigate(`/reset-password/${userInfo._id}`)}
         >
           <ListItemIcon>
-            <LockResetIcon fontSize="large" sx={{color: "#06283D"}} />
+            <LockResetIcon fontSize="large" sx={{ color: "#06283D" }} />
           </ListItemIcon>
           Reset Password
         </MenuItem>
@@ -124,7 +125,7 @@ const {
           onClick={() => navigate(`/settings`)}
         >
           <ListItemIcon>
-            <SettingsIcon fontSize="large" sx={{color: "#06283D"}}  />
+            <SettingsIcon fontSize="large" sx={{ color: "#06283D" }} />
           </ListItemIcon>
           Settings
         </MenuItem>
@@ -132,7 +133,7 @@ const {
           onClick={handleLogout}
         >
           <ListItemIcon>
-            <LogoutIcon fontSize="large" sx={{color: "#06283D"}}  />
+            <LogoutIcon fontSize="large" sx={{ color: "#06283D" }} />
           </ListItemIcon>
           Logout
         </MenuItem>
@@ -140,8 +141,13 @@ const {
       {/* menu */}
       <div className={classes.menu} onClick={() => setShow(!show)}>
         <MenuIcon fontSize="large" />
-        <Link to="/profile" className={classes.link}><img src={face} alt="" /></Link>
-
+        <Avatar sx={{
+          width: 32,
+          height: 32,
+          backgroundColor: color,
+        }}>
+          {userInfo?.name?.slice(4, 5).toUpperCase()}
+        </Avatar>
       </div>
 
       {
@@ -149,14 +155,32 @@ const {
           <div className={classes.close} onClick={() => setShow(!show)}>
             <CloseIcon fontSize="large" />
           </div>
-          <ul className={classes.list}>
-            <li className={classes.subListItem}>
-              <Link to="/settings" onClick={() => setShow(!show)}>Settings</Link>
-            </li>
-            <li className={classes.subListItem}>
-              <Link to="/notifications" onClick={() => setShow(!show)}>Notifications</Link>
-            </li>
-          </ul>
+          <div className={classes.mobilenavlinks}>
+            <div className={classes.mobilenavlink}
+              onClick={() => navigate(`/notifications`)}
+            >
+              <NotificationsNoneIcon fontSize="large" sx={{ color: "#06283D" }} />
+              <p>Notifications</p>
+            </div>
+            <div className={classes.mobilenavlink}
+              onClick={() => navigate(`/settings`)}
+            >
+              <SettingsIcon fontSize="large" sx={{ color: "#06283D" }} />
+              <p>Settings</p>
+            </div>
+            <div className={classes.mobilenavlink}
+              onClick={() => navigate(`/reset-password/${userInfo._id}`)}
+            >
+              <LockResetIcon fontSize="large" sx={{ color: "#06283D" }} />
+              <p>Reset Password</p>
+            </div>
+            <div className={classes.mobilenavlink}
+              onClick={handleLogout}
+            >
+              <LogoutIcon fontSize="large" sx={{ color: "#06283D" }} />
+              <p>Logout</p>
+            </div>
+          </div>
         </div>
       }
     </div>
