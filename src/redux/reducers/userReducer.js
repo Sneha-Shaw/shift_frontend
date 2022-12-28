@@ -447,7 +447,7 @@ export const getAvailabilityReducer = (state = getAvailabilityState, action) => 
 // delete availability by day
 const deleteAvailabilityByDayState = {
   loading: false,
-  availability: null,
+  deleteData: null,
   error: null,
   isAuthenticated: false
 }
@@ -456,7 +456,7 @@ export const deleteAvailabilityByDayReducer = (state = deleteAvailabilityByDaySt
     case DELETE_AVAILABILITY_BY_DAY_REQUEST:
       return {
         ...state,
-        availability: null,
+        deleteData: null,
         error: null,
         isAuthenticated: false,
         loading: true
@@ -467,14 +467,14 @@ export const deleteAvailabilityByDayReducer = (state = deleteAvailabilityByDaySt
         loading: false,
         isAuthenticated: true,
         error: null,
-        availability: action.payload
+        deleteData: action.payload
 
       }
     case DELETE_AVAILABILITY_BY_DAY_FAILED:
       return {
         ...state,
         loading: false,
-        availability: null,
+        deleteData: null,
         isAuthenticated: false,
         error: action.payload
       }

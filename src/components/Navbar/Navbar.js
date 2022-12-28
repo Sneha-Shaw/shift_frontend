@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import useStyles from './styles'
 import logo from '../../assets/logo.png'
 import { Link } from 'react-router-dom'
@@ -12,24 +12,29 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { Avatar } from '@mui/material';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Divider from '@mui/material/Divider';
+import LockResetIcon from '@mui/icons-material/LockReset';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { NavbarLogic } from './NavbarLogic';
 
 const Navbar = () => {
   const classes = useStyles()
-  const { userInfo } = useSelector((state) => state.signInUser)
-  const { managerInfo } = useSelector((state) => state.signInManager)
-
-  const [show, setShow] = useState(false)
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const navigate = useNavigate()
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = (id) => {
-    navigate(`/reset-password/${id}`)
-    setAnchorEl(null);
-  };
+ 
+const {
+  handleLogout,
+  show,
+  setShow,
+  anchorEl,
+  open,
+  handleClick,
+  handleClose,
+  userInfo,
+  navigate,
+  color
+} = NavbarLogic()
+  
   return (
     <div className={classes.root}>
       {/* logo */}
@@ -48,44 +53,96 @@ const Navbar = () => {
         </div>
         {/* nav links */}
         <div className={classes.navLinks}>
-          <Link to="" className={classes.link} onClick={handleClick}><SettingsIcon fontSize="large" /></Link>
-          <Link to="/notifications" className={classes.link}><NotificationsNoneIcon fontSize="large" /></Link>
-          <Link to="" className={classes.link}><img src={face} alt="" /></Link>
+
+          <Avatar sx={{
+            width: 32,
+            height: 32,
+            backgroundColor: color,
+          }}
+            onClick={handleClick}>
+            {userInfo?.name?.slice(4, 5).toUpperCase()}
+          </Avatar>
         </div>
       </div>
-
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        onClose={handleClose}
+        onClick={handleClose}
+        PaperProps={{
+          elevation: 0,
+          sx: {
+            overflow: 'visible',
+            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
+            mt: 1.5,
+            '& .MuiAvatar-root': {
+              width: 32,
+              height: 32,
+              ml: -0.5,
+              mr: 1,
+              
+            // hover color
+            '&:hover': {
+              bgcolor: 'red',
+            }
+            }}
+        }}
+        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+      >
+        <MenuItem>
+          <ListItemIcon>
+            <Avatar sx={{
+              width: 32,
+              height: 32,
+              backgroundColor: color,
+            }}>
+              {userInfo?.name?.slice(4, 5).toUpperCase()}
+            </Avatar>
+          </ListItemIcon>
+          {userInfo?.name}
+        </MenuItem>
+        <MenuItem
+          onClick={() => navigate(`/notifications`)}
+        >
+          <ListItemIcon>
+            <NotificationsNoneIcon fontSize="large" sx={{color: "#06283D"}} />
+          </ListItemIcon>
+          Notifications
+        </MenuItem>
+        <MenuItem
+          onClick={() => navigate(`/reset-password/${userInfo._id}`)}
+        >
+          <ListItemIcon>
+            <LockResetIcon fontSize="large" sx={{color: "#06283D"}} />
+          </ListItemIcon>
+          Reset Password
+        </MenuItem>
+        <Divider />
+        <MenuItem
+          onClick={() => navigate(`/settings`)}
+        >
+          <ListItemIcon>
+            <SettingsIcon fontSize="large" sx={{color: "#06283D"}}  />
+          </ListItemIcon>
+          Settings
+        </MenuItem>
+        <MenuItem
+          onClick={handleLogout}
+        >
+          <ListItemIcon>
+            <LogoutIcon fontSize="large" sx={{color: "#06283D"}}  />
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
       {/* menu */}
       <div className={classes.menu} onClick={() => setShow(!show)}>
         <MenuIcon fontSize="large" />
         <Link to="/profile" className={classes.link}><img src={face} alt="" /></Link>
 
       </div>
-      {
-        userInfo && (
-          <Menu
-            id="demo-positioned-menu"
-            aria-labelledby="demo-positioned-button"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={() => { handleClose(userInfo._id) }}>Reset Password</MenuItem>
-          </Menu>
-        )
-      }
-      {
-        managerInfo && (
-          <Menu
-            id="demo-positioned-menu"
-            aria-labelledby="demo-positioned-button"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-          >
-            <MenuItem onClick={() => { handleClose(managerInfo._id) }}>Reset Password</MenuItem>
-          </Menu>
-        )
-      }
 
       {
         show && <div className={classes.mobilenav}>

@@ -40,7 +40,7 @@ const Approvals = () => {
                 {/* </div> */}
                 <div className={classes.content}
                     style={{
-                        height: '60vh'
+                        // height: '60vh'
                     }}
                 >
                     {

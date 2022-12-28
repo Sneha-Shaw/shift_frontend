@@ -5,7 +5,7 @@ import {
     logoutUser
 } from '../../redux/actions/userAction'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate,useParams } from 'react-router-dom'
 import { Button } from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -19,6 +19,7 @@ const ResetPassword = () => {
     const { error, passData: successReset } = useSelector((state) => state.resetPassword)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {id}=useParams()
 
     useEffect(() => {
         if (!userInfo) {
@@ -55,7 +56,7 @@ const ResetPassword = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        dispatch(resetPassword(userInfo._id, password))
+        dispatch(resetPassword(id, password))
     }
 
     const handleShowPass = () => {

@@ -28,8 +28,6 @@ const Availabity = () => {
   } = AvailabilityLogic()
 
 
-  console.log(availabilities && availabilities[0]);
-
   return (
     <div className={classes.root}>
       <Sidebar />

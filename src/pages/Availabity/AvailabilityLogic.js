@@ -10,7 +10,7 @@ import {
 export const AvailabilityLogic = () => {
     const { availability } = useSelector((state) => state.addAvailability)
     const { availabilities } = useSelector((state) => state.getAvailability)
-    const { availability: deleteState } = ((state) => state.deleteAvailabilityByDay)
+    const { deleteData } = useSelector((state) => state.deleteAvailabilityByDay)
     const { userInfo } = useSelector((state) => state.signInUser)
 
     const dispatch = useDispatch()
@@ -49,13 +49,11 @@ export const AvailabilityLogic = () => {
     }, [availability])
 
     useEffect(() => {
-        if (deleteState) {
+        if (deleteData) {
             dispatch(getAvailability(userInfo._id))
-            
-
         }
-    }, [deleteState])
-    
+    }, [deleteData])
+
     const handleChange = (event) => {
         setIsDay({ ...isday, [event.target.name]: event.target.checked });
         if (event.target.checked) {
@@ -78,13 +76,13 @@ export const AvailabilityLogic = () => {
     // delete availability
     const deleteHandler = (day) => {
         dispatch(deleteAvailabilityByDay(userInfo._id, day))
-        // Swal.fire({
-        //     position: 'center',
-        //     icon: 'success',
-        //     title: `${day} removed from your availibility`,
-        //     showConfirmButton: false,
-        //     timer: 1500
-        // })
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: `${day} removed from your availibility`,
+            showConfirmButton: false,
+            timer: 1500
+        })
     }
 
     return {
