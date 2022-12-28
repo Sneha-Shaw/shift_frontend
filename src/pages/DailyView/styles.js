@@ -20,57 +20,61 @@ export default makeStyles((theme) => ({
 
     },
     grid: {
-        width: "100rem",
-        height: "100%",
+        width: "100%",
+        height: "90%",
         overflowX: "scroll",
         background: "#f7f7f7",
     },
-    date: {
-        width: "100%",
-        // display: 'flex',
-        // transform: "translate(16.5%, 0)",
-        // position: "relative",
-
-    },
-    dateHeader:{
-        fontWeight: "bold",
-        padding: "1rem",
-        fontSize: "1.5rem",
-        border: "1px solid #e0e0e0",
-        // width: "20%",
-        // height: "2rem",
-        background: "#06283D",
-        color: "#fff",
-        textAlign: "center"
-    },
-    dateBody:{
-        // position: "absolute",
-    },
-    slot:{
+    table: {
         width: "100%",
         height: "100%",
-        // display: 'flex',
-        flexDirection: 'column',
+        borderCollapse: "collapse",
+        '&>thead': {
+            width: "100%",
+            '&>tr': {
+                width: "100%",
+                '&>th': {
+                    fontWeight: "bold",
+                    padding: "1rem",
+                    fontSize: "1.5rem",
+                    border: "1px solid #e0e0e0",
+                    // width: "8rem",
+                    // height: "2rem",
+                    background: "#06283D",
+                    color: "#fff",
+                    textAlign: "center",
+                    '&>div':{
+                        width: "10rem",
+                    }
+                }
+            }
+        },
+        '&>tbody': {
+            width: "100%",
+            '&>tr': {
+                width: "100%",
+            //    td nth nth child 1
+                '&>td:nth-child(1)': {
+                    padding: "1rem",
+                    fontSize: "1.5rem",
+                    border: "1px solid #e0e0e0",
+                    width: "8rem",
+                    height: "2rem",
+                    background: "#06283D",
+                    color: "#fff",
+                    textAlign: "center"
+                },
+                '&>td': {
+                    padding: "1rem",
+                    fontSize: "1.5rem",
+                    border: "1px solid #e0e0e0",
+                    width: "8rem",
+                    height: "2rem",
+                    textAlign: "center"
+                }
+            }
+        }
     },
-    slotHeader:{
-        fontWeight: "bold",
-        padding: "1rem",
-        fontSize: "1.5rem",
-        border: "1px solid #e0e0e0",
-        width: "100%",
-        // height: "2rem",
-        background: "#06283D",
-        color: "#fff",
-        textAlign: "center",
-    },
-    shift:{
-        // display: 'flex',
-        padding: "1rem",
-        fontSize: "1.2rem",
-        border: "1px solid #e0e0e0",
-        width: "8rem",
-        height: "2rem",
-        background: "#fff",
-    }
+  
 
 }))

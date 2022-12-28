@@ -15,9 +15,8 @@ const DailyView = () => {
     } = ViewLogic()
     const doctorInfo = null
     // shift array
+    // useEffect(() => {
 
-// useEffect(() => {
-    
 
     return (
         <div className={classes.root}>
@@ -28,10 +27,18 @@ const DailyView = () => {
                     <table className={classes.table}>
                         <thead>
                             <tr>
-                                <th className={classes.dateHeader}>Date</th>
+                                <th className={classes.dateHeader}>
+                                    <div>
+                                        Slot
+                                    </div>
+                                </th>
                                 {
-                                    slots?.getAllSlots?.map((slot,index) => (
-                                        <th className={classes.dateHeader} key={index}>{slot.slotTime}</th>
+                                    slots?.getAllSlots?.map((slot, index) => (
+                                        <th className={classes.dateHeader} key={index}>
+                                            <div>
+                                                {slot.slotTime}
+                                            </div>
+                                        </th>
                                     ))
                                 }
                             </tr>
@@ -40,30 +47,13 @@ const DailyView = () => {
                             {
                                 calender?.getCalendar?.calendarArray?.map((date, clindex) => (
                                     <tr key={clindex}>
-                                        <td className={classes.dateBody}>{date.dayNumber}</td>
-                                        {
-
-                                            slots?.getAllSlots?.map((slot,slindex) => (
-                                                <td className={classes.dateBody} key={slindex}>
-                                                    {
-                                                        shifts.map((shift,shindex) => (
-                                                            <div key={shindex}>
-                                                                {
-                                                                    // check day and slot
-                                                                    shift.shiftDay === date.dayName?
-                                                                        <div>
-                                                                                {shift.shiftStartTime}-{shift.shiftEndTime}
-                                                                        </div>
-                                                                        :
-                                                                        null
-                                                                }
-
-                                                            </div>
-                                                        ))
-                                                    }
-                                                </td>
-                                            ))
-                                        }
+                                        <td className={classes.dateBody}>
+                                            {/* slice first 3 letters in dayname */}
+                                            {date.dayName.slice(0, 3)},
+                                            {' ' + month}
+                                            {' ' + date.dayNumber}
+                                        </td>
+                                       
                                     </tr>
                                 ))
                             }
