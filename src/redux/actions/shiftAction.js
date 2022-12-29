@@ -8,7 +8,10 @@ import {
     GET_ALL_SLOTS_FAILURE,
     POST_SHIFT_REPLACE_REQUEST,
     POST_SHIFT_REPLACE_SUCCESS,
-    POST_SHIFT_REPLACE_FAILED
+    POST_SHIFT_REPLACE_FAILED,
+    UPDATE_SLOT_REQUEST,
+    UPDATE_SLOT_SUCCESS,
+    UPDATE_SLOT_FAILURE
 } from "../constants/shiftConstants";
 
 
@@ -98,3 +101,33 @@ export const requestShiftReplace = (name, replacement, date, start, end) => asyn
       })
     }
   }
+
+// update slot
+export const updateSlot = (Allotment, slotTime) => async (dispatch) => {
+    try {
+        dispatch({
+            type: UPDATE_SLOT_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const body={
+            Allotment,
+            slotTime
+        }
+        const { data } = await axios.put(`${API}/private/shift/update-slot`, body, config)
+        dispatch({
+            type: UPDATE_SLOT_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: UPDATE_SLOT_FAILURE,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}

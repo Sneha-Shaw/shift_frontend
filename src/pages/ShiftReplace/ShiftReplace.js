@@ -10,9 +10,7 @@ import { ShiftReplaceLogic } from './ShiftReplaceLogic'
 const ShiftReplace = () => {
   const classes = useStyles()
   const {
-    name,
     setName,
-    replacement,
     setReplacement,
     date,
     setDate,

@@ -7,11 +7,14 @@ import {
     GET_ALL_SLOTS_FAILURE,
     POST_SHIFT_REPLACE_REQUEST,
     POST_SHIFT_REPLACE_SUCCESS,
-    POST_SHIFT_REPLACE_FAILED
+    POST_SHIFT_REPLACE_FAILED,
+    UPDATE_SLOT_REQUEST,
+    UPDATE_SLOT_SUCCESS,
+    UPDATE_SLOT_FAILURE
 } from "../constants/shiftConstants";
 
 // get calender
-const getCalenderState={
+const getCalenderState = {
     loading: false,
     calender: null,
     error: null,
@@ -42,7 +45,7 @@ export const getCalenderReducer = (state = getCalenderState, action) => {
 }
 
 // get all slots
-const getAllSlotsState={
+const getAllSlotsState = {
     loading: false,
     slots: null,
     error: null,
@@ -71,42 +74,74 @@ export const getAllSlotsReducer = (state = getAllSlotsState, action) => {
             return state
     }
 }
+
+// update slot
+const updateSlotState = {
+    loading: false,
+    slot: null,
+    error: null,
+    isAuthenticated: false
+}
+export const updateSlotReducer = (state = updateSlotState, action) => {
+    switch (action.type) {
+        case UPDATE_SLOT_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case UPDATE_SLOT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                slot: action.payload
+            }
+        case UPDATE_SLOT_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
 //request shift replace
 const requestShiftReplaceState = {
     loading: false,
     shiftReplace: null,
     error: null,
     isAuthenticated: false
-  }
-  export const requestShiftReplaceReducer = (state = requestShiftReplaceState, action) => {
+}
+export const requestShiftReplaceReducer = (state = requestShiftReplaceState, action) => {
     switch (action.type) {
-      case POST_SHIFT_REPLACE_REQUEST:
-        return {
-          ...state,
-          shiftReplace: null,
-          error: null,
-          isAuthenticated: false,
-          loading: true
-        }
-      case POST_SHIFT_REPLACE_SUCCESS:
-        return {
-          ...state,
-          loading: false,
-          isAuthenticated: true,
-          error: null,
-          shiftReplace: action.payload
-  
-        }
-      case POST_SHIFT_REPLACE_FAILED:
-        return {
-          ...state,
-          loading: false,
-          shiftReplace: null,
-          isAuthenticated: false,
-          error: action.payload
-        }
-  
-      default:
-        return state
+        case POST_SHIFT_REPLACE_REQUEST:
+            return {
+                ...state,
+                shiftReplace: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case POST_SHIFT_REPLACE_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                shiftReplace: action.payload
+
+            }
+        case POST_SHIFT_REPLACE_FAILED:
+            return {
+                ...state,
+                loading: false,
+                shiftReplace: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+
+        default:
+            return state
     }
-  }
+}

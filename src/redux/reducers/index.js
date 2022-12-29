@@ -34,7 +34,8 @@ import {
 import {
     getCalenderReducer,
     getAllSlotsReducer,
-    requestShiftReplaceReducer
+    requestShiftReplaceReducer,
+    updateSlotReducer
 } from './shiftReducer'
 
 
@@ -72,6 +73,7 @@ const rootReducer = combineReducers({
     // shift actions
     getCalender: getCalenderReducer,
     getAllSlots: getAllSlotsReducer,
+    updateSlot: updateSlotReducer
 
 })
 
