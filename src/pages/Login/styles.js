@@ -16,7 +16,7 @@ export default makeStyles((theme) => ({
           justifyContent:'center',
           height:'100vh',
           width:'100vw',
-          backgroundColor:'#256D85'
+        //   backgroundColor:'#256D85'
       },
       container:{
             display:'flex',
@@ -25,7 +25,11 @@ export default makeStyles((theme) => ({
             justifyContent:'center',
             height:'100vh',
             width:'100vw',
-            backgroundColor:'#256D85'
+            // backgroundColor:'#256D85',
+            [theme.breakpoints.down('sm')]:{
+                flexDirection:'column',
+                height:'100vh',
+            }
       },
       first:{
             display:'flex',
@@ -36,6 +40,10 @@ export default makeStyles((theme) => ({
             width:'50vw',
             backgroundColor:'#256D85',
             color: "#DFF6FF",
+            [theme.breakpoints.down('sm')]:{
+                width:'100vw',
+
+            }
            
       },
       form:{
@@ -72,7 +80,10 @@ export default makeStyles((theme) => ({
             width:'50vw',
             backgroundColor:'#DFF6FF',
             color: "#256D85",
-           
+            [theme.breakpoints.down('sm')]:{
+                width:'100vw',
+
+            }
         },
     
 }))

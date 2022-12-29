@@ -2,7 +2,7 @@
 import { makeStyles } from "@mui/styles";
 export default makeStyles((theme) => ({
         root: {
-            marginTop: theme.spacing(8),
+          
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -17,6 +17,9 @@ export default makeStyles((theme) => ({
                 fontWeight: "bold",
                 marginBottom: "1rem",
             },
+            [theme.breakpoints.down('sm')]:{
+                width: "75%",  
+            }
 
             // margin: "auto",
         },
