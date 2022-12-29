@@ -58,6 +58,7 @@ const Navbar = () => {
             width: 32,
             height: 32,
             backgroundColor: color,
+            cursor: "pointer"
           }}
             onClick={handleClick}>
             {userInfo?.name?.slice(4, 5).toUpperCase()}
