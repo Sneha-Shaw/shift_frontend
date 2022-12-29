@@ -164,7 +164,7 @@ const UpdateSlot = () => {
                                                                     onClick={() => {
                                                                         setShow(!show)
                                                                         setDay(allotment.day)
-                                                                        setSlot(slot.slot)
+                                                                        setSlot(slot.slotTime)
                                                                         setDoctorsNeeded(allotment.DoctorsNeeded)
                                                                         setSeniorNeeded(allotment.SeniorNeeded)
                                                                     }}

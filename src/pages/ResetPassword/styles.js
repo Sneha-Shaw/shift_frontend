@@ -3,7 +3,7 @@ import { makeStyles } from "@mui/styles";
 export default makeStyles((theme) => ({
     root: {
         width: "100%",
-        height: "92vh",
+        height: "94vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
@@ -66,12 +66,12 @@ export default makeStyles((theme) => ({
             color: '#06383D',
             marginRight: '1rem',
         },
-        [theme.breakpoints.down('sm')]:{
-          flexDirection: "column",
-          '& label':{
+        [theme.breakpoints.down('sm')]: {
+            flexDirection: "column",
+            '& label': {
                 width: "100%",
                 textAlign: "center"
-          }
+            }
         }
     },
     inputBox: {
@@ -96,7 +96,7 @@ export default makeStyles((theme) => ({
             fontSize: "2.2rem",
             cursor: "pointer"
         },
-        [theme.breakpoints.down('sm')]:{
+        [theme.breakpoints.down('sm')]: {
             width: "90%",
         }
     }

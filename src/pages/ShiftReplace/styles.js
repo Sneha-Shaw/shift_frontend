@@ -4,7 +4,7 @@ export default makeStyles((theme) => ({
     root: {
         display: 'flex',
         width: "100%",
-        height: "92vh",
+        height: "94vh",
         background: "#f7f7f7",
     },
     main: {
