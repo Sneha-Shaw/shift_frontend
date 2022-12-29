@@ -4,7 +4,7 @@ export default makeStyles((theme) => ({
     root: {
         display: 'flex',
         width: "100%",
-        height: "100vh",
+        height: "92vh",
         background: "#f7f7f7",
     },
     main: {
@@ -13,12 +13,10 @@ export default makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        // justifyContent: "center",
         margin: "auto",
         background: "#fff",
         borderRadius: "1rem",
         padding: "2rem",
-        // box shadow
         boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
         '&>h1': {
             fontSize: "3rem",
@@ -57,10 +55,8 @@ export default makeStyles((theme) => ({
         },
         '& label': {
             fontSize: "1.5rem",
-            // fontWeight: "bold",
             margin: "1rem 0",
             width: "35%",
-            // capitalize
             textTransform: "capitalize",
             lineHeight: "1.6"
         },
@@ -70,7 +66,6 @@ export default makeStyles((theme) => ({
             fontSize: "1.5rem",
             padding: "0 1rem",
             border: "1px solid rgba(0, 0, 0, 0.2)",
-            // border: "none",
             outline: "none",
             background: "transparent",
         }
