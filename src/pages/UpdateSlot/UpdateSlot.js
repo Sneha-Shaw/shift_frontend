@@ -3,6 +3,7 @@ import useStyles from './styles'
 import { UpdateSlotLogic } from './UpdateSlotLogic'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import SubSidebar from '../../components/SubSidebar/SubSidebar'
+import AddIcon from '@mui/icons-material/Add';
 import { Button } from '@mui/material'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
@@ -24,6 +25,8 @@ const UpdateSlot = () => {
         doctorsNeeded,
         seniorNeeded,
         submitHandler,
+        searchslot,
+        setSearchslot
     } = UpdateSlotLogic()
     return (
         <div className={classes.root}>
@@ -105,14 +108,80 @@ const UpdateSlot = () => {
 
                         </div>
                         :
-                        <div className={slots}>
-                            <Button
-                                variant="contained"
-                                className={classes.formButton}
-                                onClick={() => setShow(!show)}
-                            >
-                                Update Slot
-                            </Button>
+                        <div className={classes.slotTable}>
+
+                            <div className={classes.tableHeader}>
+                                <h1>Slots</h1>
+                                <Button
+                                    variant="contained"
+                                    startIcon={<AddIcon />}
+                                    className={classes.main__header__buttons__add}
+                                    onClick={() => setShow(true)}
+                                >
+                                    Update Slots
+                                </Button>
+                            </div>
+                            <div className={classes.tableBody}>
+                                <div className={classes.slotSelect}>
+                                    <label>Select Slot:</label>
+                                    <div>
+                                        <Dropdown
+                                            options={slotOptions}
+                                            placeholder="Select an option"
+                                            onChange={(e) => {
+                                                setSearchslot(e.value)
+                                            }}
+                                            style={{
+                                                width: '100%'
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Day</th>
+                                            <th>Doctors Needed</th>
+                                            <th>Seniors Needed</th>
+                                            <th>Update</th>
+                                        </tr>
+                                    </thead>
+
+                                    {/* map allotment of slot */}
+                                    {
+                                        slots && slots.getAllSlots.map((slot, index) => (
+                                            <tbody key={index}>
+                                                {/* check if current slot is same as searchslot then map allotment */}
+                                                {(slot.slotTime === searchslot) ?
+                                                    slot?.Allotment?.map((allotment, index) => (
+                                                        <tr key={index}>
+                                                            <td>{allotment.day}</td>
+                                                            <td>{allotment.DoctorsNeeded}</td>
+                                                            <td>{allotment.SeniorNeeded}</td>
+                                                            <td>
+                                                                <Button
+                                                                    variant="contained"
+                                                                    onClick={() => {
+                                                                        setShow(!show)
+                                                                        setDay(allotment.day)
+                                                                        setSlot(slot.slot)
+                                                                        setDoctorsNeeded(allotment.DoctorsNeeded)
+                                                                        setSeniorNeeded(allotment.SeniorNeeded)
+                                                                    }}
+                                                                >
+                                                                    Update
+                                                                </Button>
+                                                            </td>
+                                                        </tr>
+                                                    ))
+                                                    : null
+                                                }
+
+                                            </tbody>
+                                        ))
+                                    }
+                                </table>
+                            </div>
                         </div>
                 }
             </div>
