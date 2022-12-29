@@ -6,14 +6,14 @@ import { useSelector } from 'react-redux'
 
 const SubSidebar = () => {
     const classes = useStyles()
-    
+
     const { managerInfo } = useSelector(state => state.signInManager)
     const { userInfo } = useSelector(state => state.signInUser)
 
 
     return (
         <div className={classes.root}>
-         
+
             {
                 managerInfo ?
                     <ul className={classes.list}>
@@ -24,7 +24,7 @@ const SubSidebar = () => {
                             </Link>
                             {/* sub list */}
                             <ul className={classes.subList}>
-                               
+
                                 <li className={classes.subListItem}>
                                     <NavLink to='/attendance/breaks'
                                         style={({ isActive }) => ({
@@ -59,7 +59,7 @@ const SubSidebar = () => {
                                         <span className={classes.listItemText}>Daily View</span>
                                     </NavLink>
                                 </li>
-                               
+
                             </ul>
 
                         </li>
@@ -69,6 +69,22 @@ const SubSidebar = () => {
                                     color: isActive ? '#47B5FF' : 'none',
                                 })} className={classes.navLink}>
                                 <span className={classes.listItemText}>My Approvals</span>
+                            </NavLink>
+                        </li>
+                        <li className={classes.listItem}>
+                            <NavLink to='/attendance/slots'
+                                style={({ isActive }) => ({
+                                    color: isActive ? '#47B5FF' : 'none',
+                                })} className={classes.navLink}>
+                                <span className={classes.listItemText}>Update Slots</span>
+                            </NavLink>
+                        </li>
+                        <li className={classes.listItem}>
+                            <NavLink to='/self-service/requests/shift'
+                                style={({ isActive }) => ({
+                                    color: isActive ? '#47B5FF' : 'none',
+                                })} className={classes.navLink}>
+                                <span className={classes.listItemText}>Shift Replacement</span>
                             </NavLink>
                         </li>
                     </ul>

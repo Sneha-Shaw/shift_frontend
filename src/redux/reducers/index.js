@@ -2,11 +2,11 @@ import { combineReducers } from 'redux'
 import {
     userSigninReducer,
     getSingleUserReducer,
+    getAllUsersReducer,
     requestLeaveReducer,
     getLeavesReducer,
     requestSpecialReducer,
     getSpecialRequestsReducer,
-    requestShiftReplaceReducer,
     resetPasswordReducer,
     addAvailabilityReducer,
     getAvailabilityReducer,
@@ -33,7 +33,8 @@ import {
 } from './managerReducer'
 import {
     getCalenderReducer,
-    getAllSlotsReducer
+    getAllSlotsReducer,
+    requestShiftReplaceReducer
 } from './shiftReducer'
 
 
@@ -41,6 +42,7 @@ const rootReducer = combineReducers({
     // user actions
     signInUser: userSigninReducer,
     getSingleUser: getSingleUserReducer,
+    getAllUsers: getAllUsersReducer,
     requestLeave: requestLeaveReducer,
     getLeaves: getLeavesReducer,
     requestSpecial: requestSpecialReducer,

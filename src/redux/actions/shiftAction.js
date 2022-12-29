@@ -5,7 +5,10 @@ import {
     GET_CALENDER_FAILURE,
     GET_ALL_SLOTS_REQUEST,
     GET_ALL_SLOTS_SUCCESS,
-    GET_ALL_SLOTS_FAILURE
+    GET_ALL_SLOTS_FAILURE,
+    POST_SHIFT_REPLACE_REQUEST,
+    POST_SHIFT_REPLACE_SUCCESS,
+    POST_SHIFT_REPLACE_FAILED
 } from "../constants/shiftConstants";
 
 
@@ -63,3 +66,35 @@ export const getAllSlots = () => async (dispatch) => {
         })
     }
 }
+
+// request shift replace
+export const requestShiftReplace = (name, replacement, date, start, end) => async (dispatch) => {
+    try {
+      dispatch({
+        type: POST_SHIFT_REPLACE_REQUEST
+      })
+      const config = {
+        'Content-Type': 'application/json'
+      }
+      const body = {
+        name,
+        replacement,
+        date,
+        start,
+        end
+      }
+      const { data } = await axios.post(`${API}/private/shift/shift-replace`, body, config)
+      dispatch({
+        type: POST_SHIFT_REPLACE_SUCCESS,
+        payload: data
+      })
+    } catch (error) {
+      dispatch({
+        type: POST_SHIFT_REPLACE_FAILED,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+      })
+    }
+  }

@@ -7,6 +7,9 @@ import {
   GET_SINGLE_USER_REQUEST,
   GET_SINGLE_USER_SUCCESS,
   GET_SINGLE_USER_FAILED,
+  GET_ALL_USERS_REQUEST,
+  GET_ALL_USERS_SUCCESS,
+  GET_ALL_USERS_FAILED,
   POST_LEAVE_REQUEST,
   POST_LEAVE_SUCCESS,
   POST_LEAVE_FAILED,
@@ -19,9 +22,6 @@ import {
   GET_SPECIAL_REQUESTS_REQUEST,
   GET_SPECIAL_REQUESTS_SUCCESS,
   GET_SPECIAL_REQUESTS_FAILED,
-  POST_SHIFT_REPLACE_REQUEST,
-  POST_SHIFT_REPLACE_SUCCESS,
-  POST_SHIFT_REPLACE_FAILED,
   ADD_AVAILABILITY_REQUEST,
   ADD_AVAILABILITY_SUCCESS,
   ADD_AVAILABILITY_FAILED,
@@ -100,6 +100,30 @@ export const getSingleUser = (id) => async (dispatch) => {
   }
 }
 
+// get all users
+export const getAllUsers = () => async (dispatch) => {
+  try {
+    dispatch({
+      type: GET_ALL_USERS_REQUEST
+    })
+    const config = {
+      'Content-Type': 'application/json'
+    }
+    const { data } = await axios.get(`${API}/public/auth/get-all-users`, config)
+    dispatch({
+      type: GET_ALL_USERS_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: GET_ALL_USERS_FAILED,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
 
 // user logout
 export const logoutUser = () => (dispatch) => {
@@ -256,38 +280,6 @@ export const getSpecialRequests = (id) => async (dispatch) => {
   }
 }
 
-// request shift replace
-export const requestShiftReplace = (id, name, replacement, date, start, end) => async (dispatch) => {
-  try {
-    dispatch({
-      type: POST_SHIFT_REPLACE_REQUEST
-    })
-    const config = {
-      'Content-Type': 'application/json'
-    }
-    const body = {
-
-      name,
-      replacement,
-      date,
-      start,
-      end
-    }
-    const { data } = await axios.post(`${API}/public/auth/${id}/shift-replace`, body, config)
-    dispatch({
-      type: POST_SHIFT_REPLACE_SUCCESS,
-      payload: data
-    })
-  } catch (error) {
-    dispatch({
-      type: POST_SHIFT_REPLACE_FAILED,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
-    })
-  }
-}
 
 // ADD AVAILABILITY
 export const addAvailability = (id, schedule) => async (dispatch) => {

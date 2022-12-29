@@ -1,13 +1,13 @@
 
 import { makeStyles } from "@mui/styles";
 export default makeStyles((theme) => ({
-    root:{
+    root: {
         display: 'flex',
         width: "100%",
         height: "100vh",
         background: "#f7f7f7",
     },
-    main:{
+    main: {
         width: "55%",
         height: "60%",
         display: "flex",
@@ -27,14 +27,14 @@ export default makeStyles((theme) => ({
 
         },
     },
-    form:{
+    form: {
         width: "100%",
         height: "100%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        '&>button':{
+        '&>button': {
             width: "40%",
             height: "3.5rem",
             fontSize: "1.5rem",
@@ -42,39 +42,29 @@ export default makeStyles((theme) => ({
             background: "#06283D",
             color: "#fff",
             margin: "1.5rem 0",
-            '&:hover':{
+            '&:hover': {
                 background: "rgba(6, 40, 61,0.9)",
             }
         }
     },
-    formItem:{
+    formItem: {
         width: "90%",
         height: "100%",
         display: "flex",
         alignItems: "center",
-        // justifyContent: "center",
-            justifyContent: "space-between",
-
-        // flexDirection: "column",
-        '&>div':{
-            width: "53%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            '&>input':{
-                width: "60%",
-            }
+        '&>div': {
+            
         },
-        '& label':{
+        '& label': {
             fontSize: "1.5rem",
             // fontWeight: "bold",
             margin: "1rem 0",
-            width: "30%",
+            width: "35%",
             // capitalize
             textTransform: "capitalize",
             lineHeight: "1.6"
         },
-        '& input':{
+        '& input': {
             width: "50%",
             height: "3rem",
             fontSize: "1.5rem",
@@ -83,6 +73,15 @@ export default makeStyles((theme) => ({
             // border: "none",
             outline: "none",
             background: "transparent",
+        }
+    },
+    formItemTime:{
+        width: "53%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        '&>input': {
+            width: "60%",
         }
     }
 }))

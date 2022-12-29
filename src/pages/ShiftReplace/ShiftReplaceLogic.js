@@ -3,18 +3,23 @@ import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2';
 import {
     requestShiftReplace
-} from '../../redux/actions/userAction';
+} from '../../redux/actions/shiftAction';
+import {
+    getAllUsers
+} from '../../redux/actions/userAction'
 
-export const ShiftReplaceLogic=() =>{
-    const {userInfo} = useSelector((state) => state.signInUser)
+export const ShiftReplaceLogic = () => {
+    const { userInfo } = useSelector((state) => state.signInUser)
+    const { managerInfo } = useSelector((state) => state.signInManager)
+    const { users } = useSelector((state) => state.getAllUsers)
     const { shiftReplace } = useSelector((state) => state.requestShiftReplace)
 
     const dispatch = useDispatch()
 
     const options = [
         'AM', 'PM'
-      ];
-      const defaultOption = options[0];
+    ];
+    const defaultOption = options[0];
 
     const [name, setName] = useState('')
     const [replacement, setReplacement] = useState('')
@@ -24,15 +29,44 @@ export const ShiftReplaceLogic=() =>{
     const [end, setEnd] = useState('00:00')
     const [endMeridien, setEndMeridien] = useState(options[0])
 
+    const nameOptions = users && users.map((user) => {
+        return user.name
+    })
+
+    const defaultNameOption = nameOptions && nameOptions[0]
+
+    const replacementOptions =
+        managerInfo ?
+            users && users.map((user) => {
+                return user.name
+            })
+            :
+            users && users.filter((user) => {
+                return user.name !== userInfo?.name
+            }).map((user) => {
+                return user.name
+            })
+    const defaultReplacementOption = replacementOptions && replacementOptions[0]
+
+    useEffect(() => {
+        dispatch(getAllUsers())
+    }, [dispatch])
+
     const submitHandler = (e) => {
-        dispatch(requestShiftReplace(
-            userInfo._id,
-            name, 
-            replacement, 
-            date, 
-            start + ' ' + startMeridien, 
-            end + ' ' + endMeridien
-            ))
+        e.preventDefault()
+        if (replacement === '' || date === '' || start === '' || end === '') {
+            Swal.fire({
+                icon: 'error',
+                title: 'Please fill all the fields',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        } else {
+            userInfo ?
+                dispatch(requestShiftReplace(userInfo.name, replacement, date, start + ' ' + startMeridien, end + ' ' + endMeridien))
+                :
+                dispatch(requestShiftReplace(name, replacement, date, start + ' ' + startMeridien, end + ' ' + endMeridien))
+        }
     }
 
     useEffect(() => {
@@ -45,7 +79,7 @@ export const ShiftReplaceLogic=() =>{
             })
         }
     }, [shiftReplace])
-    return{
+    return {
         name,
         setName,
         replacement,
@@ -62,7 +96,12 @@ export const ShiftReplaceLogic=() =>{
         startMeridien,
         setStartMeridien,
         endMeridien,
-        setEndMeridien
+        setEndMeridien,
+        nameOptions,
+        defaultNameOption,
+        replacementOptions,
+        defaultReplacementOption,
+        userInfo
 
     }
 }

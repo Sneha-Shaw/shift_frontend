@@ -6,6 +6,9 @@ import {
   GET_SINGLE_USER_REQUEST,
   GET_SINGLE_USER_SUCCESS,
   GET_SINGLE_USER_FAILED,
+  GET_ALL_USERS_REQUEST,
+  GET_ALL_USERS_SUCCESS,
+  GET_ALL_USERS_FAILED,
   POST_LEAVE_REQUEST,
   POST_LEAVE_SUCCESS,
   POST_LEAVE_FAILED,
@@ -18,9 +21,6 @@ import {
   GET_SPECIAL_REQUESTS_REQUEST,
   GET_SPECIAL_REQUESTS_SUCCESS,
   GET_SPECIAL_REQUESTS_FAILED,
-  POST_SHIFT_REPLACE_REQUEST,
-  POST_SHIFT_REPLACE_SUCCESS,
-  POST_SHIFT_REPLACE_FAILED,
   ADD_AVAILABILITY_REQUEST,
   ADD_AVAILABILITY_SUCCESS,
   ADD_AVAILABILITY_FAILED,
@@ -124,6 +124,44 @@ export const getSingleUserReducer = (
   }
 }
 
+// get all users
+const getAllUsersState={
+  loading: false,
+  users: null,
+  error: null,
+  isAuthenticated: false
+}
+export const getAllUsersReducer = (state = getAllUsersState, action) => {
+  switch (action.type) {
+    case GET_ALL_USERS_REQUEST:
+      return {
+        ...state,
+        users: null,
+        error: null,
+        isAuthenticated: false,
+        loading: true
+      }
+    case GET_ALL_USERS_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: true,
+        error: null,
+        users: action.payload
+      }
+    case GET_ALL_USERS_FAILED:
+      return {
+        ...state,
+        loading: false,
+        users: null,
+        isAuthenticated: false,
+        error: action.payload
+      }
+
+    default:
+      return state
+  }
+}
 // reset password
 const resetPasswordState = {
   loading: false,
@@ -148,7 +186,6 @@ export const resetPasswordReducer = (state = resetPasswordState, action) => {
         isAuthenticated: true,
         error: null,
         passData: action.payload
-
       }
     case RESET_PASSWORD_FAILED:
       return {
@@ -188,7 +225,6 @@ export const requestLeaveReducer = (state = requestLeaveState, action) => {
         isAuthenticated: true,
         error: null,
         leave: action.payload
-
       }
     case POST_LEAVE_FAILED:
       return {
@@ -228,7 +264,6 @@ export const getLeavesReducer = (state = getLeavesState, action) => {
         isAuthenticated: true,
         error: null,
         leaves: action.payload
-
       }
     case GET_LEAVES_FAILED:
       return {
@@ -268,7 +303,6 @@ export const requestSpecialReducer = (state = requestSpecialState, action) => {
         isAuthenticated: true,
         error: null,
         special: action.payload
-
       }
     case POST_SPECIAL_FAILED:
       return {
@@ -324,45 +358,7 @@ export const getSpecialRequestsReducer = (state = getSpecialRequestsState, actio
   }
 }
 
-//request shift replace
-const requestShiftReplaceState = {
-  loading: false,
-  shiftReplace: null,
-  error: null,
-  isAuthenticated: false
-}
-export const requestShiftReplaceReducer = (state = requestShiftReplaceState, action) => {
-  switch (action.type) {
-    case POST_SHIFT_REPLACE_REQUEST:
-      return {
-        ...state,
-        shiftReplace: null,
-        error: null,
-        isAuthenticated: false,
-        loading: true
-      }
-    case POST_SHIFT_REPLACE_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        isAuthenticated: true,
-        error: null,
-        shiftReplace: action.payload
 
-      }
-    case POST_SHIFT_REPLACE_FAILED:
-      return {
-        ...state,
-        loading: false,
-        shiftReplace: null,
-        isAuthenticated: false,
-        error: action.payload
-      }
-
-    default:
-      return state
-  }
-}
 
 //add availability
 const addAvailabilityState = {

@@ -5,7 +5,7 @@ import SubSidebar from '../../components/SubSidebar/SubSidebar'
 import { Button } from '@mui/material'
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
-import {ShiftReplaceLogic} from './ShiftReplaceLogic'
+import { ShiftReplaceLogic } from './ShiftReplaceLogic'
 
 const ShiftReplace = () => {
   const classes = useStyles()
@@ -24,7 +24,12 @@ const ShiftReplace = () => {
     options,
     defaultOption,
     setStartMeridien,
-    setEndMeridien
+    setEndMeridien,
+    nameOptions,
+    defaultNameOption,
+    replacementOptions,
+    defaultReplacementOption,
+    userInfo
   } = ShiftReplaceLogic()
   return (
     <div className={classes.root}>
@@ -36,49 +41,65 @@ const ShiftReplace = () => {
         <div className={classes.form}>
           <div className={classes.formItem}>
             <label htmlFor="name">Name of person who cannot work:*</label>
-            <input type="text" id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-             />
+            {
+              userInfo ?
+                <input type="text" id="name"
+                  value={userInfo.name}
+                  disabled
+                />
+                :
+                <div style={{
+                  width: '53%'
+                }}>
+                  <Dropdown options={nameOptions} value={defaultNameOption} placeholder="Select an option"
+                    onChange={(e) => setName(e.value)}
+                    style={{
+                      width: '100%'
+                    }}
+                  />
+                </div>
+            }
           </div>
           <div className={classes.formItem}>
             <label htmlFor="name">Name of person who will work:*</label>
-            <input type="text" id="name" 
-              value={replacement}
-              onChange={(e) => setReplacement(e.target.value)}
-            />
+            <div style={{
+              width: '53%'
+            }}>
+              <Dropdown options={replacementOptions} value={defaultReplacementOption} placeholder="Select an option"
+                onChange={(e) => setReplacement(e.value)}
+              />
+            </div>
           </div>
           <div className={classes.formItem}>
             <label htmlFor="date">Enter Date:*</label>
             <input type="date" id="date"
               value={date}
-              onChange={(e) => setDate(e.target.value)} 
+              onChange={(e) => setDate(e.target.value)}
             />
           </div>
           <div className={classes.formItem}>
             <label htmlFor="time">Start Time:*</label>
-            <div>
+            <div className={classes.formItemTime}>
 
               <input type="time" id="time"
                 value={start}
                 onChange={(e) => setStart(e.target.value)}
-               />
-              <Dropdown options={options} value={defaultOption} placeholder="Select an option" 
+              />
+              <Dropdown options={options} value={defaultOption} placeholder="Select an option"
                 onChange={(e) => setStartMeridien(e.value)}
               />
             </div>
           </div>
           <div className={classes.formItem}>
             <label htmlFor="time">End Time:*</label>
-            <div>
-
+            <div className={classes.formItemTime}>
               <input type="time" id="time"
                 value={end}
                 onChange={(e) => setEnd(e.target.value)}
-               />
+              />
               <Dropdown options={options} value={defaultOption} placeholder="Select an option"
                 onChange={(e) => setEndMeridien(e.value)}
-               />
+              />
             </div>
           </div>
           <Button

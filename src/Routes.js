@@ -15,6 +15,7 @@ import DoctorsList from './pages/DoctorsList/DoctorsList'
 import Approvals from './pages/Approvals/Approvals'
 import Notifications from './pages/Notifications/Notifications'
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
+import UpdateSlot from "./pages/UpdateSlot/UpdateSlot"
 
 import { useSelector } from "react-redux";
 
@@ -86,7 +87,7 @@ const Router = () => {
                         exact
                         path="/self-service/requests/shift"
                         element={
-                            userInfo ? (
+                            userInfo || managerInfo ? (
                                 <>
                                     <Navbar />
                                     <ShiftReplace />
@@ -185,6 +186,20 @@ const Router = () => {
                                 <>
                                     <Navbar />
                                     <Approvals />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/attendance/slots"
+                        element={
+                            managerInfo ? (
+                                <>
+                                    <Navbar />
+                                    <UpdateSlot />
                                 </>
                             ) : (
                                 <Navigate to="/login" />
