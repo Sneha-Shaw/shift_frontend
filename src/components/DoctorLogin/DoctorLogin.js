@@ -2,15 +2,12 @@ import React from 'react'
 import useStyles from './styles'
 import { Button, TextField } from '@mui/material'
 import { DoctorLogic } from './DoctorLogic'
-import { signInUser } from '../../redux/actions/userAction';
-import { useDispatch } from 'react-redux';
 
 const DoctorLogin = () => {
     const classes = useStyles()
-    const{
+    const {
         email, setEmail, password, setPassword, loginHandler, error
     } = DoctorLogic()
-    const dispatch = useDispatch()
 
     return (
         <div className={classes.root}>
@@ -44,7 +41,7 @@ const DoctorLogin = () => {
                 />
                 <p className={classes.error}>{error}</p>
                 <Button
-                    onClick={ ()=>dispatch(signInUser(email, password))}
+                    onClick={loginHandler}
                     fullWidth
                     variant="contained"
                     color="primary"

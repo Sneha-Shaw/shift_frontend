@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState } from 'react'
-import Swal from 'sweetalert2';
+import { useEffect } from 'react'
 import {
     getAllLeaves,
     approveDenyLeave,

@@ -33,7 +33,7 @@ export const AvailabilityLogic = () => {
 
     useEffect(() => {
         dispatch(getAvailability(userInfo._id))
-    }, [])
+    }, [userInfo._id,dispatch])
 
     useEffect(() => {
         if (availability) {
@@ -46,13 +46,13 @@ export const AvailabilityLogic = () => {
                 timer: 1500
             })
         }
-    }, [availability])
+    }, [availability,userInfo._id,dispatch])
 
     useEffect(() => {
         if (deleteData) {
             dispatch(getAvailability(userInfo._id))
         }
-    }, [deleteData])
+    }, [deleteData,userInfo._id,dispatch])
 
     const handleChange = (event) => {
         setIsDay({ ...isday, [event.target.name]: event.target.checked });

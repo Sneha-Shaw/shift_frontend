@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import useStyles from './styles'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import SubSidebar from '../../components/SubSidebar/SubSidebar'
@@ -11,11 +11,8 @@ const DailyView = () => {
         calender,
         month,
         slots,
-        shifts
+        // shifts
     } = ViewLogic()
-    const doctorInfo = null
-    // shift array
-    // useEffect(() => {
 
 
     return (

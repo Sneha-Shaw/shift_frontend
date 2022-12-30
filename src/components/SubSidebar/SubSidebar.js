@@ -8,7 +8,7 @@ const SubSidebar = () => {
     const classes = useStyles()
 
     const { managerInfo } = useSelector(state => state.signInManager)
-    const { userInfo } = useSelector(state => state.signInUser)
+    // const { userInfo } = useSelector(state => state.signInUser)
 
 
     return (
