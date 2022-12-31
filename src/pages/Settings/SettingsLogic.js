@@ -21,7 +21,6 @@ export const SettingsLogic = () => {
     const dispatch = useDispatch()
 
     const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
     const [name, setName] = useState('')
     const [phone, setPhone] = useState('')
     const [address, setAddress] = useState('')
@@ -30,9 +29,7 @@ export const SettingsLogic = () => {
     const [zip, setZip] = useState('')
     const [about, setAbout] = useState('')
     const [nightDuty, setNightDuty] = useState(false)
-    const [showPass, setShowPass] = useState(false)
     const [designation, setDesignation] = useState('')
-    const [value, setValue] = useState("1")
 
     const designationOptions = [
         'Senior', 'Regular'
@@ -99,12 +96,7 @@ export const SettingsLogic = () => {
         }
     }, [manager, managerInfo])
 
-    const handleChange = (newValue) => {
-        setValue(newValue);
-    };
-    const handleShowPass = () => {
-        setShowPass(!showPass)
-    }
+  
     useEffect(() => {
         if (error) {
             Swal.fire({
@@ -159,8 +151,6 @@ export const SettingsLogic = () => {
     return {
         email,
         setEmail,
-        password,
-        setPassword,
         name,
         setName,
         phone,
@@ -176,12 +166,8 @@ export const SettingsLogic = () => {
         about,
         setAbout,
         managerInfo,
-        handleChange,
-        value,
         nightDuty,
         setNightDuty,
-        showPass,
-        handleShowPass,
         updateHandler,
         designation,
         setDesignation,

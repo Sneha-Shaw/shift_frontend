@@ -94,12 +94,7 @@ const Navbar = () => {
               width: 32,
               height: 32,
               ml: -0.5,
-              mr: 1,
-
-              // hover color
-              '&:hover': {
-                bgcolor: 'red',
-              }
+              mr: 1
             }
           }
         }}
@@ -143,14 +138,14 @@ const Navbar = () => {
           }
           
         </MenuItem>
-        <MenuItem
+        {/* <MenuItem
           onClick={() => navigate(`/notifications`)}
         >
           <ListItemIcon>
             <NotificationsNoneIcon fontSize="large" sx={{ color: "#06283D" }} />
           </ListItemIcon>
           Notifications
-        </MenuItem>
+        </MenuItem> */}
         <MenuItem
           onClick={() => navigate(`/reset-password/${id}`)}>
           <ListItemIcon>
@@ -194,12 +189,12 @@ const Navbar = () => {
             <CloseIcon fontSize="large" />
           </div>
           <div className={classes.mobilenavlinks}>
-            <div className={classes.mobilenavlink}
+            {/* <div className={classes.mobilenavlink}
               onClick={() => navigate(`/notifications`)}
             >
               <NotificationsNoneIcon fontSize="large" sx={{ color: "#06283D" }} />
               <p>Notifications</p>
-            </div>
+            </div> */}
             <div className={classes.mobilenavlink}
               onClick={() => navigate(`/settings`)}
             >

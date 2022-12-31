@@ -33,8 +33,10 @@ export const HomeLogic = () => {
     }, [dispatch])
 
     useEffect(() => {
-        dispatch(getLeaves(userInfo._id))
-    }, [dispatch,userInfo._id])
+        if(userInfo){
+            dispatch(getSingleUser(userInfo._id))
+        }
+    }, [dispatch,userInfo])
 
     useEffect(() => {
         if (userInfo) {

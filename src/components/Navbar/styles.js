@@ -73,10 +73,7 @@ export default makeStyles((theme) => ({
             backgroundColor: 'transparent',
             paddingLeft: '1rem',
             fontSize: '1.2rem',
-            '&::placeholder': {
-                color: '#BDBDBD',
-                fontSize: '1.2rem'
-            }
+           
         },
     },
     searchIcon: {
