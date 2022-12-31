@@ -19,7 +19,7 @@ export default makeStyles((theme) => ({
         padding: "2rem",
         boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
         '&>h1': {
-            fontSize: "3rem",
+            fontSize: "2.5  rem",
             fontWeight: "bold",
             marginBottom: "2rem",
 

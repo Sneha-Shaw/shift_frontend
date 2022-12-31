@@ -29,13 +29,17 @@ const Leave = () => {
     } = LeaveLogic()
     return (
         <div className={classes.root}
-        sx={{
-            height:leaves?.length >4 ? '90vh' : '100%'
-        }}
+
         >
             <Sidebar />
             <SubSidebar />
-            <div className={classes.main}>
+            <div className={classes.main}
+                style={{
+                    height: show ?
+                        '70vh' :
+                        (leaves?.length > 4 ? 'fit-content' :
+                        '72vh')
+                }}>
                 {
                     (show) && (
                         <div className={classes.back}>
@@ -75,7 +79,7 @@ const Leave = () => {
                                     <label >To:</label>
 
                                     <div className={classes.main__content__form__input__div}>
-                                        <input type="date" style={{ width: "96%" }} onChange={(e)=>setEndDate(e.target.value)} value={endDate} />
+                                        <input type="date" style={{ width: "96%" }} onChange={(e) => setEndDate(e.target.value)} value={endDate} />
 
                                     </div>
 
