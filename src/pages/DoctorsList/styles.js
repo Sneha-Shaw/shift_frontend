@@ -87,7 +87,7 @@ export default makeStyles((theme) => ({
     table: {
         width: "100%",
         borderCollapse: "collapse",
-        border: "1px solid #000",
+        border: ".5px solid #000",
         overflowX: "auto",
         margin: "2rem 0",
         background: "#fff",
@@ -116,7 +116,7 @@ export default makeStyles((theme) => ({
             fontSize: "1.2rem",
             fontWeight: "bold",
             textAlign: "center",
-            border: "1px solid #000",
+            border: ".5px solid #000",
             [theme.breakpoints.down("sm")]: {
                 fontSize: "1rem"
             }
@@ -126,7 +126,7 @@ export default makeStyles((theme) => ({
             fontSize: "1.2rem",
             fontWeight: "bold",
             textAlign: "center",
-            border: "1px solid",
+            border: ".5px solid",
             '&>button': {
                 width: "100%",
                 height: "3rem",

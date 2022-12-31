@@ -91,7 +91,7 @@ export default makeStyles((theme) => ({
             fontSize: "1.2rem",
             fontWeight: "bold",
             textAlign: "center",
-            border: "1px solid #000",
+            border: ".5px solid #000",
             [theme.breakpoints.down("sm")]: {
                 fontSize: "1rem"
             }
@@ -101,7 +101,7 @@ export default makeStyles((theme) => ({
             fontSize: "1.2rem",
             fontWeight: "bold",
             textAlign: "center",
-            border: "1px solid",
+            border: ".5px solid",
             // odd row
             '&:nth-child(odd)': {
                 background: "#f7f7f7"

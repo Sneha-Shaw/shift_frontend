@@ -37,7 +37,7 @@ export default makeStyles((theme) => ({
                     fontWeight: "bold",
                     padding: "1rem",
                     fontSize: "1.5rem",
-                    border: "1px solid #e0e0e0",
+                    border: ".5px solid #e0e0e0",
                     // width: "8rem",
                     // height: "2rem",
                     background: "#06283D",
@@ -57,7 +57,7 @@ export default makeStyles((theme) => ({
                 '&>td:nth-child(1)': {
                     padding: "1rem",
                     fontSize: "1.5rem",
-                    border: "1px solid #e0e0e0",
+                    border: ".5px solid #e0e0e0",
                     width: "8rem",
                     height: "2rem",
                     background: "#06283D",
