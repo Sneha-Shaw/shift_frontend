@@ -338,7 +338,7 @@ export const getAvailability = (id) => async (dispatch) => {
 }
 
 // delete availability by day
-export const deleteAvailabilityByDay = (id, day) => async (dispatch) => {
+export const deleteAvailabilityByDay = (id, date) => async (dispatch) => {
   try {
     dispatch({
       type: DELETE_AVAILABILITY_BY_DAY_REQUEST
@@ -347,7 +347,7 @@ export const deleteAvailabilityByDay = (id, day) => async (dispatch) => {
       'Content-Type': 'application/json'
     }
     const body = {
-      day
+      date
     }
     const { data } = await axios.put(`${API}/public/auth/${id}/delete-availability-by-day`, body, config)
     dispatch({

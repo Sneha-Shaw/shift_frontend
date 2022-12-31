@@ -14,18 +14,13 @@ export const AvailabilityLogic = () => {
     const { userInfo } = useSelector((state) => state.signInUser)
 
     const dispatch = useDispatch()
-    const [schedule, setSchedule] = useState([])
+    const [date,setDate] = useState('')
+    const [startTime,setStartTime] = useState('')
+    const [startMeridian,setStartMeridian] = useState('')
+    const [endTime,setEndTime] = useState('')
+    const [endMeridian,setEndMeridian] = useState('')
     const [show, setShow] = useState(false)
-    const [isday, setIsDay] = useState({
-        monday: false,
-        tuesday: false,
-        wednesday: false,
-        thursday: false,
-        friday: false,
-        saturday: false,
-        sunday: false,
-    });
-
+   
     const MeridianOptions = [
         'AM', 'PM'
     ];
@@ -54,15 +49,18 @@ export const AvailabilityLogic = () => {
         }
     }, [deleteData,userInfo._id,dispatch])
 
-    const handleChange = (event) => {
-        setIsDay({ ...isday, [event.target.name]: event.target.checked });
-        if (event.target.checked) {
-            setSchedule([...schedule, { day: event.target.name, start: '', end: '' }])
-        }
-    };
+   
     // add availability
     const submitHandler = () => {
         setShow(!show)
+        const schedule = [
+            {
+                date,
+                startTime: startTime + ' ' + startMeridian,
+                endTime: endTime + ' ' + endMeridian
+            }
+        ]
+        console.log(schedule);
         dispatch(addAvailability(userInfo._id, schedule))
         Swal.fire({
             position: 'center',
@@ -74,23 +72,28 @@ export const AvailabilityLogic = () => {
     }
 
     // delete availability
-    const deleteHandler = (day) => {
-        dispatch(deleteAvailabilityByDay(userInfo._id, day))
+    const deleteHandler = (date) => {
+        dispatch(deleteAvailabilityByDay(userInfo._id, date))
         Swal.fire({
             position: 'center',
             icon: 'success',
-            title: `${day} removed from your availibility`,
+            title: `${date} removed from your availibility`,
             showConfirmButton: false,
             timer: 1500
         })
     }
 
     return {
-        isday,
-        setIsDay,
-        schedule,
-        setSchedule,
-        handleChange,
+        date,
+        setDate,
+        startTime,
+        setStartTime,
+        startMeridian,
+        setStartMeridian,
+        endTime,
+        setEndTime,
+        endMeridian,
+        setEndMeridian,
         defaultMeridianOption,
         MeridianOptions,
         submitHandler,
