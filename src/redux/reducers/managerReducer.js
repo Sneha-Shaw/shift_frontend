@@ -12,6 +12,9 @@ import {
     ADD_DOCTOR_REQUEST,
     ADD_DOCTOR_SUCCESS,
     ADD_DOCTOR_FAILED,
+    SEARCH_DOCTOR_REQUEST,
+    SEARCH_DOCTOR_SUCCESS,
+    SEARCH_DOCTOR_FAILED,
     DELETE_DOCTOR_REQUEST,
     DELETE_DOCTOR_SUCCESS,
     DELETE_DOCTOR_FAILED,
@@ -198,6 +201,44 @@ export const addDoctorReducer = (state = addDoctorState, action) => {
                 doctorInfo: action.payload
             }
         case ADD_DOCTOR_FAILED:
+            return {
+                ...state,
+                loading: false,
+                doctorInfo: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// SEARCH DOCTOR
+const searchDoctorState = {
+    loading: false,
+    doctorInfo: null,
+    error: null,
+    isAuthenticated: false
+}
+export const searchDoctorReducer = (state = searchDoctorState, action) => {
+    switch (action.type) {
+        case SEARCH_DOCTOR_REQUEST:
+            return {
+                ...state,
+                doctorInfo: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case SEARCH_DOCTOR_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                doctorInfo: action.payload
+            }
+        case SEARCH_DOCTOR_FAILED:
             return {
                 ...state,
                 loading: false,

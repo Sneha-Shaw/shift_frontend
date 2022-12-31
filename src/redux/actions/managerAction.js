@@ -13,6 +13,9 @@ import {
     ADD_DOCTOR_REQUEST,
     ADD_DOCTOR_SUCCESS,
     ADD_DOCTOR_FAILED,
+    SEARCH_DOCTOR_REQUEST,
+    SEARCH_DOCTOR_SUCCESS,
+    SEARCH_DOCTOR_FAILED,
     DELETE_DOCTOR_REQUEST,
     DELETE_DOCTOR_SUCCESS,
     DELETE_DOCTOR_FAILED,
@@ -219,6 +222,31 @@ export const updateManager = (
     }
 }
 
+// search dpctor
+export const searchDoctor = (name) => async (dispatch) => {
+    try {
+        dispatch({
+            type: SEARCH_DOCTOR_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const {data} = await axios.get(`${API}/public/admin/search-doctor?name=${name}`, config)
+        dispatch({
+            type: SEARCH_DOCTOR_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: SEARCH_DOCTOR_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
 
 // delete doctor
 export const deleteDoctor = (email) => async (dispatch) => {
