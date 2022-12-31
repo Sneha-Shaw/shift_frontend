@@ -17,6 +17,7 @@ import Notifications from './pages/Notifications/Notifications'
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import UpdateSlot from "./pages/UpdateSlot/UpdateSlot"
 import Settings from "./pages/Settings/Settings"
+import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 
 import { useSelector } from "react-redux";
 
@@ -220,6 +221,11 @@ const Router = () => {
                                 <Navigate to="/login" />
                             )
                         }
+                    />
+                    <Route
+                        exact
+                        path="/forgot-password"
+                        element={<ForgotPassword />}
                     />
                     <Route
                         exact

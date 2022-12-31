@@ -5,7 +5,7 @@ import {ManagerLogic} from './ManagerLogic'
 
 const DoctorLogin = () => {
     const classes = useStyles()
-    const { email, setEmail, password, setPassword, loginHandler, error } = ManagerLogic()
+    const { email, setEmail, password, setPassword, loginHandler,navigate } = ManagerLogic()
     return (
         <div className={classes.root}>
             <h1>Sign in</h1>
@@ -36,7 +36,7 @@ const DoctorLogin = () => {
                     id="password"
                     autoComplete="current-password"
                 />
-                <p className={classes.error}>{error}</p>
+                {/* <p className={classes.error}>{error}</p> */}
                 <Button
                     onClick={loginHandler}
                     fullWidth
@@ -46,6 +46,13 @@ const DoctorLogin = () => {
                 >
                     Sign In
                 </Button>
+                  {/* forgot password */}
+                  <div className={classes.forgot}>
+                    <p>Forgot Password?</p>
+                    <p onClick={() => navigate('/forgot-password')}
+                        style={{ color: "#06283D",textDecoration: "underline" }}
+                    >Click here</p>
+                </div>
             </div>
         </div>
     )

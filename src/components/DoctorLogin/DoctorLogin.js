@@ -6,7 +6,7 @@ import { DoctorLogic } from './DoctorLogic'
 const DoctorLogin = () => {
     const classes = useStyles()
     const {
-        email, setEmail, password, setPassword, loginHandler, error
+        email, setEmail, password, setPassword, loginHandler, navigate
     } = DoctorLogic()
 
     return (
@@ -39,7 +39,7 @@ const DoctorLogin = () => {
                     id="password"
                     autoComplete="current-password"
                 />
-                <p className={classes.error}>{error}</p>
+                {/* <p className={classes.error}>{error}</p> */}
                 <Button
                     onClick={loginHandler}
                     fullWidth
@@ -49,6 +49,13 @@ const DoctorLogin = () => {
                 >
                     Sign In
                 </Button>
+                {/* forgot password */}
+                <div className={classes.forgot}>
+                    <p>Forgot Password?</p>
+                    <p onClick={() => navigate('/forgot-password')}
+                        style={{ color: "#06283D",textDecoration: "underline" }}
+                    >Click here</p>
+                </div>
             </div>
         </div>
     )

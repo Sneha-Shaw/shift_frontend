@@ -40,7 +40,7 @@ const Settings = () => {
             <Sidebar />
             <div className={classes.container}
                 style={{
-                    height: 'fi-content'
+                    height: 'fit-content'
                 }}
             >
                 <div className={classes.header}>

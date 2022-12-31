@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-// import Swal from 'sweetalert2';
+import Swal from 'sweetalert2';
 import { signInManager } from '../../redux/actions/managerAction';
 
 export const ManagerLogic = () => {
@@ -22,6 +22,15 @@ export const ManagerLogic = () => {
         e.preventDefault()
         dispatch(signInManager(email, password))
     }
-
-    return { email, setEmail, password, setPassword, loginHandler, error }
+    useEffect(()=>{
+        if(error){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: error,
+            })
+        }
+    },[error])
+    
+    return { email, setEmail, password, setPassword, loginHandler,navigate }
 }

@@ -40,6 +40,16 @@ export default makeStyles((theme) => ({
         },
         submit: {
             margin: theme.spacing(3, 0, 2)
-        }
+        },
+        forgot: {
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "1rem",
+            "& p": {
+                fontSize: "1.2rem",
+                cursor: "pointer",
+                marginRight: ".2rem"
+            }
+        },
     
 }))

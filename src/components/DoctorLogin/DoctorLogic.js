@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { signInUser } from '../../redux/actions/userAction';
+import Swal from 'sweetalert2';
 
 export const DoctorLogic = () => {
     const navigate = useNavigate()
@@ -24,5 +25,15 @@ export const DoctorLogic = () => {
         console.log('loginHandler');
     }
 
-    return { email, setEmail, password, setPassword, loginHandler, error }
+    useEffect(()=>{
+        if(error){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: error,
+            })
+        }
+    },[error])
+
+    return { email, setEmail, password, setPassword, loginHandler,navigate }
 }
