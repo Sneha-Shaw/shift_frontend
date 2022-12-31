@@ -14,11 +14,12 @@ export const AvailabilityLogic = () => {
     const { userInfo } = useSelector((state) => state.signInUser)
 
     const dispatch = useDispatch()
+    
     const [date,setDate] = useState('')
-    const [startTime,setStartTime] = useState('')
-    const [startMeridian,setStartMeridian] = useState('')
-    const [endTime,setEndTime] = useState('')
-    const [endMeridian,setEndMeridian] = useState('')
+    const [startTime,setStartTime] = useState('00:00')
+    const [startMeridian,setStartMeridian] = useState('AM')
+    const [endTime,setEndTime] = useState('00:00')
+    const [endMeridian,setEndMeridian] = useState('AM')
     const [show, setShow] = useState(false)
    
     const MeridianOptions = [

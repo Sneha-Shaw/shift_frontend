@@ -38,7 +38,12 @@ const Availabity = () => {
       <SubSidebar />
       <div className={classes.main}
         style={{
-          height: '75vh'
+          height: show ?
+            '72vh'
+            :
+            availabilities && availabilities[0]?.schedule?.length > 12 ?
+              'fit-content' :
+              '72vh'
         }}
       >
         {
