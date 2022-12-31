@@ -224,16 +224,7 @@ const Router = () => {
                     <Route
                         exact
                         path="/reset-password/:id"
-                        element={
-                            userInfo || managerInfo ? (
-                                <>
-                                    <Navbar />
-                                    <ResetPassword />
-                                </>
-                            ) : (
-                                <Navigate to="/login" />
-                            )
-                        }
+                        element={<ResetPassword />}
                     />
                     <Route
                         exact

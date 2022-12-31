@@ -30,7 +30,8 @@ const Navbar = () => {
     userInfo,
     navigate,
     color,
-    managerInfo
+    managerInfo,
+    id
   } = NavbarLogic()
 
   return (
@@ -151,8 +152,7 @@ const Navbar = () => {
           Notifications
         </MenuItem>
         <MenuItem
-          onClick={() => navigate(`/reset-password/${userInfo._id}`)}
-        >
+          onClick={() => navigate(`/reset-password/${id}`)}>
           <ListItemIcon>
             <LockResetIcon fontSize="large" sx={{ color: "#06283D" }} />
           </ListItemIcon>
@@ -207,7 +207,7 @@ const Navbar = () => {
               <p>Settings</p>
             </div>
             <div className={classes.mobilenavlink}
-              onClick={() => navigate(`/reset-password/${userInfo._id}`)}
+              onClick={() => navigate(`/reset-password/${id}`)}
             >
               <LockResetIcon fontSize="large" sx={{ color: "#06283D" }} />
               <p>Reset Password</p>

@@ -23,7 +23,6 @@ export const DoctorsLogic = () => {
     useEffect(() => {
         dispatch(getAllDoctors())
     }, [dispatch])
-    console.log(doctors?.getAllDoctors);
     // random password generator
     const randomPassword = () => {
         const length = 8;

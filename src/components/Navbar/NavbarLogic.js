@@ -10,6 +10,7 @@ export const NavbarLogic = () => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [id, setId] = useState('')
 
   const handleLogout = () => {
     if (userInfo) {
@@ -38,6 +39,17 @@ export const NavbarLogic = () => {
     setColor(randomColor())
   }, [])
 
+  useEffect(() => {
+    if (userInfo) {
+      setId(userInfo._id)
+    }
+  }, [userInfo])
+
+  useEffect(() => {
+    if (managerInfo) {
+      setId(managerInfo._id)
+    }
+  }, [managerInfo])
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -45,6 +57,7 @@ export const NavbarLogic = () => {
   const handleClose = (id) => {
     setAnchorEl(null);
   };
+  
   return {
     handleLogout,
     show,
@@ -56,7 +69,8 @@ export const NavbarLogic = () => {
     navigate,
     color,
     userInfo,
-    managerInfo
+    managerInfo,
+    id
   }
 
 

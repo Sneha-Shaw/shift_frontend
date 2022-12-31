@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import useStyles from './styles'
 import {
-    resetPassword,
-    logoutUser
+    resetPassword
 } from '../../redux/actions/userAction'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate,useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { Button } from '@mui/material'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -15,17 +14,10 @@ const ResetPassword = () => {
     const classes = useStyles()
     const [password, setPassword] = useState('')
     const [showPass, setShowPass] = useState(false)
-    const { userInfo } = useSelector((state) => state.signInUser)
     const { error, passData: successReset } = useSelector((state) => state.resetPassword)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
-    const {id}=useParams()
+    const { id } = useParams()
 
-    useEffect(() => {
-        if (!userInfo) {
-            navigate('/login')
-        }
-    }, [userInfo, navigate])
 
     useEffect(() => {
         if (successReset?.success === true) {
@@ -35,15 +27,11 @@ const ResetPassword = () => {
                 showConfirmButton: false,
                 timer: 1000
             })
-            // settimout
-            setTimeout(() => {
-                dispatch(logoutUser())
-                navigate('/login')
-            }, 1200)
-        }
-    }, [successReset, navigate, dispatch])
 
-// show error
+        }
+    }, [successReset, dispatch])
+
+    // show error
     useEffect(() => {
         if (error) {
             Swal.fire({
