@@ -1,25 +1,25 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react'
 import { logoutManager } from '../../redux/actions/managerAction';
-import {logoutUser} from '../../redux/actions/userAction'
+import { logoutUser } from '../../redux/actions/userAction'
 import { useNavigate } from 'react-router-dom';
 
-export const NavbarLogic=()=>{
-    const {userInfo}=useSelector((state)=>state.signInUser)
-    const {managerInfo}=useSelector((state)=>state.signInManager)
+export const NavbarLogic = () => {
+  const { userInfo } = useSelector((state) => state.signInUser)
+  const { managerInfo } = useSelector((state) => state.signInManager)
 
-    const dispatch=useDispatch()
-    const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-    const handleLogout=()=>{
-        if(userInfo){
-            dispatch(logoutUser())
-        }
-        if(managerInfo){
-            dispatch(logoutManager())
-        }
+  const handleLogout = () => {
+    if (userInfo) {
+      dispatch(logoutUser())
     }
-    const [show, setShow] = useState(false)
+    if (managerInfo) {
+      dispatch(logoutManager())
+    }
+  }
+  const [show, setShow] = useState(false)
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -45,18 +45,19 @@ export const NavbarLogic=()=>{
   const handleClose = (id) => {
     setAnchorEl(null);
   };
-    return {
-        handleLogout,
-        show,
-        setShow,
-        anchorEl,
-        open,
-        handleClick,
-        handleClose,
-        navigate,
-        color,
-        userInfo
-        }
+  return {
+    handleLogout,
+    show,
+    setShow,
+    anchorEl,
+    open,
+    handleClick,
+    handleClose,
+    navigate,
+    color,
+    userInfo,
+    managerInfo
+  }
 
 
 }

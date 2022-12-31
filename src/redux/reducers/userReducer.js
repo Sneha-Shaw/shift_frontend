@@ -5,7 +5,10 @@ import {
   USER_LOGOUT,
   GET_SINGLE_USER_REQUEST,
   GET_SINGLE_USER_SUCCESS,
-  GET_SINGLE_USER_FAILED,
+  GET_SINGLE_USER_FAILED, 
+  UPDATE_USER_REQUEST,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILED,
   GET_ALL_USERS_REQUEST,
   GET_ALL_USERS_SUCCESS,
   GET_ALL_USERS_FAILED,
@@ -480,3 +483,43 @@ export const deleteAvailabilityByDayReducer = (state = deleteAvailabilityByDaySt
   }
 }
 
+
+// update user
+const updateUserState = {
+  loading: false,
+  updateData: null,
+  error: null,
+  isAuthenticated: false
+}
+export const updateUserReducer = (state = updateUserState, action) => {
+  switch (action.type) {
+    case UPDATE_USER_REQUEST:
+      return {
+        ...state,
+        updateData: null,
+        error: null,
+        isAuthenticated: false,
+        loading: true
+      }
+    case UPDATE_USER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: true,
+        error: null,
+        updateData: action.payload
+
+      }
+    case UPDATE_USER_FAILED:
+      return {
+        ...state,
+        loading: false,
+        updateData: null,
+        isAuthenticated: false,
+        error: action.payload
+      }
+
+    default:
+      return state
+  }
+}

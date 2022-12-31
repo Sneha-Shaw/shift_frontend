@@ -7,6 +7,9 @@ import {
   GET_SINGLE_USER_REQUEST,
   GET_SINGLE_USER_SUCCESS,
   GET_SINGLE_USER_FAILED,
+  UPDATE_USER_REQUEST,
+  UPDATE_USER_SUCCESS,
+  UPDATE_USER_FAILED,
   GET_ALL_USERS_REQUEST,
   GET_ALL_USERS_SUCCESS,
   GET_ALL_USERS_FAILED,
@@ -354,6 +357,55 @@ export const deleteAvailabilityByDay = (id, day) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: DELETE_AVAILABILITY_BY_DAY_FAILED,
+      payload:
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+    })
+  }
+}
+
+// update user
+export const updateUser = (
+  id,
+  name,
+  email,
+  mobile,
+  address,
+  city,
+  state,
+  pincode,
+  about,
+  designation,
+  nightDuty
+) => async (dispatch) => {
+  try {
+    dispatch({
+      type: UPDATE_USER_REQUEST
+    })
+    const config = {
+      'Content-Type': 'application/json'
+    }
+    const body = {
+      name,
+      email,
+      mobile,
+      address,
+      city,
+      state,
+      pincode,
+      about,
+      designation,
+      nightDuty
+    }
+    const { data } = await axios.put(`${API}/public/auth/${id}/update-profile`, body, config)
+    dispatch({
+      type: UPDATE_USER_SUCCESS,
+      payload: data
+    })
+  } catch (error) {
+    dispatch({
+      type: UPDATE_USER_FAILED,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

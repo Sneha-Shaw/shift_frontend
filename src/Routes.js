@@ -16,6 +16,7 @@ import Approvals from './pages/Approvals/Approvals'
 import Notifications from './pages/Notifications/Notifications'
 import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import UpdateSlot from "./pages/UpdateSlot/UpdateSlot"
+import Settings from "./pages/Settings/Settings"
 
 import { useSelector } from "react-redux";
 
@@ -228,6 +229,20 @@ const Router = () => {
                                 <>
                                     <Navbar />
                                     <ResetPassword />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/settings"
+                        element={
+                            userInfo || managerInfo ? (
+                                <>
+                                    <Navbar />
+                                    <Settings />
                                 </>
                             ) : (
                                 <Navigate to="/login" />

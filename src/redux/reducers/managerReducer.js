@@ -6,6 +6,9 @@ import {
     GET_MANAGER_INFO_REQUEST,
     GET_MANAGER_INFO_SUCCESS,
     GET_MANAGER_INFO_FAILED,
+    UPDATE_MANAGER_REQUEST,
+    UPDATE_MANAGER_SUCCESS,
+    UPDATE_MANAGER_FAILED,
     ADD_DOCTOR_REQUEST,
     ADD_DOCTOR_SUCCESS,
     ADD_DOCTOR_FAILED,
@@ -119,6 +122,44 @@ export const getManagerInfoReducer = (state = getManagerInfoState, action) => {
                 manager: action.payload
             }
         case GET_MANAGER_INFO_FAILED:
+            return {
+                ...state,
+                loading: false,
+                manager: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// Update Manager
+const updateManagerState = {
+    loading: false,
+    manager: null,
+    error: null,
+    isAuthenticated: false
+}
+export const updateManagerReducer = (state = updateManagerState, action) => {
+    switch (action.type) {
+        case UPDATE_MANAGER_REQUEST:
+            return {
+                ...state,
+                manager: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case UPDATE_MANAGER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                manager: action.payload
+            }
+        case UPDATE_MANAGER_FAILED:
             return {
                 ...state,
                 loading: false,

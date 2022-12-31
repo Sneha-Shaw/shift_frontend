@@ -29,7 +29,8 @@ const Navbar = () => {
     handleClose,
     userInfo,
     navigate,
-    color
+    color,
+    managerInfo
   } = NavbarLogic()
 
   return (
@@ -50,16 +51,30 @@ const Navbar = () => {
         </div>
         {/* nav links */}
         <div className={classes.navLinks}>
+          {
+            userInfo ? (
+              <Avatar sx={{
+                width: 32,
+                height: 32,
+                backgroundColor: color,
+                cursor: "pointer"
+              }}
+                onClick={handleClick}>
+                {userInfo?.name?.slice(4, 5).toUpperCase()}
+              </Avatar>
+            ) : (
+              <Avatar sx={{
+                width: 32,
+                height: 32,
+                backgroundColor: color,
+                cursor: "pointer"
+              }}
+                onClick={handleClick}>
+                {managerInfo?.name?.charAt(0).toUpperCase()}
+              </Avatar>
+            )
+          }
 
-          <Avatar sx={{
-            width: 32,
-            height: 32,
-            backgroundColor: color,
-            cursor: "pointer"
-          }}
-            onClick={handleClick}>
-            {userInfo?.name?.slice(4, 5).toUpperCase()}
-          </Avatar>
         </div>
       </div>
       <Menu
@@ -92,15 +107,40 @@ const Navbar = () => {
       >
         <MenuItem>
           <ListItemIcon>
-            <Avatar sx={{
-              width: 32,
-              height: 32,
-              backgroundColor: color,
-            }}>
-              {userInfo?.name?.slice(4, 5).toUpperCase()}
-            </Avatar>
+            {
+              userInfo ? (
+                <Avatar sx={{
+                  width: 32,
+                  height: 32,
+                  backgroundColor: color,
+                }}>
+                  {userInfo?.name?.slice(4, 5).toUpperCase()}
+                </Avatar>
+              ) : (
+                <Avatar sx={{
+                  width: 32,
+                  height: 32,
+                  backgroundColor: color,
+                }}>
+                  {managerInfo?.name?.charAt(0).toUpperCase()}
+                </Avatar>
+              )
+            }
           </ListItemIcon>
-          {userInfo?.name}
+          {
+            userInfo ? (
+              <div>
+                <h4>{userInfo?.name}</h4>
+                <p>{userInfo?.email}</p>
+              </div>
+            ) : (
+              <div>
+                <h4>{managerInfo?.name}</h4>
+                <p>{managerInfo?.email}</p>
+              </div>
+            )
+          }
+          
         </MenuItem>
         <MenuItem
           onClick={() => navigate(`/notifications`)}

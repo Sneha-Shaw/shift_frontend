@@ -10,10 +10,12 @@ import {
     resetPasswordReducer,
     addAvailabilityReducer,
     getAvailabilityReducer,
-    deleteAvailabilityByDayReducer
+    deleteAvailabilityByDayReducer,
+    updateUserReducer
 } from './userReducer'
 import {
     signInManagerReducer,
+    updateManagerReducer,
     addDoctorReducer,
     deleteDoctorReducer,
     updateDoctorReducer,
@@ -53,8 +55,10 @@ const rootReducer = combineReducers({
     addAvailability: addAvailabilityReducer,
     getAvailability: getAvailabilityReducer,
     deleteAvailabilityByDay: deleteAvailabilityByDayReducer,
+    updateUser: updateUserReducer,
     // manager actions
     signInManager: signInManagerReducer,
+    updateManager: updateManagerReducer,
     addDoctor: addDoctorReducer,
     deleteDoctor: deleteDoctorReducer,
     updateDoctor: updateDoctorReducer,

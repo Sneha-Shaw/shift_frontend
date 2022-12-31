@@ -7,6 +7,9 @@ import {
     GET_MANAGER_INFO_REQUEST,
     GET_MANAGER_INFO_SUCCESS,
     GET_MANAGER_INFO_FAILED,
+    UPDATE_MANAGER_REQUEST,
+    UPDATE_MANAGER_SUCCESS,
+    UPDATE_MANAGER_FAILED,
     ADD_DOCTOR_REQUEST,
     ADD_DOCTOR_SUCCESS,
     ADD_DOCTOR_FAILED,
@@ -168,6 +171,54 @@ export const getManagerInfo = (id) => async (dispatch) => {
         })
     }
 }
+
+// update manager
+export const updateManager = (
+    id,
+    name,
+    email,
+    mobile,
+    address,
+    city,
+    state,
+    pincode,
+    about
+) => async (dispatch) => {
+    try {
+        dispatch({
+            type: UPDATE_MANAGER_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+
+        const body = {
+            name,
+            email,
+            mobile,
+            address,
+            city,
+            state,
+            pincode,
+            about
+        }
+        const { data } = await axios.put(`${API}/public/admin/update-profile/${id}`, body, config)
+        dispatch({
+            type: UPDATE_MANAGER_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: UPDATE_MANAGER_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
 
 // delete doctor
 export const deleteDoctor = (email) => async (dispatch) => {
