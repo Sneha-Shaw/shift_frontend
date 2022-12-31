@@ -6,11 +6,18 @@ import {
     getAllDoctors,
     getAllLeaves
 } from '../../redux/actions/managerAction'
-export const HomeLogic = ()=>{
+import {
+    getSingleUser,
+    getLeaves
+} from '../../redux/actions/userAction'
+
+export const HomeLogic = () => {
     const { managerInfo } = useSelector((state) => state.signInManager)
+    const { user: userData } = useSelector((state) => state.getSingleUser)
     const { userInfo } = useSelector((state) => state.signInUser)
     const { doctorsInfo: doctors } = useSelector(state => state.getAllDoctors)
     const { leaves } = useSelector(state => state.getAllLeaves);
+    const { leaves:userLeaves } = useSelector((state) => state.getLeaves)
 
     // get user name
     const user = userInfo ? userInfo.name : managerInfo.name
@@ -25,12 +32,24 @@ export const HomeLogic = ()=>{
         dispatch(getAllLeaves())
     }, [dispatch])
 
+    useEffect(() => {
+        dispatch(getLeaves(userInfo._id))
+    }, [dispatch,userInfo._id])
 
-    return{
+    useEffect(() => {
+        if (userInfo) {
+            dispatch(getSingleUser(userInfo._id))
+        }
+    }, [userInfo, dispatch])
+    
+    return {
         user,
         navigate,
+        userInfo,
         managerInfo,
         doctors,
-        leaves
+        leaves,
+        userData,
+        userLeaves
     }
 }

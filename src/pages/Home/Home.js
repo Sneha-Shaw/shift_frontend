@@ -11,17 +11,20 @@ const Home = () => {
   const {
     user,
     navigate,
+    userInfo,
     managerInfo,
     doctors,
-    leaves
+    leaves,
+    userData,
+    userLeaves
   } = HomeLogic()
 
   return (
     <div className={classes.root}
-    style={{
-      height: 
-      leaves && leaves.getAllLeaves.filter(leave => leave.leaveStatus === "awaiting")?.length > 3 ? "fit-content" : "100vh"
-    }}
+      style={{
+        height:
+          leaves && leaves.getAllLeaves.filter(leave => leave.leaveStatus === "awaiting")?.length > 3 ? "fit-content" : "100vh"
+      }}
     >
       <Sidebar />
       {/* Wlcome */}
@@ -168,7 +171,94 @@ const Home = () => {
             </div>
           )
         }
+        {
+          userInfo &&
+          <div
+            style={{
+              width: "60%"
+            }}
+          >
+            <div className={classes.overview}>
+              <div className={classes.overviewItem}>
+                <span className={classes.title}>Duty Hours Per Month</span>
+                <p className={classes.count}>
+                  {
+                    userData && userData.dutyHoursPerMonth
+                  }
+                </p>
+              </div>
+              <div className={classes.overviewItem}>
+                <span className={classes.title}>Duty Hours Per Day</span>
+                <p className={classes.count}>
+                  {
+                    userData && userData.dutyHoursPerDay
+                  }
+                </p>
+              </div>
+              <div className={classes.overviewItem}>
+                <span className={classes.title}>Night Duty</span>
+                <p className={classes.count}>
+                  {
+                    userData && userData.nightDuty === true ?
+                      "Yes"
+                      :
+                      "No"
+                  }
+                </p>
+              </div>
+            </div>
+            <div className={classes.recent}>
+              <div className={classes.card}>
+                <div className={classes.cardHeader}>
+                  <h3>Recently Requested Leaves</h3>
+                  <Button
+                    onClick={() => navigate('/self-service/requests/leave')}
+                  >See All</Button>
+                </div>
+                <div className={classes.cardBody}>
+                  <table className={classes.table}>
+                    <thead className={classes.tableHeader}>
+                      <tr>
+                        <th className={classes.tableHeaderItem}>Leave Type</th>
+                        <th className={classes.tableHeaderItem}>From</th>
+                        <th className={classes.tableHeaderItem}>To</th>
+                        <th className={classes.tableHeaderItem}>Reason</th>
+                        <th className={classes.tableHeaderItem}>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        userLeaves &&
+                        userLeaves.length === 0 && (
+                          <tr className={classes.tableRow}>
+                            <td className={classes.tableRowItem} colSpan="5">No leaves to show</td>
+                          </tr>
+                        )
 
+                      }
+                      {userLeaves && userLeaves.slice(0, 3).map((leave) => (
+                        <tr className={classes.tableRow}>
+                          <td className={classes.tableRowItem}>
+                            {/* caps */}
+                            {leave.leaveType.charAt(0).toUpperCase() + leave.leaveType.slice(1)}
+                          </td>
+                          <td className={classes.tableRowItem}>{leave.startDate}</td>
+                          <td className={classes.tableRowItem}>{leave.endDate}</td>
+                          <td className={classes.tableRowItem}>{leave.leaveReason}</td>
+                          <td className={classes.tableRowItem}>
+                            {/* caps */}
+                            {leave.leaveStatus.charAt(0).toUpperCase() + leave.leaveStatus.slice(1)}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+            {/* recently  */}
+          </div>
+        }
       </div>
     </div >
   )
