@@ -180,7 +180,7 @@ const Home = () => {
           >
             <div className={classes.overview}>
               <div className={classes.overviewItem}>
-                <span className={classes.title}>Duty Hours Per Month</span>
+                <span className={classes.title}>Entitled Hours Per Month</span>
                 <p className={classes.count}>
                   {
                     userData && userData.dutyHoursPerMonth
@@ -188,7 +188,7 @@ const Home = () => {
                 </p>
               </div>
               <div className={classes.overviewItem}>
-                <span className={classes.title}>Duty Hours Per Day</span>
+                <span className={classes.title}>Entitled Hours Per Day</span>
                 <p className={classes.count}>
                   {
                     userData && userData.dutyHoursPerDay
