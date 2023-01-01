@@ -37,7 +37,7 @@ export default makeStyles((theme) => ({
                     fontWeight: "bold",
                     padding: "1rem",
                     fontSize: "1.5rem",
-                    border: ".5px solid #e0e0e0",
+                    borderRight: ".5px solid #e0e0e0",
                     // width: "8rem",
                     // height: "2rem",
                     background: "#06283D",
@@ -53,23 +53,13 @@ export default makeStyles((theme) => ({
             width: "100%",
             '&>tr': {
                 width: "100%",
-            //    td nth nth child 1
-                '&>td:nth-child(1)': {
-                    padding: "1rem",
-                    fontSize: "1.5rem",
-                    border: ".5px solid #e0e0e0",
-                    width: "8rem",
-                    height: "2rem",
-                    background: "#06283D",
-                    color: "#fff",
-                    textAlign: "center"
-                },
+          
                 '&>td': {
-                    padding: "1rem",
+                    // padding: "1rem",
                     fontSize: "1.5rem",
-                    border: "1px solid #e0e0e0",
+                    // border: ".5px solid #062 83D",
                     width: "8rem",
-                    height: "2rem",
+                    height: "fit-content",
                     textAlign: "center"
                 }
             }

@@ -4,29 +4,31 @@ import {
     getCalender,
     getAllSlots
 } from '../../redux/actions/shiftAction'
+import {
+    getAllDoctors
+} from '../../redux/actions/managerAction'
 
 export const ViewLogic = () => {
     const { managerInfo } = useSelector((state) => state.signInManager)
     const { calender } = useSelector((state) => state.getCalender)
     const { slots } = useSelector((state) => state.getAllSlots)
+    const { doctorsInfo: doctors } = useSelector(state => state.getAllDoctors)
 
+
+    var count = null
     const dispatch = useDispatch()
     // get current month
-    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
-    // const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
-console.log(currentMonth);
-    // array of months
-    const months = [
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-    ]
+    const currentMonth = useState(new Date().getMonth())
 
-    const [month,setMonth] = useState(months[currentMonth])
-    // get calender
-    console.log(calender);
     useEffect(() => {
-        if (currentMonth)
-            dispatch(getCalender(currentMonth))
+        dispatch(getAllDoctors())
     }, [dispatch])
+
+    // call   dispatch(getCalender(currentMonth[0])) once
+    useEffect(() => {
+        dispatch(getCalender(currentMonth[0]))
+        count = 1
+    }, [count])
 
     const shifts = [
         {
@@ -58,7 +60,7 @@ console.log(currentMonth);
 
         }
     ]
-  
+
 
     useEffect(() => {
         dispatch(getAllSlots())
@@ -68,8 +70,8 @@ console.log(currentMonth);
     return {
         managerInfo,
         calender,
-        month,
         slots,
-        shifts
+        shifts,
+        doctors
     }
 }
