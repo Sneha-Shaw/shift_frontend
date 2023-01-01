@@ -30,9 +30,6 @@ import {
   GET_AVAILABILITY_REQUEST,
   GET_AVAILABILITY_SUCCESS,
   GET_AVAILABILITY_FAILED,
-  RESET_PASSWORD_REQUEST,
-  RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_FAILED,
   DELETE_AVAILABILITY_BY_DAY_REQUEST,
   DELETE_AVAILABILITY_BY_DAY_SUCCESS,
   DELETE_AVAILABILITY_BY_DAY_FAILED
@@ -157,44 +154,6 @@ export const getAllUsersReducer = (state = getAllUsersState, action) => {
         ...state,
         loading: false,
         users: null,
-        isAuthenticated: false,
-        error: action.payload
-      }
-
-    default:
-      return state
-  }
-}
-// reset password
-const resetPasswordState = {
-  loading: false,
-  passData: null,
-  error: null,
-  isAuthenticated: false
-}
-export const resetPasswordReducer = (state = resetPasswordState, action) => {
-  switch (action.type) {
-    case RESET_PASSWORD_REQUEST:
-      return {
-        ...state,
-        passData: null,
-        error: null,
-        isAuthenticated: false,
-        loading: true
-      }
-    case RESET_PASSWORD_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        isAuthenticated: true,
-        error: null,
-        passData: action.payload
-      }
-    case RESET_PASSWORD_FAILED:
-      return {
-        ...state,
-        loading: false,
-        passData: null,
         isAuthenticated: false,
         error: action.payload
       }

@@ -7,7 +7,6 @@ import {
     getLeavesReducer,
     requestSpecialReducer,
     getSpecialRequestsReducer,
-    resetPasswordReducer,
     addAvailabilityReducer,
     getAvailabilityReducer,
     deleteAvailabilityByDayReducer,
@@ -40,7 +39,10 @@ import {
     requestShiftReplaceReducer,
     updateSlotReducer
 } from './shiftReducer'
-
+import {
+    forgotPasswordReducer,
+    resetPasswordReducer
+} from './passwordReducer'
 
 const rootReducer = combineReducers({
     // user actions
@@ -52,7 +54,6 @@ const rootReducer = combineReducers({
     requestSpecial: requestSpecialReducer,
     getSpecialRequests: getSpecialRequestsReducer,
     requestShiftReplace: requestShiftReplaceReducer,
-    resetPassword: resetPasswordReducer,
     addAvailability: addAvailabilityReducer,
     getAvailability: getAvailabilityReducer,
     deleteAvailabilityByDay: deleteAvailabilityByDayReducer,
@@ -79,7 +80,10 @@ const rootReducer = combineReducers({
     // shift actions
     getCalender: getCalenderReducer,
     getAllSlots: getAllSlotsReducer,
-    updateSlot: updateSlotReducer
+    updateSlot: updateSlotReducer,
+    // password
+    forgotPassword: forgotPasswordReducer,
+    resetPassword: resetPasswordReducer
 
 })
 

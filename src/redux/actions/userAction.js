@@ -31,9 +31,6 @@ import {
   GET_AVAILABILITY_REQUEST,
   GET_AVAILABILITY_SUCCESS,
   GET_AVAILABILITY_FAILED,
-  RESET_PASSWORD_REQUEST,
-  RESET_PASSWORD_SUCCESS,
-  RESET_PASSWORD_FAILED,
   DELETE_AVAILABILITY_BY_DAY_REQUEST,
   DELETE_AVAILABILITY_BY_DAY_SUCCESS,
   DELETE_AVAILABILITY_BY_DAY_FAILED
@@ -136,35 +133,6 @@ export const logoutUser = () => (dispatch) => {
   dispatch({
     type: USER_LOGOUT
   })
-}
-
-// reset password
-export const resetPassword = (id, password) => async (dispatch) => {
-  try {
-    dispatch({
-      type: RESET_PASSWORD_REQUEST
-    })
-    const config = {
-      'Content-Type': 'application/json'
-    }
-    const body = {
-      password
-    }
-    const { data } = await axios.post(`${API}/public/auth/${id}/reset-password`, body, config)
-    dispatch({
-      type: RESET_PASSWORD_SUCCESS,
-      payload: data
-    })
-  }
-  catch (error) {
-    dispatch({
-      type: RESET_PASSWORD_FAILED,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
-    })
-  }
 }
 
 // request leave
