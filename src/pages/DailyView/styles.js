@@ -29,6 +29,7 @@ export default makeStyles((theme) => ({
         width: "100%",
         height: "100%",
         borderCollapse: "collapse",
+        border: ".5px solid #06283D",
         '&>thead': {
             width: "100%",
             '&>tr': {

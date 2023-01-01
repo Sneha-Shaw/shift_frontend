@@ -145,7 +145,9 @@ const DailyView = () => {
                                             slots?.getAllSlots?.map((slot, index) => (
                                                 <td className={classes.dateHeader} key={index}>
                                                     <div>
-                                                        {/* {slot.slotTime} */}
+                                                        {
+                                                            
+                                                        }
                                                     </div>
                                                 </td>
                                             ))
