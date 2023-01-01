@@ -10,8 +10,8 @@ const DailyView = () => {
         // managerInfo,
         calender,
         slots,
-        doctors
-        // shifts
+        doctors,
+        shifts
     } = ViewLogic()
 
 
@@ -146,9 +146,36 @@ const DailyView = () => {
                                                 <td className={classes.dateHeader} key={index}>
                                                     <div>
                                                         {
-                                                            
-                                                        }
-                                                    </div>
+                                                            doctors?.getAllDoctors?.map((doctor, index) => (
+                                                                <div key={index} style={{
+                                                                    border: ".5px solid #06283D",
+                                                                    padding: "1rem 0",
+                                                                    width: "100%",
+                                                                    height: "2rem",
+                                                                }}>
+                                                                    {/* if current doctor is alloted at current doctor then print 1 */}
+                                                                    {
+                                                                        shifts?.data?.map((shift, index) => (
+                                                                            <div key={index}>
+                                                                                {
+                                                                                    shift?.doctors.map((doctorShift, index) => (
+                                                                                        <div key={index}>
+                                                                                            {
+                                                                                                doctorShift === doctor._id && shift?.shiftStartDate === date.dayNumber + '/' + date.dayMonth + '/' + date.dayYear && shift?.slotTime === slot.slotTime && (
+                                                                                                    <div>
+                                                                                                        1
+                                                                                                    </div>
+                                                                                                )}
+                                                                                        </div>
+                                                                                    ))
+                                                                                }
+                                                                                        </div>
+                                                                                    ))
+                                                                                }
+                                                                            </div>
+                                                                        ))
+                                                                    }
+                                                                </div>
                                                 </td>
                                             ))
                                         }

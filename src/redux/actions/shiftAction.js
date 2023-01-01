@@ -11,7 +11,10 @@ import {
     POST_SHIFT_REPLACE_FAILED,
     UPDATE_SLOT_REQUEST,
     UPDATE_SLOT_SUCCESS,
-    UPDATE_SLOT_FAILURE
+    UPDATE_SLOT_FAILURE,
+    GET_ALL_SHIFTS_REQUEST,
+    GET_ALL_SHIFTS_SUCCESS,
+    GET_ALL_SHIFTS_FAILURE
 } from "../constants/shiftConstants";
 
 
@@ -73,34 +76,34 @@ export const getAllSlots = () => async (dispatch) => {
 // request shift replace
 export const requestShiftReplace = (name, replacement, date, start, end) => async (dispatch) => {
     try {
-      dispatch({
-        type: POST_SHIFT_REPLACE_REQUEST
-      })
-      const config = {
-        'Content-Type': 'application/json'
-      }
-      const body = {
-        name,
-        replacement,
-        date,
-        start,
-        end
-      }
-      const { data } = await axios.post(`${API}/private/shift/shift-replace`, body, config)
-      dispatch({
-        type: POST_SHIFT_REPLACE_SUCCESS,
-        payload: data
-      })
+        dispatch({
+            type: POST_SHIFT_REPLACE_REQUEST
+        })
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const body = {
+            name,
+            replacement,
+            date,
+            start,
+            end
+        }
+        const { data } = await axios.post(`${API}/private/shift/shift-replace`, body, config)
+        dispatch({
+            type: POST_SHIFT_REPLACE_SUCCESS,
+            payload: data
+        })
     } catch (error) {
-      dispatch({
-        type: POST_SHIFT_REPLACE_FAILED,
-        payload:
-          error.response && error.response.data.message
-            ? error.response.data.message
-            : error.message
-      })
+        dispatch({
+            type: POST_SHIFT_REPLACE_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
     }
-  }
+}
 
 // update slot
 export const updateSlot = (Allotment, slotTime) => async (dispatch) => {
@@ -112,7 +115,7 @@ export const updateSlot = (Allotment, slotTime) => async (dispatch) => {
         const config = {
             'Content-Type': 'application/json'
         }
-        const body={
+        const body = {
             Allotment,
             slotTime
         }
@@ -124,6 +127,32 @@ export const updateSlot = (Allotment, slotTime) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: UPDATE_SLOT_FAILURE,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// get all shifts
+export const getAllShifts = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_ALL_SHIFTS_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const { data } = await axios.get(`${API}/private/shift/get-shifts`, config)
+        dispatch({
+            type: GET_ALL_SHIFTS_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_ALL_SHIFTS_FAILURE,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
