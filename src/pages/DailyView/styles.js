@@ -24,6 +24,12 @@ export default makeStyles((theme) => ({
         height: "90%",
         overflowX: "scroll",
         background: "#f7f7f7",
+        '& button': {
+            background: "#06283D",
+            fontSize: "1.4rem",
+            fontWeight: "bold",
+            marginBottom: "1rem",
+        }
     },
     table: {
         width: "100%",

@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import useStyles from './styles'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import SubSidebar from '../../components/SubSidebar/SubSidebar'
 import { ViewLogic } from './ViewLogic'
+import { DownloadTableExcel } from 'react-export-table-to-excel'
+import { Button } from '@mui/material'
 
 const DailyView = () => {
     const classes = useStyles()
@@ -14,14 +16,25 @@ const DailyView = () => {
         shifts
     } = ViewLogic()
 
-
+    const tableRef = useRef(null);
     return (
         <div className={classes.root}>
             <Sidebar />
             <SubSidebar />
             <div className={classes.main}>
                 <div className={classes.grid}>
-                    <table className={classes.table}>
+                    <DownloadTableExcel
+                        filename="users table"
+                        sheet="users"
+                        currentTableRef={tableRef.current}>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                        >
+                            Export to Excel
+                        </Button>
+                    </DownloadTableExcel>
+                    <table className={classes.table} ref={tableRef}>
                         <thead>
                             <tr>
                                 <th className={classes.dateHeader}>
@@ -169,13 +182,13 @@ const DailyView = () => {
                                                                                         </div>
                                                                                     ))
                                                                                 }
-                                                                                        </div>
-                                                                                    ))
-                                                                                }
                                                                             </div>
                                                                         ))
                                                                     }
                                                                 </div>
+                                                            ))
+                                                        }
+                                                    </div>
                                                 </td>
                                             ))
                                         }
