@@ -34,6 +34,12 @@ export const HomeLogic = () => {
         }
     }, [dispatch, userInfo])
 
+    useEffect(()=>{
+        dispatch(getAllLeaves())
+    },[
+        dispatch
+    ])
+
     useEffect(() => {
         if (userInfo) {
             dispatch(getSingleUser(userInfo?._id))
