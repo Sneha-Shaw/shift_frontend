@@ -17,7 +17,7 @@ export const HomeLogic = () => {
     const { userInfo } = useSelector((state) => state.signInUser)
     const { doctorsInfo: doctors } = useSelector(state => state.getAllDoctors)
     const { leaves } = useSelector(state => state.getAllLeaves);
-    const { leaves:userLeaves } = useSelector((state) => state.getLeaves)
+    const { leaves: userLeaves } = useSelector((state) => state.getLeaves)
 
     // get user name
     const user = userInfo ? userInfo.name : managerInfo.name
@@ -29,21 +29,23 @@ export const HomeLogic = () => {
     }, [dispatch])
 
     useEffect(() => {
-        dispatch(getAllLeaves())
-    }, [dispatch])
+        if (userInfo) {
+            dispatch(getLeaves(userInfo?._id))
+        }
+    }, [dispatch, userInfo])
 
     useEffect(() => {
-        if(userInfo){
-            dispatch(getSingleUser(userInfo._id))
+        if (userInfo) {
+            dispatch(getSingleUser(userInfo?._id))
         }
-    }, [dispatch,userInfo])
+    }, [dispatch, userInfo])
 
     useEffect(() => {
         if (userInfo) {
             dispatch(getSingleUser(userInfo._id))
         }
     }, [userInfo, dispatch])
-    
+
     return {
         user,
         navigate,

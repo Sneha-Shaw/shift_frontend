@@ -12,15 +12,22 @@ export const ViewLogic = () => {
 
     const dispatch = useDispatch()
     // get current month
-    const [currentMonth] = useState(new Date().getMonth())
+    const [currentMonth, setCurrentMonth] = useState(new Date().getMonth())
     // const [currentYear, setCurrentYear] = useState(new Date().getFullYear())
-
+console.log(currentMonth);
     // array of months
     const months = [
         "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ]
 
-    const [month] = useState(months[currentMonth])
+    const [month,setMonth] = useState(months[currentMonth])
+    // get calender
+    console.log(calender);
+    useEffect(() => {
+        if (currentMonth)
+            dispatch(getCalender(currentMonth))
+    }, [dispatch])
+
     const shifts = [
         {
 
@@ -51,10 +58,7 @@ export const ViewLogic = () => {
 
         }
     ]
-    useEffect(() => {
-        if (currentMonth)
-            dispatch(getCalender(currentMonth))
-    }, [dispatch,currentMonth])
+  
 
     useEffect(() => {
         dispatch(getAllSlots())
