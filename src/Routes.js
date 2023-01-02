@@ -61,8 +61,24 @@ const Router = () => {
                     <Route
                         exact
                         path="/self-service/availability"
+
                         element={
                             userInfo ? (
+                                <>
+                                    <Navbar />
+                                    <Availabity />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/attendance/availability"
+
+                        element={
+                            managerInfo ? (
                                 <>
                                     <Navbar />
                                     <Availabity />
@@ -88,10 +104,23 @@ const Router = () => {
                     />
                     <Route
                         exact
-                        //  path="/self-service/requests/shift" when userinfo else  path="/attendance/requests/shift"
-                        path={userInfo ? "/self-service/requests/shift" : "/attendance/shift"}
+                        path="/self-service/requests/shift"
                         element={
-                            userInfo || managerInfo ? (
+                            userInfo ? (
+                                <>
+                                    <Navbar />
+                                    <ShiftReplace />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/attendance/shift"
+                        element={
+                            managerInfo ? (
                                 <>
                                     <Navbar />
                                     <ShiftReplace />

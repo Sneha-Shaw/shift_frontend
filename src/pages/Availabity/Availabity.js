@@ -27,7 +27,17 @@ const Availabity = () => {
     show,
     setShow,
     availabilities,
-    deleteHandler
+    deleteHandler,
+    managerInfo,
+    getAvailabilityByDateHandler,
+    deleteAvailabilityHandler,
+    setDoctorId,
+    availabilityByDate,
+    searchDate,
+    allAvailabilities,
+    tab,
+    changeTab,
+    users
   } = AvailabilityLogic()
 
 
@@ -52,9 +62,17 @@ const Availabity = () => {
             </h1>
             :
             <div className={classes.header}>
-              <h1>
-                Your Availability
-              </h1>
+              {
+                managerInfo ?
+                  <h1>
+                    Everyone's Availability
+                  </h1>
+                  :
+                  <h1>
+                    Your Availability
+                  </h1>
+              }
+
               <Button
                 variant="contained"
                 startIcon={<AddIcon />}
@@ -79,6 +97,36 @@ const Availabity = () => {
         {
           show ?
             <div className={classes.form}>
+
+              {/* pick doctor */}
+              {
+                managerInfo &&
+                <div className={classes.formGroup}>
+                  <label>
+                    Select Doctor:
+                  </label>
+                    {/* select through users */}
+                    <select
+                      name="doctor"
+                      // value={doctor}
+                      onChange={(e) => setDoctorId(e.target.value)}
+                    >
+                      <option>
+                        Select an option
+                      </option>
+                      {
+                        users?.map((user) => (
+                          <option
+                            key={user._id}
+                            value={user._id}
+                          >
+                            {user.name}
+                          </option>
+                        ))
+                      }
+                    </select>
+                </div>
+              }
 
               {/* pick date from calendar*/}
               <div className={classes.formGroup}>
@@ -143,54 +191,251 @@ const Availabity = () => {
                   color: '#fff',
                 }
               }}
-                onClick={submitHandler}
+                onClick={() => submitHandler()}
               >Submit</Button>
             </div>
             :
-            <table className={classes.table}>
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Start Time</th>
-                  <th>End Time</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              {
-                availabilities && availabilities[0]?.schedule?.map((item, index) => {
-                  return (
-                    <tbody key={index}>
-                      <tr>
-                        <td>
-                          {item.date}
-                        </td>
-                        <td>{item.startTime}</td>
-                        <td>{item.endTime}</td>
-                        <td>
 
-                          <Button variant="contained"
-                            sx={{
-                              background: 'red',
-                              color: '#fff',
-                              fontSize: "1.2rem",
-                              '&:hover': {
+            managerInfo ?
+              // table for doctors availability by date
+              <div className={classes.tableContainer}>
+                {/* tabs */}
+                <div className={classes.tabs}>
+                  <Button
+                    variant="contained"
+                    className={tab === 1 ? classes.activeTab : classes.tab}
+                    onClick={() => changeTab(1)}
+                  >
+                    <h3>By Date</h3>
+                  </Button>
+                  <Button
+                    variant="contained"
+                    className={tab === 2 ? classes.activeTab : classes.tab}
+                    onClick={() => changeTab(2)}
+                  >
+                    <h3>All</h3>
+                  </Button>
+                </div>
+                {
+                  tab === 1 ?
+                    <div style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}>
+                      <div className={classes.formGroup}>
+                        <label>
+                          Pick a date:
+                        </label>
+                        <input
+                          type="date"
+                          name="date"
+                          // value={e.target.value}
+                          onChange={(e) => getAvailabilityByDateHandler(e.target.value)}
+                        />
+                      </div>
+                      <table className={classes.table}>
+                        <thead>
+                          <tr>
+                            <th>Doctor Name</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        {
+                          !searchDate &&
+                          <tbody>
+                            <tr>
+                              <td colSpan="4">
+                                Please select a date
+                              </td>
+                            </tr>
+                          </tbody>
+                        }
+                        {
+                          availabilityByDate && availabilityByDate.length===0 &&
+                          <tbody>
+                            <tr>
+                              <td colSpan="4">
+                                No Doctors available
+                              </td>
+                            </tr>
+                          </tbody>
+                        }
+                        {
+                          availabilityByDate && availabilityByDate.map((item, index) => {
+                            return (
+                              <tbody key={index}>
+                                <tr>
+                                  <td>
+                                    {item.user.name}
+                                  </td>
+                                  <td>
+                                    {/* filter date in item.schedule  */}
+                                    {
+                                      item.schedule.filter((item) => item.date === searchDate).map((item, index) => {
+                                        return (
+                                          <div key={index}>
+                                            {item.start}
+                                          </div>
+                                        )
+                                      })
+                                    }
+                                  </td>
+                                  <td>
+                                    {
+                                      item.schedule.filter((item) => item.date === searchDate).map((item, index) => {
+                                        return (
+                                          <div key={index}>
+                                            {item.end}
+                                          </div>
+                                        )
+                                      })
+                                    }
+                                  </td>
+                                  <td>
+                                    <Button variant="contained"
+                                      sx={{
+                                        background: 'red',
+                                        color: '#fff',
+                                        '&:hover': {
+                                          background: 'red',
+                                          color: '#fff',
+                                        }
+                                      }}
+                                      onClick={() => deleteHandler(item.user._id, searchDate)}
+                                    >
+                                      Delete By date
+                                    </Button>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            )
+                          })
+                        }
+                      </table>
+                    </div>
+                    :
+                    <table className={classes.table}>
+                      <thead>
+                        <tr>
+                          <th>Doctor Name</th>
+                          <th>Date</th>
+                          <th>Start Time</th>
+                          <th>End Time</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+                      {
+                        allAvailabilities && allAvailabilities.map((item, index) => {
+                          return (
+                            <tbody key={index}>
+                              <tr>
+                                <td>
+                                  {item.user.name}
+                                </td>
+                                <td>
+                                  {
+                                    item.schedule.map((item, index) => {
+                                      return (
+                                        <div key={index}>
+                                          {item.date}
+                                        </div>
+                                      )
+                                    })
+                                  }
+                                </td>
+                                <td>
+                                  {
+                                    item.schedule.map((item, index) => {
+                                      return (
+                                        <div key={index}>
+                                          {item.start}
+                                        </div>
+                                      )
+                                    })
+                                  }
+                                </td>
+                                <td>
+                                  {
+                                    item.schedule.map((item, index) => {
+                                      return (
+                                        <div key={index}>
+                                          {item.end}
+                                        </div>
+                                      )
+                                    })
+                                  }
+                                </td>
+                                <td>
+                                  <Button variant="contained"
+                                    sx={{
+                                      background: 'red',
+                                      color: '#fff',
+                                      '&:hover': {
+                                        background: 'red',
+                                        color: '#fff',
+                                      }
+                                    }}
+                                    onClick={() => deleteAvailabilityHandler(item.user._id)}
+                                  >
+                                    Delete All Timings
+                                  </Button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          )
+                        })
+                      }
+                    </table>
+                }
+              </div>
+              :
+              <table className={classes.table}>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                {
+                  availabilities && availabilities[0]?.schedule?.map((item, index) => {
+                    return (
+                      <tbody key={index}>
+                        <tr>
+                          <td>
+                            {item.date}
+                          </td>
+                          <td>{item.start}</td>
+                          <td>{item.end}</td>
+                          <td>
+
+                            <Button variant="contained"
+                              sx={{
                                 background: 'red',
                                 color: '#fff',
-                              }
-                            }}
-                            onClick={() => deleteHandler(item.date)}
-                          >Delete</Button>
-                        </td>
-                      </tr>
-                    </tbody>
+                                fontSize: "1.2rem",
+                                '&:hover': {
+                                  background: 'red',
+                                  color: '#fff',
+                                }
+                              }}
+                              onClick={() => deleteHandler(availabilities && availabilities[0]?.user?._id, item.date)}
+                            >Delete</Button>
+                          </td>
+                        </tr>
+                      </tbody>
 
-                  )
-                })
-              }
-            </table>
+                    )
+                  })
+                }
+              </table>
         }
-
-
       </div >
     </div >
   )

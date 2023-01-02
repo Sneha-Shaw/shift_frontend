@@ -7,9 +7,6 @@ import {
     getLeavesReducer,
     requestSpecialReducer,
     getSpecialRequestsReducer,
-    addAvailabilityReducer,
-    getAvailabilityReducer,
-    deleteAvailabilityByDayReducer,
     updateUserReducer
 } from './userReducer'
 import {
@@ -39,7 +36,13 @@ import {
     requestShiftReplaceReducer,
     updateSlotReducer,
     getAllShiftsReducer,
-    getAllShiftReplaceRequestsReducer
+    getAllShiftReplaceRequestsReducer,
+    addAvailabilityReducer,
+    getAvailabilityReducer,
+    deleteAvailabilityByDateReducer,
+    deleteAvailabilityReducer,
+    getAvailabilityByDateReducer,
+    getAllAvailabilityReducer
 } from './shiftReducer'
 import {
     forgotPasswordReducer,
@@ -56,9 +59,6 @@ const rootReducer = combineReducers({
     requestSpecial: requestSpecialReducer,
     getSpecialRequests: getSpecialRequestsReducer,
     requestShiftReplace: requestShiftReplaceReducer,
-    addAvailability: addAvailabilityReducer,
-    getAvailability: getAvailabilityReducer,
-    deleteAvailabilityByDay: deleteAvailabilityByDayReducer,
     updateUser: updateUserReducer,
     // manager actions
     signInManager: signInManagerReducer,
@@ -85,6 +85,12 @@ const rootReducer = combineReducers({
     updateSlot: updateSlotReducer,
     getAllShifts: getAllShiftsReducer,
     getAllShiftReplaceRequests: getAllShiftReplaceRequestsReducer,
+    addAvailability: addAvailabilityReducer,
+    getAvailability: getAvailabilityReducer,
+    deleteAvailabilityByDate: deleteAvailabilityByDateReducer,
+    deleteAvailability: deleteAvailabilityReducer,
+    getAvailabilityByDate: getAvailabilityByDateReducer,
+    getAllAvailability: getAllAvailabilityReducer,
     // password
     forgotPassword: forgotPasswordReducer,
     resetPassword: resetPasswordReducer

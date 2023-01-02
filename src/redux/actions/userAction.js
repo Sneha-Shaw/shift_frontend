@@ -24,16 +24,7 @@ import {
   POST_SPECIAL_FAILED,
   GET_SPECIAL_REQUESTS_REQUEST,
   GET_SPECIAL_REQUESTS_SUCCESS,
-  GET_SPECIAL_REQUESTS_FAILED,
-  ADD_AVAILABILITY_REQUEST,
-  ADD_AVAILABILITY_SUCCESS,
-  ADD_AVAILABILITY_FAILED,
-  GET_AVAILABILITY_REQUEST,
-  GET_AVAILABILITY_SUCCESS,
-  GET_AVAILABILITY_FAILED,
-  DELETE_AVAILABILITY_BY_DAY_REQUEST,
-  DELETE_AVAILABILITY_BY_DAY_SUCCESS,
-  DELETE_AVAILABILITY_BY_DAY_FAILED
+  GET_SPECIAL_REQUESTS_FAILED
 } from '../constants/userConstants'
 
 
@@ -243,88 +234,6 @@ export const getSpecialRequests = (id) => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: GET_SPECIAL_REQUESTS_FAILED,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
-    })
-  }
-}
-
-
-// ADD AVAILABILITY
-export const addAvailability = (id, schedule) => async (dispatch) => {
-  try {
-    dispatch({
-      type: ADD_AVAILABILITY_REQUEST
-    })
-    const config = {
-      'Content-Type': 'application/json'
-    }
-    const body = {
-      schedule
-    }
-    const { data } = await axios.post(`${API}/public/auth/${id}/add-availability`, body, config)
-    dispatch({
-      type: ADD_AVAILABILITY_SUCCESS,
-      payload: data
-    })
-  } catch (error) {
-    dispatch({
-      type: ADD_AVAILABILITY_FAILED,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
-    })
-  }
-}
-
-// get availability
-export const getAvailability = (id) => async (dispatch) => {
-  try {
-    dispatch({
-      type: GET_AVAILABILITY_REQUEST
-    })
-    const config = {
-      'Content-Type': 'application/json'
-    }
-    const { data } = await axios.get(`${API}/public/auth/${id}/get-availability`, config)
-    dispatch({
-      type: GET_AVAILABILITY_SUCCESS,
-      payload: data
-    })
-  } catch (error) {
-    dispatch({
-      type: GET_AVAILABILITY_FAILED,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message
-    })
-  }
-}
-
-// delete availability by day
-export const deleteAvailabilityByDay = (id, date) => async (dispatch) => {
-  try {
-    dispatch({
-      type: DELETE_AVAILABILITY_BY_DAY_REQUEST
-    })
-    const config = {
-      'Content-Type': 'application/json'
-    }
-    const body = {
-      date
-    }
-    const { data } = await axios.put(`${API}/public/auth/${id}/delete-availability-by-day`, body, config)
-    dispatch({
-      type: DELETE_AVAILABILITY_BY_DAY_SUCCESS,
-      payload: data
-    })
-  } catch (error) {
-    dispatch({
-      type: DELETE_AVAILABILITY_BY_DAY_FAILED,
       payload:
         error.response && error.response.data.message
           ? error.response.data.message

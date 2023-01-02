@@ -23,16 +23,7 @@ import {
   POST_SPECIAL_FAILED,
   GET_SPECIAL_REQUESTS_REQUEST,
   GET_SPECIAL_REQUESTS_SUCCESS,
-  GET_SPECIAL_REQUESTS_FAILED,
-  ADD_AVAILABILITY_REQUEST,
-  ADD_AVAILABILITY_SUCCESS,
-  ADD_AVAILABILITY_FAILED,
-  GET_AVAILABILITY_REQUEST,
-  GET_AVAILABILITY_SUCCESS,
-  GET_AVAILABILITY_FAILED,
-  DELETE_AVAILABILITY_BY_DAY_REQUEST,
-  DELETE_AVAILABILITY_BY_DAY_SUCCESS,
-  DELETE_AVAILABILITY_BY_DAY_FAILED
+  GET_SPECIAL_REQUESTS_FAILED
 } from '../constants/userConstants'
 
 
@@ -319,129 +310,6 @@ export const getSpecialRequestsReducer = (state = getSpecialRequestsState, actio
       return state
   }
 }
-
-
-
-//add availability
-const addAvailabilityState = {
-  loading: false,
-  availability: null,
-  error: null,
-  isAuthenticated: false
-}
-export const addAvailabilityReducer = (state = addAvailabilityState, action) => {
-  switch (action.type) {
-    case ADD_AVAILABILITY_REQUEST:
-      return {
-        ...state,
-        availability: null,
-        error: null,
-        isAuthenticated: false,
-        loading: true
-      }
-    case ADD_AVAILABILITY_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        isAuthenticated: true,
-        error: null,
-        availability: action.payload
-
-      }
-    case ADD_AVAILABILITY_FAILED:
-      return {
-        ...state,
-        loading: false,
-        availability: null,
-        isAuthenticated: false,
-        error: action.payload
-      }
-
-    default:
-      return state
-  }
-}
-
-//get availabilities
-const getAvailabilityState = {
-  loading: false,
-  availabilities: null,
-  error: null,
-  isAuthenticated: false
-}
-export const getAvailabilityReducer = (state = getAvailabilityState, action) => {
-  switch (action.type) {
-    case GET_AVAILABILITY_REQUEST:
-      return {
-        ...state,
-        availabilities: null,
-        error: null,
-        isAuthenticated: false,
-        loading: true
-      }
-    case GET_AVAILABILITY_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        isAuthenticated: true,
-        error: null,
-        availabilities: action.payload
-
-      }
-    case GET_AVAILABILITY_FAILED:
-      return {
-        ...state,
-        loading: false,
-        availabilities: null,
-        isAuthenticated: false,
-        error: action.payload
-      }
-
-    default:
-      return state
-  }
-}
-
-// delete availability by day
-const deleteAvailabilityByDayState = {
-  loading: false,
-  deleteData: null,
-  error: null,
-  isAuthenticated: false
-}
-export const deleteAvailabilityByDayReducer = (state = deleteAvailabilityByDayState, action) => {
-  switch (action.type) {
-    case DELETE_AVAILABILITY_BY_DAY_REQUEST:
-      return {
-        ...state,
-        deleteData: null,
-        error: null,
-        isAuthenticated: false,
-        loading: true
-      }
-    case DELETE_AVAILABILITY_BY_DAY_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        isAuthenticated: true,
-        error: null,
-        deleteData: action.payload
-
-      }
-    case DELETE_AVAILABILITY_BY_DAY_FAILED:
-      return {
-        ...state,
-        loading: false,
-        deleteData: null,
-        isAuthenticated: false,
-        error: action.payload
-      }
-
-    default:
-      return state
-  }
-}
-
 
 // update user
 const updateUserState = {

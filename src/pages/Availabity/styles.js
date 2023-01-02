@@ -18,19 +18,19 @@ export default makeStyles((theme) => ({
         alignItems: "center",
         // justifyContent: "center",
         margin: "7.9rem auto",
-        '& h1':{
+        '& h1': {
             fontSize: "2.5rem",
             fontWeight: "bold",
             color: "#06283D"
         }
 
     },
-    header:{
+    header: {
         width: "100%",
         display: "flex",
         justifyContent: "space-between",
         alignItems: "center",
-       
+
         '& button': {
             background: "#fff",
             color: "#06283D",
@@ -76,8 +76,8 @@ export default makeStyles((theme) => ({
         borderRadius: "1rem",
         padding: "5rem 2rem",
     },
-    formGroup:{
-        width: "75%",  
+    formGroup: {
+        width: "75%",
         display: "flex",
         alignItems: "center",
         justifyContent: "space-between",
@@ -86,7 +86,7 @@ export default makeStyles((theme) => ({
             fontSize: "1.5rem",
             fontWeight: "bold",
             color: "#06383D",
-            width: "15%",
+            width: "25%",
         },
         '&>input': {
             width: "65%",
@@ -96,7 +96,21 @@ export default makeStyles((theme) => ({
             border: "1px solid #ccc",
             borderRadius: "0.5rem",
         },
-        '&>div':{
+        '&>select': {
+            width: "67%",
+            height: "3rem",
+            fontSize: "1.5rem",
+            padding: "0.5rem",
+            border: "1px solid #ccc",
+            borderRadius: "0.5rem",
+            outline: "none",
+            // option styles
+            '&>option': {
+                fontSize: "1.5rem",
+                color: "#06383D"
+            }
+        },
+        '&>div': {
             width: "67%",
             display: "flex",
             alignItems: "center",
@@ -136,6 +150,7 @@ export default makeStyles((theme) => ({
                     padding: "1rem",
                     border: ".5px solid #ccc",
                     textAlign: "center",
+                    lineHeight: 2
                 },
             },
 
@@ -146,6 +161,45 @@ export default makeStyles((theme) => ({
         display: "flex",
         justifyContent: "center",
 
-    }
+    },
+    tableContainer: {
+        width: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#fff",
+        borderRadius: "1rem",
+        padding: "2rem",
+        boxShadow: "0 0 1rem 0 rgba(0, 0, 0, 0.1)",
+        marginTop: "2rem",
+        '&>div>div': {
+            justifyContent: "center",
+            marginTop: "1rem",
+            width: "60%",
+            '&>label': {
+                width: "20%",
+            },
+            '&>input': {
+                outline: "none"
+            }
+        }
 
+    },
+    tabs: {
+        width: "50%",
+        display: "flex",
+        justifyContent: "space-between",
+        margin: "1rem 0",
+        alignItems: "center",
+        '&>button': {
+            width: "45%",
+            fontSize: "1.2rem",
+            fontWeight: "bold",
+            background: "#06383D",
+            '&:hover': {
+                background: "#06383D",
+            }
+        }
+    }
 }))

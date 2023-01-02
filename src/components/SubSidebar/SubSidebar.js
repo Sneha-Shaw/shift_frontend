@@ -81,7 +81,26 @@ const SubSidebar = () => {
                         </li>
                         <li className={classes.listItem}>
                             <NavLink
-                                to={managerInfo ? '/attendance/shift' : '/self-service/requests/shift'}
+                                to={
+                                    managerInfo ?
+                                        "/attendance/availability"
+                                        :
+                                        "/self-service/availability"
+                                }
+                                style={({ isActive }) => ({
+                                    color: isActive ? '#47B5FF' : 'none',
+                                })} className={classes.navLink}>
+                                <span className={classes.listItemText}>Update Availability</span>
+                            </NavLink>
+                        </li>
+                        <li className={classes.listItem}>
+                            <NavLink
+                                to={
+                                    managerInfo ?
+                                    '/attendance/shift'
+                                    :
+                                    '/self-service/requests/shift'
+                                }
                                 style={({ isActive }) => ({
                                     color: isActive ? '#47B5FF' : 'none',
                                 })} className={classes.navLink}>

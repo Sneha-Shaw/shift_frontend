@@ -33,24 +33,7 @@ export default makeStyles((theme) => ({
         overflowX: "auto",
         margin: "2rem 0",
         background: "#fff",
-        '& thead': {
-            width: "100%",
-            '& tr': {
-                width: "100%",
-                '& th': {
-                    // width: "100%",
-                }
-            }
-        },
-        '& tbody': {
-            width: "100%",
-            '& tr': {
-                width: "100%",
-                '& td': {
-                    // width: "30%",
-                }
-            }
-        },
+        
         '&>thead>tr>th': {
             background: "#000",
             color: "#fff",
