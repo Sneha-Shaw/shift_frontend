@@ -14,7 +14,10 @@ import {
     UPDATE_SLOT_FAILURE,
     GET_ALL_SHIFTS_REQUEST,
     GET_ALL_SHIFTS_SUCCESS,
-    GET_ALL_SHIFTS_FAILURE
+    GET_ALL_SHIFTS_FAILURE,
+    GET_ALL_SHIFT_REPLACE_REQUESTS_REQUEST,
+    GET_ALL_SHIFT_REPLACE_REQUESTS_SUCCESS,
+    GET_ALL_SHIFT_REPLACE_REQUESTS_FAILURE
 } from "../constants/shiftConstants";
 
 
@@ -153,6 +156,32 @@ export const getAllShifts = () => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: GET_ALL_SHIFTS_FAILURE,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// get all shift replace requests
+export const getAllShiftReplaceRequests = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_ALL_SHIFT_REPLACE_REQUESTS_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const { data } = await axios.get(`${API}/private/shift/get-shift-replace-requests`, config)
+        dispatch({
+            type: GET_ALL_SHIFT_REPLACE_REQUESTS_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_ALL_SHIFT_REPLACE_REQUESTS_FAILURE,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

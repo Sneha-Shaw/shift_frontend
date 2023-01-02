@@ -8,6 +8,7 @@ import Navbar from './components/Navbar/Navbar'
 import Availabity from "./pages/Availabity/Availabity";
 import Leave from "./pages/Leave/Leave";
 import ShiftReplace from "./pages/ShiftReplace/ShiftReplace";
+import ShiftReplaceRequests from "./pages/ShiftReplaceRequests/ShiftReplaceRequests";
 import SpecialRequest from "./pages/SpecialRequest/SpecialRequest";
 import DailyView from "./pages/DailyView/DailyView";
 import Break from './pages/Break/Break'
@@ -87,12 +88,27 @@ const Router = () => {
                     />
                     <Route
                         exact
-                        path="/self-service/requests/shift"
+                        //  path="/self-service/requests/shift" when userinfo else  path="/attendance/requests/shift"
+                        path={userInfo ? "/self-service/requests/shift" : "/attendance/shift"}
                         element={
                             userInfo || managerInfo ? (
                                 <>
                                     <Navbar />
                                     <ShiftReplace />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/attendance/shift-replace-requests"
+                        element={
+                            managerInfo ? (
+                                <>
+                                    <Navbar />
+                                    <ShiftReplaceRequests />
                                 </>
                             ) : (
                                 <Navigate to="/login" />

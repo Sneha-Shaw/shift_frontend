@@ -38,7 +38,8 @@ import {
     getAllSlotsReducer,
     requestShiftReplaceReducer,
     updateSlotReducer,
-    getAllShiftsReducer
+    getAllShiftsReducer,
+    getAllShiftReplaceRequestsReducer
 } from './shiftReducer'
 import {
     forgotPasswordReducer,
@@ -83,6 +84,7 @@ const rootReducer = combineReducers({
     getAllSlots: getAllSlotsReducer,
     updateSlot: updateSlotReducer,
     getAllShifts: getAllShiftsReducer,
+    getAllShiftReplaceRequests: getAllShiftReplaceRequestsReducer,
     // password
     forgotPassword: forgotPasswordReducer,
     resetPassword: resetPasswordReducer

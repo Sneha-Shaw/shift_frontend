@@ -47,7 +47,12 @@ const DoctorsList = () => {
         setId
     } = DoctorsLogic()
     return (
-        <div className={classes.root}>
+        <div className={classes.root}
+            style={{    
+                height:
+                doctors?.getAllDoctors>6 ? "100vh" : "100%",
+            }}
+        >
             <Sidebar />
             <SubSidebar />
             <div className={classes.main}>

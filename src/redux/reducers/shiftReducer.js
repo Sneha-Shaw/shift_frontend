@@ -13,7 +13,10 @@ import {
     UPDATE_SLOT_FAILURE,
     GET_ALL_SHIFTS_REQUEST,
     GET_ALL_SHIFTS_SUCCESS,
-    GET_ALL_SHIFTS_FAILURE
+    GET_ALL_SHIFTS_FAILURE,
+    GET_ALL_SHIFT_REPLACE_REQUESTS_REQUEST,
+    GET_ALL_SHIFT_REPLACE_REQUESTS_SUCCESS,
+    GET_ALL_SHIFT_REPLACE_REQUESTS_FAILURE
 } from "../constants/shiftConstants";
 
 // get calender
@@ -170,6 +173,37 @@ export const getAllShiftsReducer = (state = getAllShiftsState, action) => {
                 shifts: action.payload
             }
         case GET_ALL_SHIFTS_FAILURE:
+            return {
+                ...state,
+                loading: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// get all shift replace requests
+const getAllShiftReplaceRequestsState = {
+    loading: false,
+    requests: null,
+    error: null,
+    isAuthenticated: false
+}
+export const getAllShiftReplaceRequestsReducer = (state = getAllShiftReplaceRequestsState, action) => {
+    switch (action.type) {
+        case GET_ALL_SHIFT_REPLACE_REQUESTS_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case GET_ALL_SHIFT_REPLACE_REQUESTS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                requests: action.payload
+            }
+        case GET_ALL_SHIFT_REPLACE_REQUESTS_FAILURE:
             return {
                 ...state,
                 loading: false,

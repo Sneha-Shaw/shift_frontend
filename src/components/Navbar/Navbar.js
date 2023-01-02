@@ -2,7 +2,6 @@ import React from 'react'
 import useStyles from './styles'
 import logo from '../../assets/logo.png'
 import { Link } from 'react-router-dom'
-import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SearchIcon from '@mui/icons-material/Search';
 import MenuIcon from '@mui/icons-material/Menu';
