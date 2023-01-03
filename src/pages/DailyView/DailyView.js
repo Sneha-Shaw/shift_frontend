@@ -172,14 +172,14 @@ const DailyView = () => {
                                                                             <div key={index}>
                                                                                 {
                                                                                     shift?.doctors.map((doctorShift, index) => (
-                                                                                        <div key={index}>
+                                                                                        <td key={index}>
                                                                                             {
-                                                                                                doctorShift === doctor._id && shift?.shiftStartDate === date.dayNumber + '/' + date.dayMonth + '/' + date.dayYear && shift?.slotTime === slot.slotTime && (
+                                                                                                doctorShift === doctor._id && shift?.shiftDate === date.dayYear + '-' + date.dayMonth + '-' + date.dayNumber && shift?.shiftTime === slot.slotTime && (
                                                                                                     <div>
                                                                                                         1
                                                                                                     </div>
                                                                                                 )}
-                                                                                        </div>
+                                                                                        </td>
                                                                                     ))
                                                                                 }
                                                                             </div>

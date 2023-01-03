@@ -30,7 +30,10 @@ const Navbar = () => {
     navigate,
     color,
     managerInfo,
-    id
+    id,
+    name,
+    setName,
+    handleSearch
   } = NavbarLogic()
 
   return (
@@ -44,7 +47,11 @@ const Navbar = () => {
         </div>
         {/* search */}
         <div className={classes.search}>
-          <input type="text" placeholder="Search Doctors" />
+          <input type="text" placeholder="Search Doctors" 
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            onKeyPress={(e) => e.key === 'Enter' ? handleSearch(e) : null}
+          />
           <div className={classes.searchIcon}>
             <SearchIcon fontSize="large" />
           </div>

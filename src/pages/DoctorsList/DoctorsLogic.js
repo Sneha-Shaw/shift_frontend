@@ -9,10 +9,11 @@ import {
 } from '../../redux/actions/managerAction';
 
 export const DoctorsLogic = () => {
-    const { doctorInfo } = useSelector(state => state.addDoctor)
-    const { doctorsInfo: doctors } = useSelector(state => state.getAllDoctors)
-    const { doctorInfo: doctorDeleteState } = useSelector(state => state.deleteDoctor)
-    const { doctorInfo: doctorUpdateState } = useSelector(state => state.updateDoctor)
+    const { doctorInfo } = useSelector((state) => state.addDoctor)
+    const { doctorsInfo: doctors } = useSelector((state) => state.getAllDoctors)
+    const { doctorInfo: doctorDeleteState } = useSelector((state) => state.deleteDoctor)
+    const { doctorInfo: doctorUpdateState } = useSelector((state) => state.updateDoctor)
+    const { doctorInfo: searchData } = useSelector((state) => state.searchDoctor)
 
     const dispatch = useDispatch()
     const [checked, setChecked] = useState(false);
@@ -80,11 +81,11 @@ export const DoctorsLogic = () => {
             })
             dispatch(getAllDoctors())
         }
-    }, [doctorInfo,dispatch])
+    }, [doctorInfo, dispatch])
 
 
     // delete doctor
-    const deleteDoctorHandler = (name,email) => {
+    const deleteDoctorHandler = (name, email) => {
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -102,7 +103,7 @@ export const DoctorsLogic = () => {
                         `${name} has been removed.`,
                         'success'
                     )
-                } 
+                }
             });
 
     }
@@ -110,7 +111,7 @@ export const DoctorsLogic = () => {
         if (doctorDeleteState) {
             dispatch(getAllDoctors())
         }
-    }, [doctorDeleteState,dispatch])
+    }, [doctorDeleteState, dispatch])
 
     // update doctor
     const updateDoctorHandler = (id) => {
@@ -148,7 +149,7 @@ export const DoctorsLogic = () => {
 
             dispatch(getAllDoctors())
         }
-    }, [doctorUpdateState,dispatch])
+    }, [doctorUpdateState, dispatch])
 
 
     return {
@@ -183,7 +184,7 @@ export const DoctorsLogic = () => {
         updateDoctorHandler,
         setChecked,
         id,
-        setId
-
+        setId,
+        searchData
     }
 }

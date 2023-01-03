@@ -44,13 +44,14 @@ const DoctorsList = () => {
         checked,
         setChecked,
         id,
-        setId
+        setId,
+        searchData
     } = DoctorsLogic()
     return (
         <div className={classes.root}
-            style={{    
+            style={{
                 height:
-                doctors?.getAllDoctors>6 ? "100vh" : "100%",
+                    doctors?.getAllDoctors > 6 ? "100vh" : "100%",
             }}
         >
             <Sidebar />
@@ -196,63 +197,120 @@ const DoctorsList = () => {
                                         </tr>
                                     </thead>
 
-                                    {doctors && doctors.getAllDoctors.map((doctor) => (
-                                        <tbody className={classes.tableRow}>
-                                            <tr>
-                                                <td className={classes.tableRowItem}>{doctor.name}</td>
-                                                <td className={classes.tableRowItem}>{doctor.designation}</td>
-                                                <td className={classes.tableRowItem}>{doctor.email}</td>
-                                                <td className={classes.tableRowItem}>{doctor.mobile}</td>
-                                                <td className={classes.tableRowItem}>
-                                                    {doctor.type.charAt(0).toUpperCase() + doctor.type.slice(1)}
-                                                </td>
-                                                <td className={classes.tableRowItem}>{doctor.dutyHoursPerDay}</td>
-                                                <td className={classes.tableRowItem}>{doctor.dutyHoursPerMonth}</td>
-                                                {
-                                                    doctor.nightDuty ?
-                                                        <td className={classes.tableRowItem}>Yes</td>
-                                                        :
-                                                        <td className={classes.tableRowItem}>No</td>
-                                                }
-                                                <td className={classes.tableRowItem}>
-                                                    <Button
-                                                        variant="contained"
-                                                        sx={{
-                                                            backgroundColor: "#f44336",
-                                                            '&:hover': {
-                                                                backgroundColor: "#f44336"
-                                                            }
-                                                        }}
-                                                        onClick={() => deleteDoctorHandler(doctor.name,doctor.email)}
-                                                    >
-                                                        Delete
-                                                    </Button>
-                                                    <Button
-                                                        variant="contained"
-                                                        sx={{
+                                    {
+                                        // if searchData is not null then map searchData else map doctors
+                                        searchData ?
+                                        searchData && searchData?.searchDoctor?.map((doctor) => (
+                                                <tbody className={classes.tableRow}>
+                                                    <tr>
+                                                        <td className={classes.tableRowItem}>{doctor.name}</td>
+                                                        <td className={classes.tableRowItem}>{doctor.designation}</td>
+                                                        <td className={classes.tableRowItem}>{doctor.email}</td>
+                                                        <td className={classes.tableRowItem}>{doctor.mobile}</td>
+                                                        <td className={classes.tableRowItem}>
+                                                            {doctor.type.charAt(0).toUpperCase() + doctor.type.slice(1)}
+                                                        </td>
+                                                        <td className={classes.tableRowItem}>{doctor.dutyHoursPerDay}</td>
+                                                        <td className={classes.tableRowItem}>{doctor.dutyHoursPerMonth}</td>
+                                                        <td className={classes.tableRowItem}>{doctor.nightDuty ? 'Yes' : 'No'}</td>
+                                                        <td className={classes.tableRowItem}>
+                                                            <Button
+                                                                variant="contained"
+                                                                sx={{
+                                                                    backgroundColor: "#f44336",
+                                                                    '&:hover': {
+                                                                        backgroundColor: "#f44336"
+                                                                    }
+                                                                }}
+                                                                onClick={() => deleteDoctorHandler(doctor.name, doctor.email)}
+                                                            >
+                                                                Delete
+                                                            </Button>
+                                                            <Button
+                                                                variant="contained"
+                                                                sx={{
 
-                                                        }}
-                                                        onClick={() => {
-                                                            setaddShow(false)
-                                                            setupdateShow(true)
-                                                            setName(doctor.name)
-                                                            setDesignation(doctor.designation)
-                                                            setEmail(doctor.email)
-                                                            setPhn(doctor.mobile)
-                                                            setEmploytype(doctor.type)
-                                                            setDutyHoursPerDay(doctor.dutyHoursPerDay)
-                                                            setDutyHoursPerMonth(doctor.dutyHoursPerMonth)
-                                                            setChecked(doctor.nightDuty)
-                                                            setId(doctor._id)
-                                                        }}
-                                                    >
-                                                        Edit
-                                                    </Button>
-                                                </td>
-                                            </tr>
-                                        </tbody>
+                                                                }}
+                                                                onClick={() => {
+                                                                    setaddShow(false)
+                                                                    setupdateShow(true)
+                                                                    setName(doctor.name)
+                                                                    setDesignation(doctor.designation)
+                                                                    setEmail(doctor.email)
+                                                                    setPhn(doctor.mobile)
+                                                                    setEmploytype(doctor.type)
+                                                                    setDutyHoursPerDay(doctor.dutyHoursPerDay)
+                                                                    setDutyHoursPerMonth(doctor.dutyHoursPerMonth)
+                                                                    setChecked(doctor.nightDuty)
+                                                                    setId(doctor._id)
+                                                                }}
+                                                            >
+                                                                Edit
+                                                            </Button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            ))
+                                            :
+                                            doctors && doctors.getAllDoctors.map((doctor) => (
+                                                <tbody className={classes.tableRow}>
+                                                    <tr>
+                                                        <td className={classes.tableRowItem}>{doctor.name}</td>
+                                                        <td className={classes.tableRowItem}>{doctor.designation}</td>
+                                                        <td className={classes.tableRowItem}>{doctor.email}</td>
+                                                        <td className={classes.tableRowItem}>{doctor.mobile}</td>
+                                                        <td className={classes.tableRowItem}>
+                                                            {doctor.type.charAt(0).toUpperCase() + doctor.type.slice(1)}
+                                                        </td>
+                                                        <td className={classes.tableRowItem}>{doctor.dutyHoursPerDay}</td>
+                                                        <td className={classes.tableRowItem}>{doctor.dutyHoursPerMonth}</td>
+                                                        {
+                                                            doctor.nightDuty ?
+                                                                <td className={classes.tableRowItem}>Yes</td>
+                                                                :
+                                                                <td className={classes.tableRowItem}>No</td>
+                                                        }
+                                                        <td className={classes.tableRowItem}>
+                                                            <Button
+                                                                variant="contained"
+                                                                sx={{
+                                                                    backgroundColor: "#f44336",
+                                                                    '&:hover': {
+                                                                        backgroundColor: "#f44336"
+                                                                    }
+                                                                }}
+                                                                onClick={() => deleteDoctorHandler(doctor.name, doctor.email)}
+                                                            >
+                                                                Delete
+                                                            </Button>
+                                                            <Button
+                                                                variant="contained"
+                                                                sx={{
 
-                                    ))}
+                                                                }}
+                                                                onClick={() => {
+                                                                    setaddShow(false)
+                                                                    setupdateShow(true)
+                                                                    setName(doctor.name)
+                                                                    setDesignation(doctor.designation)
+                                                                    setEmail(doctor.email)
+                                                                    setPhn(doctor.mobile)
+                                                                    setEmploytype(doctor.type)
+                                                                    setDutyHoursPerDay(doctor.dutyHoursPerDay)
+                                                                    setDutyHoursPerMonth(doctor.dutyHoursPerMonth)
+                                                                    setChecked(doctor.nightDuty)
+                                                                    setId(doctor._id)
+                                                                }}
+                                                            >
+                                                                Edit
+                                                            </Button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+
+                                            ))
+                                    }
+
                                 </table>
                             </div>)
                 }

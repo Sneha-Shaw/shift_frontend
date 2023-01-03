@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react'
-import { logoutManager } from '../../redux/actions/managerAction';
+import { logoutManager,searchDoctor } from '../../redux/actions/managerAction';
 import { logoutUser } from '../../redux/actions/userAction'
 import { useNavigate } from 'react-router-dom';
 
@@ -11,6 +11,7 @@ export const NavbarLogic = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [id, setId] = useState('')
+  const[name,setName] = useState('')
 
   const handleLogout = () => {
     if (userInfo) {
@@ -51,6 +52,12 @@ export const NavbarLogic = () => {
     }
   }, [managerInfo])
 
+  // searchDoctor
+  const handleSearch = (e) => {
+    e.preventDefault()
+    dispatch(searchDoctor(name))
+  }
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -70,7 +77,10 @@ export const NavbarLogic = () => {
     color,
     userInfo,
     managerInfo,
-    id
+    id,
+    name,
+    setName,
+    handleSearch
   }
 
 
