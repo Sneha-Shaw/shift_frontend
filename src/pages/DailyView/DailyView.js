@@ -82,10 +82,14 @@ const DailyView = () => {
                                             {
                                                 doctors?.getAllDoctors?.map((doctor, index) => (
                                                     <div key={index} style={{
-                                                        border: ".5px solid #06283D",
+                                                        borderTop: ".5px solid #06283D",
+                                                        borderLeft: ".5px solid #06283D",
+                                                        borderRight: ".5px solid #06283D",
                                                         padding: "1rem 0",
                                                         width: "100%",
                                                         height: "2rem",
+                                                        // border of last child is #000
+                                                        borderBottom: index === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
                                                     }}>
                                                         {date.dayNumber + '-' + date.dayMonth + '-' + date.dayYear}
                                                     </div>
@@ -96,10 +100,14 @@ const DailyView = () => {
                                             {
                                                 doctors?.getAllDoctors?.map((doctor, index) => (
                                                     <div key={index} style={{
-                                                        border: ".5px solid #06283D",
+                                                        borderTop: ".5px solid #06283D",
+                                                        borderLeft: ".5px solid #06283D",
+                                                        borderRight: ".5px solid #06283D",
                                                         padding: "1rem 0",
                                                         width: "100%",
                                                         height: "2rem",
+                                                        // border of last child is #000
+                                                        borderBottom: index === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
                                                     }}>
                                                         {date.dayName.slice(0, 3)}
                                                     </div>
@@ -111,10 +119,14 @@ const DailyView = () => {
                                                 {
                                                     doctors?.getAllDoctors?.map((doctor, index) => (
                                                         <div key={index} style={{
-                                                            border: ".5px solid #06283D",
+                                                            borderTop: ".5px solid #06283D",
+                                                            borderLeft: ".5px solid #06283D",
+                                                            borderRight: ".5px solid #06283D",
                                                             padding: "1rem 0",
                                                             width: "100%",
                                                             height: "2rem",
+                                                            // border of last child is #000
+                                                            borderBottom: index === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
                                                         }}>
                                                             {doctor.name}
                                                         </div>
@@ -127,10 +139,14 @@ const DailyView = () => {
                                                 {
                                                     doctors?.getAllDoctors?.map((doctor, index) => (
                                                         <div key={index} style={{
-                                                            border: ".5px solid #06283D",
+                                                            borderTop: ".5px solid #06283D",
+                                                            borderLeft: ".5px solid #06283D",
+                                                            borderRight: ".5px solid #06283D",
                                                             padding: "1rem 0",
                                                             width: "100%",
                                                             height: "2rem",
+                                                            // border of last child is #000
+                                                            borderBottom: index === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
                                                         }}>
                                                             {doctor.dutyHoursAllotedPerMonth}
                                                         </div>
@@ -143,10 +159,14 @@ const DailyView = () => {
                                                 {
                                                     doctors?.getAllDoctors?.map((doctor, index) => (
                                                         <div key={index} style={{
-                                                            border: ".5px solid #06283D",
+                                                            borderTop: ".5px solid #06283D",
+                                                            borderLeft: ".5px solid #06283D",
+                                                            borderRight: ".5px solid #06283D",
                                                             padding: "1rem 0",
                                                             width: "100%",
                                                             height: "2rem",
+                                                            // border of last child is #000
+                                                            borderBottom: index === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
                                                         }}>
                                                             {doctor.dutyHoursPerMonth}
                                                         </div>
@@ -161,10 +181,14 @@ const DailyView = () => {
                                                         {
                                                             doctors?.getAllDoctors?.map((doctor, index) => (
                                                                 <div key={index} style={{
-                                                                    border: ".5px solid #06283D",
+                                                                    borderTop: ".5px solid #06283D",
+                                                                    borderLeft: ".5px solid #06283D",
+                                                                    borderRight: ".5px solid #06283D",
                                                                     padding: "1rem 0",
                                                                     width: "100%",
                                                                     height: "2rem",
+                                                                    // border of last child is #000
+                                                                    borderBottom: index === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
                                                                 }}>
                                                                     {/* if current doctor is alloted at current doctor then print 1 */}
                                                                     {

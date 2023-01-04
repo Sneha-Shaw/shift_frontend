@@ -6,6 +6,9 @@ export default makeStyles((theme) => ({
         height: "100vh",
         display: "flex",
         background: "#f7f7f7",
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column"
+         }
     },
     main: {
         width: "70%",
@@ -17,7 +20,11 @@ export default makeStyles((theme) => ({
         background: "#f7f7f7",
         padding: "2rem",
         margin: "2rem",
-
+        [theme.breakpoints.down("sm")]: {
+            width: "90%",
+            // margin: "1rem",
+            padding: "0",
+         }
     },
     grid: {
         width: "100%",
