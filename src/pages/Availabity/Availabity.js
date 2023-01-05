@@ -2,7 +2,7 @@ import React from 'react'
 import useStyles from './styles'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import SubSidebar from '../../components/SubSidebar/SubSidebar'
-import { Button, Modal,Popover } from '@mui/material';
+import { Button, Modal } from '@mui/material';
 import { AvailabilityLogic } from './AvailabilityLogic'
 import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
 import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
@@ -44,8 +44,8 @@ const Availabity = () => {
     setAvailabilityOps,
   } = AvailabilityLogic()
   const DnDCalendar = withDragAndDrop(Calendar);
- 
-  
+
+
   return (
     <div className={classes.root}>
       <Sidebar />
@@ -66,7 +66,7 @@ const Availabity = () => {
           defaultView="month"
           selectable
           popup={true}
-          onSelectEvent={(e) => {onSelectEventHandler(e);}}
+          onSelectEvent={(e) => { onSelectEventHandler(e); }}
           onEventDrop={onEventDrop}
           onEventResize={onEventResize}
           resizable
@@ -77,62 +77,66 @@ const Availabity = () => {
           }}
           eventPropGetter={eventStyleGetter}
         />
-        {/* <div
-          className={classes.modalContainer}
-        > */}
         {
           show &&
           <div
-            className={classes.popup  }
+            className={classes.popup}
           >
-              <div className={classes.popupHeader}>
-                <h1>Details</h1>
-               
-                  <Button
-                    className={classes.editBtn}
-                  >
-                    <EditIcon />
-                  </Button>
-                  <Button
-                    onClick={() => deleteHandler(
+            <div className={classes.popupHeader}>
+              <h1>Details</h1>
 
-                    )}
-                    className={classes.deleteBtn}
-                  >
-                    <DeleteIcon />
-                  </Button>
-                  <Button
-                  onClick={() => setShow(false)}
-                  className={classes.closeBtn}
-                >
-                  X
-                </Button>
+              <Button
+                className={classes.editBtn}
+                onClick={() => {
+
+                  handleOpen();
+                }
+                }
+              >
+                <EditIcon />
+              </Button>
+              <Button
+                onClick={() => deleteHandler(
+                  temp?.doctor?._id,
+                  temp?.start,
+                  temp?.end
+                )}
+                className={classes.deleteBtn}
+              >
+                <DeleteIcon />
+              </Button>
+              <Button
+                onClick={() => setShow(false)}
+                className={classes.closeBtn}
+              >
+                X
+              </Button>
+            </div>
+            <div className={classes.popupBody}>
+              <div className={classes.popupBodyContentItem}>
+                <h4>Start:</h4>
+                <p>
+                  {
+                    moment(temp?.start).format('MMMM Do YYYY, h:mm a')
+                  }
+                </p>
               </div>
-              <div className={classes.popupBody}>
-                <div className={classes.popupBodyContentItem}>
-                  <h4>Start:</h4>
-                  <p>
-                    {
-                      moment(temp?.start).format('MMMM Do YYYY, h:mm a')
-                    }
-                  </p>
-                </div>
-                <div className={classes.popupBodyContentItem}>
-                  <h4>End:</h4>
-                  <p>
-                    {
-                      moment(temp?.end).format('MMMM Do YYYY, h:mm a')
-                    }
-                  </p>
-                </div>
-                <div className={classes.popupBodyContentItem}>
-                  <h4>Doctor:</h4>
-                  <p>
-                    {
-                      temp?.doctor?.name
-                    }
-                  </p>
-                </div>
+              <div className={classes.popupBodyContentItem}>
+                <h4>End:</h4>
+                <p>
+                  {
+                    moment(temp?.end).format('MMMM Do YYYY, h:mm a')
+                  }
+                </p>
+              </div>
+              <div className={classes.popupBodyContentItem}>
+                <h4>Doctor:</h4>
+                <p>
+                  {
+                    temp?.doctor?.name
+                  }
+                </p>
+              </div>
             </div>
           </div>
 
@@ -215,8 +219,6 @@ const Availabity = () => {
           </div>
         </Modal>
       </div >
-
-      {/* </div> */}
     </div >
   )
 }

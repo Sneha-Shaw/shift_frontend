@@ -28,8 +28,8 @@ export const AvailabilityLogic = () => {
     const dispatch = useDispatch()
 
     const [open, setOpen] = useState(false);
-    const [startTime, setStartTime] = useState('00:00')
-    const [endTime, setEndTime] = useState('00:00')
+    const [startTime, setStartTime] = useState('')
+    const [endTime, setEndTime] = useState('')
     const [doctorId, setDoctorId] = useState('')
     const [availabilityOps, setAvailabilityOps] = useState('')
 
@@ -210,11 +210,12 @@ export const AvailabilityLogic = () => {
     }
 
     const handleOpen = (slots) => {
+        setOpen(true);
+
         const { start, end } = slots;
         setStartTime(start)
         setEndTime(end)
         console.log(startTime, endTime);
-        setOpen(true);
     }
 
     const handleClose = () => setOpen(false);
