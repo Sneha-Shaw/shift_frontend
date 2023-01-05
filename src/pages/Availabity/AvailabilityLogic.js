@@ -5,8 +5,8 @@ import {
     addAvailability,
     getAvailability,
     deleteAvailabilityByDate,
-    getAvailabilityByDate,
-    deleteAvailability,
+    // getAvailabilityByDate,
+    // deleteAvailability,
     getAllAvailability
 } from '../../redux/actions/shiftAction';
 import {
@@ -17,8 +17,8 @@ export const AvailabilityLogic = () => {
     const { availability } = useSelector((state) => state.addAvailability)
     const { availabilities } = useSelector((state) => state.getAvailability)
     const { deleteData } = useSelector((state) => state.deleteAvailabilityByDate)
-    const { availability: availabilityByDate } = useSelector((state) => state.getAvailabilityByDate)
-    const { deleteData: deleteAvailabilityData } = useSelector((state) => state.deleteAvailability)
+    // const { availability: availabilityByDate } = useSelector((state) => state.getAvailabilityByDate)
+    // const { deleteData: deleteAvailabilityData } = useSelector((state) => state.deleteAvailability)
     const { availabilities: allAvailabilities } = useSelector((state) => state.getAllAvailability)
     const { users } = useSelector((state) => state.getAllUsers)
 
@@ -27,20 +27,17 @@ export const AvailabilityLogic = () => {
 
     const dispatch = useDispatch()
 
-    const [date, setDate] = useState('')
-    const [searchDate, setSearchdate] = useState('')
+    const [open, setOpen] = useState(false);
     const [startTime, setStartTime] = useState('00:00')
-    const [startMeridian, setStartMeridian] = useState('AM')
     const [endTime, setEndTime] = useState('00:00')
-    const [endMeridian, setEndMeridian] = useState('AM')
     const [doctorId, setDoctorId] = useState('')
+    const [availabilityOps, setAvailabilityOps] = useState('')
 
     const [show, setShow] = useState(false)
 
-    const MeridianOptions = [
-        'AM', 'PM'
-    ];
-    const defaultMeridianOption = MeridianOptions[0];
+    const [events, setEvents] = useState([])
+    const [subEvent, setSubevent] = useState([])
+    const [temp, setTemp] = useState({})
 
     useEffect(() => {
         if (userInfo) {
@@ -49,10 +46,49 @@ export const AvailabilityLogic = () => {
     }, [userInfo, dispatch])
 
     useEffect(() => {
+        if (availabilities) {
+            setEvents(
+                availabilities && availabilities[0]?.schedule.map((availability) => {
+                    return {
+                        //   map availability.schdule
+                        start: new Date(availability.start),
+                        end: new Date(availability.end),
+                        title: availability.title,
+                        doctor: availabilities[0].user
+                    }
+                })
+            )
+        }
+    }, [availabilities])
+    useEffect(() => {
         if (managerInfo) {
             dispatch(getAllAvailability())
         }
     }, [managerInfo, dispatch])
+
+    useEffect(() => {
+        if (allAvailabilities) {
+            if (subEvent.length < allAvailabilities.length) {
+                //    map allavailabilities then map schedule then store all the elements of subarray in subevents
+                allAvailabilities && allAvailabilities.map((availability, index) => {
+                    availability.schedule.map((sub) => {
+                        setSubevent((prev) => {
+                            return [
+                                ...prev,
+                                {
+                                    start: new Date(sub.start),
+                                    end: new Date(sub.end),
+                                    title: sub.title,
+                                    doctor: availability.user
+                                }
+                            ]
+                        })
+                    })
+                }
+                )
+            }
+        }
+    }, [allAvailabilities])
 
     useEffect(() => {
         if (managerInfo) {
@@ -60,16 +96,6 @@ export const AvailabilityLogic = () => {
         }
     }, [managerInfo, dispatch])
 
-    // getAvailabilityByDate
-    const getAvailabilityByDateHandler = (date) => {
-        setSearchdate(date)
-        dispatch(getAvailabilityByDate(date))
-    }
-
-    // deleteAvailability
-    const deleteAvailabilityHandler = (id) => {
-        dispatch(deleteAvailability(id))
-    }
 
     useEffect(() => {
         if (userInfo) {
@@ -131,79 +157,113 @@ export const AvailabilityLogic = () => {
         }
     }, [deleteData, managerInfo, dispatch])
 
-    useEffect(() => {
-        if (managerInfo) {
-            if (deleteAvailabilityData) {
-                dispatch(getAllAvailability())
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: `User removed from availibility`,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-        }
-    }, [deleteAvailabilityData, managerInfo, dispatch])
+
 
     // add availability
     const submitHandler = () => {
-        setShow(!show)
+        setOpen(false);
         const schedule = [
             {
-                date,
-                start: startTime + ' ' + startMeridian,
-                end: endTime + ' ' + endMeridian
+                start: startTime,
+                end: endTime,
+                title: availabilityOps
             }
         ]
 
         managerInfo ? dispatch(addAvailability(doctorId, schedule)) : dispatch(addAvailability(userInfo._id, schedule))
-        Swal.fire({
-            position: 'center',
-            icon: 'success',
-            title: 'Availability Added',
-            showConfirmButton: false,
-            timer: 1500
-        })
     }
-    // tabs
-    const [tab, setTab] = useState(2)
-    // changetab
-    const changeTab = (index) => {
-        setTab(index)
-    }
+
+
     // delete availability
-    const deleteHandler = (id, date) => {
-        managerInfo ? dispatch(deleteAvailabilityByDate(id, date)) : dispatch(deleteAvailabilityByDate(userInfo._id, date))
+    const deleteHandler = (id, start,end) => {
+        managerInfo ? dispatch(deleteAvailabilityByDate(id, start,end)) : dispatch(deleteAvailabilityByDate(userInfo._id, start,end))
     }
+
+    // onSelectmodal
+    const onSelectEventHandler = (e) => {
+        setShow(true)  
+        setTemp({
+            start: e.start,
+            end: e.end,
+            title: e.title,
+            doctor: e.doctor
+        })
+        console.log(e.doctor);
+    }
+  
+    // custom styles for events
+    const eventStyleGetter = (event) => {
+        // check if title is available
+        var backgroundColor = event.title === 'Available' ? '#3174AD' : '#f0ad4e';
+        // color
+        var color = event.title === 'Available' ? '#fff' : '#000';
+        var style = {
+            backgroundColor: backgroundColor,
+            borderRadius: '0px',
+            color: color,
+            border: '0px',
+            display: 'block'
+        };
+        return {
+            style: style
+        };
+    }
+
+    const handleOpen = (slots) => {
+        const { start, end } = slots;
+        setStartTime(start)
+        setEndTime(end)
+        console.log(startTime, endTime);
+        setOpen(true);
+    }
+
+    const handleClose = () => setOpen(false);
+
+    const onEventDrop = ({ event, start, end }) => {
+        // setstartTime,endtime
+        // setEndTime(end)
+        // setStartTime(start)
+        // submitHandler()
+
+    };
+
+    const onEventResize = ({ event, start, end }) => {
+        const idx = events.indexOf(event);
+        const updatedEvents = [...events];
+        updatedEvents.splice(idx, 1, {
+            ...event,
+            start,
+            end
+        });
+        setEvents(updatedEvents);
+    };
+
     return {
-        date,
-        setDate,
         startTime,
         setStartTime,
-        startMeridian,
-        setStartMeridian,
         endTime,
         setEndTime,
-        endMeridian,
-        setEndMeridian,
-        defaultMeridianOption,
-        MeridianOptions,
-        submitHandler,
         show,
         setShow,
         availabilities,
         deleteHandler,
         managerInfo,
-        getAvailabilityByDateHandler,
-        deleteAvailabilityHandler,
         doctorId,
         setDoctorId,
-        availabilityByDate,
-        searchDate,
+        // availabilityByDate,
         allAvailabilities,
-        tab,
-        changeTab,
-        users
+        users,
+        userInfo,
+        submitHandler,
+        events,
+        subEvent,
+        eventStyleGetter,
+        open,
+        handleOpen,
+        handleClose,
+        onEventDrop,
+        onEventResize,
+        setAvailabilityOps,
+        onSelectEventHandler,
     }
 }

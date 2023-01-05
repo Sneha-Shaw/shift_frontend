@@ -2,441 +2,221 @@ import React from 'react'
 import useStyles from './styles'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import SubSidebar from '../../components/SubSidebar/SubSidebar'
-import { Button } from '@mui/material';
+import { Button, Modal,Popover } from '@mui/material';
 import { AvailabilityLogic } from './AvailabilityLogic'
-import AddIcon from '@mui/icons-material/Add';
-import Dropdown from 'react-dropdown';
+import withDragAndDrop from "react-big-calendar/lib/addons/dragAndDrop";
+import "react-big-calendar/lib/addons/dragAndDrop/styles.css";
+import Datetime from 'react-datetime';
 import 'react-dropdown/style.css';
+import { Calendar, momentLocalizer } from 'react-big-calendar'
+import moment from 'moment'
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "react-datetime/css/react-datetime.css";
 
 const Availabity = () => {
+  const localizer = momentLocalizer(moment)
   const classes = useStyles()
   const {
-    date,
-    setDate,
     startTime,
     setStartTime,
-    // startMeridian,
-    setStartMeridian,
     endTime,
     setEndTime,
-    // endMeridian,
-    setEndMeridian,
-    defaultMeridianOption,
-    MeridianOptions,
-    submitHandler,
+    managerInfo,
     show,
     setShow,
-    availabilities,
     deleteHandler,
-    managerInfo,
-    getAvailabilityByDateHandler,
-    deleteAvailabilityHandler,
+    onSelectEventHandler,
+    temp,
     setDoctorId,
-    availabilityByDate,
-    searchDate,
-    allAvailabilities,
-    tab,
-    changeTab,
-    users
+    users,
+    userInfo,
+    submitHandler,
+    events,
+    subEvent,
+    eventStyleGetter,
+    open,
+    handleOpen,
+    handleClose,
+    onEventDrop,
+    onEventResize,
+    setAvailabilityOps,
   } = AvailabilityLogic()
-
-
+  const DnDCalendar = withDragAndDrop(Calendar);
+ 
+  
   return (
     <div className={classes.root}>
       <Sidebar />
       <SubSidebar />
-      <div className={classes.main}
-        style={{
-          height: show ?
-            '72vh'
-            :
-            availabilities && availabilities[0]?.schedule?.length > 12 ?
-              'fit-content' :
-              '72vh'
-        }}
-      >
+      <div className={classes.main}>
+        <DnDCalendar
+          localizer={localizer}
+          events={
+            managerInfo ?
+              subEvent
+              :
+              events
+          }
+          startAccessor="start"
+          endAccessor="end"
+          views={['month', 'week', 'day']}
+          defaultDate={new Date()}
+          defaultView="month"
+          selectable
+          popup={true}
+          onSelectEvent={(e) => {onSelectEventHandler(e);}}
+          onEventDrop={onEventDrop}
+          onEventResize={onEventResize}
+          resizable
+          onSelectSlot={handleOpen}
+          style={{
+            height: "87.5vh",
+            width: "100%"
+          }}
+          eventPropGetter={eventStyleGetter}
+        />
+        {/* <div
+          className={classes.modalContainer}
+        > */}
         {
-          show ?
-            <h1>
-              Select Availability
-            </h1>
-            :
-            <div className={classes.header}>
-              {
-                managerInfo ?
-                  <h1>
-                    Everyone's Availability
-                  </h1>
-                  :
-                  <h1>
-                    Your Availability
-                  </h1>
-              }
+          show &&
+          <div
+            className={classes.popup  }
+          >
+              <div className={classes.popupHeader}>
+                <h1>Details</h1>
+               
+                  <Button
+                    className={classes.editBtn}
+                  >
+                    <EditIcon />
+                  </Button>
+                  <Button
+                    onClick={() => deleteHandler(
 
+                    )}
+                    className={classes.deleteBtn}
+                  >
+                    <DeleteIcon />
+                  </Button>
+                  <Button
+                  onClick={() => setShow(false)}
+                  className={classes.closeBtn}
+                >
+                  X
+                </Button>
+              </div>
+              <div className={classes.popupBody}>
+                <div className={classes.popupBodyContentItem}>
+                  <h4>Start:</h4>
+                  <p>
+                    {
+                      moment(temp?.start).format('MMMM Do YYYY, h:mm a')
+                    }
+                  </p>
+                </div>
+                <div className={classes.popupBodyContentItem}>
+                  <h4>End:</h4>
+                  <p>
+                    {
+                      moment(temp?.end).format('MMMM Do YYYY, h:mm a')
+                    }
+                  </p>
+                </div>
+                <div className={classes.popupBodyContentItem}>
+                  <h4>Doctor:</h4>
+                  <p>
+                    {
+                      temp?.doctor?.name
+                    }
+                  </p>
+                </div>
+            </div>
+          </div>
+
+        }
+        <Modal
+          open={open}
+          onClose={handleClose}
+          className={classes.modal}
+
+        >
+          <div className={classes.modalContent}>
+            <div className={classes.modalHeader}>
+              <h1>Set Availability</h1>
               <Button
-                variant="contained"
-                startIcon={<AddIcon />}
-                onClick={() => setShow(!show)}
+                onClick={handleClose}
+                className={classes.closeBtn}
               >
-                Add Availability
+                X
               </Button>
             </div>
-        }
-        {
-          show && (
-            <div className={classes.back}>
-              <Button
-                // variant="contained"
-                onClick={() => setShow(!show)}
-              >
-                Back
-              </Button>
-            </div>
-          )
-        }
-        {
-          show ?
-            <div className={classes.form}>
-
-              {/* pick doctor */}
-              {
-                managerInfo &&
-                <div className={classes.formGroup}>
-                  <label>
-                    Select Doctor:
-                  </label>
-                    {/* select through users */}
+            <div className={classes.modalBody}>
+              <div className={classes.modalBodyContentItem}>
+                <h4>Start Time</h4>
+                <Datetime
+                  value={startTime}
+                  onChange={(e) => setStartTime(e._d)}
+                />
+              </div>
+              <div className={classes.modalBodyContentItem}>
+                <h4>End Time</h4>
+                <Datetime
+                  value={endTime}
+                  onChange={(e) => setEndTime(e._d)}
+                />
+              </div>
+              <div className={classes.modalBodyContentItem}>
+                <h4>Doctor</h4>
+                {
+                  managerInfo ?
                     <select
                       name="doctor"
-                      // value={doctor}
+                      id="doctor"
                       onChange={(e) => setDoctorId(e.target.value)}
                     >
-                      <option>
-                        Select an option
-                      </option>
+                      <option value="0">Select Doctor</option>
                       {
-                        users?.map((user) => (
-                          <option
-                            key={user._id}
-                            value={user._id}
-                          >
-                            {user.name}
-                          </option>
+                        users && users.map((user) => (
+                          <option value={user._id}>{user.name}</option>
                         ))
                       }
                     </select>
-                </div>
-              }
-
-              {/* pick date from calendar*/}
-              <div className={classes.formGroup}>
-                <label>
-                  Pick a date:
-                </label>
-                <input
-                  type="date"
-                  name="date"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                />
-              </div>
-              {/* pick start time */}
-              <div className={classes.formGroup}>
-                <label>
-                  Start Time:
-                </label>
-                <div>
-                  <input
-                    type="time"
-                    name="start"
-                    value={startTime}
-                    onChange={(e) => setStartTime(e.target.value)}
-                  />
-                  <Dropdown
-                    options={MeridianOptions}
-                    value={defaultMeridianOption}
-                    placeholder="Select an option"
-                    onChange={(e) => setStartMeridian(e.value)}
-                  />
-                </div>
-              </div>
-              {/* pick end time */}
-              <div className={classes.formGroup}>
-                <label>
-                  End Time:
-                </label>
-                <div>
-                  <input
-                    type="time"
-                    name="end"
-                    value={endTime}
-                    onChange={(e) => setEndTime(e.target.value)}
-                  />
-                  <Dropdown
-                    options={MeridianOptions}
-                    value={defaultMeridianOption}
-                    placeholder="Select an option"
-                    onChange={(e) => setEndMeridian(e.value)}
-                  />
-                </div>
-              </div>
-              <Button variant="contained" sx={{
-                width: '40%',
-                margin: '4rem auto 0 auto',
-                background: '#06383D',
-                color: '#fff',
-                fontSize: "1.5rem",
-                '&:hover': {
-                  background: '#06383D',
-                  color: '#fff',
-                }
-              }}
-                onClick={() => submitHandler()}
-              >Submit</Button>
-            </div>
-            :
-
-            managerInfo ?
-              // table for doctors availability by date
-              <div className={classes.tableContainer}>
-                {/* tabs */}
-                <div className={classes.tabs}>
-                  <Button
-                    variant="contained"
-                    className={tab === 1 ? classes.activeTab : classes.tab}
-                    onClick={() => changeTab(1)}
-                  >
-                    <h3>By Date</h3>
-                  </Button>
-                  <Button
-                    variant="contained"
-                    className={tab === 2 ? classes.activeTab : classes.tab}
-                    onClick={() => changeTab(2)}
-                  >
-                    <h3>All</h3>
-                  </Button>
-                </div>
-                {
-                  tab === 1 ?
-                    <div style={{
-                      width: "100%",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}>
-                      <div className={classes.formGroup}>
-                        <label>
-                          Pick a date:
-                        </label>
-                        <input
-                          type="date"
-                          name="date"
-                          // value={e.target.value}
-                          onChange={(e) => getAvailabilityByDateHandler(e.target.value)}
-                        />
-                      </div>
-                      <table className={classes.table}>
-                        <thead>
-                          <tr>
-                            <th>Doctor Name</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Action</th>
-                          </tr>
-                        </thead>
-                        {
-                          !searchDate &&
-                          <tbody>
-                            <tr>
-                              <td colSpan="4">
-                                Please select a date
-                              </td>
-                            </tr>
-                          </tbody>
-                        }
-                        {
-                          availabilityByDate && availabilityByDate.length===0 &&
-                          <tbody>
-                            <tr>
-                              <td colSpan="4">
-                                No Doctors available
-                              </td>
-                            </tr>
-                          </tbody>
-                        }
-                        {
-                          availabilityByDate && availabilityByDate.map((item, index) => {
-                            return (
-                              <tbody key={index}>
-                                <tr>
-                                  <td>
-                                    {item.user.name}
-                                  </td>
-                                  <td>
-                                    {/* filter date in item.schedule  */}
-                                    {
-                                      item.schedule.filter((item) => item.date === searchDate).map((item, index) => {
-                                        return (
-                                          <div key={index}>
-                                            {item.start}
-                                          </div>
-                                        )
-                                      })
-                                    }
-                                  </td>
-                                  <td>
-                                    {
-                                      item.schedule.filter((item) => item.date === searchDate).map((item, index) => {
-                                        return (
-                                          <div key={index}>
-                                            {item.end}
-                                          </div>
-                                        )
-                                      })
-                                    }
-                                  </td>
-                                  <td>
-                                    <Button variant="contained"
-                                      sx={{
-                                        background: 'red',
-                                        color: '#fff',
-                                        '&:hover': {
-                                          background: 'red',
-                                          color: '#fff',
-                                        }
-                                      }}
-                                      onClick={() => deleteHandler(item.user._id, searchDate)}
-                                    >
-                                      Delete By date
-                                    </Button>
-                                  </td>
-                                </tr>
-                              </tbody>
-                            )
-                          })
-                        }
-                      </table>
-                    </div>
                     :
-                    <table className={classes.table}>
-                      <thead>
-                        <tr>
-                          <th>Doctor Name</th>
-                          <th>Date</th>
-                          <th>Start Time</th>
-                          <th>End Time</th>
-                          <th>Action</th>
-                        </tr>
-                      </thead>
-                      {
-                        allAvailabilities && allAvailabilities.map((item, index) => {
-                          return (
-                            <tbody key={index}>
-                              <tr>
-                                <td>
-                                  {item.user.name}
-                                </td>
-                                <td>
-                                  {
-                                    item.schedule.map((item, index) => {
-                                      return (
-                                        <div key={index}>
-                                          {item.date}
-                                        </div>
-                                      )
-                                    })
-                                  }
-                                </td>
-                                <td>
-                                  {
-                                    item.schedule.map((item, index) => {
-                                      return (
-                                        <div key={index}>
-                                          {item.start}
-                                        </div>
-                                      )
-                                    })
-                                  }
-                                </td>
-                                <td>
-                                  {
-                                    item.schedule.map((item, index) => {
-                                      return (
-                                        <div key={index}>
-                                          {item.end}
-                                        </div>
-                                      )
-                                    })
-                                  }
-                                </td>
-                                <td>
-                                  <Button variant="contained"
-                                    sx={{
-                                      background: 'red',
-                                      color: '#fff',
-                                      '&:hover': {
-                                        background: 'red',
-                                        color: '#fff',
-                                      }
-                                    }}
-                                    onClick={() => deleteAvailabilityHandler(item.user._id)}
-                                  >
-                                    Delete All Timings
-                                  </Button>
-                                </td>
-                              </tr>
-                            </tbody>
-                          )
-                        })
-                      }
-                    </table>
+                    <input
+                      type="text"
+                      value={userInfo.name}
+                      disabled
+                    />
                 }
               </div>
-              :
-              <table className={classes.table}>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Start Time</th>
-                    <th>End Time</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                {
-                  availabilities && availabilities[0]?.schedule?.map((item, index) => {
-                    return (
-                      <tbody key={index}>
-                        <tr>
-                          <td>
-                            {item.date}
-                          </td>
-                          <td>{item.start}</td>
-                          <td>{item.end}</td>
-                          <td>
-
-                            <Button variant="contained"
-                              sx={{
-                                background: 'red',
-                                color: '#fff',
-                                fontSize: "1.2rem",
-                                '&:hover': {
-                                  background: 'red',
-                                  color: '#fff',
-                                }
-                              }}
-                              onClick={() => deleteHandler(availabilities && availabilities[0]?.user?._id, item.date)}
-                            >Delete</Button>
-                          </td>
-                        </tr>
-                      </tbody>
-
-                    )
-                  })
-                }
-              </table>
-        }
+              <div className={classes.modalBodyContentItem}>
+                <h4>Availability</h4>
+                <select
+                  onChange={(e) => setAvailabilityOps(e.target.value)}
+                >
+                  <option value="null">Select Availability</option>
+                  <option value="Available">Available</option>
+                  <option value="Unavailable">Unavailable</option>
+                </select>
+              </div>
+            </div>
+            <div className={classes.modalFooter}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={submitHandler}
+              >
+                Submit
+              </Button>
+            </div>
+          </div>
+        </Modal>
       </div >
+
+      {/* </div> */}
     </div >
   )
 }

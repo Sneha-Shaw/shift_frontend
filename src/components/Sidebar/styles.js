@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
         width: "5%",
         display: "flex",
         backgroundColor: "#06283D",
-        zIndex: 10000,
+        zIndex: 1000,
         position: "relative",
         [theme.breakpoints.down("sm")]: {
             width: "100%",
