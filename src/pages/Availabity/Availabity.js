@@ -29,6 +29,7 @@ const Availabity = () => {
     deleteHandler,
     onSelectEventHandler,
     temp,
+    doctorId,
     setDoctorId,
     users,
     userInfo,
@@ -41,17 +42,17 @@ const Availabity = () => {
     handleClose,
     onEventDrop,
     onEventResize,
+    availabilityOps,
     setAvailabilityOps,
   } = AvailabilityLogic()
   const DnDCalendar = withDragAndDrop(Calendar);
-
 
   return (
     <div className={classes.root}>
       <Sidebar />
       <SubSidebar />
       <div className={classes.main}>
-        <DnDCalendar
+        <Calendar
           localizer={localizer}
           events={
             managerInfo ?
@@ -77,8 +78,12 @@ const Availabity = () => {
           }}
           eventPropGetter={eventStyleGetter}
         />
-        {
-          show &&
+
+        <Modal
+          open={show}
+          onClose={() => setShow(false)}
+          className={classes.popupModal}
+        >
           <div
             className={classes.popup}
           >
@@ -88,7 +93,14 @@ const Availabity = () => {
               <Button
                 className={classes.editBtn}
                 onClick={() => {
-
+                  setAvailabilityOps(temp.title);
+                  setDoctorId(temp?.doctor?._id);
+                  setStartTime(
+                    temp.startDate.slice(5, 7) + '/' + temp.startDate.slice(8, 10) + '/' + temp.startDate.slice(0, 4) + " " + temp?.endTime
+                  );
+                  setEndTime(
+                    temp.endDate.slice(5, 7) + '/' + temp.endDate.slice(8, 10) + '/' + temp.endDate.slice(0, 4) + " " + temp?.endTime
+                  );
                   handleOpen();
                 }
                 }
@@ -98,8 +110,8 @@ const Availabity = () => {
               <Button
                 onClick={() => deleteHandler(
                   temp?.doctor?._id,
-                  temp?.start,
-                  temp?.end
+                  temp?.startDate + " " + temp?.startTime,
+                  temp?.endDate + " " + temp?.endTime
                 )}
                 className={classes.deleteBtn}
               >
@@ -114,19 +126,32 @@ const Availabity = () => {
             </div>
             <div className={classes.popupBody}>
               <div className={classes.popupBodyContentItem}>
-                <h4>Start:</h4>
+                <h2>
+                  {temp?.title}
+                </h2>
+              </div>
+              <div className={classes.popupBodyContentItem}>
+                <h4>Start Date:</h4>
                 <p>
-                  {
-                    moment(temp?.start).format('MMMM Do YYYY, h:mm a')
-                  }
+                  {temp?.startDate}
                 </p>
               </div>
               <div className={classes.popupBodyContentItem}>
-                <h4>End:</h4>
+                <h4>Start Time:</h4>
                 <p>
-                  {
-                    moment(temp?.end).format('MMMM Do YYYY, h:mm a')
-                  }
+                  {temp?.startTime}
+                </p>
+              </div>
+              <div className={classes.popupBodyContentItem}>
+                <h4>End Date:</h4>
+                <p>
+                  {temp?.endDate}
+                </p>
+              </div>
+              <div className={classes.popupBodyContentItem}>
+                <h4>End Time:</h4>
+                <p>
+                  {temp?.endTime}
                 </p>
               </div>
               <div className={classes.popupBodyContentItem}>
@@ -139,8 +164,8 @@ const Availabity = () => {
               </div>
             </div>
           </div>
+        </Modal>
 
-        }
         <Modal
           open={open}
           onClose={handleClose}
@@ -180,6 +205,7 @@ const Availabity = () => {
                       name="doctor"
                       id="doctor"
                       onChange={(e) => setDoctorId(e.target.value)}
+                      value={doctorId}
                     >
                       <option value="0">Select Doctor</option>
                       {
@@ -200,8 +226,9 @@ const Availabity = () => {
                 <h4>Availability</h4>
                 <select
                   onChange={(e) => setAvailabilityOps(e.target.value)}
+                  value={availabilityOps}
                 >
-                  <option value="null">Select Availability</option>
+                  <option value="">Select Availability</option>
                   <option value="Available">Available</option>
                   <option value="Unavailable">Unavailable</option>
                 </select>

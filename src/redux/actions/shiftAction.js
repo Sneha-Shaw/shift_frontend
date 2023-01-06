@@ -313,7 +313,7 @@ export const getAllAvailability = () => async (dispatch) => {
 }
 
 // delete availability by date
-export const deleteAvailabilityByDate = (id, date) => async (dispatch) => {
+export const deleteAvailabilityByDate = (id, start,end) => async (dispatch) => {
     try {
         dispatch({
             type: DELETE_AVAILABILITY_BY_DATE_REQUEST
@@ -323,7 +323,8 @@ export const deleteAvailabilityByDate = (id, date) => async (dispatch) => {
         }
         const body = {
             id,
-            date
+            start,
+            end
         }
         const { data } = await axios.put(`${API}/private/shift/delete-availability-by-date`, body, config)
         dispatch({

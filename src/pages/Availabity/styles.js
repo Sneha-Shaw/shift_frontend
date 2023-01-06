@@ -136,6 +136,18 @@ export default makeStyles((theme) => ({
             }
         }
     },
+    popupModal:{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "absolute",
+        top: 0,
+        left: 0,
+        zIndex: "100",
+    },
     popup: {
         position: "absolute",
         background: "#fff",
@@ -193,14 +205,23 @@ export default makeStyles((theme) => ({
                 fontWeight: "bold",
                 margin: "1rem 0",
                 color: "#47B5FF",
-                width: "20%"
+                width: "40%"
+            },
+            '&>h2':{
+                fontSize: "2.5rem",
+                fontWeight: "bold",
+                margin: "1rem 0",
+                color: "#47B5FF",
+                width: "100%",
+                textAlign: "center"
             },
             '&>p':{
                 fontSize: "1.5rem",
                 // fontWeight: "bold",
                 margin: "1rem 0",
                 color: "#47B5FF",
-                width: "80%"
+                width: "60%",
+                textAlign: "center"
             }
         }
     }
