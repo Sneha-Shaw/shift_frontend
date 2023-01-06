@@ -19,6 +19,7 @@ import ResetPassword from "./pages/ResetPassword/ResetPassword";
 import UpdateSlot from "./pages/UpdateSlot/UpdateSlot"
 import Settings from "./pages/Settings/Settings"
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
+import AddDomain from './pages/AddDomain/AddDomain'
 
 import { useSelector } from "react-redux";
 
@@ -247,6 +248,20 @@ const Router = () => {
                                 <>
                                     <Navbar />
                                     <UpdateSlot />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/attendance/add-domain"
+                        element={
+                            managerInfo ? (
+                                <>
+                                    <Navbar />
+                                    <AddDomain />
                                 </>
                             ) : (
                                 <Navigate to="/login" />
