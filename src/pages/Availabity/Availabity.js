@@ -52,7 +52,7 @@ const Availabity = () => {
       <Sidebar />
       <SubSidebar />
       <div className={classes.main}>
-        <Calendar
+        <DnDCalendar
           localizer={localizer}
           events={
             managerInfo ?
@@ -89,7 +89,7 @@ const Availabity = () => {
           >
             <div className={classes.popupHeader}>
               <h1>Details</h1>
-
+{/* 
               <Button
                 className={classes.editBtn}
                 onClick={() => {
@@ -107,7 +107,7 @@ const Availabity = () => {
                 }
               >
                 <EditIcon />
-              </Button>
+              </Button> */}
               <Button
                 onClick={() => {deleteHandler(
                   temp?.doctor?._id,
@@ -115,6 +115,12 @@ const Availabity = () => {
                   temp?.endDate + " " + temp?.endTime
                 );  setShow(false)}}
                 className={classes.deleteBtn}
+                sx={{
+                  // backgroundColor: "#f44336",
+                  color: "#f44336",
+                  fontSize:"1.8rem",
+                
+                }}
               >
                 <DeleteIcon />
               </Button>

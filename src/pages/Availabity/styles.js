@@ -151,7 +151,7 @@ export default makeStyles((theme) => ({
     popup: {
         position: "absolute",
         background: "#fff",
-        width: "fit-content",
+        width: "20%",
         height: "fit-content",
         display: "flex",
         flexDirection: "column",
@@ -174,7 +174,7 @@ export default makeStyles((theme) => ({
             color: "#47B5FF",
         },
         '&>button': {
-            color: "#47B5FF",
+            // color: "#47B5FF",
             fontWeight: "bold",
             fontSize: "1.5rem",
             width: "3rem",
@@ -182,10 +182,7 @@ export default makeStyles((theme) => ({
             border: "none",
             padding:0,
             margin:0,
-            '&>svg':{
-                color: "#47B5FF",
-                fontSize: "1.8rem"
-            }
+           
         },
       
     },
