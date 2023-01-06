@@ -4,7 +4,8 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import SubSidebar from '../../components/SubSidebar/SubSidebar'
 import { ViewLogic } from './ViewLogic'
 import { DownloadTableExcel } from 'react-export-table-to-excel'
-import { Button } from '@mui/material'
+import { Button, Modal } from '@mui/material'
+import AddIcon from '@mui/icons-material/Add';
 
 const DailyView = () => {
     const classes = useStyles()
@@ -13,7 +14,13 @@ const DailyView = () => {
         calender,
         slots,
         doctors,
-        shifts
+        shifts,
+        show,
+        setShow,
+        doctorList,
+        setDoctorList,
+        handleAdd,
+        handleDelete
     } = ViewLogic()
 
     const tableRef = useRef(null);
@@ -23,17 +30,151 @@ const DailyView = () => {
             <SubSidebar />
             <div className={classes.main}>
                 <div className={classes.grid}>
-                    <DownloadTableExcel
-                        filename="users table"
-                        sheet="users"
-                        currentTableRef={tableRef.current}>
+                    <div className={classes.btnheader}>
+                        <DownloadTableExcel
+                            filename="users table"
+                            sheet="users"
+                            currentTableRef={tableRef.current}>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                            >
+                                Export to Excel
+                            </Button>
+                        </DownloadTableExcel>
                         <Button
                             variant="contained"
                             color="primary"
                         >
-                            Export to Excel
+                            Generate Roster manually
                         </Button>
-                    </DownloadTableExcel>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                        >
+                            Generate Roster Automatically
+                        </Button>
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            onClick={() => setShow(true)}
+                        >
+                            Create Shift
+                        </Button>
+                    </div>
+                    <Modal
+                        open={show}
+                        onClose={() => setShow(false)}
+                        className={classes.modal}
+                    >
+                        <div className={classes.modalContent}>
+                            <div className={classes.modalHeader}>
+                                <h1>Create Shift</h1>
+                                <Button
+                                    onClick={() => setShow(false)}
+                                >
+                                    X
+                                </Button>
+                            </div>
+                            <hr className={classes.hr} />
+                            <div className={classes.modalBody}>
+                                <div className={classes.modalBodyItem}>
+                                    <label htmlFor="domain">Select Domain</label>
+                                    <select
+                                        name="domain"
+                                        id="domain"
+                                        className={classes.modalBodyItemSelect}
+                                    >
+                                        <option value="">Select Domain</option>
+                                        <option value="">Domain 1</option>
+                                        <option value="">Domain 2</option>
+                                    </select>
+                                </div>
+                                <div className={classes.modalBodyItem}>
+                                    <label htmlFor="date">Select Date</label>
+                                    <input
+                                        type="date"
+                                        name="date"
+                                        id="date"
+                                        className={classes.modalBodyItemInput}
+                                    />
+                                </div>
+                                <div className={classes.modalBodyItem}>
+                                    <label htmlFor="slot">Select Slot</label>
+                                    <select
+                                        name="slot"
+                                        id="slot"
+                                        className={classes.modalBodyItemSelect}
+                                    >
+                                        <option value="">Select Slot</option>
+                                        {
+                                            slots?.getAllSlots?.map((slot, index) => (
+                                                <option value={slot.slotTime} key={index}>
+                                                    {slot.slotTime}
+                                                </option>
+                                            ))
+                                        }
+                                    </select>
+                                </div>
+                                <div className={classes.modalBodyItem}>
+                                    <label htmlFor="doctor">Select Doctor:</label>
+                                    <div style={{
+                                         height: "20rem",
+                                         overflowY:"scroll",
+                                    }}>
+                                        {
+                                            doctors?.getAllDoctors?.map((doctor, index) => (
+                                                <div key={index}> 
+                                                {/* checkbox */}
+                                                    <input
+                                                        type="checkbox"
+                                                        name="doctor"
+                                                        id="doctor"
+                                                        value={doctor._id}
+                                                        // onChange={(e) => handleAdd(e)}
+                                                    />
+                                                    <label htmlFor="doctor">{doctor.name}</label>
+                                                  </div>
+                                            ))
+                                        }
+                                        </div>
+                                </div>
+                            </div>
+                            <hr className={classes.hr} />
+                            <div className={classes.modalFooter}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                >
+                                    Create
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => setShow(false)}
+                                >
+                                    Cancel
+                                </Button>
+                            </div>
+                        </div>
+                    </Modal>
+                    <div className={classes.domain}>
+                        <label
+                            htmlFor="domain"
+                            className={classes.domainLabel}
+                        >
+                            Select A Domain to view Roster:
+                        </label>
+                        <select
+                            name="domain"
+                            id="domain"
+                            className={classes.domainSelect}
+                        >
+                            <option value="">Select Domain</option>
+                            <option value="">Domain 1</option>
+                            <option value="">Domain 2</option>
+                        </select>
+                    </div>
                     <table className={classes.table} ref={tableRef}>
                         <thead>
                             <tr>

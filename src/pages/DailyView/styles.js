@@ -8,7 +8,7 @@ export default makeStyles((theme) => ({
         background: "#f7f7f7",
         [theme.breakpoints.down("sm")]: {
             flexDirection: "column"
-         }
+        }
     },
     main: {
         width: "70%",
@@ -24,7 +24,7 @@ export default makeStyles((theme) => ({
             width: "90%",
             // margin: "1rem",
             padding: "0",
-         }
+        }
     },
     grid: {
         width: "100%",
@@ -36,7 +36,40 @@ export default makeStyles((theme) => ({
             fontSize: "1.4rem",
             fontWeight: "bold",
             marginBottom: "1rem",
+            color: "#fff",
+            '&:hover': {
+                background: "#06283D",
+                color: "#fff",
+            }
         }
+    },
+    btnheader: {
+        width: "100%",
+        height: "10%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+    },
+    domain: {
+        width: "100%",
+        height: "10%",
+        '&>label': {
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            color: "#06283D",
+            marginRight: "1rem",
+        },
+        '&>select': {
+            // width: "10%",
+            fontSize: "1.5rem",
+            color: "#06283D",
+            border: ".5px solid #06283D",
+            borderRadius: ".5rem",
+            padding: ".5rem",
+            outline: "none"
+        }
+
+
     },
     table: {
         width: "100%",
@@ -57,7 +90,7 @@ export default makeStyles((theme) => ({
                     background: "#06283D",
                     color: "#fff",
                     textAlign: "center",
-                    '&>div':{
+                    '&>div': {
                         width: "10rem",
                     }
                 }
@@ -67,7 +100,7 @@ export default makeStyles((theme) => ({
             width: "100%",
             '&>tr': {
                 width: "100%",
-          
+
                 '&>td': {
                     // padding: "1rem",
                     fontSize: "1.5rem",
@@ -79,6 +112,141 @@ export default makeStyles((theme) => ({
             }
         }
     },
-  
+    modal: {
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        position: "fixed",
+        top: "0",
+        left: "0",
+        background: "rgba(0,0,0,0.5)",
+        zIndex: "1000",
 
+    },
+    modalContent: {
+        width: "50%",
+        height: "fit-content",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#f7f7f7",
+        borderRadius: ".5rem",
+        boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
+        padding: "2rem",
+
+
+    },
+    modalHeader: {
+        width: "100%",
+
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        '&>h1': {
+            fontSize: "2rem",
+            fontWeight: "bold",
+            color: "#06283D",
+        },
+        '&>button': {
+            outline: "none",
+            fontSize: "2rem",
+            fontWeight: "bold",
+            color: "#06283D",
+        }
+    },
+    hr: {
+        width: "100%",
+        height: ".5px",
+        background: "#06283D",
+        margin: "1rem 0"
+
+    },
+    modalBody: {
+        width: "100%",
+
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        '&>div': {
+            width: "100%",
+            // height: "100%",
+            display: "flex",
+            flexDirection: "column",
+
+            alignItems: "center",
+            justifyContent: "space-between",
+            margin: "1.4rem",
+            '&>label': {
+                fontSize: "1.5rem",
+                fontWeight: "bold",
+                color: "#06283D",
+                marginRight: "1rem",
+            },
+            '&>input': {
+                width: "60%",
+                fontSize: "1.5rem",
+                color: "#06283D",
+                border: ".5px solid #06283D",
+                borderRadius: ".5rem",
+                padding: ".5rem",
+                outline: "none"
+            },
+            '&>select': {
+                width: "61%",
+                fontSize: "1.5rem",
+                color: "#06283D",
+                border: ".5px solid #06283D",
+                borderRadius: ".5rem",
+                padding: ".5rem",
+                outline: "none"
+            },
+            '&>div': {
+                width: "60%",
+                display: "flex",
+                flexDirection: "column",
+                '&>div': {
+                    width: "100%",
+                    display: "flex",
+                   
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                    margin: "1rem 0",
+                    '&>input': {
+                        width: "2rem",
+                        height: "2rem",
+                        marginRight: "1rem",
+                        outline: "none",
+                        border: ".5px solid #06283D",
+                    },
+                    '&>label': {
+                        fontSize: "1.6rem",
+                        fontWeight: "bold",
+                        color: "#06283D",
+                    }
+                }
+            }
+
+        }
+    },
+    modalFooter: {
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        '&>button': {
+            background: "#06283D",
+            color: "#fff",
+            fontSize: "1.2rem",
+            outline: "none",
+            margin: "0 2rem",
+            '&:hover': {
+                background: "#06283D",
+                color: "#fff",
+            }
+        }
+    }
 }))

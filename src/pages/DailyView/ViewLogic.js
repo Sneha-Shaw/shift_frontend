@@ -20,7 +20,27 @@ export const ViewLogic = () => {
     const dispatch = useDispatch()
     // get current month
     const currentMonth = useState(new Date().getMonth())
+    const [show, setShow] = useState(false)
+    // usestate variable to control addition and deletion of input
+    const [doctorList, setDoctorList] = useState([
+        {
+            doctor: ""
+        }
+    ])
 
+    // handleadd
+    const handleAdd = () => {
+        setDoctorList([...doctorList, { doctor: "" }])
+    }
+    
+    // handledelete
+    const handleDelete = (index) => {
+        const list = [...doctorList]
+        list.splice(index, 1)
+        setDoctorList(list)
+    }
+
+    // call   dispatch(getAllDoctors()) once
     useEffect(() => {
         dispatch(getAllDoctors())
     }, [dispatch])
@@ -41,11 +61,19 @@ export const ViewLogic = () => {
     }, [dispatch])
 
 
+
     return {
         managerInfo,
         calender,
         slots,
         shifts,
-        doctors
+        doctors,
+        currentMonth,
+        show,
+        setShow,
+        doctorList,
+        setDoctorList,
+        handleAdd,
+        handleDelete
     }
 }
