@@ -102,17 +102,18 @@ const Availabity = () => {
                     temp.endDate.slice(5, 7) + '/' + temp.endDate.slice(8, 10) + '/' + temp.endDate.slice(0, 4) + " " + temp?.endTime
                   );
                   handleOpen();
+                  setShow(false)
                 }
                 }
               >
                 <EditIcon />
               </Button>
               <Button
-                onClick={() => deleteHandler(
+                onClick={() => {deleteHandler(
                   temp?.doctor?._id,
                   temp?.startDate + " " + temp?.startTime,
                   temp?.endDate + " " + temp?.endTime
-                )}
+                );  setShow(false)}}
                 className={classes.deleteBtn}
               >
                 <DeleteIcon />
@@ -170,7 +171,6 @@ const Availabity = () => {
           open={open}
           onClose={handleClose}
           className={classes.modal}
-
         >
           <div className={classes.modalContent}>
             <div className={classes.modalHeader}>

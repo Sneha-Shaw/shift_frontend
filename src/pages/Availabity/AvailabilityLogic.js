@@ -45,6 +45,7 @@ export const AvailabilityLogic = () => {
 
     // add availability
     const submitHandler = () => {
+        setShow(false)
         setOpen(false);
         const schedule = [
             {
@@ -60,6 +61,7 @@ export const AvailabilityLogic = () => {
 
     // delete availability
     const deleteHandler = (id, start, end) => {
+        setShow(false)
         // convert 12 hr format to 24 hr
         start = moment(start).format('YYYY-MM-DD HH:mm:ss')
         end = moment(end).format('YYYY-MM-DD HH:mm:ss')
@@ -135,32 +137,6 @@ export const AvailabilityLogic = () => {
         setEvents(updatedEvents);
     };
 
-    const setSubeventHandler = useCallback(() => {
-        if (allAvailabilities) {
-            if (subEvent.length < allAvailabilities.length) {
-                //    map allavailabilities then map schedule then store all the elements of subarray in subevents
-                allAvailabilities && allAvailabilities.map((availability) => {
-                    availability.schedule.map((sub) => {
-                        setSubevent((prev) => {
-                            return [
-                                ...prev,
-                                {
-                                    start: new Date(sub.start),
-                                    end: new Date(sub.end),
-                                    title: sub.title,
-                                    doctor: availability.user
-                                }
-                            ]
-                        })
-                    })
-                }
-                )
-            }
-        }
-    }, [
-        allAvailabilities,
-        subEvent.length
-    ])
 
     // get availability for doctor
     useEffect(() => {
@@ -174,7 +150,7 @@ export const AvailabilityLogic = () => {
     useEffect(() => {
         if (managerInfo) {
             dispatch(getAllAvailability())
-            setSubeventHandler()
+
         }
     }, [managerInfo, dispatch])
 
@@ -209,6 +185,8 @@ export const AvailabilityLogic = () => {
         if (managerInfo) {
             if (availability) {
                 dispatch(getAllAvailability())
+                // refresh
+                window.location.reload()
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -243,6 +221,8 @@ export const AvailabilityLogic = () => {
         if (managerInfo) {
             if (deleteData) {
                 dispatch(getAllAvailability())
+                // refresh
+                window.location.reload()
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -278,7 +258,7 @@ export const AvailabilityLogic = () => {
                 }
             }
         }
-    }, [managerInfo, allAvailabilities,subEvent])
+    }, [managerInfo, allAvailabilities, subEvent])
     // set availability to event to show in calender
     useEffect(() => {
         if (userInfo) {
