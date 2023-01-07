@@ -86,8 +86,8 @@ const DailyView = () => {
                                         className={classes.modalBodyItemSelect}
                                     >
                                         <option value="">Select Domain</option>
-                                        <option value="">Domain 1</option>
-                                        <option value="">Domain 2</option>
+                                        <option value="">ECG</option>
+                                        <option value="">ECHO</option>
                                     </select>
                                 </div>
                                 <div className={classes.modalBodyItem}>
@@ -171,8 +171,8 @@ const DailyView = () => {
                             className={classes.domainSelect}
                         >
                             <option value="">Select Domain</option>
-                            <option value="">Domain 1</option>
-                            <option value="">Domain 2</option>
+                            <option value="">ECG</option>
+                            <option value="">ECHO</option>
                         </select>
                     </div>
                     <table className={classes.table} ref={tableRef}>

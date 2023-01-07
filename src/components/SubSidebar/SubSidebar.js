@@ -115,14 +115,14 @@ const SubSidebar = () => {
                                 <span className={classes.listItemText}>Shift Replacement Requests</span>
                             </NavLink>
                         </li>
-                        <li className={classes.listItem}>
+                        {/* <li className={classes.listItem}>
                             <NavLink to='/attendance/add-domain'
                                 style={({ isActive }) => ({
                                     color: isActive ? '#47B5FF' : 'none',
                                 })} className={classes.navLink}>
                                 <span className={classes.listItemText}>Add Domain</span>
                             </NavLink>
-                        </li>
+                        </li> */}
                     </ul>
                     :
                     <ul className={classes.list}>
