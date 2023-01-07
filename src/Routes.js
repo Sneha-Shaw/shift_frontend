@@ -20,6 +20,7 @@ import UpdateSlot from "./pages/UpdateSlot/UpdateSlot"
 import Settings from "./pages/Settings/Settings"
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import AddDomain from './pages/AddDomain/AddDomain'
+import Archives from './pages/Archives/Archives'
 
 import { useSelector } from "react-redux";
 
@@ -262,6 +263,20 @@ const Router = () => {
                                 <>
                                     <Navbar />
                                     <AddDomain />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/archives"
+                        element={
+                            managerInfo ? (
+                                <>
+                                    <Navbar />
+                                    <Archives />
                                 </>
                             ) : (
                                 <Navigate to="/login" />

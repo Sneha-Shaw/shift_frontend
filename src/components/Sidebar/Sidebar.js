@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import useStyles from './styles'
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
+import ArchiveIcon from '@mui/icons-material/Archive';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import { NavLink, Link } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -71,6 +72,16 @@ const Sidebar = () => {
                             </h3>
                         </NavLink>
                 }
+                <NavLink
+                    to='/archives'
+                    style={({ isActive }) => ({
+                        background: isActive ? '#256D85' : 'none',
+                    })} className={classes.navLink}>
+                    <ArchiveIcon fontSize="large" />
+                    <h3>
+                    Archives
+                    </h3>
+                </NavLink>
 
             </div>
             {
