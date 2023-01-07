@@ -5,7 +5,7 @@ import SubSidebar from '../../components/SubSidebar/SubSidebar'
 import { ViewLogic } from './ViewLogic'
 import { DownloadTableExcel } from 'react-export-table-to-excel'
 import { Button, Modal } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add';
+// import AddIcon from '@mui/icons-material/Add';
 
 const DailyView = () => {
     const classes = useStyles()
@@ -17,10 +17,10 @@ const DailyView = () => {
         shifts,
         show,
         setShow,
-        doctorList,
-        setDoctorList,
-        handleAdd,
-        handleDelete
+        show2,
+        setShow2,
+        show3,
+        setShow3
     } = ViewLogic()
 
     const tableRef = useRef(null);
@@ -45,6 +45,7 @@ const DailyView = () => {
                         <Button
                             variant="contained"
                             color="primary"
+                            onClick={() => setShow2(true)}
                         >
                             Generate Roster manually
                         </Button>
@@ -62,6 +63,73 @@ const DailyView = () => {
                             Create Shift
                         </Button>
                     </div>
+                    <Modal
+                        open={show2}
+                        onClose={() => setShow2(false)}
+                        className={classes.modal}
+                    >
+                        <div className={classes.modalContent}>
+                            <div className={classes.modalHeader}>
+                                <h1>Generate Roster Manually</h1>
+                                <Button
+                                    onClick={() => setShow2(false)}
+                                >
+                                    X
+                                </Button>
+                            </div>
+                            <div className={classes.modalBodyItem} style={{
+                                width: "70%",
+                                display: "flex",
+                                justifyContent: "space-between",
+                                margin: "1rem 0"
+
+                            }}>
+                                <input
+                                    type="number"
+                                    placeholder="Enter no. of days to generate roster"
+                                    style={{
+                                        width: '60%',
+                                        padding: "1rem",
+                                        border: "1px solid #ccc",
+                                        borderRadius: "0.5rem",
+                                        outline: "none"
+
+                                    }}
+                                />
+                                {/* choose domain */}
+                                <select
+                                    style={{
+                                        width: '30%',
+                                        padding: "1rem",
+                                        border: "1px solid #ccc",
+                                        borderRadius: "0.5rem",
+                                        outline: "none"
+
+                                    }}
+                                >
+                                    <option value="1">Choose Domain</option>
+                                    <option value="2">ECG</option>
+                                    <option value="3">ECHO</option>
+                                </select>
+
+                            </div>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                sx={{
+                                    width: "20%",
+                                    background: "#06283D",
+                                    fontSize: "1.2rem",
+                                    margin: "1rem 0",
+                                    '&:hover': {
+                                        background: "rgba(6, 40, 61,0.9)"
+                                    }
+                                }}
+                            >
+                                Generate
+                            </Button>
+                        </div>
+                    </Modal>
                     <Modal
                         open={show}
                         onClose={() => setShow(false)}
@@ -119,25 +187,25 @@ const DailyView = () => {
                                 <div className={classes.modalBodyItem}>
                                     <label htmlFor="doctor">Select Doctor:</label>
                                     <div style={{
-                                         height: "20rem",
-                                         overflowY:"scroll",
+                                        height: "20rem",
+                                        overflowY: "scroll",
                                     }}>
                                         {
                                             doctors?.getAllDoctors?.map((doctor, index) => (
-                                                <div key={index}> 
-                                                {/* checkbox */}
+                                                <div key={index}>
+                                                    {/* checkbox */}
                                                     <input
                                                         type="checkbox"
                                                         name="doctor"
                                                         id="doctor"
                                                         value={doctor._id}
-                                                        // onChange={(e) => handleAdd(e)}
+                                                    // onChange={(e) => handleAdd(e)}
                                                     />
                                                     <label htmlFor="doctor">{doctor.name}</label>
-                                                  </div>
+                                                </div>
                                             ))
                                         }
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <hr className={classes.hr} />
@@ -175,7 +243,7 @@ const DailyView = () => {
                             <option value="">ECHO</option>
                         </select>
                     </div>
-                    <table className={classes.table} ref={tableRef}>
+                    {/* <table className={classes.table} ref={tableRef}>
                         <thead>
                             <tr>
                                 <th className={classes.dateHeader}>
@@ -207,7 +275,7 @@ const DailyView = () => {
                                     slots?.getAllSlots?.map((slot, index) => (
                                         <th className={classes.dateHeader} key={index}>
                                             <div>
-                                                {/* {slot.slotTime.slice(0, 8)} */}
+                                                {/* {slot.slotTime.slice(0, 8)} 
                                                 {slot.slotTime}
                                             </div>
                                         </th>
@@ -331,7 +399,7 @@ const DailyView = () => {
                                                                     // border of last child is #000
                                                                     borderBottom: index === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
                                                                 }}>
-                                                                    {/* if current doctor is alloted at current doctor then print 1 */}
+                                                                    {/* if current doctor is alloted at current doctor then print 1 *
                                                                     {
                                                                         shifts?.data?.map((shift, index) => (
                                                                             <div key={index}>
@@ -362,7 +430,7 @@ const DailyView = () => {
                             }
 
                         </tbody>
-                    </table>
+                    </table> */}
                 </div>
             </div>
         </div>
