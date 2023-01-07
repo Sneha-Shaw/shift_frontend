@@ -9,7 +9,7 @@ export default makeStyles((theme) => ({
         position: "relative",
         [theme.breakpoints.down("sm")]: {
             flexDirection: "column"
-         }
+        }
     },
     main: {
         width: "60%",
@@ -17,7 +17,7 @@ export default makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        margin: "8rem auto",
+        margin: "6rem auto",
         position: "relative",
         borderRadius: "1rem",
         '& h1': {
@@ -77,10 +77,10 @@ export default makeStyles((theme) => ({
     },
     tableDiv: {
         width: "100%",
-    
-        
+        height: "100%",
+        overflowX: "scroll",
         [theme.breakpoints.down("sm")]: {
-           
+
             overflow: "scroll"
         }
     },
@@ -88,7 +88,7 @@ export default makeStyles((theme) => ({
         width: "100%",
         borderCollapse: "collapse",
         border: ".5px solid #000",
-        overflowX: "auto",
+
         margin: "2rem 0",
         background: "#fff",
         '& thead': {

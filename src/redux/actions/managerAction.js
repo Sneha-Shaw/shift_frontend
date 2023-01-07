@@ -108,7 +108,8 @@ export const addDoctor = (
     mobile,
     password,
     designation,
-    domain,
+    ecg,
+    echo,
     type,
     dutyHoursPerMonth,
     dutyHoursPerDay,
@@ -128,7 +129,8 @@ export const addDoctor = (
             mobile,
             password,
             designation,
-            domain,
+            ecg,
+            echo,
             type,
             dutyHoursPerMonth,
             dutyHoursPerDay,
@@ -234,7 +236,7 @@ export const searchDoctor = (name) => async (dispatch) => {
         const config = {
             'Content-Type': 'application/json'
         }
-        const {data} = await axios.get(`${API}/public/admin/search-doctor?name=${name}`, config)
+        const { data } = await axios.get(`${API}/public/admin/search-doctor?name=${name}`, config)
         dispatch({
             type: SEARCH_DOCTOR_SUCCESS,
             payload: data
@@ -285,7 +287,8 @@ export const updateDoctor = (
     email,
     mobile,
     designation,
-    domain,
+    ecg,
+    echo,
     type,
     dutyHoursPerMonth,
     dutyHoursPerDay,
@@ -305,7 +308,8 @@ export const updateDoctor = (
             email,
             mobile,
             designation,
-            domain,
+            ecg,
+            echo,
             type,
             dutyHoursPerMonth,
             dutyHoursPerDay,

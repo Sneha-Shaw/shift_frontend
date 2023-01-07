@@ -7,7 +7,7 @@ import {
     updateDoctor,
     getAllDoctors
 } from '../../redux/actions/managerAction';
-import axios from 'axios';
+
 
 export const DoctorsLogic = () => {
     const { doctorInfo } = useSelector((state) => state.addDoctor)
@@ -22,25 +22,6 @@ export const DoctorsLogic = () => {
     const handleChange = (event) => {
         setChecked(event.target.checked);
     };
-
-    const API = process.env.REACT_APP_NODE_API
-    //axios call /remove-domain/ api async
-    const RemoveDomainHandler = async (id, domain) => {
-        try {
-            const config = {
-                'Content-Type': 'application/json'
-            }
-            const body = {
-                domain: domain
-            }
-            await axios.put(`${API}/public/admin/remove-domain/${id}`, body, config)
-
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-
 
     useEffect(() => {
         dispatch(getAllDoctors())
@@ -58,11 +39,8 @@ export const DoctorsLogic = () => {
 
     const [name, setName] = useState('')
     const [designation, setDesignation] = useState('Senior')
-    const [domain, setDomain] = useState()
-    const [domainList, setDomainList] = useState([
-        { name: 'ECG', checked: false },
-        { name: 'ECHO', checked: false }
-    ])
+    const [ecg, setEcg] = useState(false)
+    const [echo, setEcho] = useState(false)
     const [email, setEmail] = useState('')
     const [phn, setPhn] = useState('')
     const [dutyHoursPerMonth, setDutyHoursPerMonth] = useState(192)
@@ -79,10 +57,6 @@ export const DoctorsLogic = () => {
         'Permanent', 'Contractual'
     ]
 
-    const domainOptions = [
-        'ECG', 'ECHO'
-    ]
-    const defaultDomainOptions = domainOptions[0]
 
     const defaultType = Type[0];
     const [addShow, setaddShow] = useState(false)
@@ -91,9 +65,7 @@ export const DoctorsLogic = () => {
     // addDoctor
     const addDoctorHandler = () => {
         setaddShow(!addShow)
-        setDomain(
-            domainList.filter((item) => item.checked === true).map((item) => item.name)
-        )
+
 
         dispatch(addDoctor(
             name,
@@ -101,14 +73,14 @@ export const DoctorsLogic = () => {
             phn,
             randomPassword(),
             designation,
-            domain,
+            ecg,
+            echo,
             employType.toLowerCase(),
             dutyHoursPerMonth,
             dutyHoursPerDay,
             checked
         ))
     }
-    console.log(domain, "domain");
 
     useEffect(() => {
         if (doctorInfo) {
@@ -161,7 +133,8 @@ export const DoctorsLogic = () => {
             email,
             phn,
             designation,
-            domain,
+            ecg,
+            echo,
             employType.toLowerCase(),
             dutyHoursPerMonth,
             dutyHoursPerDay,
@@ -227,12 +200,10 @@ export const DoctorsLogic = () => {
         id,
         setId,
         searchData,
-        domain,
-        setDomain,
-        domainOptions,
-        defaultDomainOptions,
-        domainList,
-        setDomainList,
-        RemoveDomainHandler
+        ecg,
+        setEcg,
+        echo,
+        setEcho
+
     }
 }

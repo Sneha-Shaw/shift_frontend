@@ -46,11 +46,10 @@ const DoctorsList = () => {
         id,
         setId,
         searchData,
-        domain,
-        setDomain,
-        RemoveDomainHandler,
-        domainList,
-        setDomainList
+        ecg,
+        setEcg,
+        echo,
+        setEcho
     } = DoctorsLogic()
     return (
         <div className={classes.root}
@@ -82,7 +81,19 @@ const DoctorsList = () => {
                             <Button
                                 // variant="contained"
                                 //    if addshow is true then setaddshow false else if updateshow is true then setupdateshow false
-                                onClick={() => addShow ? setaddShow(!addShow) : setupdateShow(!updateShow)}
+                                onClick={() => {
+                                    addShow ? setaddShow(!addShow) : setupdateShow(!updateShow);
+                                    setName('')
+                                    setDesignation('')
+
+                                    setEmail('')
+                                    setPhn('')
+                                    setEmploytype('')
+                                    setDutyHoursPerDay('')
+                                    setDutyHoursPerMonth('')
+                                    setChecked(false)
+                                    setId('')
+                                }}
                             >
                                 Back
                             </Button>
@@ -115,71 +126,25 @@ const DoctorsList = () => {
                                     value={designation ? designation : defaultdesignationOptions}
                                 />
                             </div>
-                            {
-                                updateShow?
-                                <div className={classes.formItem}>
-                                <label htmlFor="domain">Domain:</label>
-                                {/* map domain and a button to remove or add */}
-                                {
-                                    domain.map((item, index) => {
-                                        return (
-                                            <div className={classes.domainList} key={index}>
-                                                <div className={classes.domainItem}>
-                                                    <label htmlFor="domain">{item}</label>
-                                                    <Button
-                                                        variant="contained"
-                                                        onClick={() => {
-                                                            setDomain(domain.filter((item, i) => i === index));
-                                                            RemoveDomainHandler(
-                                                                id,
-                                                                domain.filter((item, i) => i === index)
-                                                            );
-                                                            console.log(domain.filter((item, i) => i !== index));
-                                                        }}
-                                                    >
-                                                        Remove
-                                                    </Button>
-                                                    </div>
-                                                    </div>
-                                        )
-                                    }
-                                    )
-                                }
-                                </div>
-                                :
-                                <div className={classes.formItem}>
-                                <label htmlFor="domain">Domain:</label>
-                                {
-                                    // domainList.map
-                                    domainList.map((item, index) => {
-                                        return (
-                                            <div className={classes.domainList} key={index}>
-                                                <div className={classes.domainItem}>
-                                                    <label htmlFor="domain">{item.name}</label>
-                                                    <Switch
-                                                        checked={item.checked}
-                                                        onChange={(e)=>{setDomainList(
-                                                            domainList.map((item, i) => {
-                                                                if (i === index) {
-                                                                    item.checked = e.target.checked;
-                                                                }
-                                                                return item;
-                                                            }
-                                                            )
-                                                        ); setDomain(
-                                                            domainList.filter((item)=>item.checked===true).map((item)=>item.name)
-                                                        )}}
-                                                    />
-                                                </div>
-                                            </div>
-                                        )
-                                    }
-                                    )
-                                }
-                                
+                            <div className={classes.formItem}>
+                                <label htmlFor="ECG">ECG:</label>
+                                <Switch
+                                    checked={ecg}
+                                    onChange={() =>
+                                        setEcg(!ecg)}
+
+                                />
                             </div>
-                            }
-                           
+                            <div className={classes.formItem}>
+                                <label htmlFor="domain">ECHO:</label>
+                                <Switch
+                                    checked={echo}
+                                    onChange={
+                                        () => setEcho(!echo)
+                                    }
+
+                                />
+                            </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="email">Email:</label>
                                 <input type="email" name="email" id="email"
@@ -225,7 +190,6 @@ const DoctorsList = () => {
                                 <Switch
                                     checked={checked}
                                     onChange={handleChange}
-                                    inputProps={{ 'aria-label': 'controlled' }}
                                 />
                             </div>
                             <div className={classes.formItem}>
@@ -257,7 +221,8 @@ const DoctorsList = () => {
                                         <tr>
                                             <th className={classes.tableHeaderItem}>Name</th>
                                             <th className={classes.tableHeaderItem}>Designation</th>
-                                            <th className={classes.tableHeaderItem}>Domain</th>
+                                            <th className={classes.tableHeaderItem}>ECG</th>
+                                            <th className={classes.tableHeaderItem}>ECHO</th>
                                             <th className={classes.tableHeaderItem}>Email</th>
                                             <th className={classes.tableHeaderItem}>Mobile</th>
                                             <th className={classes.tableHeaderItem}>Type</th>
@@ -271,21 +236,27 @@ const DoctorsList = () => {
                                     {
                                         // if searchData is not null then map searchData else map doctors
                                         searchData ?
-                                        searchData && searchData?.searchDoctor?.map((doctor,index) => (
+                                            searchData && searchData?.searchDoctor?.map((doctor, index) => (
                                                 <tbody className={classes.tableRow} key={index}>
                                                     <tr>
                                                         <td className={classes.tableRowItem}>{doctor.name}</td>
                                                         <td className={classes.tableRowItem}>{doctor.designation}</td>
-                                                        <td className={classes.tableRowItem}>{
-                                                            // map doctor.domain
-                                                            doctor.domain?(
-                                                            doctor.domain.map((domain,index) => (
-                                                                <span key={index}>{domain} </span>
-                                                            )))
-                                                            :
-                                                            null
-                                                            
-                                                        }</td>
+                                                        <td className={classes.tableRowItem}>
+                                                            {
+                                                                doctor?.ecg ?
+                                                                    "yes"
+                                                                    :
+                                                                    "no"
+                                                            }
+                                                        </td>
+                                                        <td className={classes.tableRowItem}>
+                                                            {
+                                                                doctor?.echo ?
+                                                                    "yes"
+                                                                    :
+                                                                    "no"
+                                                            }
+                                                        </td>
                                                         <td className={classes.tableRowItem}>{doctor.email}</td>
                                                         <td className={classes.tableRowItem}>{doctor.mobile}</td>
                                                         <td className={classes.tableRowItem}>
@@ -317,11 +288,7 @@ const DoctorsList = () => {
                                                                     setupdateShow(true)
                                                                     setName(doctor.name)
                                                                     setDesignation(doctor.designation)
-                                                                    setDomain(
-                                                                        doctor?.domain.map((domainEl) => (
-                                                                            domainEl
-                                                                        ))
-                                                                    )
+
                                                                     setEmail(doctor.email)
                                                                     setPhn(doctor.mobile)
                                                                     setEmploytype(doctor.type)
@@ -338,21 +305,26 @@ const DoctorsList = () => {
                                                 </tbody>
                                             ))
                                             :
-                                            doctors && doctors.getAllDoctors.map((doctor,index) => (
+                                            doctors && doctors.getAllDoctors.map((doctor, index) => (
                                                 <tbody className={classes.tableRow} key={index}>
                                                     <tr>
                                                         <td className={classes.tableRowItem}>{doctor.name}</td>
                                                         <td className={classes.tableRowItem}>{doctor.designation}</td>
-                                                        <td className={classes.tableRowItem}>{
-                                                            // map doctor.domain
-                                                            doctor.domain?(
-                                                            doctor.domain.map((domain,index) => (
-                                                                <span key={index}>{domain} </span>
-                                                            )))
-                                                            :
-                                                            null
-                                                            
-                                                        }
+                                                        <td className={classes.tableRowItem}>
+                                                            {
+                                                                doctor?.ecg ?
+                                                                    "yes"
+                                                                    :
+                                                                    "no"
+                                                            }
+                                                        </td>
+                                                        <td className={classes.tableRowItem}>
+                                                            {
+                                                                doctor?.echo ?
+                                                                    "yes"
+                                                                    :
+                                                                    "no"
+                                                            }
                                                         </td>
                                                         <td className={classes.tableRowItem}>{doctor.email}</td>
                                                         <td className={classes.tableRowItem}>{doctor.mobile}</td>
@@ -390,11 +362,8 @@ const DoctorsList = () => {
                                                                     setupdateShow(true)
                                                                     setName(doctor.name)
                                                                     setDesignation(doctor.designation)
-                                                                    setDomain(
-                                                                        doctor?.domain.map((domainEl) => (
-                                                                            domainEl
-                                                                        ))
-                                                                    )
+                                                                    setEcg(doctor?.ecg)
+                                                                    setEcho(doctor?.echo)
                                                                     setEmail(doctor.email)
                                                                     setPhn(doctor.mobile)
                                                                     setEmploytype(doctor.type)
