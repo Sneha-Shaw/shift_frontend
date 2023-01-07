@@ -7,7 +7,10 @@ const Archives = () => {
   return (
     <div className={classes.root}>
         <Sidebar />
-        
+        <div className={classes.main}>
+            <h1>Archives</h1>
+            
+        </div>
     </div>
   )
 }

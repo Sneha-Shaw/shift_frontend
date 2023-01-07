@@ -10,7 +10,8 @@ import { Button, Modal } from '@mui/material'
 const DailyView = () => {
     const classes = useStyles()
     const {
-        // managerInfo,
+        managerInfo,
+        user,
         calender,
         slots,
         doctors,
@@ -19,10 +20,13 @@ const DailyView = () => {
         setShow,
         show2,
         setShow2,
-        show3,
-        setShow3
+        domain,
+        setDomain
+        // show3,
+        // setShow3
     } = ViewLogic()
-
+    // const domain = "ecg"
+    const dateRange = "2023-1-12 to 2023-2-12"
     const tableRef = useRef(null);
     return (
         <div className={classes.root}>
@@ -32,7 +36,8 @@ const DailyView = () => {
                 <div className={classes.grid}>
                     <div className={classes.btnheader}>
                         <DownloadTableExcel
-                            filename="users table"
+                            // filename ={ecg_dateRange}
+                            filename={`${domain}_${dateRange}`}
                             sheet="users"
                             currentTableRef={tableRef.current}>
                             <Button
@@ -42,26 +47,38 @@ const DailyView = () => {
                                 Export to Excel
                             </Button>
                         </DownloadTableExcel>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => setShow2(true)}
-                        >
-                            Generate Roster manually
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                        >
-                            Generate Roster Automatically
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={() => setShow(true)}
-                        >
-                            Create Shift
-                        </Button>
+                        {
+                            managerInfo && (
+                                <div
+                                    style={{
+                                        display: "flex",
+                                        justifyContent: "space-around",
+                                        width: "70%"
+                                    }}>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={() => setShow2(true)}
+                                    >
+                                        Generate Roster manually
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                    >
+                                        Generate Roster Automatically
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={() => setShow(true)}
+                                    >
+                                        Create Shift
+                                    </Button>
+                                </div>
+                            )
+                        }
+
                     </div>
                     <Modal
                         open={show2}
@@ -152,6 +169,7 @@ const DailyView = () => {
                                         name="domain"
                                         id="domain"
                                         className={classes.modalBodyItemSelect}
+                                        onChange={(e) => setDomain(e.target.value)}
                                     >
                                         <option value="">Select Domain</option>
                                         <option value="">ECG</option>
@@ -176,8 +194,8 @@ const DailyView = () => {
                                     >
                                         <option value="">Select Slot</option>
                                         {
-                                            slots?.getAllSlots?.map((slot, index) => (
-                                                <option value={slot.slotTime} key={index}>
+                                            slots?.getAllSlots?.map((slot, slotIndex3) => (
+                                                <option value={slot.slotTime} key={slotIndex3}>
                                                     {slot.slotTime}
                                                 </option>
                                             ))
@@ -191,8 +209,8 @@ const DailyView = () => {
                                         overflowY: "scroll",
                                     }}>
                                         {
-                                            doctors?.getAllDoctors?.map((doctor, index) => (
-                                                <div key={index}>
+                                            doctors?.getAllDoctors?.map((doctor, doctorAddIndex) => (
+                                                <div key={doctorAddIndex}>
                                                     {/* checkbox */}
                                                     <input
                                                         type="checkbox"
@@ -226,211 +244,275 @@ const DailyView = () => {
                             </div>
                         </div>
                     </Modal>
-                    <div className={classes.domain}>
-                        <label
-                            htmlFor="domain"
-                            className={classes.domainLabel}
-                        >
-                            Select A Domain to view Roster:
-                        </label>
-                        <select
-                            name="domain"
-                            id="domain"
-                            className={classes.domainSelect}
-                        >
-                            <option value="">Select Domain</option>
-                            <option value="">ECG</option>
-                            <option value="">ECHO</option>
-                        </select>
-                    </div>
-                    {/* <table className={classes.table} ref={tableRef}>
-                        <thead>
-                            <tr>
-                                <th className={classes.dateHeader}>
-                                    <div>
-                                        Date
-                                    </div>
-                                </th>
-                                <th>
-                                    <div>
-                                        Day
-                                    </div>
-                                </th>
-                                <th>
-                                    <div>
-                                        Doctors
-                                    </div>
-                                </th>
-                                <th>
-                                    <div>
-                                        Total Duty Hours
-                                    </div>
-                                </th>
-                                <th>
-                                    <div>
-                                        Hours Entitled to
-                                    </div>
-                                </th>
+                    {
+                        managerInfo ?
+                            <div className={classes.domain}>
+                                <label
+                                    htmlFor="domain"
+                                    className={classes.domainLabel}
+                                >
+                                    Select A Domain to view Roster:
+                                </label>
+                                <select
+                                    name="domain"
+                                    id="domain"
+                                    className={classes.domainSelect}
+                                >
+                                    <option value="">Select Domain</option>
+                                    <option value="">ECG</option>
+                                    <option value="">ECHO</option>
+                                </select>
+                            </div>
+                            :
+                            <div className={classes.domain}>
+                                <label
+                                    htmlFor="domain"
+                                    className={classes.domainLabel}
+                                >
+                                    Select A Domain to view Roster:
+                                </label>
                                 {
-                                    slots?.getAllSlots?.map((slot, index) => (
-                                        <th className={classes.dateHeader} key={index}>
-                                            <div>
-                                                {/* {slot.slotTime.slice(0, 8)} 
-                                                {slot.slotTime}
-                                            </div>
-                                        </th>
-                                    ))
+                                    user && user?.ecg && user?.echo ?
+                                        <select
+                                            name="domain"
+                                            id="domain"
+                                            className={classes.domainSelect}
+                                        // onChange={(e) => handleDomain(e)}
+                                        >
+                                            <option value="">Select Domain</option>
+                                            <option value="ecg">ECG</option>
+                                            <option value="echo">ECHO</option>
+                                        </select>
+                                        :
+                                        user && user?.ecg ?
+                                            <input
+                                                type="text"
+                                                name="domain"
+                                                id="domain"
+                                                className={classes.domainSelect}
+                                                value="ECG"
+                                                disabled
+                                            />
+                                            :
+                                            user && user?.echo ?
+                                                <input
+                                                    type="text"
+                                                    name="domain"
+                                                    id="domain"
+                                                    className={classes.domainSelect}
+                                                    value="ECHO"
+                                                    disabled
+                                                />
+                                                :
+                                                <input
+                                                    type="text"
+                                                    name="domain"
+                                                    id="domain"
+                                                    className={classes.domainSelect}
+                                                    value="No Domain"
+                                                    disabled
+                                                />
+
                                 }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                calender?.getCalendar?.calendarArray?.map((date, index) => (
-                                    <tr key={index}>
-                                        <td className={classes.dateBody}>
-                                            {
-                                                doctors?.getAllDoctors?.map((doctor, index) => (
-                                                    <div key={index} style={{
-                                                        borderTop: ".5px solid #06283D",
-                                                        borderLeft: ".5px solid #06283D",
-                                                        borderRight: ".5px solid #06283D",
-                                                        padding: "1rem 0",
-                                                        width: "100%",
-                                                        height: "2rem",
-                                                        // border of last child is #000
-                                                        borderBottom: index === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
-                                                    }}>
-                                                        {date.dayNumber + '-' + date.dayMonth + '-' + date.dayYear}
-                                                    </div>
-                                                ))
-                                            }
-                                        </td>
-                                        <td>
-                                            {
-                                                doctors?.getAllDoctors?.map((doctor, index) => (
-                                                    <div key={index} style={{
-                                                        borderTop: ".5px solid #06283D",
-                                                        borderLeft: ".5px solid #06283D",
-                                                        borderRight: ".5px solid #06283D",
-                                                        padding: "1rem 0",
-                                                        width: "100%",
-                                                        height: "2rem",
-                                                        // border of last child is #000
-                                                        borderBottom: index === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
-                                                    }}>
-                                                        {date.dayName.slice(0, 3)}
-                                                    </div>
-                                                ))
-                                            }
-                                        </td>
-                                        <td>
-                                            <div>
+                            </div>
+                    }
+                    <div className={classes.tableContainer}>
+                        <table className={classes.table}>
+                            <thead>
+                                <tr>
+                                    <th><div>Date</div></th>
+                                    <th>
+                                        <div>Day</div>
+                                    </th>
+                                    <th>
+                                        <div>Doctors</div>
+                                    </th>
+                                    <th>
+                                        <div>Total Duty Hours</div>
+                                    </th>
+                                    <th>
+                                        <div>Hours Entitled to</div>
+                                    </th>
+                                    {
+                                        slots?.getAllSlots?.map((slot, slotIndex1) => (
+                                            <th className={classes.dateHeader} key={slotIndex1}>
+                                                <div>
+                                                    {slot.slotTime}
+                                                </div>
+                                            </th>
+                                        ))
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                {
+                                    calender?.getCalendar?.calendarArray?.map((date, calendarIndex) =>
+                                        <tr key={calendarIndex}>
+                                            <td>
                                                 {
-                                                    doctors?.getAllDoctors?.map((doctor, index) => (
-                                                        <div key={index} style={{
+                                                    //doctor.getAllDoctors length and map the div 
+                                                    doctors?.getAllDoctors?.map((doctor, docindex) => (
+                                                        <div key={doctor?._id} style={{
                                                             borderTop: ".5px solid #06283D",
                                                             borderLeft: ".5px solid #06283D",
                                                             borderRight: ".5px solid #06283D",
-                                                            padding: "1rem 0",
                                                             width: "100%",
-                                                            height: "2rem",
+                                                            height: "4rem",
+                                                            display: "flex",
+                                                            alignItems: "center",
+                                                            justifyContent: "center",
                                                             // border of last child is #000
-                                                            borderBottom: index === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                            borderBottom: docindex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                        }}>
+                                                            {date.dayNumber + '-' + date.dayMonth + '-' + date.dayYear}
+                                                        </div>
+                                                    ))
+                                                }
+                                            </td>
+                                            <td>
+                                                {
+                                                    doctors?.getAllDoctors?.map((doctor, docindex) => (
+                                                        <div key={doctor._id} style={{
+                                                            borderTop: ".5px solid #06283D",
+                                                            borderLeft: ".5px solid #06283D",
+                                                            borderRight: ".5px solid #06283D",
+                                                            width: "100%",
+                                                            height: "4rem",
+                                                            display: "flex",
+                                                            alignItems: "center",
+                                                            justifyContent: "center",
+                                                            // border of last child is #000
+                                                            borderBottom: docindex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                        }}>
+                                                            {date.dayName.slice(0, 3)}
+                                                        </div>
+                                                    ))
+                                                }
+                                            </td>
+                                            <td>
+                                                {
+                                                    doctors?.getAllDoctors?.map((doctor, docindex) => (
+                                                        <div key={doctor._id} style={{
+                                                            borderTop: ".5px solid #06283D",
+                                                            borderLeft: ".5px solid #06283D",
+                                                            borderRight: ".5px solid #06283D",
+                                                            width: "100%",
+                                                            height: "4rem",
+                                                            display: "flex",
+                                                            alignItems: "center",
+                                                            justifyContent: "center",
+                                                            // border of last child is #000
+                                                            borderBottom: docindex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
                                                         }}>
                                                             {doctor.name}
                                                         </div>
                                                     ))
                                                 }
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
+                                            </td>
+                                            <td>
                                                 {
-                                                    doctors?.getAllDoctors?.map((doctor, index) => (
-                                                        <div key={index} style={{
+                                                    doctors?.getAllDoctors?.map((doctor, docindex) => (
+                                                        <div key={doctor._id} style={{
                                                             borderTop: ".5px solid #06283D",
                                                             borderLeft: ".5px solid #06283D",
                                                             borderRight: ".5px solid #06283D",
-                                                            padding: "1rem 0",
                                                             width: "100%",
-                                                            height: "2rem",
+                                                            height: "4rem",
+                                                            display: "flex",
+                                                            alignItems: "center",
+                                                            justifyContent: "center",
                                                             // border of last child is #000
-                                                            borderBottom: index === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                            borderBottom: docindex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
                                                         }}>
                                                             {doctor.dutyHoursAllotedPerMonth}
                                                         </div>
                                                     ))
                                                 }
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div>
+                                            </td>
+                                            <td>
                                                 {
-                                                    doctors?.getAllDoctors?.map((doctor, index) => (
-                                                        <div key={index} style={{
+                                                    doctors?.getAllDoctors?.map((doctor, docindex) => (
+                                                        <div key={doctor._id} style={{
                                                             borderTop: ".5px solid #06283D",
                                                             borderLeft: ".5px solid #06283D",
                                                             borderRight: ".5px solid #06283D",
-                                                            padding: "1rem 0",
                                                             width: "100%",
-                                                            height: "2rem",
+                                                            height: "4rem",
+                                                            display: "flex",
+                                                            alignItems: "center",
+                                                            justifyContent: "center",
                                                             // border of last child is #000
-                                                            borderBottom: index === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                            borderBottom: docindex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
                                                         }}>
                                                             {doctor.dutyHoursPerMonth}
                                                         </div>
                                                     ))
                                                 }
-                                            </div>
-                                        </td>
-                                        {
-                                            slots?.getAllSlots?.map((slot, index) => (
-                                                <td className={classes.dateHeader} key={index}>
-                                                    <div>
-                                                        {
-                                                            doctors?.getAllDoctors?.map((doctor, index) => (
-                                                                <div key={index} style={{
-                                                                    borderTop: ".5px solid #06283D",
-                                                                    borderLeft: ".5px solid #06283D",
-                                                                    borderRight: ".5px solid #06283D",
-                                                                    padding: "1rem 0",
-                                                                    width: "100%",
-                                                                    height: "2rem",
-                                                                    // border of last child is #000
-                                                                    borderBottom: index === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
-                                                                }}>
-                                                                    {/* if current doctor is alloted at current doctor then print 1 *
-                                                                    {
-                                                                        shifts?.data?.map((shift, index) => (
-                                                                            <div key={index}>
-                                                                                {
-                                                                                    shift?.doctors.map((doctorShift, index) => (
-                                                                                        <td key={index}>
-                                                                                            {
-                                                                                                doctorShift === doctor._id && shift?.shiftDate === date.dayYear + '-' + date.dayMonth + '-' + date.dayNumber && shift?.shiftTime === slot.slotTime && (
-                                                                                                    <div>
-                                                                                                        1
-                                                                                                    </div>
-                                                                                                )}
-                                                                                        </td>
-                                                                                    ))
-                                                                                }
-                                                                            </div>
-                                                                        ))
-                                                                    }
-                                                                </div>
-                                                            ))
-                                                        }
-                                                    </div>
-                                                </td>
-                                            ))
-                                        }
-                                    </tr>
-                                ))
-                            }
+                                            </td>
+                                            {
+                                                slots?.getAllSlots?.map((slot, slotIndex2) => (
+                                                    <td className={classes.dateHeader} key={slotIndex2}>
+                                                        <div>
+                                                            {
+                                                                doctors?.getAllDoctors?.map((doctor, doctorIndex6) => (
+                                                                    <div key={doctorIndex6} style={{
+                                                                        borderTop: ".5px solid #06283D",
+                                                                        borderLeft: ".5px solid #06283D",
+                                                                        borderRight: ".5px solid #06283D",
+                                                                        width: "100%",
+                                                                        height: "4rem",
+                                                                        display: "flex",
+                                                                        alignItems: "center",
+                                                                        justifyContent: "center",
+                                                                        // border of last child is #000
+                                                                        borderBottom: doctorIndex6 === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                                    }}>
+                                                                        {/*  if current doctor is alloted at current shift then print 1  */}
+                                                                        {
+                                                                            shifts?.data?.map((shift, shiftIndex) => (
+                                                                                <div key={shiftIndex} style={{
+                                                                                    width: "100%",
+                                                                                    height: "100%",
+                                                                                }}>
+                                                                                    {
+                                                                                        shift?.doctors.map((doctorShift, doctorIndex7) => (
 
-                        </tbody>
-                    </table> */}
+
+                                                                                            doctorShift === doctor._id && shift?.shiftDate === date.dayYear + '-' + date.dayMonth + '-' + date.dayNumber && shift?.shiftTime === slot.slotTime && (
+                                                                                                <div key={doctorIndex7}
+                                                                                                    style={{
+                                                                                                        width: "100%",
+                                                                                                        height: "100%",
+                                                                                                    }}
+                                                                                                    onClick={() => {
+                                                                                                        console.log('not empty');
+                                                                                                    }}
+                                                                                                >
+                                                                                                    1
+                                                                                                </div>
+                                                                                            )
+                                                                                            // </div>
+                                                                                        ))
+                                                                                    }
+                                                                                </div>
+                                                                            ))
+                                                                        }
+                                                                    </div>
+                                                                ))
+                                                            }
+                                                        </div>
+                                                    </td>
+                                                ))
+                                            }
+
+                                        </tr>
+                                    )
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

@@ -16,10 +16,10 @@ export default makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
+        // justifyContent: "center",
         background: "#f7f7f7",
         padding: "2rem",
-        margin: "2rem",
+        margin: "1rem auto",
         [theme.breakpoints.down("sm")]: {
             width: "90%",
             // margin: "1rem",
@@ -28,8 +28,7 @@ export default makeStyles((theme) => ({
     },
     grid: {
         width: "100%",
-        height: "90%",
-        overflowX: "scroll",
+        height: "100%",
         background: "#f7f7f7",
         '& button': {
             background: "#06283D",
@@ -71,15 +70,18 @@ export default makeStyles((theme) => ({
 
 
     },
+    tableContainer: {
+        width: "100%",
+        height: "90%",
+        overflowX: "scroll",
+    },
     table: {
         width: "100%",
         height: "100%",
         borderCollapse: "collapse",
         border: ".5px solid #06283D",
         '&>thead': {
-            width: "100%",
             '&>tr': {
-                width: "100%",
                 '&>th': {
                     fontWeight: "bold",
                     padding: "1rem",
@@ -107,7 +109,8 @@ export default makeStyles((theme) => ({
                     // border: ".5px solid #062 83D",
                     width: "8rem",
                     height: "fit-content",
-                    textAlign: "center"
+                    textAlign: "center",
+                    
                 }
             }
         }
@@ -211,7 +214,7 @@ export default makeStyles((theme) => ({
                 '&>div': {
                     width: "100%",
                     display: "flex",
-                   
+
                     alignItems: "center",
                     justifyContent: "flex-start",
                     margin: "1rem 0",
