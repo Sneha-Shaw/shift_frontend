@@ -49,7 +49,9 @@ const DoctorsList = () => {
         ecg,
         setEcg,
         echo,
-        setEcho
+        setEcho,
+        handleecgChange,
+        handleechoChange
     } = DoctorsLogic()
     return (
         <div className={classes.root}
@@ -85,7 +87,8 @@ const DoctorsList = () => {
                                     addShow ? setaddShow(!addShow) : setupdateShow(!updateShow);
                                     setName('')
                                     setDesignation('')
-
+                                    setEcg(false)
+                                    setEcho(false)
                                     setEmail('')
                                     setPhn('')
                                     setEmploytype('')
@@ -130,8 +133,7 @@ const DoctorsList = () => {
                                 <label htmlFor="ECG">ECG:</label>
                                 <Switch
                                     checked={ecg}
-                                    onChange={() =>
-                                        setEcg(!ecg)}
+                                    onChange={handleecgChange}
 
                                 />
                             </div>
@@ -140,7 +142,7 @@ const DoctorsList = () => {
                                 <Switch
                                     checked={echo}
                                     onChange={
-                                        () => setEcho(!echo)
+                                        handleechoChange
                                     }
 
                                 />
@@ -288,7 +290,8 @@ const DoctorsList = () => {
                                                                     setupdateShow(true)
                                                                     setName(doctor.name)
                                                                     setDesignation(doctor.designation)
-
+                                                                    setEcg(doctor?.ecg)
+                                                                    setEcho(doctor?.echo)
                                                                     setEmail(doctor.email)
                                                                     setPhn(doctor.mobile)
                                                                     setEmploytype(doctor.type)

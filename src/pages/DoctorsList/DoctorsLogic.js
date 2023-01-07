@@ -17,11 +17,7 @@ export const DoctorsLogic = () => {
     const { doctorInfo: searchData } = useSelector((state) => state.searchDoctor)
 
     const dispatch = useDispatch()
-    const [checked, setChecked] = useState(false);
-
-    const handleChange = (event) => {
-        setChecked(event.target.checked);
-    };
+   
 
     useEffect(() => {
         dispatch(getAllDoctors())
@@ -46,7 +42,19 @@ export const DoctorsLogic = () => {
     const [dutyHoursPerMonth, setDutyHoursPerMonth] = useState(192)
     const [dutyHoursPerDay, setDutyHoursPerDay] = useState(8)
     const [id, setId] = useState('')
+    const [checked, setChecked] = useState(false);
 
+    const handleChange = (event) => {
+        setChecked(event.target.checked);
+    };
+    
+    const handleecgChange=(e)=>{
+        setEcg(e.target.checked)
+    }
+
+    const handleechoChange=(e)=>{
+        setEcho(e.target.checked)
+    }
 
 
     const designationOptions = [
@@ -203,7 +211,9 @@ export const DoctorsLogic = () => {
         ecg,
         setEcg,
         echo,
-        setEcho
+        setEcho,
+        handleecgChange,
+        handleechoChange
 
     }
 }
