@@ -14,12 +14,11 @@ const UpdateSlot = () => {
         show,
         setShow,
         slots,
-        days,
         slotOptions,
         slot,
         setSlot,
-        day,
-        setDay,
+        date,
+        setDate,
         setDoctorsNeeded,
         setSeniorNeeded,
         doctorsNeeded,
@@ -54,15 +53,14 @@ const UpdateSlot = () => {
                             </div>
                             <div className={classes.formBody}>
                                 <div className={classes.formBodyItem}>
-                                    <label>Select Day:</label>
+                                    <label>Select Date:</label>
                                     <div>
-                                        <Dropdown
-                                            options={days}
-                                            placeholder="Select an option"
+                                        <input 
+                                            type="date"
                                             onChange={(e) => {
-                                                setDay(e.value)
+                                                setDate(e.target.value)
                                             }}
-                                            value={day}
+                                            value={date}
                                         />
                                     </div>
                                 </div>
@@ -140,7 +138,7 @@ const UpdateSlot = () => {
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Day</th>
+                                            <th>Date</th>
                                             <th>Doctors Needed</th>
                                             <th>Seniors Needed</th>
                                             <th>Update</th>
@@ -155,7 +153,7 @@ const UpdateSlot = () => {
                                                 {(slot.slotTime === searchslot) ?
                                                     slot?.Allotment?.map((allotment, index) => (
                                                         <tr key={index}>
-                                                            <td>{allotment.day}</td>
+                                                            <td>{allotment.date}</td>
                                                             <td>{allotment.DoctorsNeeded}</td>
                                                             <td>{allotment.SeniorNeeded}</td>
                                                             <td>
@@ -163,7 +161,7 @@ const UpdateSlot = () => {
                                                                     variant="contained"
                                                                     onClick={() => {
                                                                         setShow(!show)
-                                                                        setDay(allotment.day)
+                                                                        setDate(allotment.date)
                                                                         setSlot(slot.slotTime)
                                                                         setDoctorsNeeded(allotment.DoctorsNeeded)
                                                                         setSeniorNeeded(allotment.SeniorNeeded)

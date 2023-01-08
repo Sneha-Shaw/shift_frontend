@@ -96,7 +96,7 @@ export default makeStyles((theme) => ({
             '&>div': {
                 width: "60%",
             },
-            '&>input': {
+            '& input': {
                 width: "57%",
                 // height: "2rem",
                 fontSize: "1.5rem",

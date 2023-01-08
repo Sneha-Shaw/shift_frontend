@@ -12,15 +12,7 @@ export const UpdateSlotLogic = () => {
     const [show, setShow] = useState(false)
 
     const dispatch = useDispatch()
-    const days = [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday'
-    ]
+   
 
     const slotOptions =
         slots && slots?.getAllSlots?.map((slot) => {
@@ -29,7 +21,7 @@ export const UpdateSlotLogic = () => {
     const defaultSlotOption = slotOptions && slotOptions[0]
 
     const [slot, setSlot] = useState('')
-    const [day, setDay] = useState('')
+    const [date, setDate] = useState('')
     const [doctorsNeeded, setDoctorsNeeded] = useState(0)
     const [seniorNeeded, setSeniorNeeded] = useState(0)
     const [searchslot,setSearchslot] = useState('')
@@ -42,7 +34,7 @@ export const UpdateSlotLogic = () => {
         if (doctorsNeeded > seniorNeeded) {
             const allotment = [
                 {
-                    day,
+                    date,
                     DoctorsNeeded: doctorsNeeded,
                     SeniorNeeded: seniorNeeded
                 }
@@ -78,13 +70,12 @@ export const UpdateSlotLogic = () => {
         show,
         setShow,
         slots,
-        days,
         slotOptions,
         defaultSlotOption,
         slot,
         setSlot,
-        day,
-        setDay,
+        date,
+        setDate,
         setDoctorsNeeded,
         setSeniorNeeded,
         doctorsNeeded,
