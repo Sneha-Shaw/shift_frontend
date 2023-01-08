@@ -171,20 +171,20 @@ const SubSidebar = () => {
                             </ul>
                         </li>
                         <li className={classes.listItem}>
-                            <Link to="" className={classes.navLink}>
+                            {/* <Link to="" className={classes.navLink}>
                                 <span className={classes.listItemText}>Views</span>
                             </Link>
                             <ul className={classes.subList}>
-                                <li className={classes.subListItem}>
-                                    <NavLink to='/self-service/view/daily'
+                                <li className={classes.subListItem}> */}
+                                    <NavLink to='/self-service/schedule'
                                         style={({ isActive }) => ({
                                             color: isActive ? '#47B5FF' : 'none',
                                         })} className={classes.navLink}>
                                         <ArrowForwardIosIcon />
-                                        <span className={classes.listItemText}>Daily View</span>
+                                        <span className={classes.listItemText}>Your Schedule</span>
                                     </NavLink>
-                                </li>
-                            </ul>
+                                {/* </li>
+                            </ul> */}
                         </li>
                     </ul>
             }

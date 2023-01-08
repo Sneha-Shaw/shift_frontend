@@ -178,8 +178,8 @@ const Navbar = () => {
         </MenuItem>
       </Menu>
       {/* menu */}
-      <div className={classes.menu} onClick={() => setShow(!show)}>
-        <MenuIcon fontSize="large" />
+      <div className={classes.menu}>
+        <MenuIcon fontSize="large"  onClick={() => setShow(!show)} />
         <Avatar sx={{
           width: 32,
           height: 32,

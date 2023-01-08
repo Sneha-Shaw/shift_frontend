@@ -79,7 +79,7 @@ const Sidebar = () => {
                     })} className={classes.navLink}>
                     <ArchiveIcon fontSize="large" />
                     <h3>
-                    Archives
+                        Archives
                     </h3>
                 </NavLink>
 
@@ -152,15 +152,37 @@ const Sidebar = () => {
                                     <span className={classes.listItemText}>Update Slots</span>
                                 </NavLink>
                             </li>
-                            <li className={classes.subListItem}>
-                                        <NavLink to='/self-service/requests/shift'
-                                            style={({ isActive }) => ({
-                                                color: isActive ? '#47B5FF' : 'none',
-                                            })} className={classes.navLink} onClick={() => setShowSubList(!showSubList)}>
-                                            <ArrowForwardIosIcon />
-                                            <span className={classes.listItemText}>Shift Replacement</span>
-                                        </NavLink>
-                                    </li>
+                            <li className={classes.listItem}>
+                                <NavLink
+                                    to={
+                                        managerInfo ?
+                                            "/attendance/availability"
+                                            :
+                                            "/self-service/availability"
+                                    }
+                                    style={({ isActive }) => ({
+                                        color: isActive ? '#47B5FF' : 'none',
+                                    })} className={classes.navLink} onClick={() => setShowSubList(!showSubList)}>
+                                    <span className={classes.listItemText}>Update Availability</span>
+                                </NavLink>
+                            </li>
+                            <li className={classes.listItem}>
+                                <NavLink to='/self-service/requests/shift'
+                                    style={({ isActive }) => ({
+                                        color: isActive ? '#47B5FF' : 'none',
+                                    })} className={classes.navLink} onClick={() => setShowSubList(!showSubList)}>
+                                   
+                                    <span className={classes.listItemText}>Shift Replacement</span>
+                                </NavLink>
+                            </li>
+                            <li className={classes.listItem}>
+                                <NavLink to='/attendance/shift-replace-requests'
+                                    style={({ isActive }) => ({
+                                        color: isActive ? '#47B5FF' : 'none',
+                                    })} className={classes.navLink} onClick={() => setShowSubList(!showSubList)}>
+                                    <span className={classes.listItemText}>Shift Replacement Requests</span>
+                                </NavLink>
+                            </li>
                         </ul>
                         :
                         <ul className={classes.list}>
@@ -209,21 +231,21 @@ const Sidebar = () => {
                                 </ul>
                             </li>
                             <li className={classes.listItem}>
-                                <Link to="" className={classes.navLink} onClick={() => setShowSubList(!showSubList)}>
+                                {/* <Link to="" className={classes.navLink} onClick={() => setShowSubList(!showSubList)}>
                                     <span className={classes.listItemText}>Views</span>
                                 </Link>
                                 <ul className={classes.subList}>
-                                    <li className={classes.subListItem}>
-                                        <NavLink to='/self-service/view/daily'
-                                            style={({ isActive }) => ({
-                                                color: isActive ? '#47B5FF' : 'none',
-                                            })} className={classes.navLink} onClick={() => setShowSubList(!showSubList)}>
-                                            <ArrowForwardIosIcon />
-                                            <span className={classes.listItemText}>Daily View</span>
-                                        </NavLink>
-                                    </li>
+                                    <li className={classes.subListItem}> */}
+                                <NavLink to='/self-service/schedule'
+                                    style={({ isActive }) => ({
+                                        color: isActive ? '#47B5FF' : 'none',
+                                    })} className={classes.navLink} onClick={() => setShowSubList(!showSubList)}>
+                                    <ArrowForwardIosIcon />
+                                    <span className={classes.listItemText}>Your Schedule</span>
+                                </NavLink>
+                                {/* </li>
 
-                                </ul>
+                                </ul> */}
                             </li>
                         </ul>
 

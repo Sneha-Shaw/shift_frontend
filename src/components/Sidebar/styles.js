@@ -34,7 +34,7 @@ export default makeStyles((theme) => ({
             color: "#fff",
             fontSize: "1.8rem",
             fontWeight: "bold",
-            padding: "1rem 0",
+            padding: ".5rem 0",
             '&:hover':{
                 backgroundColor: "#256D85",
             },

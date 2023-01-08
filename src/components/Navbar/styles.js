@@ -18,9 +18,9 @@ export default makeStyles((theme) => ({
             // left: "1rem",
             // transform: "translateY(-50%)",
             justifyContent: "space-between",
-            width: "95%",
+            width: "90%",
             alignItems: "center",
-            padding: "2rem 0.5rem"
+            padding: "2rem 1.5rem"
         }
     },
     close: {
