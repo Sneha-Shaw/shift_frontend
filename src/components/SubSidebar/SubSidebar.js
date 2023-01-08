@@ -180,7 +180,6 @@ const SubSidebar = () => {
                                         style={({ isActive }) => ({
                                             color: isActive ? '#47B5FF' : 'none',
                                         })} className={classes.navLink}>
-                                        <ArrowForwardIosIcon />
                                         <span className={classes.listItemText}>Your Schedule</span>
                                     </NavLink>
                                 {/* </li>

@@ -21,6 +21,7 @@ import Settings from "./pages/Settings/Settings"
 import ForgotPassword from './pages/ForgotPassword/ForgotPassword'
 import AddDomain from './pages/AddDomain/AddDomain'
 import Archives from './pages/Archives/Archives'
+import Schedule from './pages/Schedule/Schedule'
 
 import { useSelector } from "react-redux";
 
@@ -112,6 +113,20 @@ const Router = () => {
                                 <>
                                     <Navbar />
                                     <ShiftReplace />
+                                </>
+                            ) : (
+                                <Navigate to="/login" />
+                            )
+                        }
+                    />
+                    <Route
+                        exact
+                        path="/self-service/schedule"
+                        element={
+                            userInfo ? (
+                                <>
+                                    <Navbar />
+                                    <Schedule />
                                 </>
                             ) : (
                                 <Navigate to="/login" />
