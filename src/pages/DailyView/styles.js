@@ -12,14 +12,14 @@ export default makeStyles((theme) => ({
     },
     main: {
         width: "70%",
-        height: "90%",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         // justifyContent: "center",
         background: "#f7f7f7",
-        padding: "2rem",
-        margin: "1rem auto",
+        padding: "0 2rem",
+        margin: "0 auto",
         [theme.breakpoints.down("sm")]: {
             width: "90%",
             // margin: "1rem",
@@ -72,7 +72,7 @@ export default makeStyles((theme) => ({
     },
     tableContainer: {
         width: "100%",
-        height: "90%",
+        height: "70%",
         overflowX: "scroll",
     },
     table: {

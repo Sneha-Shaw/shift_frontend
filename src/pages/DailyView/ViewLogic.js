@@ -56,6 +56,20 @@ export const ViewLogic = () => {
             dispatch(getSingleUser(userInfo._id))
     }, [dispatch, userInfo])
 
+    // if user.domain is ecg set domain ecg
+    useEffect(() => {
+        if (user && user.ecg === true) {
+            setDomain('ecg')
+        }
+    }, [user])
+
+    // if user.domain is echo set domain echo
+    useEffect(() => {
+        if (user && user.echo === true) {
+            setDomain('echo')
+        }
+    }, [user])
+
 
     return {
         managerInfo,

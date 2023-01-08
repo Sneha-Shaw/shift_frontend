@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import useStyles from './styles'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import SubSidebar from '../../components/SubSidebar/SubSidebar'
@@ -25,7 +25,7 @@ const DailyView = () => {
         // show3,
         // setShow3
     } = ViewLogic()
-    // const domain = "ecg"
+
     const dateRange = "2023-1-12 to 2023-2-12"
     const tableRef = useRef(null);
     return (
@@ -53,7 +53,7 @@ const DailyView = () => {
                                     style={{
                                         display: "flex",
                                         justifyContent: "space-around",
-                                        width: "70%"
+                                        width: "80%"
                                     }}>
                                     <Button
                                         variant="contained"
@@ -170,10 +170,11 @@ const DailyView = () => {
                                         id="domain"
                                         className={classes.modalBodyItemSelect}
                                         onChange={(e) => setDomain(e.target.value)}
+
                                     >
                                         <option value="">Select Domain</option>
-                                        <option value="">ECG</option>
-                                        <option value="">ECHO</option>
+                                        <option value="ecg">ECG</option>
+                                        <option value="echo">ECHO</option>
                                     </select>
                                 </div>
                                 <div className={classes.modalBodyItem}>
@@ -209,7 +210,8 @@ const DailyView = () => {
                                         overflowY: "scroll",
                                     }}>
                                         {
-                                            doctors?.getAllDoctors?.map((doctor, doctorAddIndex) => (
+
+                                            doctors && doctors?.getAllDoctors?.map((doctor, doctorAddIndex) => (
                                                 <div key={doctorAddIndex}>
                                                     {/* checkbox */}
                                                     <input
@@ -222,6 +224,7 @@ const DailyView = () => {
                                                     <label htmlFor="doctor">{doctor.name}</label>
                                                 </div>
                                             ))
+
                                         }
                                     </div>
                                 </div>
@@ -257,11 +260,16 @@ const DailyView = () => {
                                     name="domain"
                                     id="domain"
                                     className={classes.domainSelect}
+                                    onChange={(e) => {
+                                        setDomain(e.target.value);
+                                        // handleDomain(e.target.value)
+                                    }}
                                 >
                                     <option value="">Select Domain</option>
-                                    <option value="">ECG</option>
-                                    <option value="">ECHO</option>
+                                    <option value="ecg">ECG</option>
+                                    <option value="echo">ECHO</option>
                                 </select>
+
                             </div>
                             :
                             <div className={classes.domain}>
@@ -277,7 +285,9 @@ const DailyView = () => {
                                             name="domain"
                                             id="domain"
                                             className={classes.domainSelect}
-                                        // onChange={(e) => handleDomain(e)}
+                                            onChange={(e) => {
+                                                setDomain(e.target.value);
+                                            }}
                                         >
                                             <option value="">Select Domain</option>
                                             <option value="ecg">ECG</option>
@@ -294,26 +304,20 @@ const DailyView = () => {
                                                 disabled
                                             />
                                             :
-                                            user && user?.echo ?
-                                                <input
-                                                    type="text"
-                                                    name="domain"
-                                                    id="domain"
-                                                    className={classes.domainSelect}
-                                                    value="ECHO"
-                                                    disabled
-                                                />
-                                                :
-                                                <input
-                                                    type="text"
-                                                    name="domain"
-                                                    id="domain"
-                                                    className={classes.domainSelect}
-                                                    value="No Domain"
-                                                    disabled
-                                                />
+                                            user && user?.echo &&
+                                            <input
+                                                type="text"
+                                                name="domain"
+                                                id="domain"
+                                                className={classes.domainSelect}
+                                                value="ECHO"
+                                                disabled
+                                            />
+
+
 
                                 }
+
                             </div>
                     }
                     <div className={classes.tableContainer}>
@@ -351,103 +355,206 @@ const DailyView = () => {
                                         <tr key={calendarIndex}>
                                             <td>
                                                 {
-                                                    //doctor.getAllDoctors length and map the div 
-                                                    doctors?.getAllDoctors?.map((doctor, docindex) => (
-                                                        <div key={doctor?._id} style={{
-                                                            borderTop: ".5px solid #06283D",
-                                                            borderLeft: ".5px solid #06283D",
-                                                            borderRight: ".5px solid #06283D",
-                                                            width: "100%",
-                                                            height: "4rem",
-                                                            display: "flex",
-                                                            alignItems: "center",
-                                                            justifyContent: "center",
-                                                            // border of last child is #000
-                                                            borderBottom: docindex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
-                                                        }}>
-                                                            {date.dayNumber + '-' + date.dayMonth + '-' + date.dayYear}
-                                                        </div>
-                                                    ))
+                                                    domain === "ecg" ?
+                                                        doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.ecg).map((doctor, docIndex) => (
+                                                            <div key={doctor?._id} style={{
+                                                                borderTop: ".5px solid #06283D",
+                                                                borderLeft: ".5px solid #06283D",
+                                                                borderRight: ".5px solid #06283D",
+                                                                width: "100%",
+                                                                height: "4rem",
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                                justifyContent: "center",
+                                                                // border of last child is #000
+                                                                borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                            }}>
+                                                                {date.dayNumber + '-' + date.dayMonth + '-' + date.dayYear}
+
+                                                            </div>
+                                                        ))
+
+                                                        :
+                                                        domain === "echo" &&
+                                                        doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.echo).map((doctor, docIndex) => (
+                                                            <div key={doctor?._id} style={{
+                                                                borderTop: ".5px solid #06283D",
+                                                                borderLeft: ".5px solid #06283D",
+                                                                borderRight: ".5px solid #06283D",
+                                                                width: "100%",
+                                                                height: "4rem",
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                                justifyContent: "center",
+                                                                // border of last child is #000
+                                                                borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                            }}>
+                                                                {date.dayNumber + '-' + date.dayMonth + '-' + date.dayYear}
+                                                            </div>
+                                                        ))
+
                                                 }
                                             </td>
                                             <td>
                                                 {
-                                                    doctors?.getAllDoctors?.map((doctor, docindex) => (
-                                                        <div key={doctor._id} style={{
-                                                            borderTop: ".5px solid #06283D",
-                                                            borderLeft: ".5px solid #06283D",
-                                                            borderRight: ".5px solid #06283D",
-                                                            width: "100%",
-                                                            height: "4rem",
-                                                            display: "flex",
-                                                            alignItems: "center",
-                                                            justifyContent: "center",
-                                                            // border of last child is #000
-                                                            borderBottom: docindex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
-                                                        }}>
-                                                            {date.dayName.slice(0, 3)}
-                                                        </div>
-                                                    ))
+                                                    domain === "ecg" ?
+                                                        doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.ecg).map((doctor, docIndex) => (
+                                                            <div key={doctor._id} style={{
+                                                                borderTop: ".5px solid #06283D",
+                                                                borderLeft: ".5px solid #06283D",
+                                                                borderRight: ".5px solid #06283D",
+                                                                width: "100%",
+                                                                height: "4rem",
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                                justifyContent: "center",
+                                                                // border of last child is #000
+                                                                borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                            }}>
+                                                                {date.dayName.slice(0, 3)}
+                                                            </div>
+                                                        ))
+                                                        :
+                                                        domain === "echo" &&
+                                                        doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.echo).map((doctor, docIndex) => (
+                                                            <div key={doctor._id} style={{
+                                                                borderTop: ".5px solid #06283D",
+                                                                borderLeft: ".5px solid #06283D",
+                                                                borderRight: ".5px solid #06283D",
+                                                                width: "100%",
+                                                                height: "4rem",
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                                justifyContent: "center",
+                                                                // border of last child is #000
+                                                                borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                            }}>
+                                                                {date.dayName.slice(0, 3)}
+                                                            </div>
+                                                        ))
                                                 }
                                             </td>
                                             <td>
                                                 {
-                                                    doctors?.getAllDoctors?.map((doctor, docindex) => (
-                                                        <div key={doctor._id} style={{
-                                                            borderTop: ".5px solid #06283D",
-                                                            borderLeft: ".5px solid #06283D",
-                                                            borderRight: ".5px solid #06283D",
-                                                            width: "100%",
-                                                            height: "4rem",
-                                                            display: "flex",
-                                                            alignItems: "center",
-                                                            justifyContent: "center",
-                                                            // border of last child is #000
-                                                            borderBottom: docindex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
-                                                        }}>
-                                                            {doctor.name}
-                                                        </div>
-                                                    ))
+                                                    domain === "ecg" ?
+                                                        doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.ecg).map((doctor, docIndex) => (
+                                                            <div key={doctor._id} style={{
+                                                                borderTop: ".5px solid #06283D",
+                                                                borderLeft: ".5px solid #06283D",
+                                                                borderRight: ".5px solid #06283D",
+                                                                width: "100%",
+                                                                height: "4rem",
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                                justifyContent: "center",
+                                                                // border of last child is #000
+                                                                borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                            }}>
+                                                                {doctor.name}
+                                                            </div>
+                                                        ))
+
+                                                        :
+                                                        domain === "echo" &&
+                                                        doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.echo).map((doctor, docIndex) => (
+                                                            <div key={doctor._id} style={{
+                                                                borderTop: ".5px solid #06283D",
+                                                                borderLeft: ".5px solid #06283D",
+                                                                borderRight: ".5px solid #06283D",
+                                                                width: "100%",
+                                                                height: "4rem",
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                                justifyContent: "center",
+                                                                // border of last child is #000
+                                                                borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                            }}>
+                                                                {doctor.name}
+                                                            </div>
+                                                        ))
+
                                                 }
                                             </td>
                                             <td>
                                                 {
-                                                    doctors?.getAllDoctors?.map((doctor, docindex) => (
-                                                        <div key={doctor._id} style={{
-                                                            borderTop: ".5px solid #06283D",
-                                                            borderLeft: ".5px solid #06283D",
-                                                            borderRight: ".5px solid #06283D",
-                                                            width: "100%",
-                                                            height: "4rem",
-                                                            display: "flex",
-                                                            alignItems: "center",
-                                                            justifyContent: "center",
-                                                            // border of last child is #000
-                                                            borderBottom: docindex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
-                                                        }}>
-                                                            {doctor.dutyHoursAllotedPerMonth}
-                                                        </div>
-                                                    ))
+                                                    domain === "ecg" ?
+                                                        doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.ecg).map((doctor, docIndex) => (
+                                                            <div key={doctor._id} style={{
+                                                                borderTop: ".5px solid #06283D",
+                                                                borderLeft: ".5px solid #06283D",
+                                                                borderRight: ".5px solid #06283D",
+                                                                width: "100%",
+                                                                height: "4rem",
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                                justifyContent: "center",
+                                                                // border of last child is #000
+                                                                borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                            }}>
+                                                                {doctor.dutyHoursAllotedPerMonth}
+                                                            </div>
+                                                        ))
+
+                                                        :
+                                                        domain === "echo" &&
+                                                        doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.echo).map((doctor, docIndex) => (
+                                                            <div key={doctor._id} style={{
+                                                                borderTop: ".5px solid #06283D",
+                                                                borderLeft: ".5px solid #06283D",
+                                                                borderRight: ".5px solid #06283D",
+                                                                width: "100%",
+                                                                height: "4rem",
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                                justifyContent: "center",
+                                                                // border of last child is #000
+                                                                borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                            }}>
+                                                                {doctor.dutyHoursAllotedPerMonth}
+                                                            </div>
+                                                        ))
+
                                                 }
                                             </td>
                                             <td>
                                                 {
-                                                    doctors?.getAllDoctors?.map((doctor, docindex) => (
-                                                        <div key={doctor._id} style={{
-                                                            borderTop: ".5px solid #06283D",
-                                                            borderLeft: ".5px solid #06283D",
-                                                            borderRight: ".5px solid #06283D",
-                                                            width: "100%",
-                                                            height: "4rem",
-                                                            display: "flex",
-                                                            alignItems: "center",
-                                                            justifyContent: "center",
-                                                            // border of last child is #000
-                                                            borderBottom: docindex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
-                                                        }}>
-                                                            {doctor.dutyHoursPerMonth}
-                                                        </div>
-                                                    ))
+                                                    domain === "ecg" ?
+                                                        doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.ecg).map((doctor, docIndex) => (
+                                                            <div key={doctor._id} style={{
+                                                                borderTop: ".5px solid #06283D",
+                                                                borderLeft: ".5px solid #06283D",
+                                                                borderRight: ".5px solid #06283D",
+                                                                width: "100%",
+                                                                height: "4rem",
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                                justifyContent: "center",
+                                                                // border of last child is #000
+                                                                borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                            }}>
+                                                                {doctor.dutyHoursPerMonth}
+                                                            </div>
+                                                        ))
+
+                                                        :
+                                                        domain === "echo" &&
+                                                        doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.echo).map((doctor, docIndex) => (
+                                                            <div key={doctor._id} style={{
+                                                                borderTop: ".5px solid #06283D",
+                                                                borderLeft: ".5px solid #06283D",
+                                                                borderRight: ".5px solid #06283D",
+                                                                width: "100%",
+                                                                height: "4rem",
+                                                                display: "flex",
+                                                                alignItems: "center",
+                                                                justifyContent: "center",
+                                                                // border of last child is #000
+                                                                borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                            }}>
+                                                                {doctor.dutyHoursPerMonth}
+                                                            </div>
+                                                        ))
+
                                                 }
                                             </td>
                                             {
@@ -455,51 +562,98 @@ const DailyView = () => {
                                                     <td className={classes.dateHeader} key={slotIndex2}>
                                                         <div>
                                                             {
-                                                                doctors?.getAllDoctors?.map((doctor, doctorIndex6) => (
-                                                                    <div key={doctorIndex6} style={{
-                                                                        borderTop: ".5px solid #06283D",
-                                                                        borderLeft: ".5px solid #06283D",
-                                                                        borderRight: ".5px solid #06283D",
-                                                                        width: "100%",
-                                                                        height: "4rem",
-                                                                        display: "flex",
-                                                                        alignItems: "center",
-                                                                        justifyContent: "center",
-                                                                        // border of last child is #000
-                                                                        borderBottom: doctorIndex6 === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
-                                                                    }}>
-                                                                        {/*  if current doctor is alloted at current shift then print 1  */}
-                                                                        {
-                                                                            shifts?.data?.map((shift, shiftIndex) => (
-                                                                                <div key={shiftIndex} style={{
-                                                                                    width: "100%",
-                                                                                    height: "100%",
-                                                                                }}>
-                                                                                    {
-                                                                                        shift?.doctors.map((doctorShift, doctorIndex7) => (
+                                                                domain === "ecg" ?
+                                                                    doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.ecg).map((doctor, docIndex) => (
+                                                                        <div key={docIndex} style={{
+                                                                            borderTop: ".5px solid #06283D",
+                                                                            borderLeft: ".5px solid #06283D",
+                                                                            borderRight: ".5px solid #06283D",
+                                                                            width: "100%",
+                                                                            height: "4rem",
+                                                                            display: "flex",
+                                                                            alignItems: "center",
+                                                                            justifyContent: "center",
+                                                                            // border of last child is #000
+                                                                            borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                                        }}>
+                                                                            {/*  if current doctor is alloted at current shift then print 1  */}
+                                                                            {
+                                                                                shifts?.data?.map((shift, shiftIndex) => (
+                                                                                    <div key={shiftIndex} style={{
+                                                                                        width: "100%",
+                                                                                        height: "100%",
+                                                                                    }}>
+                                                                                        {
+                                                                                            shift?.doctors.map((doctorShift, doctorIndex7) => (
 
 
-                                                                                            doctorShift === doctor._id && shift?.shiftDate === date.dayYear + '-' + date.dayMonth + '-' + date.dayNumber && shift?.shiftTime === slot.slotTime && (
-                                                                                                <div key={doctorIndex7}
-                                                                                                    style={{
-                                                                                                        width: "100%",
-                                                                                                        height: "100%",
-                                                                                                    }}
-                                                                                                    onClick={() => {
-                                                                                                        console.log('not empty');
-                                                                                                    }}
-                                                                                                >
-                                                                                                    1
-                                                                                                </div>
-                                                                                            )
-                                                                                            // </div>
-                                                                                        ))
-                                                                                    }
-                                                                                </div>
-                                                                            ))
-                                                                        }
-                                                                    </div>
-                                                                ))
+                                                                                                doctorShift === doctor._id && shift?.shiftDate === date.dayYear + '-' + date.dayMonth + '-' + date.dayNumber && shift?.shiftTime === slot.slotTime && (
+                                                                                                    <div key={doctorIndex7}
+                                                                                                        style={{
+                                                                                                            width: "100%",
+                                                                                                            height: "100%",
+                                                                                                        }}
+                                                                                                        onClick={() => {
+                                                                                                            console.log('not empty');
+                                                                                                        }}
+                                                                                                    >
+                                                                                                        1
+                                                                                                    </div>
+                                                                                                )
+                                                                                                // </div>
+                                                                                            ))
+                                                                                        }
+                                                                                    </div>
+                                                                                ))
+                                                                            }
+                                                                        </div>
+                                                                    ))
+                                                                    :
+                                                                    domain === "echo" &&
+                                                                    doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.echo).map((doctor, docIndex) => (
+                                                                        <div key={doctor._id} style={{
+                                                                            borderTop: ".5px solid #06283D",
+                                                                            borderLeft: ".5px solid #06283D",
+                                                                            borderRight: ".5px solid #06283D",
+                                                                            width: "100%",
+                                                                            height: "4rem",
+                                                                            display: "flex",
+                                                                            alignItems: "center",
+                                                                            justifyContent: "center",
+                                                                            // border of last child is #000
+                                                                            borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                                        }}>
+                                                                            {
+                                                                                shifts?.data?.map((shift, shiftIndex) => (
+                                                                                    <div key={shiftIndex} style={{
+                                                                                        width: "100%",
+                                                                                        height: "100%",
+                                                                                    }}>
+                                                                                        {
+                                                                                            shift?.doctors.map((doctorShift, doctorIndex7) => (
+
+
+                                                                                                doctorShift === doctor._id && shift?.shiftDate === date.dayYear + '-' + date.dayMonth + '-' + date.dayNumber && shift?.shiftTime === slot.slotTime && (
+                                                                                                    <div key={doctorIndex7}
+                                                                                                        style={{
+                                                                                                            width: "100%",
+                                                                                                            height: "100%",
+                                                                                                        }}
+                                                                                                        onClick={() => {
+                                                                                                            console.log('not empty');
+                                                                                                        }}
+                                                                                                    >
+                                                                                                        1
+                                                                                                    </div>
+                                                                                                )
+                                                                                                // </div>
+                                                                                            ))
+                                                                                        }
+                                                                                    </div>
+                                                                                ))
+                                                                            }
+                                                                        </div>
+                                                                    ))
                                                             }
                                                         </div>
                                                     </td>
