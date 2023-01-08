@@ -28,7 +28,7 @@ export const ViewLogic = () => {
     const [show, setShow] = useState(false)
     const [show2, setShow2] = useState(false)
     const [show3, setShow3] = useState(false)
-    const [domain,setDomain] = useState('')
+    const [domain,setDomain] = useState('ecg')
 
     // call   dispatch(getAllDoctors()) once
     useEffect(() => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef } from 'react'
 import useStyles from './styles'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import SubSidebar from '../../components/SubSidebar/SubSidebar'
@@ -21,9 +21,9 @@ const DailyView = () => {
         show2,
         setShow2,
         domain,
-        setDomain
-        // show3,
-        // setShow3
+        setDomain,
+        show3,
+        setShow3
     } = ViewLogic()
 
     const dateRange = "2023-1-12 to 2023-2-12"
@@ -170,6 +170,7 @@ const DailyView = () => {
                                         id="domain"
                                         className={classes.modalBodyItemSelect}
                                         onChange={(e) => setDomain(e.target.value)}
+                                        value={domain}
 
                                     >
                                         <option value="">Select Domain</option>
@@ -210,21 +211,35 @@ const DailyView = () => {
                                         overflowY: "scroll",
                                     }}>
                                         {
-
-                                            doctors && doctors?.getAllDoctors?.map((doctor, doctorAddIndex) => (
-                                                <div key={doctorAddIndex}>
-                                                    {/* checkbox */}
-                                                    <input
-                                                        type="checkbox"
-                                                        name="doctor"
-                                                        id="doctor"
-                                                        value={doctor._id}
-                                                    // onChange={(e) => handleAdd(e)}
-                                                    />
-                                                    <label htmlFor="doctor">{doctor.name}</label>
-                                                </div>
-                                            ))
-
+                                            domain === "ecg" ?
+                                                doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.ecg).map((doctor, doctorAddIndex) => (
+                                                    <div key={doctorAddIndex}>
+                                                        {/* checkbox */}
+                                                        <input
+                                                            type="checkbox"
+                                                            name="doctor"
+                                                            id="doctor"
+                                                            value={doctor._id}
+                                                        // onChange={(e) => handleAdd(e)}
+                                                        />
+                                                        <label htmlFor="doctor">{doctor.name}</label>
+                                                    </div>
+                                                ))
+                                                :
+                                                domain === "echo" &&
+                                                doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.echo).map((doctor, doctorAddIndex) => (
+                                                    <div key={doctorAddIndex}>
+                                                        {/* checkbox */}
+                                                        <input
+                                                            type="checkbox"
+                                                            name="doctor"
+                                                            id="doctor"
+                                                            value={doctor._id}
+                                                        // onChange={(e) => handleAdd(e)}
+                                                        />
+                                                        <label htmlFor="doctor">{doctor.name}</label>
+                                                    </div>
+                                                ))
                                         }
                                     </div>
                                 </div>
@@ -247,6 +262,59 @@ const DailyView = () => {
                             </div>
                         </div>
                     </Modal>
+                    {/* <Modal
+                        open={show3}
+                        onClose={() => setShow3(false)}
+                        className={classes.modal}
+                    >
+                        <div className={classes.modalContent}>
+                            <div className={classes.modalHeader}>
+                                <h1>Update Shift</h1>
+                                <Button
+                                    onClick={() => setShow3(false)}
+                                >
+                                    X
+                                </Button>
+                            </div>
+                            <hr className={classes.hr} />
+                            <div className={classes.modalBody}>
+                                <div className={classes.modalBodyLeft}>
+                                    <div className={classes.modalBodyItem}>
+                                        <label htmlFor="domain">Domain</label>
+                                        <input
+                                            type="text"
+                                            name="domain"
+                                            id="domain"
+                                            className={classes.modalBodyItemInput}
+                                            value={domain.toUpperCase()}
+                                            disabled
+                                        />
+                                    </div>
+                                    <div className={classes.modalBodyItem}></div>
+                                </div>
+                                <div className={classes.modalBodyRight}>
+
+                                </div>
+                            </div>
+                            <hr className={classes.hr} />
+                            <div className={classes.modalFooter}>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                >
+                                    Save
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={() => setShow3(false)}
+                                >
+                                    Cancel
+                                </Button>
+
+                            </div>
+                        </div>
+                    </Modal> */}
                     {
                         managerInfo ?
                             <div className={classes.domain}>
@@ -264,6 +332,8 @@ const DailyView = () => {
                                         setDomain(e.target.value);
                                         // handleDomain(e.target.value)
                                     }}
+                                    value={domain}
+
                                 >
                                     <option value="">Select Domain</option>
                                     <option value="ecg">ECG</option>
@@ -288,6 +358,8 @@ const DailyView = () => {
                                             onChange={(e) => {
                                                 setDomain(e.target.value);
                                             }}
+                                            value={domain}
+
                                         >
                                             <option value="">Select Domain</option>
                                             <option value="ecg">ECG</option>
@@ -594,7 +666,7 @@ const DailyView = () => {
                                                                                                             height: "100%",
                                                                                                         }}
                                                                                                         onClick={() => {
-                                                                                                            console.log('not empty');
+                                                                                                            setShow3(!show3)
                                                                                                         }}
                                                                                                     >
                                                                                                         1
@@ -640,7 +712,7 @@ const DailyView = () => {
                                                                                                             height: "100%",
                                                                                                         }}
                                                                                                         onClick={() => {
-                                                                                                            console.log('not empty');
+                                                                                                            setShow3(!show3)
                                                                                                         }}
                                                                                                     >
                                                                                                         1
