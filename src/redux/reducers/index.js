@@ -27,7 +27,12 @@ import {
     getAllLeavesReducer,
     approveDenyLeaveReducer,
     getAllSpecialRequestsReducer,
-    approveDenySpecialRequestReducer
+    approveDenySpecialRequestReducer,
+    addDomainReducer,
+    getAllDomainsReducer,
+    deleteDomainReducer,
+    updateDomainReducer,
+    getDomainByIdReducer
 
 } from './managerReducer'
 import {
@@ -70,6 +75,11 @@ const rootReducer = combineReducers({
     getAllDoctors: getAllDoctorsReducer,
     getDoctorById: getDoctorByIdReducer,
     getManagerInfo: getManagerInfoReducer,
+    addDomain: addDomainReducer,
+    getAllDomains: getAllDomainsReducer,
+    deleteDomain: deleteDomainReducer,
+    updateDomain: updateDomainReducer,
+    getDomainById: getDomainByIdReducer,
     addBreaks: addBreaksReducer,
     getBreaksById: getBreaksReducer,
     deleteBreaks: deleteBreaksReducer,

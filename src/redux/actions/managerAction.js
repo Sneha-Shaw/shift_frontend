@@ -54,7 +54,22 @@ import {
     GET_ALL_SPECIAL_REQUESTS_FAILED,
     APPROVE_DENY_SPECIAL_REQUEST_REQUEST,
     APPROVE_DENY_SPECIAL_REQUEST_SUCCESS,
-    APPROVE_DENY_SPECIAL_REQUEST_FAILED
+    APPROVE_DENY_SPECIAL_REQUEST_FAILED,
+    ADD_DOMAIN_REQUEST,
+    ADD_DOMAIN_SUCCESS,
+    ADD_DOMAIN_FAILED,
+    GET_ALL_DOMAINS_REQUEST,
+    GET_ALL_DOMAINS_SUCCESS,
+    GET_ALL_DOMAINS_FAILED,
+    DELETE_DOMAIN_REQUEST,
+    DELETE_DOMAIN_SUCCESS,
+    DELETE_DOMAIN_FAILED,
+    UPDATE_DOMAIN_REQUEST,
+    UPDATE_DOMAIN_SUCCESS,
+    UPDATE_DOMAIN_FAILED,
+    GET_DOMAIN_BY_ID_REQUEST,
+    GET_DOMAIN_BY_ID_SUCCESS,
+    GET_DOMAIN_BY_ID_FAILED
 } from '../constants/managerConstants'
 
 
@@ -633,6 +648,143 @@ export const approveDenySpecialRequest = (id, requestStatus) => async (dispatch)
     } catch (error) {
         dispatch({
             type: APPROVE_DENY_SPECIAL_REQUEST_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// addDomain
+export const addDomain = (domainName) => async (dispatch) => {
+    try {
+        dispatch({
+            type: ADD_DOMAIN_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const body = {
+            domainName
+        }
+        const { data } = await axios.post(`${API}/public/admin/add-domain`, body, config)
+        dispatch({
+            type: ADD_DOMAIN_SUCCESS,
+            payload: data
+        })
+    }
+    catch (error) {
+        dispatch({
+            type: ADD_DOMAIN_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+// getAllDomains
+export const getAllDomains = () => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_ALL_DOMAINS_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const { data } = await axios.get(`${API}/public/admin/get-all-domains`, config)
+        dispatch({
+            type: GET_ALL_DOMAINS_SUCCESS,
+            payload: data
+        })
+    }
+    catch (error) {
+        dispatch({
+            type: GET_ALL_DOMAINS_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+// getDomainById
+export const getDomainById = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_DOMAIN_BY_ID_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const { data } = await axios.get(`${API}/public/admin/get-domain-by-id/${id}`, config)
+        dispatch({
+            type: GET_DOMAIN_BY_ID_SUCCESS,
+            payload: data
+        })
+    }
+    catch (error) {
+        dispatch({
+            type: GET_DOMAIN_BY_ID_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+// updateDomain
+export const updateDomain = (id, domainName) => async (dispatch) => {
+    try {
+        dispatch({
+            type: UPDATE_DOMAIN_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const body = {
+            domainName
+        }
+        const { data } = await axios.put(`${API}/public/admin/update-domain/${id}`, body, config)
+        dispatch({
+            type: UPDATE_DOMAIN_SUCCESS,
+            payload: data
+        })
+    }
+    catch (error) {
+        dispatch({
+            type: UPDATE_DOMAIN_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+// deleteDomain
+export const deleteDomain = (id) => async (dispatch) => {
+    try {
+        dispatch({
+            type: DELETE_DOMAIN_REQUEST
+        })
+
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const { data } = await axios.post(`${API}/public/admin/delete-domain/${id}`, config)
+        dispatch({
+            type: DELETE_DOMAIN_SUCCESS,
+            payload: data
+        })
+    }
+    catch (error) {
+        dispatch({
+            type: DELETE_DOMAIN_FAILED,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

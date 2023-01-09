@@ -53,7 +53,22 @@ import {
     GET_ALL_SPECIAL_REQUESTS_FAILED,
     APPROVE_DENY_SPECIAL_REQUEST_REQUEST,
     APPROVE_DENY_SPECIAL_REQUEST_SUCCESS,
-    APPROVE_DENY_SPECIAL_REQUEST_FAILED
+    APPROVE_DENY_SPECIAL_REQUEST_FAILED,
+    ADD_DOMAIN_REQUEST,
+    ADD_DOMAIN_SUCCESS,
+    ADD_DOMAIN_FAILED,
+    GET_ALL_DOMAINS_REQUEST,
+    GET_ALL_DOMAINS_SUCCESS,
+    GET_ALL_DOMAINS_FAILED,
+    DELETE_DOMAIN_REQUEST,
+    DELETE_DOMAIN_SUCCESS,
+    DELETE_DOMAIN_FAILED,
+    UPDATE_DOMAIN_REQUEST,
+    UPDATE_DOMAIN_SUCCESS,
+    UPDATE_DOMAIN_FAILED,
+    GET_DOMAIN_BY_ID_REQUEST,
+    GET_DOMAIN_BY_ID_SUCCESS,
+    GET_DOMAIN_BY_ID_FAILED
 
 } from '../constants/managerConstants'
 
@@ -744,3 +759,199 @@ export const approveDenySpecialRequestReducer = (state = approveDenySpecialReque
             return state
     }
 }
+
+// ADD DOMAIN
+const addDomainState = {
+    loading: false,
+    domain: null,
+    error: null,
+    isAuthenticated: false
+}
+
+export const addDomainReducer = (state = addDomainState, action) => {
+    switch (action.type) {
+        case ADD_DOMAIN_REQUEST:
+            return {
+                ...state,
+                domain: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case ADD_DOMAIN_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                domain: action.payload
+            }
+        case ADD_DOMAIN_FAILED:
+            return {
+                ...state,
+                loading: false,
+                domain: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// GET ALL DOMAINS
+const getAllDomainsState = {
+    loading: false,
+    domains: null,
+    error: null,
+    isAuthenticated: false
+}
+
+export const getAllDomainsReducer = (state = getAllDomainsState, action) => {
+    switch (action.type) {
+        case GET_ALL_DOMAINS_REQUEST:
+            return {
+                ...state,
+                domains: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case GET_ALL_DOMAINS_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                domains: action.payload
+            }
+        case GET_ALL_DOMAINS_FAILED:
+            return {
+                ...state,
+                loading: false,
+                domains: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// DELETE DOMAIN
+const deleteDomainState = {
+    loading: false,
+    domain: null,
+    error: null,
+    isAuthenticated: false
+}
+
+export const deleteDomainReducer = (state = deleteDomainState, action) => {
+    switch (action.type) {
+        case DELETE_DOMAIN_REQUEST:
+            return {
+                ...state,
+                domain: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case DELETE_DOMAIN_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                domain: action.payload
+            }
+        case DELETE_DOMAIN_FAILED:
+            return {
+                ...state,
+                loading: false,
+                domain: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// UPDATE DOMAIN
+const updateDomainState = {
+    loading: false,
+    domain: null,
+    error: null,
+    isAuthenticated: false
+}
+
+export const updateDomainReducer = (state = updateDomainState, action) => {
+    switch (action.type) {
+        case UPDATE_DOMAIN_REQUEST:
+            return {
+                ...state,
+                domain: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case UPDATE_DOMAIN_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                domain: action.payload
+            }
+        case UPDATE_DOMAIN_FAILED:
+            return {
+                ...state,
+                loading: false,
+                domain: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
+// GET DOMAIN BY ID
+const getDomainByIdState = {
+    loading: false,
+    domain: null,
+    error: null,
+    isAuthenticated: false
+}
+
+export const getDomainByIdReducer = (state = getDomainByIdState, action) => {
+    switch (action.type) {
+        case GET_DOMAIN_BY_ID_REQUEST:
+            return {
+                ...state,
+                domain: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case GET_DOMAIN_BY_ID_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                domain: action.payload
+            }
+        case GET_DOMAIN_BY_ID_FAILED:
+            return {
+                ...state,
+                loading: false,
+                domain: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+        default:
+            return state
+    }
+}
+
