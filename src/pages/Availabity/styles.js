@@ -136,7 +136,7 @@ export default makeStyles((theme) => ({
             }
         }
     },
-    popupModal:{
+    popupModal: {
         width: "100%",
         height: "100%",
         display: "flex",
@@ -180,47 +180,52 @@ export default makeStyles((theme) => ({
             width: "3rem",
             height: "3rem",
             border: "none",
-            padding:0,
-            margin:0,
-           
+            padding: 0,
+            margin: 0,
+
         },
-      
+
     },
-    popupBody:{
+    popupBody: {
         width: "90%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        '&>div':{
+        '&>div': {
             width: "100%",
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            '&>h4':{
+            '&>h4': {
                 fontSize: "1.5rem",
                 fontWeight: "bold",
                 margin: "1rem 0",
-                color: "#47B5FF",
+                color: "#3174AD",
                 width: "40%"
             },
-            '&>h2':{
-                fontSize: "2.5rem",
-                fontWeight: "bold",
-                margin: "1rem 0",
-                color: "#47B5FF",
-                width: "100%",
-                textAlign: "center"
-            },
-            '&>p':{
+            '&>p': {
                 fontSize: "1.5rem",
                 // fontWeight: "bold",
                 margin: "1rem 0",
                 color: "#47B5FF",
                 width: "60%",
-                textAlign: "center"
+                textAlign: "right"
             }
         }
+    },
+    popupFooter:{
+        width: "90%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+    },
+    hr:{
+        width: "100%",
+        height: ".4px",
+        background: "#47B5FF",
+        margin: "1rem 0",
+        borderRadius:"1rem"
     }
 
 }))

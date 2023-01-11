@@ -88,55 +88,11 @@ const Availabity = () => {
             className={classes.popup}
           >
             <div className={classes.popupHeader}>
-              <h1>Details</h1>
-{/* 
-              <Button
-                className={classes.editBtn}
-                onClick={() => {
-                  setAvailabilityOps(temp.title);
-                  setDoctorId(temp?.doctor?._id);
-                  setStartTime(
-                    temp.startDate.slice(5, 7) + '/' + temp.startDate.slice(8, 10) + '/' + temp.startDate.slice(0, 4) + " " + temp?.endTime
-                  );
-                  setEndTime(
-                    temp.endDate.slice(5, 7) + '/' + temp.endDate.slice(8, 10) + '/' + temp.endDate.slice(0, 4) + " " + temp?.endTime
-                  );
-                  handleOpen();
-                  setShow(false)
-                }
-                }
-              >
-                <EditIcon />
-              </Button> */}
-              <Button
-                onClick={() => {deleteHandler(
-                  temp?.doctor?._id,
-                  temp?.startDate + " " + temp?.startTime,
-                  temp?.endDate + " " + temp?.endTime
-                );  setShow(false)}}
-                className={classes.deleteBtn}
-                sx={{
-                  // backgroundColor: "#f44336",
-                  color: "#f44336",
-                  fontSize:"1.8rem",
-                
-                }}
-              >
-                <DeleteIcon />
-              </Button>
-              <Button
-                onClick={() => setShow(false)}
-                className={classes.closeBtn}
-              >
-                X
-              </Button>
+              <h1 style={{
+                color: temp?.title==="Available" ? "#3174AD" : "#f0ad4e"
+              }}> {temp?.title}</h1>
             </div>
             <div className={classes.popupBody}>
-              <div className={classes.popupBodyContentItem}>
-                <h2>
-                  {temp?.title}
-                </h2>
-              </div>
               <div className={classes.popupBodyContentItem}>
                 <h4>Start Date:</h4>
                 <p>
@@ -169,6 +125,31 @@ const Availabity = () => {
                   }
                 </p>
               </div>
+            </div>
+            <hr className={classes.hr} />
+            <div className={classes.popupFooter}>
+              <Button
+                onClick={() => {
+                  deleteHandler(
+                    temp?.doctor?._id,
+                    temp?.startDate + " " + temp?.startTime,
+                    temp?.endDate + " " + temp?.endTime
+                  ); setShow(false)
+                }}
+                variant="contained"
+                color="error"
+                className={classes.deleteBtn}
+              >
+                Delete
+              </Button>
+              <Button
+                onClick={() => { setShow(!show) }}
+                variant="contained"
+                color="primary"
+                className={classes.closeBtn}
+              >
+                Cancel
+              </Button>
             </div>
           </div>
         </Modal>
