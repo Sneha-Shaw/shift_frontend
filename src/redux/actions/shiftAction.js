@@ -51,7 +51,7 @@ export const getCalender = (currentMonth) => async (dispatch) => {
         const config = {
             'Content-Type': 'application/json'
         }
-        const { data } = await axios.get(`${API}/private/shift/get-calendar?currentMonth=${currentMonth}`, config)
+        const { data } = await axios.get(`${API}/private/calendar/get-calendar?currentMonth=${currentMonth}`, config)
         dispatch({
             type: GET_CALENDER_SUCCESS,
             payload: data
@@ -78,7 +78,7 @@ export const getAllSlots = () => async (dispatch) => {
         const config = {
             'Content-Type': 'application/json'
         }
-        const { data } = await axios.get(`${API}/private/shift/get-all-slots`, config)
+        const { data } = await axios.get(`${API}/private/slot/get-all-slots`, config)
         dispatch({
             type: GET_ALL_SLOTS_SUCCESS,
             payload: data
@@ -140,7 +140,7 @@ export const updateSlot = (Allotment, slotTime) => async (dispatch) => {
             Allotment,
             slotTime
         }
-        const { data } = await axios.put(`${API}/private/shift/update-slot`, body, config)
+        const { data } = await axios.put(`${API}/private/slot/update-slot`, body, config)
         dispatch({
             type: UPDATE_SLOT_SUCCESS,
             payload: data
@@ -221,7 +221,7 @@ export const addAvailability = (id, schedule) => async (dispatch) => {
             id,
             schedule
         }
-        const { data } = await axios.post(`${API}/private/shift/add-availability`, body, config)
+        const { data } = await axios.post(`${API}/private/availability/add-availability`, body, config)
         dispatch({
             type: ADD_AVAILABILITY_SUCCESS,
             payload: data
@@ -246,7 +246,7 @@ export const getAvailability = (id) => async (dispatch) => {
         const config = {
             'Content-Type': 'application/json'
         }
-        const { data } = await axios.get(`${API}/private/shift/${id}/get-availability`, config)
+        const { data } = await axios.get(`${API}/private/availability/${id}/get-availability`, config)
         dispatch({
             type: GET_AVAILABILITY_SUCCESS,
             payload: data
@@ -271,7 +271,7 @@ export const getAvailabilityByDate = (date) => async (dispatch) => {
         const config = {
             'Content-Type': 'application/json'
         }
-        const { data } = await axios.get(`${API}/private/shift/get-availability-by-date?date=${date}`, config)
+        const { data } = await axios.get(`${API}/private/availability/get-availability-by-date?date=${date}`, config)
         dispatch({
             type: GET_AVAILABILITY_BY_DATE_SUCCESS,
             payload: data
@@ -296,7 +296,7 @@ export const getAllAvailability = () => async (dispatch) => {
         const config = {
             'Content-Type': 'application/json'
         }
-        const { data } = await axios.get(`${API}/private/shift/get-all-availability`, config)
+        const { data } = await axios.get(`${API}/private/availability/get-all-availability`, config)
         dispatch({
             type: GET_ALL_AVAILABILITY_SUCCESS,
             payload: data
@@ -326,7 +326,7 @@ export const deleteAvailabilityByDate = (id, start,end) => async (dispatch) => {
             start,
             end
         }
-        const { data } = await axios.put(`${API}/private/shift/delete-availability-by-date`, body, config)
+        const { data } = await axios.put(`${API}/private/availability/delete-availability-by-date`, body, config)
         dispatch({
             type: DELETE_AVAILABILITY_BY_DATE_SUCCESS,
             payload: data
@@ -355,7 +355,7 @@ export const deleteAvailability = (id) => async (dispatch) => {
             id
         }
         console.log(body);
-        const { data } = await axios.post(`${API}/private/shift/delete-availability`, body, config)
+        const { data } = await axios.post(`${API}/private/availability/delete-availability`, body, config)
         dispatch({
             type: DELETE_AVAILABILITY_SUCCESS,
             payload: data
