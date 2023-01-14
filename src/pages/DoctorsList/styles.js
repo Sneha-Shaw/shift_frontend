@@ -210,6 +210,29 @@ export default makeStyles((theme) => ({
     formItemTime: {
         marginBottom: "1.5rem",
         width: "71%",
+    },
+    domain: {
+        width: "100%",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+       
+    },
+    circle:{
+        width: "2rem",
+        height: "2rem",
+        background: "#fff",
+        borderRadius: "50%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        border: "1px solid #000",
+        cursor:"pointer",
+        '&>svg':{
+            width: "100%",
+            height: "100%",
+            color: "#000",
+        }
     }
 
 }))

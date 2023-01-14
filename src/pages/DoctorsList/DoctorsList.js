@@ -7,7 +7,8 @@ import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
 import { DoctorsLogic } from './DoctorsLogic'
 import Switch from '@mui/material/Switch';
-
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 const DoctorsList = () => {
     const classes = useStyles()
@@ -48,7 +49,11 @@ const DoctorsList = () => {
         searchData,
         domain,
         setDomain,
-        domainOptions
+        domainOptions,
+        domaindrop,
+        setDomainDrop,
+        addDomainDropdown,
+        removeDomainDropdown
     } = DoctorsLogic()
     return (
         <div className={classes.root}
@@ -127,10 +132,59 @@ const DoctorsList = () => {
                             </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="domain">Domain:</label>
-                                <Dropdown options={domainOptions} placeholder="Select an option"
-                                    onChange={(e) => setDomain(e.value)}
-                                    value={domain.toUpperCase()}
-                                />
+
+                                <div>
+                                    {
+                                        // show dropdown as many time as the length of domaindrop
+                                        domaindrop.map((item, index) => {
+                                            return (
+                                                <div key={index} className={classes.domain}>
+                                                    <div style={{
+                                                        width: "80%",
+                                                        margin: "1rem 0"
+                                                    }}>
+                                                        <Dropdown options={domainOptions} placeholder="Select an option"
+                                                            style={{
+                                                                width: "100%",
+                                                            }}
+                                                            //  store in domain array
+                                                            onChange={(e) => {
+                                                                let domainArray = [...domain]
+                                                                domainArray[index] = e.value
+                                                                setDomain(domainArray)
+                                                            }}
+                                                            value={domain[index] ? domain[index].toUpperCase() : ""}
+                                                        />
+                                                    </div>
+                                                    {
+                                                        // domaindrop length is less tan domainOptions length
+                                                        domaindrop.length < domainOptions.length && (
+                                                            <div className={classes.circle}>
+                                                                <AddIcon
+                                                                    onClick={() => addDomainDropdown()}
+                                                                />
+                                                            </div>
+                                                        )
+                                                    }
+                                                    {
+                                                        // domaindrop length is greater than 1
+                                                        domaindrop.length > 1 && (
+                                                            <div className={classes.circle}>
+                                                                <RemoveIcon
+                                                                    onClick={() => removeDomainDropdown(index)}
+                                                                />
+                                                            </div>
+                                                        )
+                                                    }
+                                                </div>
+                                            )
+                                        })
+                                    }
+
+                                    {/* <div className={classes.circle}>
+                                        <AddIcon />
+                                    </div> */}
+                                </div>
                             </div>
 
                             <div className={classes.formItem}>
@@ -231,7 +285,7 @@ const DoctorsList = () => {
                                                         <td className={classes.tableRowItem}>
                                                             {
                                                                 doctor?.domain?.map((domainItem) => {
-                                                                    return domainItem.charAt(0).toUpperCase() + domainItem.slice(1) + ' '
+                                                                    return domainItem.toUpperCase() + ' '
                                                                 })}
                                                         </td>
 
@@ -266,7 +320,9 @@ const DoctorsList = () => {
                                                                     setupdateShow(true)
                                                                     setName(doctor.name)
                                                                     setDesignation(doctor.designation)
-                                                                    setDomain(...doctor.domain)
+                                                                    setDomain(doctor.domain)
+                                                                    // setDomainDrop([...domaindrop, { domainName: '' }]) until domaindrop length is equal to doctor.domain length
+                                                                    domaindrop?.length < doctor.domain?.length && setDomainDrop([...domaindrop, { domainName: '' }])
                                                                     setEmail(doctor.email)
                                                                     setPhn(doctor.mobile)
                                                                     setEmploytype(doctor.type)
@@ -291,7 +347,7 @@ const DoctorsList = () => {
                                                         <td className={classes.tableRowItem}>
                                                             {
                                                                 doctor?.domain?.map((domainItem) => {
-                                                                    return domainItem.charAt(0).toUpperCase() + domainItem.slice(1) + ' '
+                                                                    return domainItem.toUpperCase() + ' '
 
                                                                 })}
                                                         </td>
@@ -332,7 +388,10 @@ const DoctorsList = () => {
                                                                     setupdateShow(true)
                                                                     setName(doctor.name)
                                                                     setDesignation(doctor.designation)
-                                                                    setDomain(...doctor.domain)
+                                                                    // set array of doctor domain to domain
+                                                                    setDomain(doctor.domain)
+                                                                    // setDomainDrop([...domaindrop, { domainName: '' }]) until domaindrop length is equal to doctor.domain length
+                                                                    domaindrop?.length < doctor.domain?.length && setDomainDrop([...domaindrop, { domainName: '' }])
                                                                     setEmail(doctor.email)
                                                                     setPhn(doctor.mobile)
                                                                     setEmploytype(doctor.type)

@@ -23,7 +23,7 @@ export const DoctorsLogic = () => {
     useEffect(() => {
         dispatch(getAllDomains())
     }, [dispatch])
-    console.log(domains);
+  
     useEffect(() => {
         dispatch(getAllDoctors())
     }, [dispatch])
@@ -40,21 +40,27 @@ export const DoctorsLogic = () => {
 
     const [name, setName] = useState('')
     const [designation, setDesignation] = useState('Senior')
-    const [domain, setDomain] = useState('')
+    const [domain, setDomain] = useState([])
     const [email, setEmail] = useState('')
     const [phn, setPhn] = useState('')
     const [dutyHoursPerMonth, setDutyHoursPerMonth] = useState(192)
     const [dutyHoursPerDay, setDutyHoursPerDay] = useState(8)
     const [id, setId] = useState('')
     const [checked, setChecked] = useState(false);
-
+    // domain dropdown
+    const [domaindrop,setDomainDrop] = useState(
+       [ {
+            domainName: ''
+        }]
+    )
+console.log(domain);
     const handleChange = (event) => {
         setChecked(event.target.checked);
     };
 
     // domains && domains?.getAllDomains
     const domainOptions = domains && domains?.getAllDomains?.map((domain) => domain.domainName)
-console.log(domainOptions);
+ 
     const designationOptions = [
         'Senior', 'Regular'
     ]
@@ -68,6 +74,20 @@ console.log(domainOptions);
     const [addShow, setaddShow] = useState(false)
     const [updateShow, setupdateShow] = useState(false)
     const [employType, setEmploytype] = useState('Permanent')
+
+    // inc no of inputs in domaindrop
+    const addDomainDropdown = () => {
+        setDomainDrop([...domaindrop, { domainName: '' }])
+    }
+
+    // dec no of inputs in domaindrop
+    const removeDomainDropdown = (index) => {
+        const list = [...domaindrop];
+        list.splice(index, 1);
+        setDomainDrop(list);
+    }
+
+
     // addDoctor
     const addDoctorHandler = () => {
         setaddShow(!addShow)
@@ -206,7 +226,11 @@ console.log(domainOptions);
         searchData,
         domain,
         setDomain,
-        domainOptions
+        domainOptions,
+        domaindrop,
+        setDomainDrop,
+        addDomainDropdown,
+        removeDomainDropdown
 
     }
 }
