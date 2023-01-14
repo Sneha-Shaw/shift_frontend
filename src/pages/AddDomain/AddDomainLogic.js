@@ -13,11 +13,14 @@ export const AddDomainLogic = () => {
     const dispatch = useDispatch();
     // const navigate = useNavigate();
     const [domain, setDomain] = useState('');
-    const [show, setShow] = useState(false);
+    const [id, setid] = useState('')
+    const [addShow, setaddShow] = useState(false)
+    const [updateShow, setupdateShow] = useState(false)
 
     const { domain: domainData } = useSelector(state => state.addDomain);
     const { domains: alldomains } = useSelector(state => state.getAllDomains)
-    const {domain:domainDeleteState} = useSelector(state=>state.deleteDomain)
+    const { domain: domainDeleteState } = useSelector(state => state.deleteDomain)
+    const { domain: domainUpdateState } = useSelector(state => state.updateDomain)
 
     useEffect(() => {
         if (domainData) {
@@ -29,6 +32,17 @@ export const AddDomainLogic = () => {
             dispatch(getAllDomains());
         }
     }, [domainData]);
+
+    useEffect(() => {
+        if (domainUpdateState) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Domain Updated Successfully!',
+            })
+            dispatch(getAllDomains());
+        }
+    }, [domainUpdateState]);
 
     useEffect(() => {
         dispatch(getAllDomains());
@@ -46,7 +60,7 @@ export const AddDomainLogic = () => {
     }, [domainDeleteState]);
 
     const handleAddDomain = () => {
-        setShow(!show)
+        setaddShow(!addShow)
         if (domain === '') {
             Swal.fire({
                 icon: 'error',
@@ -60,7 +74,8 @@ export const AddDomainLogic = () => {
 
 
     // update domain
-    const handleUpdateDomain = (id) => {
+    const handleUpdateDomain = () => {
+        setupdateShow(!updateShow)
         if (domain === '') {
             Swal.fire({
                 icon: 'error',
@@ -77,7 +92,7 @@ export const AddDomainLogic = () => {
         dispatch(deleteDomain(id));
     }
 
-    console.log(alldomains);
+
 
     return {
         domain,
@@ -85,8 +100,11 @@ export const AddDomainLogic = () => {
         handleAddDomain,
         handleUpdateDomain,
         handleDeleteDomain,
-        show,
-        setShow,
-        alldomains
+        addShow,
+        setaddShow,
+        alldomains,
+        updateShow,
+        setupdateShow,
+        setid
     }
 }

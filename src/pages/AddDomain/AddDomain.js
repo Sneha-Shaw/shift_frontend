@@ -13,9 +13,12 @@ const AddDomain = () => {
         handleAddDomain,
         handleUpdateDomain,
         handleDeleteDomain,
-        show,
-        setShow,
-        alldomains
+        addShow,
+        setaddShow,
+        alldomains,
+        updateShow,
+        setupdateShow,
+        setid
     } = AddDomainLogic()
     return (
         <div className={classes.root}>
@@ -23,30 +26,42 @@ const AddDomain = () => {
             <SubSidebar />
             <div className={classes.main}>
                 {
-                    show ? (
+                    addShow ? (
                         <h1>
                             Add Domain
                         </h1>
-                    ) : (
-                        <div className={classes.header}>
+                    ) :
+                        updateShow ? (
                             <h1>
-                                Domains
+                                Update Domain
                             </h1>
-                            <Button
-                                variant="contained"
-                                onClick={() => setShow(!show)}
-                            >
-                                Add Domain
-                            </Button>
-                        </div>
-                    )
+                        )
+                            :
+                            (
+                                <div className={classes.header}>
+                                    <h1>
+                                        Domains
+                                    </h1>
+                                    <Button
+                                        variant="contained"
+                                        onClick={() => setaddShow(!addShow)}
+                                    >
+                                        Add Domain
+                                    </Button>
+
+                                </div>
+                            )
+
                 }
                 {
-                    show && (
+                    (updateShow || addShow) && (
                         <div className={classes.back}>
                             <Button
                                 // variant="contained"
-                                onClick={() => setShow(!show)}
+                                onClick={() => {
+                                    addShow === true && setaddShow(!addShow)
+                                    updateShow === true && setupdateShow(!updateShow)
+                                }}
                             >
                                 Back
                             </Button>
@@ -54,7 +69,7 @@ const AddDomain = () => {
                     )
                 }
                 {
-                    show ? (
+                    (updateShow || addShow) ? (
                         <div className={classes.content}>
                             <div className={classes.input}>
                                 <label htmlFor="domain">Domain</label>
@@ -66,13 +81,30 @@ const AddDomain = () => {
                                     onChange={(e) => setDomain(e.target.value)}
                                 />
                             </div>
-                            <Button
-                                variant="contained"
-                                color="success"
-                                onClick={handleAddDomain}
-                            >
-                                Add Domain
-                            </Button>
+                            {
+                                addShow && (
+                                    <Button
+                                        variant="contained"
+                                        color="success"
+                                        onClick={handleAddDomain}
+                                    >
+                                        Add Domain
+                                    </Button>
+                                )
+                            }
+                            {
+                                updateShow && (
+                                    <Button
+                                        variant="contained"
+                                        color="success"
+                                        onClick={() => {
+                                            handleUpdateDomain()
+                                        }}
+                                    >
+                                        Update Domain
+                                    </Button>
+                                )
+                            }
                         </div>
                     ) : (
                         <div className={classes.content}>
@@ -85,7 +117,7 @@ const AddDomain = () => {
                                 </thead>
                                 <tbody>
                                     {
-                                        alldomains && alldomains?.getAllDomains.length===0 && (
+                                        alldomains && alldomains?.getAllDomains.length === 0 && (
                                             <tr>
                                                 <td colSpan="2">No Domains Found</td>
                                             </tr>
@@ -98,8 +130,12 @@ const AddDomain = () => {
                                                 <td>
                                                     <Button
                                                         variant="contained"
-                                                        // color="success"
-                                                        // onClick={() => handleUpdateDomain(domain._id)}
+                                                        color="primary"
+                                                        onClick={() => {
+                                                            setDomain(domain.domainName)
+                                                            setupdateShow(!updateShow)
+                                                            setid(domain._id)
+                                                        }}
                                                     >
                                                         Update
                                                     </Button>

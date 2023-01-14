@@ -23,7 +23,7 @@ export const DoctorsLogic = () => {
     useEffect(() => {
         dispatch(getAllDomains())
     }, [dispatch])
-  
+
     useEffect(() => {
         dispatch(getAllDoctors())
     }, [dispatch])
@@ -48,19 +48,19 @@ export const DoctorsLogic = () => {
     const [id, setId] = useState('')
     const [checked, setChecked] = useState(false);
     // domain dropdown
-    const [domaindrop,setDomainDrop] = useState(
-       [ {
+    const [domaindrop, setDomainDrop] = useState(
+        [{
             domainName: ''
         }]
     )
-console.log(domain);
+    
     const handleChange = (event) => {
         setChecked(event.target.checked);
     };
 
     // domains && domains?.getAllDomains
     const domainOptions = domains && domains?.getAllDomains?.map((domain) => domain.domainName)
- 
+
     const designationOptions = [
         'Senior', 'Regular'
     ]
