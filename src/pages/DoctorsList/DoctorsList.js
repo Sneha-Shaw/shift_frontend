@@ -46,12 +46,9 @@ const DoctorsList = () => {
         id,
         setId,
         searchData,
-        ecg,
-        setEcg,
-        echo,
-        setEcho,
-        handleecgChange,
-        handleechoChange
+        domain,
+        setDomain,
+        domainOptions
     } = DoctorsLogic()
     return (
         <div className={classes.root}
@@ -87,8 +84,7 @@ const DoctorsList = () => {
                                     addShow ? setaddShow(!addShow) : setupdateShow(!updateShow);
                                     setName('')
                                     setDesignation('')
-                                    setEcg(false)
-                                    setEcho(false)
+                                    setDomain('')
                                     setEmail('')
                                     setPhn('')
                                     setEmploytype('')
@@ -130,23 +126,13 @@ const DoctorsList = () => {
                                 />
                             </div>
                             <div className={classes.formItem}>
-                                <label htmlFor="ECG">ECG:</label>
-                                <Switch
-                                    checked={ecg}
-                                    onChange={handleecgChange}
-
+                                <label htmlFor="domain">Domain:</label>
+                                <Dropdown options={domainOptions} placeholder="Select an option"
+                                    onChange={(e) => setDomain(e.value)}
+                                    value={domain.toUpperCase()}
                                 />
                             </div>
-                            <div className={classes.formItem}>
-                                <label htmlFor="domain">ECHO:</label>
-                                <Switch
-                                    checked={echo}
-                                    onChange={
-                                        handleechoChange
-                                    }
 
-                                />
-                            </div>
                             <div className={classes.formItem}>
                                 <label htmlFor="email">Email:</label>
                                 <input type="email" name="email" id="email"
@@ -223,8 +209,7 @@ const DoctorsList = () => {
                                         <tr>
                                             <th className={classes.tableHeaderItem}>Name</th>
                                             <th className={classes.tableHeaderItem}>Designation</th>
-                                            <th className={classes.tableHeaderItem}>ECG</th>
-                                            <th className={classes.tableHeaderItem}>ECHO</th>
+                                            <th className={classes.tableHeaderItem}>Domain</th>
                                             <th className={classes.tableHeaderItem}>Email</th>
                                             <th className={classes.tableHeaderItem}>Mobile</th>
                                             <th className={classes.tableHeaderItem}>Type</th>
@@ -245,20 +230,11 @@ const DoctorsList = () => {
                                                         <td className={classes.tableRowItem}>{doctor.designation}</td>
                                                         <td className={classes.tableRowItem}>
                                                             {
-                                                                doctor?.ecg ?
-                                                                    "yes"
-                                                                    :
-                                                                    "no"
-                                                            }
+                                                                doctor?.domain?.map((domainItem) => {
+                                                                    return domainItem.charAt(0).toUpperCase() + domainItem.slice(1) + ' '
+                                                                })}
                                                         </td>
-                                                        <td className={classes.tableRowItem}>
-                                                            {
-                                                                doctor?.echo ?
-                                                                    "yes"
-                                                                    :
-                                                                    "no"
-                                                            }
-                                                        </td>
+
                                                         <td className={classes.tableRowItem}>{doctor.email}</td>
                                                         <td className={classes.tableRowItem}>{doctor.mobile}</td>
                                                         <td className={classes.tableRowItem}>
@@ -290,8 +266,7 @@ const DoctorsList = () => {
                                                                     setupdateShow(true)
                                                                     setName(doctor.name)
                                                                     setDesignation(doctor.designation)
-                                                                    setEcg(doctor?.ecg)
-                                                                    setEcho(doctor?.echo)
+                                                                    setDomain(...doctor.domain)
                                                                     setEmail(doctor.email)
                                                                     setPhn(doctor.mobile)
                                                                     setEmploytype(doctor.type)
@@ -315,20 +290,12 @@ const DoctorsList = () => {
                                                         <td className={classes.tableRowItem}>{doctor.designation}</td>
                                                         <td className={classes.tableRowItem}>
                                                             {
-                                                                doctor?.ecg ?
-                                                                    "yes"
-                                                                    :
-                                                                    "no"
-                                                            }
+                                                                doctor?.domain?.map((domainItem) => {
+                                                                    return domainItem.charAt(0).toUpperCase() + domainItem.slice(1) + ' '
+
+                                                                })}
                                                         </td>
-                                                        <td className={classes.tableRowItem}>
-                                                            {
-                                                                doctor?.echo ?
-                                                                    "yes"
-                                                                    :
-                                                                    "no"
-                                                            }
-                                                        </td>
+
                                                         <td className={classes.tableRowItem}>{doctor.email}</td>
                                                         <td className={classes.tableRowItem}>{doctor.mobile}</td>
                                                         <td className={classes.tableRowItem}>
@@ -365,8 +332,7 @@ const DoctorsList = () => {
                                                                     setupdateShow(true)
                                                                     setName(doctor.name)
                                                                     setDesignation(doctor.designation)
-                                                                    setEcg(doctor?.ecg)
-                                                                    setEcho(doctor?.echo)
+                                                                    setDomain(...doctor.domain)
                                                                     setEmail(doctor.email)
                                                                     setPhn(doctor.mobile)
                                                                     setEmploytype(doctor.type)

@@ -5,7 +5,8 @@ import {
     addDoctor,
     deleteDoctor,
     updateDoctor,
-    getAllDoctors
+    getAllDoctors,
+    getAllDomains
 } from '../../redux/actions/managerAction';
 
 
@@ -15,10 +16,14 @@ export const DoctorsLogic = () => {
     const { doctorInfo: doctorDeleteState } = useSelector((state) => state.deleteDoctor)
     const { doctorInfo: doctorUpdateState } = useSelector((state) => state.updateDoctor)
     const { doctorInfo: searchData } = useSelector((state) => state.searchDoctor)
+    const { domains } = useSelector((state) => state.getAllDomains)
 
     const dispatch = useDispatch()
-   
 
+    useEffect(() => {
+        dispatch(getAllDomains())
+    }, [dispatch])
+    console.log(domains);
     useEffect(() => {
         dispatch(getAllDoctors())
     }, [dispatch])
@@ -35,8 +40,7 @@ export const DoctorsLogic = () => {
 
     const [name, setName] = useState('')
     const [designation, setDesignation] = useState('Senior')
-    const [ecg, setEcg] = useState(false)
-    const [echo, setEcho] = useState(false)
+    const [domain, setDomain] = useState('')
     const [email, setEmail] = useState('')
     const [phn, setPhn] = useState('')
     const [dutyHoursPerMonth, setDutyHoursPerMonth] = useState(192)
@@ -47,16 +51,10 @@ export const DoctorsLogic = () => {
     const handleChange = (event) => {
         setChecked(event.target.checked);
     };
-    
-    const handleecgChange=(e)=>{
-        setEcg(e.target.checked)
-    }
 
-    const handleechoChange=(e)=>{
-        setEcho(e.target.checked)
-    }
-
-
+    // domains && domains?.getAllDomains
+    const domainOptions = domains && domains?.getAllDomains?.map((domain) => domain.domainName)
+console.log(domainOptions);
     const designationOptions = [
         'Senior', 'Regular'
     ]
@@ -81,8 +79,7 @@ export const DoctorsLogic = () => {
             phn,
             randomPassword(),
             designation,
-            ecg,
-            echo,
+            domain,
             employType.toLowerCase(),
             dutyHoursPerMonth,
             dutyHoursPerDay,
@@ -141,8 +138,7 @@ export const DoctorsLogic = () => {
             email,
             phn,
             designation,
-            ecg,
-            echo,
+            domain,
             employType.toLowerCase(),
             dutyHoursPerMonth,
             dutyHoursPerDay,
@@ -208,12 +204,9 @@ export const DoctorsLogic = () => {
         id,
         setId,
         searchData,
-        ecg,
-        setEcg,
-        echo,
-        setEcho,
-        handleecgChange,
-        handleechoChange
+        domain,
+        setDomain,
+        domainOptions
 
     }
 }
