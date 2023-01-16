@@ -153,6 +153,8 @@ export default makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        overflowY:"scroll",
+
         '&>table': {
             width: "100%",
             borderCollapse: "collapse",
