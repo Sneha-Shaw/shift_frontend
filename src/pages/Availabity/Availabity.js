@@ -44,6 +44,8 @@ const Availabity = () => {
     onEventResize,
     availabilityOps,
     setAvailabilityOps,
+    date,
+    setDate
   } = AvailabilityLogic()
   const DnDCalendar = withDragAndDrop(Calendar);
 
@@ -89,14 +91,14 @@ const Availabity = () => {
           >
             <div className={classes.popupHeader}>
               <h1 style={{
-                color: temp?.title==="Available" ? "#3174AD" : "#f0ad4e"
+                color: temp?.title === "Available" ? "#3174AD" : "#f0ad4e"
               }}> {temp?.title}</h1>
             </div>
             <div className={classes.popupBody}>
               <div className={classes.popupBodyContentItem}>
-                <h4>Start Date:</h4>
+                <h4>Date:</h4>
                 <p>
-                  {temp?.startDate}
+                  {temp?.date}
                 </p>
               </div>
               <div className={classes.popupBodyContentItem}>
@@ -105,12 +107,12 @@ const Availabity = () => {
                   {temp?.startTime}
                 </p>
               </div>
-              <div className={classes.popupBodyContentItem}>
+              {/* <div className={classes.popupBodyContentItem}>
                 <h4>End Date:</h4>
                 <p>
                   {temp?.endDate}
                 </p>
-              </div>
+              </div> */}
               <div className={classes.popupBodyContentItem}>
                 <h4>End Time:</h4>
                 <p>
@@ -132,8 +134,9 @@ const Availabity = () => {
                 onClick={() => {
                   deleteHandler(
                     temp?.doctor?._id,
-                    temp?.startDate + " " + temp?.startTime,
-                    temp?.endDate + " " + temp?.endTime
+                    temp?.date,
+                    temp?.startTime,
+                    temp?.endTime
                   ); setShow(false)
                 }}
                 variant="contained"
@@ -170,19 +173,26 @@ const Availabity = () => {
               </Button>
             </div>
             <div className={classes.modalBody}>
+
+              <div className={classes.modalBodyContentItem}>
+                <h4>Date</h4>
+                <input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+              </div>
               <div className={classes.modalBodyContentItem}>
                 <h4>Start Time</h4>
-                <Datetime
+                {/* <Datetime
                   value={startTime}
                   onChange={(e) => setStartTime(e._d)}
-                />
+                /> */}
+                <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
               </div>
               <div className={classes.modalBodyContentItem}>
                 <h4>End Time</h4>
-                <Datetime
+                {/* <Datetime
                   value={endTime}
                   onChange={(e) => setEndTime(e._d)}
-                />
+                /> */}
+                <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
               </div>
               <div className={classes.modalBodyContentItem}>
                 <h4>Doctor</h4>

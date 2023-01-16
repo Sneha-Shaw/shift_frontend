@@ -29,8 +29,9 @@ export const AvailabilityLogic = () => {
     const dispatch = useDispatch()
 
     const [open, setOpen] = useState(false);
-    const [startTime, setStartTime] = useState('')
-    const [endTime, setEndTime] = useState('')
+    const [date, setDate] = useState('')
+    const [startTime, setStartTime] = useState('00:00')
+    const [endTime, setEndTime] = useState('00:00')
     const [doctorId, setDoctorId] = useState('')
     const [availabilityOps, setAvailabilityOps] = useState('')
 
@@ -49,6 +50,7 @@ export const AvailabilityLogic = () => {
         setOpen(false);
         const schedule = [
             {
+                date: date,
                 start: startTime,
                 end: endTime,
                 title: availabilityOps
@@ -60,21 +62,19 @@ export const AvailabilityLogic = () => {
 
 
     // delete availability
-    const deleteHandler = (id, start, end) => {
+    const deleteHandler = (id, date, start, end) => {
         setShow(false)
-        // convert 12 hr format to 24 hr
-        start = moment(start).format('YYYY-MM-DD HH:mm:ss')
-        end = moment(end).format('YYYY-MM-DD HH:mm:ss')
-        // convert start from 2023-01-18 18:30:00 to 2023-01-18T18:30:00.000Z
-        const startString = start.slice(0, 10) + 'T' + start.slice(11, 19) + '.000Z'
-        // convert end from 2023-01-18 18:30:00 to 2023-01-18T18:30:00.000Z
-        const endString = end.slice(0, 10) + 'T' + end.slice(11, 19) + '.000Z'
-        managerInfo ? dispatch(deleteAvailabilityByDate(id, startString, endString)) : dispatch(deleteAvailabilityByDate(userInfo._id, startString, endString))
+        // 06:30 PM to 18:30
+        // convert 12 hr format to 24 hrex:6:30 PM to 18:30
+        const startTime = moment(start, 'hh:mm A').format('HH:mm:ss')
+        const endTime = moment(end, 'hh:mm A').format('HH:mm:ss')
+        managerInfo ? dispatch(deleteAvailabilityByDate(id, date, startTime, endTime)) : dispatch(deleteAvailabilityByDate(userInfo._id, date, startTime, endTime))
     }
 
     // onSelectmodal
     const onSelectEventHandler = (e) => {
         const { start, end } = e;
+        console.log(start, end);
         setShow(true)
         // stringify start
         const startString = JSON.stringify(start)
@@ -84,8 +84,7 @@ export const AvailabilityLogic = () => {
         const startTime = moment(startString.slice(12, 20), 'HH:mm:ss').format('hh:mm A')
         const endTime = moment(endString.slice(12, 20), 'HH:mm:ss').format('hh:mm A')
         setTemp({
-            startDate: startString.slice(1, 11),
-            endDate: endString.slice(1, 11),
+            date: startString.slice(1, 11),
             startTime: startTime,
             endTime: endTime,
             title: e.title,
@@ -114,9 +113,18 @@ export const AvailabilityLogic = () => {
         setOpen(true);
 
         const { start, end } = slots;
-        setStartTime(start)
-        setEndTime(end)
-        console.log(startTime, endTime);
+        console.log(start, end, "hi");
+        const startString = JSON.stringify(start)
+        console.log(startString, "start");
+        // stringify end
+        const endString = JSON.stringify(end)
+        //    get time in 24 hr format and setstattime
+        setStartTime(startString.slice(12, 20))
+        // get time in 24 hr format and set endtime
+        setEndTime(endString.slice(12, 20))
+        // get date in yyyy-mm-dd format and set date
+        setDate(startString.slice(1, 11))
+        console.log(startTime, endTime, date);
     }
 
     const handleClose = () => setOpen(false);
@@ -222,7 +230,7 @@ export const AvailabilityLogic = () => {
             if (deleteData) {
                 dispatch(getAllAvailability())
                 // refresh
-                window.location.reload()
+                // window.location.reload()
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -243,10 +251,11 @@ export const AvailabilityLogic = () => {
                         availability.schedule.map((sub) => {
                             setSubevent((prev) => {
                                 return [
+                                    // console.log(new Date(sub.date + " " + sub.start)),
                                     ...prev,
                                     {
-                                        start: new Date(sub.start),
-                                        end: new Date(sub.end),
+                                        start: new Date(sub.date + " " + sub.start),
+                                        end: new Date(sub.date + " " + sub.end),
                                         title: sub.title,
                                         doctor: availability.user
                                     }
@@ -279,7 +288,7 @@ export const AvailabilityLogic = () => {
     }, [availabilities, userInfo])
 
 
-
+console.log(subEvent, "subEvent");
     return {
         startTime,
         setStartTime,
@@ -308,6 +317,8 @@ export const AvailabilityLogic = () => {
         availabilityOps,
         setAvailabilityOps,
         onSelectEventHandler,
-        temp
+        temp,
+        date,
+        setDate
     }
 }
