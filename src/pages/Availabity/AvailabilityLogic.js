@@ -67,6 +67,7 @@ export const AvailabilityLogic = () => {
         // 06:30 PM to 18:30
         // convert 12 hr format to 24 hrex:6:30 PM to 18:30
         const startTime = moment(start, 'hh:mm A').format('HH:mm:ss')
+      
         const endTime = moment(end, 'hh:mm A').format('HH:mm:ss')
         managerInfo ? dispatch(deleteAvailabilityByDate(id, date, startTime, endTime)) : dispatch(deleteAvailabilityByDate(userInfo._id, date, startTime, endTime))
     }
@@ -74,17 +75,22 @@ export const AvailabilityLogic = () => {
     // onSelectmodal
     const onSelectEventHandler = (e) => {
         const { start, end } = e;
-        console.log(start, end, "start");
+       
         setShow(true)
         // stringify start
         const startString = JSON.stringify(start)
         // stringify end
         const endString = JSON.stringify(end)
-        // convert 24 hr format to 12 hrex:18:00:00 to 6:00 PM
-        const startTime = moment(startString.slice(12, 20), 'HH:mm:ss').format('hh:mm A')
-        const endTime = moment(endString.slice(12, 20), 'HH:mm:ss').format('hh:mm A')
+        // get time then subtract 18 hrs 30 min from it 
+        const startTim = moment(startString.slice(12, 20), 'HH:mm:ss').subtract(18, 'hours').subtract(30, 'minutes')
+        const endTim = moment(endString.slice(12, 20), 'HH:mm:ss').subtract(18, 'hours').subtract(30, 'minutes')
+
+        // convert 24 hr format to 12 hr format
+        const startTime = moment(startTim, 'HH:mm:ss').format('hh:mm A')
+        const endTime = moment(endTim, 'HH:mm:ss').format('hh:mm A')
+        const date = parseInt(startString.slice(9, 11)) + 1
         setTemp({
-            date: startString.slice(1, 11),
+            date: startString.slice(1, 5) + '-' + startString.slice(6, 8) + '-' + (date < 10 ? '0' + date : date),
             startTime: startTime,
             endTime: endTime,
             title: e.title,
@@ -118,10 +124,13 @@ export const AvailabilityLogic = () => {
         const startString = JSON.stringify(start)
         // stringify end
         const endString = JSON.stringify(end)
-        //    get time in 24 hr format and setstattime
-        setStartTime(startString.slice(12, 20))
-        // get time in 24 hr format and set endtime
-        setEndTime(endString.slice(12, 20))
+
+        // get time then subtract 18 hrs 30 min from it 
+        const startTim = moment(startString.slice(12, 20), 'HH:mm:ss').subtract(18, 'hours').subtract(30, 'minutes')
+        const endTim = moment(endString.slice(12, 20), 'HH:mm:ss').subtract(18, 'hours').subtract(30, 'minutes')
+
+        setStartTime(startTim.format('HH:mm:ss'))
+        setEndTime(endTim.format('HH:mm:ss'))
         // parse int startString.slice(1,3) then add 1 
         const date = parseInt(startString.slice(9, 11)) + 1
         // set date
@@ -232,7 +241,7 @@ export const AvailabilityLogic = () => {
             if (deleteData) {
                 dispatch(getAllAvailability())
                 // refresh
-                window.location.reload()
+                // window.location.reload()
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
