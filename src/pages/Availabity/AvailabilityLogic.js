@@ -74,7 +74,7 @@ export const AvailabilityLogic = () => {
     // onSelectmodal
     const onSelectEventHandler = (e) => {
         const { start, end } = e;
-        console.log(start, end);
+        console.log(start, end, "start");
         setShow(true)
         // stringify start
         const startString = JSON.stringify(start)
@@ -113,18 +113,20 @@ export const AvailabilityLogic = () => {
         setOpen(true);
 
         const { start, end } = slots;
-        console.log(start, end, "hi");
+        // console.log(new Date (start.toISOString()), end.toISOString(), "start");
+        // stringify start
         const startString = JSON.stringify(start)
-        console.log(startString, "start");
         // stringify end
         const endString = JSON.stringify(end)
         //    get time in 24 hr format and setstattime
         setStartTime(startString.slice(12, 20))
         // get time in 24 hr format and set endtime
         setEndTime(endString.slice(12, 20))
-        // get date in yyyy-mm-dd format and set date
-        setDate(startString.slice(1, 11))
-        console.log(startTime, endTime, date);
+        // parse int startString.slice(1,3) then add 1 
+        const date = parseInt(startString.slice(9, 11)) + 1
+        // set date
+        setDate(startString.slice(1, 5) + '-' + startString.slice(6, 8) + '-' + (date < 10 ? '0' + date : date))
+
     }
 
     const handleClose = () => setOpen(false);
@@ -230,7 +232,7 @@ export const AvailabilityLogic = () => {
             if (deleteData) {
                 dispatch(getAllAvailability())
                 // refresh
-                // window.location.reload()
+                window.location.reload()
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -287,8 +289,6 @@ export const AvailabilityLogic = () => {
         }
     }, [availabilities, userInfo])
 
-
-console.log(subEvent, "subEvent");
     return {
         startTime,
         setStartTime,

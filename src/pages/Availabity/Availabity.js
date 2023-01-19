@@ -207,7 +207,7 @@ const Availabity = () => {
                       <option value="0">Select Doctor</option>
                       {
                         users && users.map((user) => (
-                          <option value={user._id}>{user.name}</option>
+                          <option key={user._id} value={user._id}>{user.name}</option>
                         ))
                       }
                     </select>
