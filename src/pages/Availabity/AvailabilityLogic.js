@@ -30,8 +30,8 @@ export const AvailabilityLogic = () => {
 
     const [open, setOpen] = useState(false);
     const [date, setDate] = useState('')
-    const [startTime, setStartTime] = useState('00:00')
-    const [endTime, setEndTime] = useState('00:00')
+    const [startTime, setStartTime] = useState('00:00:00')
+    const [endTime, setEndTime] = useState('00:00:00')
     const [doctorId, setDoctorId] = useState('')
     const [availabilityOps, setAvailabilityOps] = useState('')
 
@@ -66,30 +66,31 @@ export const AvailabilityLogic = () => {
         setShow(false)
         // 06:30 PM to 18:30
         // convert 12 hr format to 24 hrex:6:30 PM to 18:30
-        const startTime = moment(start, 'hh:mm A').format('HH:mm:ss')
-      
-        const endTime = moment(end, 'hh:mm A').format('HH:mm:ss')
+        const startTime = moment(start, 'hh:mm A').format('HH:mm')
+        console.log(startTime);
+        const endTime = moment(end, 'hh:mm A').format('HH:mm')
         managerInfo ? dispatch(deleteAvailabilityByDate(id, date, startTime, endTime)) : dispatch(deleteAvailabilityByDate(userInfo._id, date, startTime, endTime))
     }
 
     // onSelectmodal
     const onSelectEventHandler = (e) => {
         const { start, end } = e;
-       
+        console.log(start, end, "start");
         setShow(true)
         // stringify start
         const startString = JSON.stringify(start)
         // stringify end
         const endString = JSON.stringify(end)
         // get time then subtract 18 hrs 30 min from it 
-        const startTim = moment(startString.slice(12, 20), 'HH:mm:ss').subtract(18, 'hours').subtract(30, 'minutes')
-        const endTim = moment(endString.slice(12, 20), 'HH:mm:ss').subtract(18, 'hours').subtract(30, 'minutes')
+        const startTim = moment(startString.slice(12, 20), 'HH:mm').subtract(18, 'hours').subtract(30, 'minutes')
+        const endTim = moment(endString.slice(12, 20), 'HH:mm').subtract(18, 'hours').subtract(30, 'minutes')
 
         // convert 24 hr format to 12 hr format
-        const startTime = moment(startTim, 'HH:mm:ss').format('hh:mm A')
-        const endTime = moment(endTim, 'HH:mm:ss').format('hh:mm A')
+        const startTime = moment(startTim, 'HH:mm').format('hh:mm A')
+        const endTime = moment(endTim, 'HH:mm').format('hh:mm A')
         const date = parseInt(startString.slice(9, 11)) + 1
         setTemp({
+            // date: startString.slice(1, 11),
             date: startString.slice(1, 5) + '-' + startString.slice(6, 8) + '-' + (date < 10 ? '0' + date : date),
             startTime: startTime,
             endTime: endTime,
@@ -126,11 +127,11 @@ export const AvailabilityLogic = () => {
         const endString = JSON.stringify(end)
 
         // get time then subtract 18 hrs 30 min from it 
-        const startTim = moment(startString.slice(12, 20), 'HH:mm:ss').subtract(18, 'hours').subtract(30, 'minutes')
-        const endTim = moment(endString.slice(12, 20), 'HH:mm:ss').subtract(18, 'hours').subtract(30, 'minutes')
+        const startTim = moment(startString.slice(12, 20), 'HH:mm').subtract(18, 'hours').subtract(30, 'minutes')
+        const endTim = moment(endString.slice(12, 20), 'HH:mm').subtract(18, 'hours').subtract(30, 'minutes')
 
-        setStartTime(startTim.format('HH:mm:ss'))
-        setEndTime(endTim.format('HH:mm:ss'))
+        setStartTime(startTim.format('HH:mm'))
+        setEndTime(endTim.format('HH:mm'))
         // parse int startString.slice(1,3) then add 1 
         const date = parseInt(startString.slice(9, 11)) + 1
         // set date
