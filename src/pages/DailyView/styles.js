@@ -110,7 +110,7 @@ export default makeStyles((theme) => ({
                     width: "8rem",
                     height: "fit-content",
                     textAlign: "center",
-                    
+
                 }
             }
         }
@@ -251,5 +251,16 @@ export default makeStyles((theme) => ({
                 color: "#fff",
             }
         }
+    },
+    shiftBox: {
+        background: "#06283D",
+        color: "#fff",
+        fontSize: "1.2rem",
+        outline: "none",
+        cursor: "pointer",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
     }
 }))

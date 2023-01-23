@@ -34,7 +34,10 @@ import {
     GET_AVAILABILITY_BY_DATE_FAILED,
     DELETE_AVAILABILITY_BY_DATE_REQUEST,
     DELETE_AVAILABILITY_BY_DATE_SUCCESS,
-    DELETE_AVAILABILITY_BY_DATE_FAILED
+    DELETE_AVAILABILITY_BY_DATE_FAILED,
+    GET_SHIFTS_BY_DOMAIN_REQUEST,
+    GET_SHIFTS_BY_DOMAIN_SUCCESS,
+    GET_SHIFTS_BY_DOMAIN_FAILED
 } from "../constants/shiftConstants";
 
 // get calender
@@ -463,6 +466,46 @@ export const getAllAvailabilityReducer = (state = getAllAvailabilityState, actio
                 ...state,
                 loading: false,
                 availabilities: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+// get shifts by domain
+const getShiftsByDomainState = {
+    loading: false,
+    shifts: null,
+    error: null,
+    isAuthenticated: false
+}
+export const getShiftsByDomainReducer = (state = getShiftsByDomainState, action) => {
+    switch (action.type) {
+        case GET_SHIFTS_BY_DOMAIN_REQUEST:
+            return {
+                ...state,
+                shifts: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case GET_SHIFTS_BY_DOMAIN_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                shifts: action.payload
+
+            }
+        case GET_SHIFTS_BY_DOMAIN_FAILED:
+            return {
+                ...state,
+                loading: false,
+                shifts: null,
                 isAuthenticated: false,
                 error: action.payload
             }

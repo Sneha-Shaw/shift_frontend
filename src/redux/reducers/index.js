@@ -47,7 +47,8 @@ import {
     deleteAvailabilityByDateReducer,
     deleteAvailabilityReducer,
     getAvailabilityByDateReducer,
-    getAllAvailabilityReducer
+    getAllAvailabilityReducer,
+    getShiftsByDomainReducer
 } from './shiftReducer'
 import {
     forgotPasswordReducer,
@@ -101,6 +102,7 @@ const rootReducer = combineReducers({
     deleteAvailability: deleteAvailabilityReducer,
     getAvailabilityByDate: getAvailabilityByDateReducer,
     getAllAvailability: getAllAvailabilityReducer,
+    getShiftsByDomain: getShiftsByDomainReducer,
     // password
     forgotPassword: forgotPasswordReducer,
     resetPassword: resetPasswordReducer

@@ -35,7 +35,10 @@ import {
     GET_AVAILABILITY_BY_DATE_FAILED,
     DELETE_AVAILABILITY_BY_DATE_REQUEST,
     DELETE_AVAILABILITY_BY_DATE_SUCCESS,
-    DELETE_AVAILABILITY_BY_DATE_FAILED
+    DELETE_AVAILABILITY_BY_DATE_FAILED,
+    GET_SHIFTS_BY_DOMAIN_REQUEST,
+    GET_SHIFTS_BY_DOMAIN_SUCCESS,
+    GET_SHIFTS_BY_DOMAIN_FAILED
 } from "../constants/shiftConstants";
 
 
@@ -313,7 +316,7 @@ export const getAllAvailability = () => async (dispatch) => {
 }
 
 // delete availability by date
-export const deleteAvailabilityByDate = (id, date,start,end) => async (dispatch) => {
+export const deleteAvailabilityByDate = (id, date, start, end) => async (dispatch) => {
     try {
         dispatch({
             type: DELETE_AVAILABILITY_BY_DATE_REQUEST
@@ -364,6 +367,31 @@ export const deleteAvailability = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: DELETE_AVAILABILITY_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// get shifts by domain
+export const getShiftsByDomain = (domain) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_SHIFTS_BY_DOMAIN_REQUEST
+        })
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const { data } = await axios.get(`${API}/private/shift/get-shifts-by-domain?domain=${domain}`, config)
+        dispatch({
+            type: GET_SHIFTS_BY_DOMAIN_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_SHIFTS_BY_DOMAIN_FAILED,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

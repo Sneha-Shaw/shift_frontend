@@ -1,9 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react'
 import {
-    getAllShifts,
+    // getAllShifts,
     getCalender,
-    getAllSlots
+    getAllSlots,
+    getShiftsByDomain
 } from '../../redux/actions/shiftAction'
 import {
     getAllDoctors
@@ -19,7 +20,8 @@ export const ViewLogic = () => {
     const { calender } = useSelector((state) => state.getCalender)
     const { slots } = useSelector((state) => state.getAllSlots)
     const { doctorsInfo: doctors } = useSelector((state) => state.getAllDoctors)
-    const { shifts } = useSelector((state) => state.getAllShifts)
+    const { shifts } = useSelector((state) => state.getShiftsByDomain)
+
 
     var count = null
     const dispatch = useDispatch()
@@ -28,7 +30,7 @@ export const ViewLogic = () => {
     const [show, setShow] = useState(false)
     const [show2, setShow2] = useState(false)
     const [show3, setShow3] = useState(false)
-    const [domain,setDomain] = useState('ecg')
+    const [domain,setDomain] = useState("")
 
     // call   dispatch(getAllDoctors()) once
     useEffect(() => {
@@ -47,9 +49,9 @@ export const ViewLogic = () => {
         dispatch(getAllSlots())
     }, [dispatch])
 
-    useEffect(() => {
-        dispatch(getAllShifts())
-    }, [dispatch])
+  const getShifts= (domain) => {
+        dispatch(getShiftsByDomain(domain))
+    }
 
     useEffect(() => {
         if (userInfo)
@@ -59,17 +61,16 @@ export const ViewLogic = () => {
     // if user.domain is ecg set domain ecg
     useEffect(() => {
         if (user && user.ecg === true) {
-            setDomain('ecg')
+            setDomain("ecg")
         }
     }, [user])
 
     // if user.domain is echo set domain echo
     useEffect(() => {
         if (user && user.echo === true) {
-            setDomain('echo')
+            setDomain("echo")
         }
     }, [user])
-
 
     return {
         managerInfo,
@@ -86,6 +87,7 @@ export const ViewLogic = () => {
         setShow3,
         user,
         domain,
-        setDomain
+        setDomain,
+        getShifts
     }
 }
