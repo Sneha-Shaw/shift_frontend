@@ -104,7 +104,7 @@ const DailyView = () => {
                                 </Button>
                             </div>
                             <div className={classes.modalBodyItem} style={{
-                                width: "70%",
+                                width: "100%",
                                 display: "flex",
                                 justifyContent: "space-between",
                                 margin: "1rem 0"
@@ -114,7 +114,7 @@ const DailyView = () => {
                                     type="date"
                                     placeholder="Enter Start Date"
                                     style={{
-                                        width: '60%',
+                                        width: '30%',
                                         padding: "1rem",
                                         border: "1px solid #ccc",
                                         borderRadius: "0.5rem",
@@ -128,7 +128,7 @@ const DailyView = () => {
                                     type="date"
                                     placeholder="Enter End Date"
                                     style={{
-                                        width: '60%',
+                                        width: '30%',
                                         padding: "1rem",
                                         border: "1px solid #ccc",
                                         borderRadius: "0.5rem",
@@ -470,7 +470,11 @@ const DailyView = () => {
                                     shifts && shifts.data &&
                                     calender?.getCalendar?.calendarArray?.map((date, calendarIndex) =>
                                         <tr key={calendarIndex}>
-                                            <td>
+                                            <td style={{
+                                                position: "sticky",
+                                                left: 0,
+                                                background: "white"
+                                            }}>
                                                 {
 
                                                     doctors && doctors?.getAllDoctors?.map((doctor, docIndex) => (

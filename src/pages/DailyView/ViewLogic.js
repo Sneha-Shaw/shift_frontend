@@ -25,7 +25,7 @@ export const ViewLogic = () => {
     const { slots } = useSelector((state) => state.getAllSlots)
     const { doctorsInfo: doctors } = useSelector((state) => state.getAllDoctors)
     const { shifts } = useSelector((state) => state.getShiftsByDomain)
-    const {shifts:generateShiftsState}= useSelector((state)=>state.generateShiftsManually)
+    const { shifts: generateShiftsState } = useSelector((state) => state.generateShiftsManually)
     const { domains: alldomains } = useSelector(state => state.getAllDomains)
 
     var count = null
@@ -35,15 +35,15 @@ export const ViewLogic = () => {
     const [show, setShow] = useState(false)
     const [show2, setShow2] = useState(false)
     const [show3, setShow3] = useState(false)
-    const [domainOp,setDomainOp] = useState("")
-    const [startDate,setStartDate]= useState()
-    const [endDate,setEndDate]= useState()
-    const [domain,setDomain] = useState()
+    const [domainOp, setDomainOp] = useState("")
+    const [startDate, setStartDate] = useState()
+    const [endDate, setEndDate] = useState()
+    const [domain, setDomain] = useState()
 
 
     // generate shifts manually
     const generateShiftManually = () => {
-        dispatch(generateShiftsManually(domain,startDate,endDate))
+        dispatch(generateShiftsManually(domain, startDate, endDate))
     }
 
 
@@ -83,7 +83,9 @@ export const ViewLogic = () => {
         dispatch(getAllSlots())
     }, [dispatch])
 
-  const getShifts= (domain) => {
+    const getShifts = (domain) => {
+        // uncapitalize domain
+        domain = domain.toLowerCase()
         dispatch(getShiftsByDomain(domain))
     }
 

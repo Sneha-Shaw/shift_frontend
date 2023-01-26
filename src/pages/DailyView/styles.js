@@ -82,13 +82,16 @@ export default makeStyles((theme) => ({
         border: ".5px solid #06283D",
         '&>thead': {
             position:"sticky",
-            top:0,
-            background: "#06283D",
+            top:"-.2rem",
+            zIndex:100,
             '&>tr': {
+
                 '&>th': {
                     fontWeight: "bold",
                     padding: "1rem",
                     fontSize: "1.5rem",
+            background: "#06283D",
+
                     // borderRight: ".5px solid #06283D",
                     // width: "8rem",
                     // height: "2rem",
