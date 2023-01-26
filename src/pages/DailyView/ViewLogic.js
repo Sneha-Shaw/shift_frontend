@@ -4,14 +4,18 @@ import {
     // getAllShifts,
     getCalender,
     getAllSlots,
-    getShiftsByDomain
+    getShiftsByDomain,
+    generateShiftsManually
 } from '../../redux/actions/shiftAction'
 import {
-    getAllDoctors
+    getAllDoctors,
+    getAllDomains
 } from '../../redux/actions/managerAction'
 import {
     getSingleUser
 } from '../../redux/actions/userAction'
+
+import Swal from 'sweetalert2';
 
 export const ViewLogic = () => {
     const { managerInfo } = useSelector((state) => state.signInManager)
@@ -21,7 +25,8 @@ export const ViewLogic = () => {
     const { slots } = useSelector((state) => state.getAllSlots)
     const { doctorsInfo: doctors } = useSelector((state) => state.getAllDoctors)
     const { shifts } = useSelector((state) => state.getShiftsByDomain)
-
+    const {shifts:generateShiftsState}= useSelector((state)=>state.generateShiftsManually)
+    const { domains: alldomains } = useSelector(state => state.getAllDomains)
 
     var count = null
     const dispatch = useDispatch()
@@ -30,7 +35,36 @@ export const ViewLogic = () => {
     const [show, setShow] = useState(false)
     const [show2, setShow2] = useState(false)
     const [show3, setShow3] = useState(false)
-    const [domain,setDomain] = useState("")
+    const [domainOp,setDomainOp] = useState("")
+    const [startDate,setStartDate]= useState()
+    const [endDate,setEndDate]= useState()
+    const [domain,setDomain] = useState()
+
+
+    // generate shifts manually
+    const generateShiftManually = () => {
+        dispatch(generateShiftsManually(domain,startDate,endDate))
+    }
+
+
+    useEffect(() => {
+        if (generateShiftsState) {
+            setShow2(false)
+            setDomainOp(domain)
+            dispatch(getShiftsByDomain(domain))
+            Swal.fire({
+                icon: 'success',
+                title: 'Shifts Generated Successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    }, [generateShiftsState])
+
+    // get all domains
+    useEffect(() => {
+        dispatch(getAllDomains())
+    }, [dispatch])
 
     // call   dispatch(getAllDoctors()) once
     useEffect(() => {
@@ -61,17 +95,16 @@ export const ViewLogic = () => {
     // if user.domain is ecg set domain ecg
     useEffect(() => {
         if (user && user.ecg === true) {
-            setDomain("ecg")
+            setDomainOp("ecg")
         }
     }, [user])
 
     // if user.domain is echo set domain echo
     useEffect(() => {
         if (user && user.echo === true) {
-            setDomain("echo")
+            setDomainOp("echo")
         }
     }, [user])
-
     return {
         managerInfo,
         calender,
@@ -86,8 +119,16 @@ export const ViewLogic = () => {
         show3,
         setShow3,
         user,
+        domainOp,
+        setDomainOp,
+        getShifts,
+        generateShiftManually,
+        setStartDate,
+        startDate,
+        endDate,
+        setEndDate,
         domain,
         setDomain,
-        getShifts
+        alldomains
     }
 }

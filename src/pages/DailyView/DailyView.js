@@ -20,11 +20,19 @@ const DailyView = () => {
         setShow,
         show2,
         setShow2,
-        domain,
-        setDomain,
+        domainOp,
+        setDomainOp,
         show3,
         setShow3,
-        getShifts
+        getShifts,
+        generateShiftManually,
+        setStartDate,
+        startDate,
+        endDate,
+        setEndDate,
+        domain,
+        setDomain,
+        alldomains
     } = ViewLogic()
 
     const dateRange = "2023-1-12 to 2023-2-12"
@@ -38,7 +46,7 @@ const DailyView = () => {
                     <div className={classes.btnheader}>
                         <DownloadTableExcel
                             // filename ={ecg_dateRange}
-                            filename={`${domain}_${dateRange}`}
+                            filename={`${domainOp}_${dateRange}`}
                             sheet="users"
                             currentTableRef={tableRef.current}>
                             <Button
@@ -103,8 +111,8 @@ const DailyView = () => {
 
                             }}>
                                 <input
-                                    type="number"
-                                    placeholder="Enter no. of days to generate roster"
+                                    type="date"
+                                    placeholder="Enter Start Date"
                                     style={{
                                         width: '60%',
                                         padding: "1rem",
@@ -113,6 +121,21 @@ const DailyView = () => {
                                         outline: "none"
 
                                     }}
+                                    onChange={(e) => { setStartDate(e.target.value); }}
+                                    value={startDate}
+                                />
+                                <input
+                                    type="date"
+                                    placeholder="Enter End Date"
+                                    style={{
+                                        width: '60%',
+                                        padding: "1rem",
+                                        border: "1px solid #ccc",
+                                        borderRadius: "0.5rem",
+                                        outline: "none"
+                                    }}
+                                    onChange={(e) => { setEndDate(e.target.value); }}
+                                    value={endDate}
                                 />
                                 {/* choose domain */}
                                 <select
@@ -124,10 +147,16 @@ const DailyView = () => {
                                         outline: "none"
 
                                     }}
+                                    onChange={(e) => { setDomain(e.target.value); }}
+                                    value={domain}
                                 >
-                                    <option value="1">Choose Domain</option>
-                                    <option value="2">ECG</option>
-                                    <option value="3">ECHO</option>
+                                    <option value="">Choose Domain</option>
+                                    {
+                                        alldomains && alldomains.getAllDomains.map
+                                            ((domain) => (
+                                                <option key={domain._id} value={domain?.domainName}>{domain?.domainName}</option>
+                                            ))
+                                    }
                                 </select>
 
                             </div>
@@ -143,6 +172,7 @@ const DailyView = () => {
                                         background: "rgba(6, 40, 61,0.9)"
                                     }
                                 }}
+                                onClick={generateShiftManually}
                             >
                                 Generate
                             </Button>
@@ -170,13 +200,17 @@ const DailyView = () => {
                                         name="domain"
                                         id="domain"
                                         className={classes.modalBodyItemSelect}
-                                        onChange={(e) => { setDomain(e.target.value); }}
-                                        value={domain}
+                                        onChange={(e) => { setDomainOp(e.target.value); }}
+                                        value={domainOp}
 
                                     >
                                         <option value="">Select Domain</option>
-                                        <option value="ecg">ECG</option>
-                                        <option value="echo">ECHO</option>
+                                        {
+                                            alldomains && alldomains.getAllDomains.map
+                                                ((domain) => (
+                                                    <option key={domain._id} value={domain?.domainName}>{domain?.domainName}</option>
+                                                ))
+                                        }
                                     </select>
                                 </div>
                                 <div className={classes.modalBodyItem}>
@@ -212,7 +246,7 @@ const DailyView = () => {
                                         overflowY: "scroll",
                                     }}>
                                         {
-                                            domain === "ecg" ?
+                                            domainOp === "ecg" ?
                                                 doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.ecg).map((doctor, doctorAddIndex) => (
                                                     <div key={doctorAddIndex}>
                                                         {/* checkbox */}
@@ -227,7 +261,7 @@ const DailyView = () => {
                                                     </div>
                                                 ))
                                                 :
-                                                domain === "echo" &&
+                                                domainOp === "echo" &&
                                                 doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.echo).map((doctor, doctorAddIndex) => (
                                                     <div key={doctorAddIndex}>
                                                         {/* checkbox */}
@@ -330,16 +364,20 @@ const DailyView = () => {
                                     id="domain"
                                     className={classes.domainSelect}
                                     onChange={(e) => {
-                                        setDomain(e.target.value);
+                                        setDomainOp(e.target.value);
                                         getShifts(e.target.value);
                                         // handleDomain(e.target.value)
                                     }}
-                                    value={domain}
+                                    value={domainOp}
 
                                 >
                                     <option value="">Select Domain</option>
-                                    <option value="ecg">ECG</option>
-                                    <option value="echo">ECHO</option>
+                                    {
+                                        alldomains && alldomains.getAllDomains.map
+                                            ((domain) => (
+                                                <option key={domain._id} value={domain?.domainName}>{domain?.domainName}</option>
+                                            ))
+                                    }
                                 </select>
 
                             </div>
@@ -358,14 +396,18 @@ const DailyView = () => {
                                             id="domain"
                                             className={classes.domainSelect}
                                             onChange={(e) => {
-                                                setDomain(e.target.value);
+                                                setDomainOp(e.target.value);
                                             }}
-                                            value={domain}
+                                            value={domainOp}
 
                                         >
                                             <option value="">Select Domain</option>
-                                            <option value="ecg">ECG</option>
-                                            <option value="echo">ECHO</option>
+                                            {
+                                                alldomains && alldomains.getAllDomains.map
+                                                    ((domain) => (
+                                                        <option key={domain._id} value={domain?.domainName}>{domain?.domainName}</option>
+                                                    ))
+                                            }
                                         </select>
                                         :
                                         user && user?.ecg ?

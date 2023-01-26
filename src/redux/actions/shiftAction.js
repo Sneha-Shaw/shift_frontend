@@ -38,7 +38,10 @@ import {
     DELETE_AVAILABILITY_BY_DATE_FAILED,
     GET_SHIFTS_BY_DOMAIN_REQUEST,
     GET_SHIFTS_BY_DOMAIN_SUCCESS,
-    GET_SHIFTS_BY_DOMAIN_FAILED
+    GET_SHIFTS_BY_DOMAIN_FAILED,
+    GENERATE_SHIFTS_MANUALLY_REQUEST,
+    GENERATE_SHIFTS_MANUALLY_SUCCESS,
+    GENERATE_SHIFTS_MANUALLY_FAILED
 } from "../constants/shiftConstants";
 
 
@@ -392,6 +395,36 @@ export const getShiftsByDomain = (domain) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: GET_SHIFTS_BY_DOMAIN_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// generate shifts manually
+export const generateShiftsManually = (domain, startDate, endDate) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GENERATE_SHIFTS_MANUALLY_REQUEST
+        })
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const body = {
+            domain,
+            startDate,
+            endDate
+        }
+        const { data } = await axios.post(`${API}/private/shift/generate-shift`, body, config)
+        dispatch({
+            type: GENERATE_SHIFTS_MANUALLY_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: GENERATE_SHIFTS_MANUALLY_FAILED,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

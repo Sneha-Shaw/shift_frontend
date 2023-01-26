@@ -37,7 +37,10 @@ import {
     DELETE_AVAILABILITY_BY_DATE_FAILED,
     GET_SHIFTS_BY_DOMAIN_REQUEST,
     GET_SHIFTS_BY_DOMAIN_SUCCESS,
-    GET_SHIFTS_BY_DOMAIN_FAILED
+    GET_SHIFTS_BY_DOMAIN_FAILED,
+    GENERATE_SHIFTS_MANUALLY_REQUEST,
+    GENERATE_SHIFTS_MANUALLY_SUCCESS,
+    GENERATE_SHIFTS_MANUALLY_FAILED
 } from "../constants/shiftConstants";
 
 // get calender
@@ -502,6 +505,47 @@ export const getShiftsByDomainReducer = (state = getShiftsByDomainState, action)
 
             }
         case GET_SHIFTS_BY_DOMAIN_FAILED:
+            return {
+                ...state,
+                loading: false,
+                shifts: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+// GENERATE SHIFTS MANUALY
+const generateShiftsState = {
+    loading: false,
+    shifts: null,
+    error: null,
+    isAuthenticated: false
+}
+
+export const generateShiftsManuallyReducer = (state = generateShiftsState, action) => {
+    switch (action.type) {
+        case GENERATE_SHIFTS_MANUALLY_REQUEST:
+            return {
+                ...state,
+                shifts: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case GENERATE_SHIFTS_MANUALLY_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                shifts: action.payload
+
+            }
+        case GENERATE_SHIFTS_MANUALLY_FAILED:
             return {
                 ...state,
                 loading: false,
