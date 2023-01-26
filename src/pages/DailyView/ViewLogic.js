@@ -29,6 +29,8 @@ export const ViewLogic = () => {
     const { shifts } = useSelector((state) => state.getShiftsByDomain)
     const { shifts: generateShiftsState } = useSelector((state) => state.generateShiftsManually)
     const { domains: alldomains } = useSelector(state => state.getAllDomains)
+    const { shift: updatedShift } = useSelector(state => state.updateShift)
+    const { shift: createdShift } = useSelector(state => state.createShift)
 
     var count = null
     const dispatch = useDispatch()
@@ -121,6 +123,33 @@ export const ViewLogic = () => {
     const generateShiftManually = () => {
         dispatch(generateShiftsManually(domain, startDate, endDate))
     }
+
+    useEffect(() => {
+        if (updatedShift) {
+           var domain = domainOp.toLowerCase()
+            dispatch(getShiftsByDomain(domain))
+            Swal.fire({
+                icon: 'success',
+                title: 'Shift Updated Successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    }, [updatedShift])
+
+    useEffect(() => {
+        if (createdShift) {
+            setDomainOp(createDomain)
+           var domain = createDomain.toLowerCase()
+            dispatch(getShiftsByDomain(domain))
+            Swal.fire({
+                icon: 'success',
+                title: 'Shift Created Successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    }, [createdShift])
 
 
     useEffect(() => {
