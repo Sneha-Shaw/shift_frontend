@@ -5,7 +5,8 @@ import {
     getCalender,
     getAllSlots,
     getShiftsByDomain,
-    generateShiftsManually
+    generateShiftsManually,
+    updateShift
 } from '../../redux/actions/shiftAction'
 import {
     getAllDoctors,
@@ -60,6 +61,12 @@ export const ViewLogic = () => {
             id: id
         })
 
+    }
+
+    // update
+    const handleUpdate = () => {
+        dispatch(updateShift(temp.id,temp.doctors))
+        setShow3(false)
     }
 
     // handle add doctors in edit doctors
@@ -174,6 +181,7 @@ export const ViewLogic = () => {
         handleAddDoctors,
         handleRemoveDoctors,
         setDoctors,
-        editdoctors
+        editdoctors,
+        handleUpdate
     }
 }

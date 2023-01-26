@@ -38,9 +38,10 @@ const DailyView = () => {
         handleAddDoctors,
         handleRemoveDoctors,
         setDoctors,
-        editdoctors
+        editdoctors,
+        handleUpdate
     } = ViewLogic()
-    // console.log(editdoctors,"edit");
+    console.log(editdoctors,"edit");
     // get current month's first date ex: 01-01-2023 and last date ex: 31-01-2023
     const date = new Date()
     const currentMonth = date.getMonth()
@@ -398,6 +399,7 @@ const DailyView = () => {
                                 <Button
                                     variant="contained"
                                     color="success"
+                                    onClick={handleUpdate}
                                 >
                                     Save
                                 </Button>
