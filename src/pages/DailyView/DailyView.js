@@ -39,16 +39,24 @@ const DailyView = () => {
         handleRemoveDoctors,
         setDoctors,
         editdoctors,
-        handleUpdate
+        handleUpdate,
+        handleCreate,
+        setcreateDomain,
+        createDomain,
+        setcreateDate,
+        createDate,
+        setcreateSlot,
+        createSlot,
+        setcreateId
     } = ViewLogic()
-    console.log(editdoctors,"edit");
+    // console.log(editdoctors, "edit");
     // get current month's first date ex: 01-01-2023 and last date ex: 31-01-2023
     const date = new Date()
     const currentMonth = date.getMonth()
     const currentYear = date.getFullYear()
     const firstDay = new Date(currentYear, currentMonth, 1)
     const lastDay = new Date(currentYear, currentMonth + 1, 0)
-    const dateRange = `${firstDay.getDate()}-${currentMonth+1}-${currentYear} to ${lastDay.getDate()}-${currentMonth+1}-${currentYear}`
+    const dateRange = `${firstDay.getDate()}-${currentMonth + 1}-${currentYear} to ${lastDay.getDate()}-${currentMonth + 1}-${currentYear}`
     const tableRef = useRef(null);
     return (
         <div className={classes.root}>
@@ -213,8 +221,8 @@ const DailyView = () => {
                                         name="domain"
                                         id="domain"
                                         className={classes.modalBodyItemSelect}
-                                        onChange={(e) => { setDomainOp(e.target.value); }}
-                                        value={domainOp}
+                                        onChange={(e) => { setcreateDomain(e.target.value); }}
+                                        value={createDomain}
 
                                     >
                                         <option value="">Select Domain</option>
@@ -233,6 +241,8 @@ const DailyView = () => {
                                         name="date"
                                         id="date"
                                         className={classes.modalBodyItemInput}
+                                        onChange={(e) => { setcreateDate(e.target.value); }}
+                                        value={createDate}
                                     />
                                 </div>
                                 <div className={classes.modalBodyItem}>
@@ -241,6 +251,13 @@ const DailyView = () => {
                                         name="slot"
                                         id="slot"
                                         className={classes.modalBodyItemSelect}
+                                        onChange={(e) => {
+                                            setcreateSlot(e.target.value);
+                                            setcreateId(
+                                                slots?.getAllSlots?.filter((slot) => slot.slotTime === e.target.value)[0]._id
+                                            )
+                                        }}
+                                        value={createSlot}
                                     >
                                         <option value="">Select Slot</option>
                                         {
@@ -293,6 +310,8 @@ const DailyView = () => {
                                 <Button
                                     variant="contained"
                                     color="primary"
+
+                                    onClick={handleCreate}
                                 >
                                     Create
                                 </Button>
@@ -662,28 +681,23 @@ const DailyView = () => {
                                                                     }}>
                                                                         {/*  if current doctor is alloted at current shift then print 1  */}
                                                                         {
-                                                                            shifts?.data?.map((shift, shiftIndex) => (
-                                                                                // <div key={shiftIndex} style={{
-                                                                                //     width: "100%",
-                                                                                //     height: "100%",
-                                                                                // }}>
+                                                                            shifts?.data?.map((shift) => (
 
                                                                                 shift?.doctors.map((doctorShift, doctorIndex7) => (
-
 
                                                                                     doctorShift === doctor._id && shift?.shiftDate === date.dayYear + '-' + date.dayMonth + '-' + date.dayNumber && shift?.shiftTime === slot.slotTime && (
                                                                                         <div className={classes.shiftBox} key={doctorIndex7}
                                                                                             style={{
-                                                                                                borderTop: ".5px solid #06283D",
-                                                                                                borderLeft: ".5px solid #06283D",
-                                                                                                borderRight: ".5px solid #06283D",
+                                                                                                borderTop: ".5px solid #fff",
+                                                                                                borderLeft: ".5px solid #fff",
+                                                                                                borderRight: ".5px solid #fff",
                                                                                                 width: "100%",
                                                                                                 height: "4rem",
                                                                                                 display: "flex",
                                                                                                 alignItems: "center",
                                                                                                 justifyContent: "center",
                                                                                                 // border of last child is #000
-                                                                                                borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #06283D"
+                                                                                                borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #fff"
                                                                                             }}
 
                                                                                             onClick={() => {

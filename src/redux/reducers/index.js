@@ -50,7 +50,8 @@ import {
     getAllAvailabilityReducer,
     getShiftsByDomainReducer,
     generateShiftsManuallyReducer,
-    updateShiftReducer
+    updateShiftReducer,
+    createShiftReducer
 } from './shiftReducer'
 import {
     forgotPasswordReducer,
@@ -107,6 +108,7 @@ const rootReducer = combineReducers({
     getShiftsByDomain: getShiftsByDomainReducer,
     generateShiftsManually: generateShiftsManuallyReducer,
     updateShift: updateShiftReducer,
+    createShift: createShiftReducer,
     // password
     forgotPassword: forgotPasswordReducer,
     resetPassword: resetPasswordReducer

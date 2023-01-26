@@ -6,7 +6,8 @@ import {
     getAllSlots,
     getShiftsByDomain,
     generateShiftsManually,
-    updateShift
+    updateShift,
+    createShift
 } from '../../redux/actions/shiftAction'
 import {
     getAllDoctors,
@@ -42,6 +43,11 @@ export const ViewLogic = () => {
     const [domain, setDomain] = useState("")
     const [temp, setTemp] = useState({})
     const [editdoctors, setDoctors] = useState([])
+    const [createDomain, setcreateDomain] = useState("")
+    const [createDate, setcreateDate] = useState("")
+    const [createSlot, setcreateSlot] = useState("")
+    const [createId, setcreateId] = useState("")
+    const [shiftDay, setShiftDay] = useState("")
 
     // handle open modal
     const handleOpen = (date, slot, doctors, id) => {
@@ -65,8 +71,34 @@ export const ViewLogic = () => {
 
     // update
     const handleUpdate = () => {
-        dispatch(updateShift(temp.id,temp.doctors))
+        dispatch(updateShift(temp.id, temp.doctors))
         setShow3(false)
+    }
+
+    // create
+    const handleCreate = () => {
+        const days = [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ]
+        const shiftDate = new Date(createDate)
+        setShiftDay(days[shiftDate.getDay()])
+        console.log(createDate);
+        // check if dd contains 0 ex: if(dd in 2023-01-27 includes 0 then remove 0 and result should be 2023-1-27
+        const dd = parseInt(createDate.split("-")[2]) < 10 ? parseInt(createDate.split("-")[0]).toString().replace("0", "") : parseInt(createDate.split("-")[2])
+        const mm = parseInt(createDate.split("-")[1]) < 10 ? parseInt(createDate.split("-")[1]).toString().replace("0", "") : parseInt(createDate.split("-")[1])
+        const yyyy = createDate.split("-")[0]
+        const date2 = yyyy + "-" + mm + "-" + dd
+        console.log(date2);
+        var domain = createDomain.toLowerCase()
+        //  doctors, shiftDate, shiftDay, shiftTime, shiftDomain, slotId 
+        dispatch(createShift(editdoctors, date2, days[new Date(createDate).getDay()], createSlot, domain, createId))
+        setShow(false)
     }
 
     // handle add doctors in edit doctors
@@ -182,6 +214,17 @@ export const ViewLogic = () => {
         handleRemoveDoctors,
         setDoctors,
         editdoctors,
-        handleUpdate
+        handleUpdate,
+        handleCreate,
+        setcreateDomain,
+        createDomain,
+        setcreateDate,
+        createDate,
+        setcreateSlot,
+        createSlot,
+        setcreateId,
+        createId,
+        setShiftDay,
+        shiftDay
     }
 }

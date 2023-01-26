@@ -43,7 +43,10 @@ import {
     GENERATE_SHIFTS_MANUALLY_FAILED,
     UPDATE_SHIFT_REQUEST,
     UPDATE_SHIFT_SUCCESS,
-    UPDATE_SHIFT_FAILED
+    UPDATE_SHIFT_FAILED,
+    CREATE_SHIFT_REQUEST,
+    CREATE_SHIFT_SUCCESS,
+    CREATE_SHIFT_FAILED
 } from "../constants/shiftConstants";
 
 // get calender
@@ -590,6 +593,47 @@ export const updateShiftReducer = (state = updateShiftState, action) => {
 
             }
         case UPDATE_SHIFT_FAILED:
+            return {
+                ...state,
+                loading: false,
+                shift: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+// create shift
+const createShiftState = {
+    loading: false,
+    shift: null,
+    error: null,
+    isAuthenticated: false
+}
+
+export const createShiftReducer = (state = createShiftState, action) => {
+    switch (action.type) {
+        case CREATE_SHIFT_REQUEST:
+            return {
+                ...state,
+                shift: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case CREATE_SHIFT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                shift: action.payload
+
+            }
+        case CREATE_SHIFT_FAILED:
             return {
                 ...state,
                 loading: false,

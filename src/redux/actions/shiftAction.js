@@ -44,7 +44,10 @@ import {
     GENERATE_SHIFTS_MANUALLY_FAILED,
     UPDATE_SHIFT_REQUEST,
     UPDATE_SHIFT_SUCCESS,
-    UPDATE_SHIFT_FAILED
+    UPDATE_SHIFT_FAILED,
+    CREATE_SHIFT_REQUEST,
+    CREATE_SHIFT_SUCCESS,
+    CREATE_SHIFT_FAILED
 } from "../constants/shiftConstants";
 
 
@@ -437,7 +440,7 @@ export const generateShiftsManually = (domain, startDate, endDate) => async (dis
 }
 
 // update shift
-export const updateShift = (id,doctors) => async (dispatch) => {
+export const updateShift = (id, doctors) => async (dispatch) => {
     try {
         dispatch({
             type: UPDATE_SHIFT_REQUEST
@@ -456,6 +459,39 @@ export const updateShift = (id,doctors) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: UPDATE_SHIFT_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// create shift
+export const createShift = (doctors, shiftDate, shiftDay, shiftTime, shiftDomain, slotId) => async (dispatch) => {
+    try {
+        dispatch({
+            type: CREATE_SHIFT_REQUEST
+        })
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const body = {
+            doctors,
+            shiftDate,
+            shiftDay,
+            shiftTime,
+            shiftDomain,
+            slotId
+        }
+        const { data } = await axios.post(`${API}/private/shift/create-shift`, body, config)
+        dispatch({
+            type: CREATE_SHIFT_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: CREATE_SHIFT_FAILED,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
