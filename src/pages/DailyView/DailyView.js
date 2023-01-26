@@ -32,9 +32,15 @@ const DailyView = () => {
         setEndDate,
         domain,
         setDomain,
-        alldomains
+        alldomains,
+        handleOpen,
+        temp,
+        handleAddDoctors,
+        handleRemoveDoctors,
+        setDoctors,
+        editdoctors
     } = ViewLogic()
-
+    // console.log(editdoctors,"edit");
     const dateRange = "2023-1-12 to 2023-2-12"
     const tableRef = useRef(null);
     return (
@@ -246,35 +252,31 @@ const DailyView = () => {
                                         overflowY: "scroll",
                                     }}>
                                         {
-                                            domainOp === "ecg" ?
-                                                doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.ecg).map((doctor, doctorAddIndex) => (
-                                                    <div key={doctorAddIndex}>
-                                                        {/* checkbox */}
-                                                        <input
-                                                            type="checkbox"
-                                                            name="doctor"
-                                                            id="doctor"
-                                                            value={doctor._id}
-                                                        // onChange={(e) => handleAdd(e)}
-                                                        />
-                                                        <label htmlFor="doctor">{doctor.name}</label>
-                                                    </div>
-                                                ))
-                                                :
-                                                domainOp === "echo" &&
-                                                doctors && doctors?.getAllDoctors?.filter((doctor) => doctor.echo).map((doctor, doctorAddIndex) => (
-                                                    <div key={doctorAddIndex}>
-                                                        {/* checkbox */}
-                                                        <input
-                                                            type="checkbox"
-                                                            name="doctor"
-                                                            id="doctor"
-                                                            value={doctor._id}
-                                                        // onChange={(e) => handleAdd(e)}
-                                                        />
-                                                        <label htmlFor="doctor">{doctor.name}</label>
-                                                    </div>
-                                                ))
+
+                                            doctors && doctors?.getAllDoctors?.map((doctor, doctorAddIndex) => (
+                                                <div key={doctorAddIndex}>
+                                                    {/* checkbox */}
+                                                    <input
+                                                        type="checkbox"
+                                                        name="doctor"
+                                                        id="doctor"
+                                                        value={doctor._id}
+                                                        onChange={(e) => {
+                                                            if (e.target.checked) {
+                                                                setDoctors((prev) => [...prev, e.target.value]);
+                                                            }
+                                                            else {
+                                                                setDoctors((prev) => prev.filter((item) => item !== e.target.value));
+                                                            }
+                                                        }}
+                                                        checked={
+                                                            editdoctors.includes(doctor._id)
+                                                        }
+                                                    />
+                                                    <label htmlFor="doctor">{doctor.name}</label>
+                                                </div>
+                                            ))
+
                                         }
                                     </div>
                                 </div>
@@ -297,7 +299,7 @@ const DailyView = () => {
                             </div>
                         </div>
                     </Modal>
-                    {/* <Modal
+                    <Modal
                         open={show3}
                         onClose={() => setShow3(false)}
                         className={classes.modal}
@@ -313,35 +315,89 @@ const DailyView = () => {
                             </div>
                             <hr className={classes.hr} />
                             <div className={classes.modalBody}>
-                                <div className={classes.modalBodyLeft}>
-                                    <div className={classes.modalBodyItem}>
-                                        <label htmlFor="domain">Domain</label>
-                                        <input
-                                            type="text"
-                                            name="domain"
-                                            id="domain"
-                                            className={classes.modalBodyItemInput}
-                                            value={domain.toUpperCase()}
-                                            disabled
-                                        />
-                                    </div>
-                                    <div className={classes.modalBodyItem}></div>
+                                <div className={classes.modalBodyItem}>
+                                    <label htmlFor="domain"> Domain</label>
+                                    <input
+                                        type="text"
+                                        name="domain"
+                                        id="domain"
+                                        className={classes.modalBodyItemInput}
+                                        value={temp?.domain}
+                                        disabled
+                                    />
                                 </div>
-                                <div className={classes.modalBodyRight}>
+                                <div className={classes.modalBodyItem}>
+                                    <label htmlFor="date">Date</label>
+                                    <input
+                                        type="date"
+                                        name="date"
+                                        id="date"
+                                        className={classes.modalBodyItemInput}
+                                        value={temp?.date}
+                                        disabled
+                                    />
+                                </div>
+                                <div className={classes.modalBodyItem}>
+                                    <label htmlFor="slot">Slot</label>
+                                    <input
+                                        type="text"
+                                        name="slot"
+                                        id="slot"
+                                        className={classes.modalBodyItemInput}
+                                        value={temp?.slot}
+                                        disabled
+                                    />
+                                </div>
+                                <div className={classes.modalBodyItem}>
+                                    <label htmlFor="doctor">Select Doctor:</label>
+                                    <div style={{
+                                        height: "20rem",
+                                        overflowY: "scroll",
+                                    }}>
+                                        {
 
+                                            doctors && doctors?.getAllDoctors?.map((doctor, doctorAddIndex) => (
+                                                <div key={doctorAddIndex}>
+                                                    {/* checkbox */}
+                                                    <input
+                                                        type="checkbox"
+                                                        name="doctor"
+                                                        id="doctor"
+                                                        value={doctor._id}
+                                                        // check if doctor is already in shift
+                                                        checked={temp?.doctors?.includes(doctor._id)}
+                                                        onChange={(e) => {
+                                                            if (e.target.checked) {
+                                                                handleAddDoctors(
+                                                                    doctor._id
+                                                                )
+                                                            } else {
+                                                                handleRemoveDoctors(
+                                                                    doctor._id
+                                                                )
+                                                            }
+                                                        }}
+                                                    />
+                                                    <label htmlFor="doctor">{doctor.name}</label>
+                                                </div>
+                                            ))
+
+                                        }
+                                    </div>
                                 </div>
+
                             </div>
                             <hr className={classes.hr} />
                             <div className={classes.modalFooter}>
                                 <Button
                                     variant="contained"
-                                    color="primary"
+                                    color="success"
                                 >
                                     Save
                                 </Button>
                                 <Button
                                     variant="contained"
-                                    color="primary"
+                                    color="error"
                                     onClick={() => setShow3(false)}
                                 >
                                     Cancel
@@ -349,7 +405,7 @@ const DailyView = () => {
 
                             </div>
                         </div>
-                    </Modal> */}
+                    </Modal>
                     {
                         managerInfo ?
                             <div className={classes.domain}>
@@ -623,7 +679,13 @@ const DailyView = () => {
                                                                                             }}
 
                                                                                             onClick={() => {
-                                                                                                setShow3(!show3)
+                                                                                                handleOpen(
+                                                                                                    date.dayNumber + '-' + date.dayMonth + '-' + date.dayYear,
+                                                                                                    slot.slotTime,
+                                                                                                    // array of shift?.doctors
+                                                                                                    shift?.doctors,
+                                                                                                    shift._id
+                                                                                                )
                                                                                             }}
                                                                                         >
                                                                                             Yes

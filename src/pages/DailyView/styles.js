@@ -246,7 +246,7 @@ export default makeStyles((theme) => ({
         alignItems: "center",
         justifyContent: "center",
         '&>button': {
-            background: "#06283D",
+            // background: "#06283D",
             color: "#fff",
             fontSize: "1.2rem",
             outline: "none",

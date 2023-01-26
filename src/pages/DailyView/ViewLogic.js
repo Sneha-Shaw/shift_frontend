@@ -36,10 +36,47 @@ export const ViewLogic = () => {
     const [show2, setShow2] = useState(false)
     const [show3, setShow3] = useState(false)
     const [domainOp, setDomainOp] = useState("")
-    const [startDate, setStartDate] = useState()
-    const [endDate, setEndDate] = useState()
-    const [domain, setDomain] = useState()
+    const [startDate, setStartDate] = useState("")
+    const [endDate, setEndDate] = useState("")
+    const [domain, setDomain] = useState("")
+    const [temp, setTemp] = useState({})
+    const [editdoctors, setDoctors] = useState([])
 
+    // handle open modal
+    const handleOpen = (date, slot, doctors, id) => {
+        setShow3(!show3)
+        // get mm from DD-MM-YYYY format and then parse int then check if its less than 10 than add 0
+        const mm = parseInt(date.split("-")[1]) < 10 ? "0" + parseInt(date.split("-")[1]) : parseInt(date.split("-")[1])
+        const dd = parseInt(date.split("-")[0]) < 10 ? "0" + parseInt(date.split("-")[0]) : parseInt(date.split("-")[0])
+        const yyyy = date.split("-")[2]
+        const date2 = yyyy + "-" + mm + "-" + dd
+
+
+        setTemp({
+            domain: domainOp,
+            date: date2,
+            slot: slot,
+            doctors: doctors,
+            id: id
+        })
+
+    }
+
+    // handle add doctors in edit doctors
+    const handleAddDoctors = (id) => {
+
+        setDoctors([...editdoctors, id])
+        // edit in temp.doctors
+        temp.doctors.push(id)
+    }
+
+    // handleRemoveDoctors
+    const handleRemoveDoctors = (id) => {
+
+        setDoctors(editdoctors.filter((doctor) => doctor !== id))
+        // edit in temp.doctors
+        temp.doctors = temp.doctors.filter((doctor) => doctor !== id)
+    }
 
     // generate shifts manually
     const generateShiftManually = () => {
@@ -131,6 +168,12 @@ export const ViewLogic = () => {
         setEndDate,
         domain,
         setDomain,
-        alldomains
+        alldomains,
+        handleOpen,
+        temp,
+        handleAddDoctors,
+        handleRemoveDoctors,
+        setDoctors,
+        editdoctors
     }
 }
