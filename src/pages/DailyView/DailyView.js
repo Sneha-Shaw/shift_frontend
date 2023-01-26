@@ -41,7 +41,13 @@ const DailyView = () => {
         editdoctors
     } = ViewLogic()
     // console.log(editdoctors,"edit");
-    const dateRange = "2023-1-12 to 2023-2-12"
+    // get current month's first date ex: 01-01-2023 and last date ex: 31-01-2023
+    const date = new Date()
+    const currentMonth = date.getMonth()
+    const currentYear = date.getFullYear()
+    const firstDay = new Date(currentYear, currentMonth, 1)
+    const lastDay = new Date(currentYear, currentMonth + 1, 0)
+    const dateRange = `${firstDay.getDate()}-${currentMonth+1}-${currentYear} to ${lastDay.getDate()}-${currentMonth+1}-${currentYear}`
     const tableRef = useRef(null);
     return (
         <div className={classes.root}>
