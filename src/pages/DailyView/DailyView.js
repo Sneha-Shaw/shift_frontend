@@ -47,7 +47,8 @@ const DailyView = () => {
         createDate,
         setcreateSlot,
         createSlot,
-        setcreateId
+        setcreateId,
+        handleDelete
     } = ViewLogic()
     // console.log(editdoctors, "edit");
     // get current month's first date ex: 01-01-2023 and last date ex: 31-01-2023
@@ -309,7 +310,7 @@ const DailyView = () => {
                             <div className={classes.modalFooter}>
                                 <Button
                                     variant="contained"
-                                    color="primary"
+                                    color="success"
 
                                     onClick={handleCreate}
                                 >
@@ -317,7 +318,7 @@ const DailyView = () => {
                                 </Button>
                                 <Button
                                     variant="contained"
-                                    color="primary"
+                                    color="error"
                                     onClick={() => setShow(false)}
                                 >
                                     Cancel
@@ -425,9 +426,9 @@ const DailyView = () => {
                                 <Button
                                     variant="contained"
                                     color="error"
-                                    onClick={() => setShow3(false)}
+                                    onClick={() => {setShow3(false);handleDelete(temp.id)}}
                                 >
-                                    Cancel
+                                    Delete
                                 </Button>
 
                             </div>

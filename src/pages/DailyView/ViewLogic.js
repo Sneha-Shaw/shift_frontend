@@ -6,7 +6,8 @@ import {
     getShiftsByDomain,
     generateShiftsManually,
     updateShift,
-    createShift
+    createShift,
+    deleteShift
 } from '../../redux/actions/shiftAction'
 import {
     getAllSlots
@@ -33,6 +34,7 @@ export const ViewLogic = () => {
     const { domains: alldomains } = useSelector(state => state.getAllDomains)
     const { shift: updatedShift } = useSelector(state => state.updateShift)
     const { shift: createdShift } = useSelector(state => state.createShift)
+    const { shift: deletedShift } = useSelector(state => state.deleteShift)
 
     var count = null
     const dispatch = useDispatch()
@@ -125,6 +127,24 @@ export const ViewLogic = () => {
     const generateShiftManually = () => {
         dispatch(generateShiftsManually(domain, startDate, endDate))
     }
+
+    // handle delete shift
+    const handleDelete = (id) => {
+        dispatch(deleteShift(id))
+    }
+
+    useEffect(() => {
+        if (deletedShift) {
+            var domain = domainOp.toLowerCase()
+            dispatch(getShiftsByDomain(domain))
+            Swal.fire({
+                icon: 'success',
+                title: 'Shift Deleted Successfully',
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }
+    }, [deletedShift])
 
     useEffect(() => {
         if (updatedShift) {
@@ -256,6 +276,7 @@ export const ViewLogic = () => {
         setcreateId,
         createId,
         setShiftDay,
-        shiftDay
+        shiftDay,
+        handleDelete
     }
 }
