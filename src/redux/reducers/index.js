@@ -37,22 +37,27 @@ import {
 } from './managerReducer'
 import {
     getCalenderReducer,
-    getAllSlotsReducer,
     requestShiftReplaceReducer,
-    updateSlotReducer,
     getAllShiftsReducer,
     getAllShiftReplaceRequestsReducer,
+    getShiftsByDomainReducer,
+    generateShiftsManuallyReducer,
+    updateShiftReducer,
+    createShiftReducer,
+    deleteShiftReducer
+} from './shiftReducer'
+import {
     addAvailabilityReducer,
     getAvailabilityReducer,
     deleteAvailabilityByDateReducer,
     deleteAvailabilityReducer,
     getAvailabilityByDateReducer,
-    getAllAvailabilityReducer,
-    getShiftsByDomainReducer,
-    generateShiftsManuallyReducer,
-    updateShiftReducer,
-    createShiftReducer
-} from './shiftReducer'
+    getAllAvailabilityReducer
+} from './availabilityReducer'
+import {
+    updateSlotReducer,
+    getAllSlotsReducer
+} from './slotReducer'
 import {
     forgotPasswordReducer,
     resetPasswordReducer
@@ -95,20 +100,23 @@ const rootReducer = combineReducers({
     approveDenySpecialRequest: approveDenySpecialRequestReducer,
     // shift actions
     getCalender: getCalenderReducer,
-    getAllSlots: getAllSlotsReducer,
-    updateSlot: updateSlotReducer,
     getAllShifts: getAllShiftsReducer,
     getAllShiftReplaceRequests: getAllShiftReplaceRequestsReducer,
+    getShiftsByDomain: getShiftsByDomainReducer,
+    generateShiftsManually: generateShiftsManuallyReducer,
+    updateShift: updateShiftReducer,
+    createShift: createShiftReducer,
+    deleteShift: deleteShiftReducer,
+    // slot actions
+    getAllSlots: getAllSlotsReducer,
+    updateSlot: updateSlotReducer,
+    // availability actions
     addAvailability: addAvailabilityReducer,
     getAvailability: getAvailabilityReducer,
     deleteAvailabilityByDate: deleteAvailabilityByDateReducer,
     deleteAvailability: deleteAvailabilityReducer,
     getAvailabilityByDate: getAvailabilityByDateReducer,
     getAllAvailability: getAllAvailabilityReducer,
-    getShiftsByDomain: getShiftsByDomainReducer,
-    generateShiftsManually: generateShiftsManuallyReducer,
-    updateShift: updateShiftReducer,
-    createShift: createShiftReducer,
     // password
     forgotPassword: forgotPasswordReducer,
     resetPassword: resetPasswordReducer

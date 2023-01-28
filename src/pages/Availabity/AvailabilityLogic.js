@@ -1,14 +1,12 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState, } from 'react'
 import Swal from 'sweetalert2';
 import {
     addAvailability,
     getAvailability,
     deleteAvailabilityByDate,
-    // getAvailabilityByDate,
-    // deleteAvailability,
     getAllAvailability
-} from '../../redux/actions/shiftAction';
+} from '../../redux/actions/availabilityAction';
 import {
     getAllUsers
 } from '../../redux/actions/userAction'

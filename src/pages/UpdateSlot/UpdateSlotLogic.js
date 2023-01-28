@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import {
     getAllSlots,
     updateSlot
-} from '../../redux/actions/shiftAction'
+} from '../../redux/actions/slotAction'
 
 export const UpdateSlotLogic = () => {
     const { slots } = useSelector((state) => state.getAllSlots)

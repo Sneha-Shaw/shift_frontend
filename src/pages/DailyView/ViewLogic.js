@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react'
 import {
     // getAllShifts,
     getCalender,
-    getAllSlots,
     getShiftsByDomain,
     generateShiftsManually,
     updateShift,
     createShift
 } from '../../redux/actions/shiftAction'
+import {
+    getAllSlots
+} from '../../redux/actions/slotAction'
 import {
     getAllDoctors,
     getAllDomains
