@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material/styles'
 import theme from './theme'
 import Home from "./pages/Home/Home";
 import Navbar from './components/Navbar/Navbar'
-import Availabity from "./pages/Availabity/Availabity";
+import Availability from "./pages/Availability/Availability";
 import Leave from "./pages/Leave/Leave";
 import ShiftReplace from "./pages/ShiftReplace/ShiftReplace";
 import ShiftReplaceRequests from "./pages/ShiftReplaceRequests/ShiftReplaceRequests";
@@ -69,7 +69,7 @@ const Router = () => {
                             userInfo ? (
                                 <>
                                     <Navbar />
-                                    <Availabity />
+                                    <Availability />
                                 </>
                             ) : (
                                 <Navigate to="/login" />
@@ -84,7 +84,7 @@ const Router = () => {
                             managerInfo ? (
                                 <>
                                     <Navbar />
-                                    <Availabity />
+                                    <Availability />
                                 </>
                             ) : (
                                 <Navigate to="/login" />
