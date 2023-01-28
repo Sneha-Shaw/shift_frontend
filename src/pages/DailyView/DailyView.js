@@ -6,6 +6,7 @@ import { ViewLogic } from './ViewLogic'
 import { DownloadTableExcel } from 'react-export-table-to-excel'
 import { Button, Modal } from '@mui/material'
 // import AddIcon from '@mui/icons-material/Add';
+import SearchIcon from '@mui/icons-material/Search';
 
 const DailyView = () => {
     const classes = useStyles()
@@ -48,7 +49,11 @@ const DailyView = () => {
         setcreateSlot,
         createSlot,
         setcreateId,
-        handleDelete
+        handleDelete,
+        handleSearch,
+        setName,
+        name,
+        searchData
     } = ViewLogic()
     // console.log(editdoctors, "edit");
     // get current month's first date ex: 01-01-2023 and last date ex: 31-01-2023
@@ -272,35 +277,67 @@ const DailyView = () => {
                                 </div>
                                 <div className={classes.modalBodyItem}>
                                     <label htmlFor="doctor">Select Doctor:</label>
-                                    <div style={{
-                                        height: "20rem",
-                                        overflowY: "scroll",
-                                    }}>
+                                    <div className={classes.search}>
+                                        <input type="text" placeholder="Search Doctors"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            onKeyPress={(e) => e.key === 'Enter' ? handleSearch(e) : null}
+                                        />
+                                        <div className={classes.searchIcon}>
+                                            <SearchIcon fontSize="large" />
+                                        </div>
+                                    </div>
+                                    <div className={classes.doctorList}>
                                         {
+                                            searchData ?
+                                                searchData && searchData?.searchDoctor?.map((doctor, doctorAddIndex) => (
+                                                    <div key={doctorAddIndex}>
+                                                        {/* checkbox */}
+                                                        <input
+                                                            type="checkbox"
+                                                            name="doctor"
+                                                            id="doctor"
+                                                            value={doctor._id}
+                                                            onChange={(e) => {
+                                                                if (e.target.checked) {
+                                                                    setDoctors((prev) => [...prev, e.target.value]);
+                                                                }
+                                                                else {
+                                                                    setDoctors((prev) => prev.filter((item) => item !== e.target.value));
+                                                                }
+                                                            }}
+                                                            checked={
+                                                                editdoctors.includes(doctor._id)
+                                                            }
+                                                        />
+                                                        <label htmlFor="doctor">{doctor.name}</label>
+                                                    </div>
+                                                ))
+                                                :
 
-                                            doctors && doctors?.getAllDoctors?.map((doctor, doctorAddIndex) => (
-                                                <div key={doctorAddIndex}>
-                                                    {/* checkbox */}
-                                                    <input
-                                                        type="checkbox"
-                                                        name="doctor"
-                                                        id="doctor"
-                                                        value={doctor._id}
-                                                        onChange={(e) => {
-                                                            if (e.target.checked) {
-                                                                setDoctors((prev) => [...prev, e.target.value]);
+                                                doctors && doctors?.getAllDoctors?.map((doctor, doctorAddIndex) => (
+                                                    <div key={doctorAddIndex}>
+                                                        {/* checkbox */}
+                                                        <input
+                                                            type="checkbox"
+                                                            name="doctor"
+                                                            id="doctor"
+                                                            value={doctor._id}
+                                                            onChange={(e) => {
+                                                                if (e.target.checked) {
+                                                                    setDoctors((prev) => [...prev, e.target.value]);
+                                                                }
+                                                                else {
+                                                                    setDoctors((prev) => prev.filter((item) => item !== e.target.value));
+                                                                }
+                                                            }}
+                                                            checked={
+                                                                editdoctors.includes(doctor._id)
                                                             }
-                                                            else {
-                                                                setDoctors((prev) => prev.filter((item) => item !== e.target.value));
-                                                            }
-                                                        }}
-                                                        checked={
-                                                            editdoctors.includes(doctor._id)
-                                                        }
-                                                    />
-                                                    <label htmlFor="doctor">{doctor.name}</label>
-                                                </div>
-                                            ))
+                                                        />
+                                                        <label htmlFor="doctor">{doctor.name}</label>
+                                                    </div>
+                                                ))
 
                                         }
                                     </div>
@@ -377,37 +414,70 @@ const DailyView = () => {
                                 </div>
                                 <div className={classes.modalBodyItem}>
                                     <label htmlFor="doctor">Select Doctor:</label>
-                                    <div style={{
-                                        height: "20rem",
-                                        overflowY: "scroll",
-                                    }}>
+                                    <div className={classes.search}>
+                                        <input type="text" placeholder="Search Doctors"
+                                            value={name}
+                                            onChange={(e) => setName(e.target.value)}
+                                            onKeyPress={(e) => e.key === 'Enter' ? handleSearch(e) : null}
+                                        />
+                                        <div className={classes.searchIcon}>
+                                            <SearchIcon fontSize="large" />
+                                        </div>
+                                    </div>
+                                    <div className={classes.doctorList}>
                                         {
-
-                                            doctors && doctors?.getAllDoctors?.map((doctor, doctorAddIndex) => (
-                                                <div key={doctorAddIndex}>
-                                                    {/* checkbox */}
-                                                    <input
-                                                        type="checkbox"
-                                                        name="doctor"
-                                                        id="doctor"
-                                                        value={doctor._id}
-                                                        // check if doctor is already in shift
-                                                        checked={temp?.doctors?.includes(doctor._id)}
-                                                        onChange={(e) => {
-                                                            if (e.target.checked) {
-                                                                handleAddDoctors(
-                                                                    doctor._id
-                                                                )
-                                                            } else {
-                                                                handleRemoveDoctors(
-                                                                    doctor._id
-                                                                )
-                                                            }
-                                                        }}
-                                                    />
-                                                    <label htmlFor="doctor">{doctor.name}</label>
-                                                </div>
-                                            ))
+                                            searchData ?
+                                                searchData && searchData?.searchDoctor?.map((doctor, doctorAddIndex) => (
+                                                    <div key={doctorAddIndex}>
+                                                        {/* checkbox */}
+                                                        <input
+                                                            type="checkbox"
+                                                            name="doctor"
+                                                            id="doctor"
+                                                            value={doctor._id}
+                                                            // check if doctor is already in shift
+                                                            checked={temp?.doctors?.includes(doctor._id)}
+                                                            onChange={(e) => {
+                                                                if (e.target.checked) {
+                                                                    handleAddDoctors(
+                                                                        doctor._id
+                                                                    )
+                                                                } else {
+                                                                    handleRemoveDoctors(
+                                                                        doctor._id
+                                                                    )
+                                                                }
+                                                            }}
+                                                        />
+                                                        <label htmlFor="doctor">{doctor.name}</label>
+                                                    </div>
+                                                ))
+                                                :
+                                                doctors && doctors?.getAllDoctors?.map((doctor, doctorAddIndex) => (
+                                                    <div key={doctorAddIndex}>
+                                                        {/* checkbox */}
+                                                        <input
+                                                            type="checkbox"
+                                                            name="doctor"
+                                                            id="doctor"
+                                                            value={doctor._id}
+                                                            // check if doctor is already in shift
+                                                            checked={temp?.doctors?.includes(doctor._id)}
+                                                            onChange={(e) => {
+                                                                if (e.target.checked) {
+                                                                    handleAddDoctors(
+                                                                        doctor._id
+                                                                    )
+                                                                } else {
+                                                                    handleRemoveDoctors(
+                                                                        doctor._id
+                                                                    )
+                                                                }
+                                                            }}
+                                                        />
+                                                        <label htmlFor="doctor">{doctor.name}</label>
+                                                    </div>
+                                                ))
 
                                         }
                                     </div>
@@ -426,7 +496,7 @@ const DailyView = () => {
                                 <Button
                                     variant="contained"
                                     color="error"
-                                    onClick={() => {setShow3(false);handleDelete(temp.id)}}
+                                    onClick={() => { setShow3(false); handleDelete(temp.id) }}
                                 >
                                     Delete
                                 </Button>

@@ -215,7 +215,7 @@ export default makeStyles((theme) => ({
             '&>div': {
                 width: "60%",
                 display: "flex",
-                flexDirection: "column",
+                // flexDirection: "column",
                 '&>div': {
                     width: "100%",
                     display: "flex",
@@ -240,6 +240,12 @@ export default makeStyles((theme) => ({
 
         }
     },
+    doctorList:{
+        width:"100%",
+        height:"20rem",
+        flexDirection:"column",
+        overflow: 'scroll'
+    },
     modalFooter: {
         width: "100%",
         display: "flex",
@@ -255,6 +261,39 @@ export default makeStyles((theme) => ({
                 background: "#06283D",
                 color: "#fff",
             }
+        }
+    },
+    search: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        // backgroundColor:'#F2F2F2',
+        border: "1.5px solid #06283D",
+        borderRadius: '1rem',
+        // padding: ".5rem 1rem",
+        '& input': {
+            width: '100%',
+            height: '100%',
+            border: 'none',
+            outline: 'none',
+            backgroundColor: 'transparent',
+            marginLeft: '1rem',
+            fontSize: '1.2rem',
+           
+        },
+    },
+    searchIcon: {
+        width:"10% !important",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: "pointer",
+        marginLeft: '1rem',
+        '& svg': {
+            color: "#06283D",
+            fontSize: '2.2rem',
+            width:"100%"
         }
     },
     shiftBox: {

@@ -14,7 +14,8 @@ import {
 } from '../../redux/actions/slotAction'
 import {
     getAllDoctors,
-    getAllDomains
+    getAllDomains,
+    searchDoctor
 } from '../../redux/actions/managerAction'
 import {
     getSingleUser
@@ -35,6 +36,7 @@ export const ViewLogic = () => {
     const { shift: updatedShift } = useSelector(state => state.updateShift)
     const { shift: createdShift } = useSelector(state => state.createShift)
     const { shift: deletedShift } = useSelector(state => state.deleteShift)
+    const { doctorInfo: searchData } = useSelector((state) => state.searchDoctor)
 
     var count = null
     const dispatch = useDispatch()
@@ -54,6 +56,9 @@ export const ViewLogic = () => {
     const [createSlot, setcreateSlot] = useState("")
     const [createId, setcreateId] = useState("")
     const [shiftDay, setShiftDay] = useState("")
+
+    const [name, setName] = useState('')
+
 
     // handle open modal
     const handleOpen = (date, slot, doctors, id) => {
@@ -133,6 +138,12 @@ export const ViewLogic = () => {
         dispatch(deleteShift(id))
     }
 
+    // searchDoctor
+    const handleSearch = (e) => {
+        e.preventDefault()
+        dispatch(searchDoctor(name))
+    }
+
     useEffect(() => {
         if (deletedShift) {
             var domain = domainOp.toLowerCase()
@@ -148,7 +159,7 @@ export const ViewLogic = () => {
 
     useEffect(() => {
         if (updatedShift) {
-           var domain = domainOp.toLowerCase()
+            var domain = domainOp.toLowerCase()
             dispatch(getShiftsByDomain(domain))
             Swal.fire({
                 icon: 'success',
@@ -162,7 +173,7 @@ export const ViewLogic = () => {
     useEffect(() => {
         if (createdShift) {
             setDomainOp(createDomain)
-           var domain = createDomain.toLowerCase()
+            var domain = createDomain.toLowerCase()
             dispatch(getShiftsByDomain(domain))
             Swal.fire({
                 icon: 'success',
@@ -277,6 +288,10 @@ export const ViewLogic = () => {
         createId,
         setShiftDay,
         shiftDay,
-        handleDelete
+        handleDelete,
+        handleSearch,
+        setName,
+        name,
+        searchData
     }
 }
