@@ -54,7 +54,7 @@ const Availabity = () => {
       <Sidebar />
       <SubSidebar />
       <div className={classes.main}>
-        <DnDCalendar
+        {/* <DnDCalendar
           localizer={localizer}
           events={
             managerInfo ?
@@ -80,6 +80,8 @@ const Availabity = () => {
           }}
           eventPropGetter={eventStyleGetter}
         />
+       */}
+
 
         <Modal
           open={show}

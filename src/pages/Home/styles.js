@@ -21,7 +21,6 @@ export default makeStyles((theme) => ({
     welcome: {
         width: "60%",
         display: "flex",
-        flexDirection: "row",
         alignItems: "center",
         justifyContent: "space-between",
         "&>h1": {
@@ -44,6 +43,7 @@ export default makeStyles((theme) => ({
         },
         [theme.breakpoints.down("sm")]: {
             width: "90%",
+            flexDirection: "column"
         }
     },
     overview: {
@@ -75,6 +75,14 @@ export default makeStyles((theme) => ({
                 fontWeight: "bold",
                 color: "#06283D",
             },
+        },
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column",
+            "&>div": {
+                width: "100%",
+                height: "fit-content",
+                marginTop: "1rem",
+            }
         }
     },
     recent: {
@@ -130,7 +138,7 @@ export default makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-
+        overflow: "auto"
     },
     table: {
         width: "100%",

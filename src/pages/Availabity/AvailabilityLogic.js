@@ -35,9 +35,9 @@ export const AvailabilityLogic = () => {
 
     const [show, setShow] = useState(false)
 
-    const [events, setEvents] = useState([])
-    const [subEvent, setSubevent] = useState([])
-    const [temp, setTemp] = useState({})
+    // const [events, setEvents] = useState([])
+    // const [subEvent, setSubevent] = useState([])
+    // const [temp, setTemp] = useState({})
 
 
 
@@ -62,98 +62,45 @@ export const AvailabilityLogic = () => {
     // delete availability
     const deleteHandler = (id, date, start, end) => {
         setShow(false)
-        // 06:30 PM to 18:30
-        // convert 12 hr format to 24 hrex:6:30 PM to 18:30
-        const startTime = moment(start, 'hh:mm A').format('HH:mm')
-        console.log(startTime);
-        const endTime = moment(end, 'hh:mm A').format('HH:mm')
+        const startTime = moment(start, 'HH:mm').format('hh:mm A')
+        const endTime = moment(end, 'HH:mm').format('hh:mm A')
         managerInfo ? dispatch(deleteAvailabilityByDate(id, date, startTime, endTime)) : dispatch(deleteAvailabilityByDate(userInfo._id, date, startTime, endTime))
     }
 
     // onSelectmodal
     const onSelectEventHandler = (e) => {
-        const { start, end } = e;
-        console.log(start, end, "start");
         setShow(true)
-        // stringify start
-        const startString = JSON.stringify(start)
-        // stringify end
-        const endString = JSON.stringify(end)
-        // get time then subtract 18 hrs 30 min from it 
-        const startTim = moment(startString.slice(12, 20), 'HH:mm').subtract(18, 'hours').subtract(30, 'minutes')
-        const endTim = moment(endString.slice(12, 20), 'HH:mm').subtract(18, 'hours').subtract(30, 'minutes')
-
-        // convert 24 hr format to 12 hr format
-        const startTime = moment(startTim, 'HH:mm').format('hh:mm A')
-        const endTime = moment(endTim, 'HH:mm').format('hh:mm A')
-        const date = parseInt(startString.slice(9, 11)) + 1
-        setTemp({
-            // date: startString.slice(1, 11),
-            date: startString.slice(1, 5) + '-' + startString.slice(6, 8) + '-' + (date < 10 ? '0' + date : date),
-            startTime: startTime,
-            endTime: endTime,
-            title: e.title,
-            doctor: e.doctor
-        })
+        setDate(e.start)
+        setStartTime(e.start)
+        setEndTime(e.end)
+        setAvailabilityOps(e.title)
+        managerInfo ? setDoctorId(e.doctorId) : setDoctorId(userInfo._id)
     }
-    // custom styles for events
-    const eventStyleGetter = (event) => {
-        // check if title is available
-        var backgroundColor = event.title === 'Available' ? '#3174AD' : '#f0ad4e';
-        // color
-        var color = event.title === 'Available' ? '#fff' : '#000';
-        var style = {
-            backgroundColor: backgroundColor,
-            borderRadius: '0px',
-            color: color,
-            border: '0px',
-            display: 'block'
-        };
-        return {
-            style: style
-        };
-    }
+    // // custom styles for events
+    // const eventStyleGetter = (event) => {
+    //     // check if title is available
+    //     var backgroundColor = event.title === 'Available' ? '#3174AD' : '#f0ad4e';
+    //     // color
+    //     var color = event.title === 'Available' ? '#fff' : '#000';
+    //     var style = {
+    //         backgroundColor: backgroundColor,
+    //         borderRadius: '0px',
+    //         color: color,
+    //         border: '0px',
+    //         display: 'block'
+    //     };
+    //     return {
+    //         style: style
+    //     };
+    // }
 
-    const handleOpen = (slots) => {
+    const handleOpen = () => {
         setOpen(true);
 
-        const { start, end } = slots;
-        // console.log(new Date (start.toISOString()), end.toISOString(), "start");
-        // stringify start
-        const startString = JSON.stringify(start)
-        // stringify end
-        const endString = JSON.stringify(end)
-
-        // get time then subtract 18 hrs 30 min from it 
-        const startTim = moment(startString.slice(12, 20), 'HH:mm').subtract(18, 'hours').subtract(30, 'minutes')
-        const endTim = moment(endString.slice(12, 20), 'HH:mm').subtract(18, 'hours').subtract(30, 'minutes')
-
-        setStartTime(startTim.format('HH:mm'))
-        setEndTime(endTim.format('HH:mm'))
-        // parse int startString.slice(1,3) then add 1 
-        const date = parseInt(startString.slice(9, 11)) + 1
-        // set date
-        setDate(startString.slice(1, 5) + '-' + startString.slice(6, 8) + '-' + (date < 10 ? '0' + date : date))
 
     }
 
     const handleClose = () => setOpen(false);
-
-    const onEventDrop = ({ event, start, end }) => {
-
-
-    };
-
-    const onEventResize = ({ event, start, end }) => {
-        const idx = events.indexOf(event);
-        const updatedEvents = [...events];
-        updatedEvents.splice(idx, 1, {
-            ...event,
-            start,
-            end
-        });
-        setEvents(updatedEvents);
-    };
 
 
     // get availability for doctor
@@ -252,51 +199,7 @@ export const AvailabilityLogic = () => {
         }
     }, [deleteData, managerInfo, dispatch])
 
-    useEffect(() => {
-        if (managerInfo) {
-            if (allAvailabilities) {
-                if (subEvent.length < allAvailabilities.length) {
-                    //    map allavailabilities then map schedule then store all the elements of subarray in subevents
-                    allAvailabilities && allAvailabilities.map((availability) => {
-                        availability.schedule.map((sub) => {
-                            setSubevent((prev) => {
-                                return [
-                                    // console.log(new Date(sub.date + " " + sub.start)),
-                                    ...prev,
-                                    {
-                                        start: new Date(sub.date + " " + sub.start),
-                                        end: new Date(sub.date + " " + sub.end),
-                                        title: sub.title,
-                                        doctor: availability.user
-                                    }
-                                ]
-                            })
-                        })
-                    }
-                    )
-                }
-            }
-        }
-    }, [managerInfo, allAvailabilities, subEvent])
-    // set availability to event to show in calender
-    useEffect(() => {
-        if (userInfo) {
-            if (availabilities) {
-                setEvents(
-                    availabilities && availabilities[0]?.schedule.map((availability) => {
-                        return {
-                            //   map availability.schdule
-                            start: new Date(availability.start),
-                            end: new Date(availability.end),
-                            title: availability.title,
-                            doctor: availabilities[0].user
-                        }
-                    })
-                )
-            }
-        }
-    }, [availabilities, userInfo])
-
+  
     return {
         startTime,
         setStartTime,
@@ -314,18 +217,18 @@ export const AvailabilityLogic = () => {
         users,
         userInfo,
         submitHandler,
-        events,
-        subEvent,
-        eventStyleGetter,
+        // events,
+        // subEvent,
+        // eventStyleGetter,
         open,
         handleOpen,
         handleClose,
-        onEventDrop,
-        onEventResize,
+        // onEventDrop,
+        // onEventResize,
         availabilityOps,
         setAvailabilityOps,
         onSelectEventHandler,
-        temp,
+        // temp,
         date,
         setDate
     }
