@@ -5,7 +5,8 @@ import {
     addAvailability,
     getAvailability,
     deleteAvailabilityByDate,
-    getAllAvailability
+    getAllAvailability,
+    getAvailabilityByDate
 } from '../../redux/actions/availabilityAction';
 import {
     getAllUsers
@@ -16,7 +17,7 @@ export const AvailabilityLogic = () => {
     const { availability } = useSelector((state) => state.addAvailability)
     const { availabilities } = useSelector((state) => state.getAvailability)
     const { deleteData } = useSelector((state) => state.deleteAvailabilityByDate)
-    // const { availability: availabilityByDate } = useSelector((state) => state.getAvailabilityByDate)
+    const { availability: availabilityByDate } = useSelector((state) => state.getAvailabilityByDate)
     // const { deleteData: deleteAvailabilityData } = useSelector((state) => state.deleteAvailability)
     const { availabilities: allAvailabilities } = useSelector((state) => state.getAllAvailability)
     const { users } = useSelector((state) => state.getAllUsers)
@@ -26,10 +27,12 @@ export const AvailabilityLogic = () => {
 
     const dispatch = useDispatch()
 
+    // get current date in format YYYY-MM-DD
+    const today = moment()
     const [open, setOpen] = useState(false);
-    const [date, setDate] = useState('')
-    const [startTime, setStartTime] = useState('00:00:00')
-    const [endTime, setEndTime] = useState('00:00:00')
+    const [date, setDate] = useState(today)
+    const [startTime, setStartTime] = useState('12:00:AM')
+    const [endTime, setEndTime] = useState('12:00:AM')
     const [doctorId, setDoctorId] = useState('')
     const [availabilityOps, setAvailabilityOps] = useState('')
 
@@ -39,6 +42,7 @@ export const AvailabilityLogic = () => {
     // const [subEvent, setSubevent] = useState([])
     // const [temp, setTemp] = useState({})
 
+    const [availabilityBy, setAvailabilityby] = useState('')
 
 
 
@@ -67,38 +71,26 @@ export const AvailabilityLogic = () => {
         managerInfo ? dispatch(deleteAvailabilityByDate(id, date, startTime, endTime)) : dispatch(deleteAvailabilityByDate(userInfo._id, date, startTime, endTime))
     }
 
-    // onSelectmodal
-    const onSelectEventHandler = (e) => {
-        setShow(true)
-        setDate(e.start)
-        setStartTime(e.start)
-        setEndTime(e.end)
-        setAvailabilityOps(e.title)
-        managerInfo ? setDoctorId(e.doctorId) : setDoctorId(userInfo._id)
+
+    // get availability by date if availabilityBy is date else if it is doctor then call getAvailability by user id
+    const getAvailabilityHandler = () => {
+        if (availabilityBy === 'date') {
+            var dateFormatted = date
+            // if availabilityBy is not in YYYY-MM-DD format then format
+            if (dateFormatted.length !== 10) {
+                dateFormatted = moment(dateFormatted).format('YYYY-MM-DD')
+            }
+            // var dateFormatted = date.format('YYYY-MM-DD')
+
+            dispatch(getAvailabilityByDate(dateFormatted))
+        }
+        else if (availabilityBy === 'doctor') {
+            dispatch(getAvailability(doctorId))
+        }
     }
-    // // custom styles for events
-    // const eventStyleGetter = (event) => {
-    //     // check if title is available
-    //     var backgroundColor = event.title === 'Available' ? '#3174AD' : '#f0ad4e';
-    //     // color
-    //     var color = event.title === 'Available' ? '#fff' : '#000';
-    //     var style = {
-    //         backgroundColor: backgroundColor,
-    //         borderRadius: '0px',
-    //         color: color,
-    //         border: '0px',
-    //         display: 'block'
-    //     };
-    //     return {
-    //         style: style
-    //     };
-    // }
 
-    const handleOpen = () => {
-        setOpen(true);
+    const handleOpen = () => setOpen(true);
 
-
-    }
 
     const handleClose = () => setOpen(false);
 
@@ -199,7 +191,7 @@ export const AvailabilityLogic = () => {
         }
     }, [deleteData, managerInfo, dispatch])
 
-  
+
     return {
         startTime,
         setStartTime,
@@ -212,7 +204,7 @@ export const AvailabilityLogic = () => {
         managerInfo,
         doctorId,
         setDoctorId,
-        // availabilityByDate,
+        availabilityByDate,
         allAvailabilities,
         users,
         userInfo,
@@ -227,9 +219,11 @@ export const AvailabilityLogic = () => {
         // onEventResize,
         availabilityOps,
         setAvailabilityOps,
-        onSelectEventHandler,
         // temp,
         date,
-        setDate
+        setDate,
+        availabilityBy,
+        setAvailabilityby,
+        getAvailabilityHandler
     }
 }

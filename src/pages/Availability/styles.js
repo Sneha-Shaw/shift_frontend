@@ -17,215 +17,199 @@ export default makeStyles((theme) => ({
         position: "relative",
 
     },
-    modal: {
+    form: {
         width: "100%",
-        height: "100%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
-        // background: "#47B5FF",
-    },
-    modalContent: {
-        width: "50%",
-        height: "fit-content",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
         background: "#fff",
-        outline: "none",
-        padding: "2rem 1rem",
-        borderRadius: "1rem",
-        boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
-        // button
-
-
+        padding: "2rem",
+        borderRadius: "10px",
+        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)",
+        // marginBottom: "2rem",
     },
-    modalHeader: {
+    formHeader: {
         width: "100%",
         display: "flex",
-        alignItems: "center",
         justifyContent: "center",
-        position: "relative",
-        '&>h1': {
-            fontSize: "3rem",
-            fontWeight: "bold",
-            margin: "2rem 0",
-            color: "#47B5FF",
-        },
-        '&>button': {
-            position: "absolute",
-            right: "0",
-            top: "0",
-            color: "#47B5FF",
-            border: "none",
-            fontWeight: "bold",
+        alignItems: "center",
+        marginBottom: "2rem",
+        '&>h2': {
             fontSize: "2rem",
+            fontWeight: "800",
+            color: "#06283D",
         }
-        // background: "#47B5FF",
     },
-    modalBody: {
-        width: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        // background: "#47B5FF",
-    },
-    modalBodyContentItem: {
+    formBody: {
         width: "60%",
         display: "flex",
+        flexDirection: "column",
         alignItems: "center",
+    },
+    formBodyItem: {
+        width: "100%",
+        display: "flex",
         justifyContent: "space-between",
-        margin: "2rem 0",
-        '&>h4': {
-            fontSize: "2rem",
-            fontWeight: "bold",
-            margin: "0 1rem",
-            color: "#47B5FF",
-            width: "20%"
+        alignItems: "center",
+        marginBottom: "1rem",
+        '&>select': {
+            width: "50%",
+            // height: "2rem",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+            padding: "0.5rem",
+            outline: "none",
         },
         '&>div': {
-            width: "65%",
-            '&>input': {
-                width: "100%",
-                outline: "none",
-                border: "none",
-                borderBottom: "1px solid #47B5FF",
-                fontSize: "1.5rem",
-                padding: "0.5rem",
-                textAlign: "center"
-            }
+            width: "50%",
         },
-        '&>input': {
-            width: "65%",
-            outline: "none",
-            border: "none",
-            borderBottom: "1px solid #47B5FF",
-            fontSize: "1.5rem",
-            textAlign: "center",
+        '& input': {
+            width: "95%",
+            // height: "2rem",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
             padding: "0.5rem",
+            outline: "none",
         },
-        '&>select': {
-            width: "65%",
-            outline: "none",
-            border: "none",
-            borderBottom: "1px solid #47B5FF",
+        '&>label': {
+            width: "30%",
             fontSize: "1.5rem",
-            padding: "0.5rem",
-            textAlign: "center",
+            fontWeight: "800",
+            color: "#06283D",
         },
     },
-    modalFooter: {
-        width: "50%",
+    formFooter: {
+        width: "100%",
         display: "flex",
-        alignItems: "center",
         justifyContent: "center",
+        alignItems: "center",
+        marginTop: "2rem",
         '&>button': {
-            width: "100%",
-            background: "#47B5FF",
-            color: "#fff",
+            width: "20%",
+            background: "#06283D",
             fontSize: "1.5rem",
-            fontWeight: "bold",
-            margin: "2rem 0",
+            fontWeight: "800",
             '&:hover': {
                 background: "#fff",
-                color: "#47B5FF",
-                border: "1px solid #47B5FF",
+                color: "#06283D",
+                border: "1px solid #06283D",
             }
         }
     },
-    popupModal: {
+    calendar: {
         width: "100%",
-        height: "100%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        position: "absolute",
-        top: 0,
-        left: 0,
-        zIndex: "100",
     },
-    popup: {
-        position: "absolute",
-        background: "#fff",
-        width: "20%",
-        height: "fit-content",
+    calendarHeader: {
+        width: "100%",
         display: "flex",
-        flexDirection: "column",
+        justifyContent: "space-between",
         alignItems: "center",
-        justifyContent: "center",
-        zIndex: "100",
-        padding: "2rem",
-        borderRadius: "1rem",
-        boxShadow: "0 0 10px 0 rgba(0,0,0,0.5)",
-    },
-    popupHeader: {
-        width: "90%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        '&>h1': {
+        marginBottom: "2rem",
+        '&>h2': {
             fontSize: "2rem",
-            fontWeight: "bold",
-            margin: "1rem 0",
-            color: "#47B5FF",
+            fontWeight: "800",
+            color: "#06283D",
         },
         '&>button': {
-            // color: "#47B5FF",
-            fontWeight: "bold",
+            width: "20%",
+            background: "#06283D",
             fontSize: "1.5rem",
-            width: "3rem",
-            height: "3rem",
-            border: "none",
-            padding: 0,
-            margin: 0,
-
-        },
-
-    },
-    popupBody: {
-        width: "90%",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        '&>div': {
-            width: "100%",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            '&>h4': {
-                fontSize: "1.5rem",
-                fontWeight: "bold",
-                margin: "1rem 0",
-                color: "#3174AD",
-                width: "40%"
-            },
-            '&>p': {
-                fontSize: "1.5rem",
-                // fontWeight: "bold",
-                margin: "1rem 0",
-                color: "#47B5FF",
-                width: "60%",
-                textAlign: "right"
+            fontWeight: "800",
+            '&:hover': {
+                background: "#fff",
+                color: "#06283D",
+                border: "1px solid #06283D",
             }
         }
     },
-    popupFooter:{
-        width: "90%",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-    },
-    hr:{
+    calendarBody: {
         width: "100%",
-        height: ".4px",
-        background: "#47B5FF",
-        margin: "1rem 0",
-        borderRadius:"1rem"
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        background: "#fff",
+        padding: "2rem",
+        borderRadius: "10px",
+        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)",
+        marginBottom: "2rem",
+    },
+    calendarBodyItemContainer: {
+        width: "100%",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center",
+    },
+    calendarBodyItem: {
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        '&>label':{
+            width: "fit-content",
+            fontSize: "1.5rem",
+            fontWeight: "800",
+            color: "#06283D",
+            marginRight:"1rem"
+        },
+        '&>select':{
+            width: "fit-content",
+            // width: "50%",
+            // height: "2rem",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+            padding: "0.5rem",
+            outline: "none",
+
+        },
+        '&>button':{
+            // width: "20%",
+            background: "#06283D",
+            fontSize: "1.1rem",
+            fontWeight: "800",
+            '&:hover': {
+                background: "#fff",
+                color: "#06283D",
+                border: "1px solid #06283D",
+            }
+        }
+
+    },
+    table: {
+        width: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexDirection: "column",
+        marginTop: "2rem",
+        '&>table': {
+            width: "100%",
+            borderCollapse: "collapse",
+            '&>thead': {
+                '&>tr': {
+                    '&>th': {
+                        border: "1px solid #ccc",
+                        padding: "0.5rem",
+                        fontSize: "1.5rem",
+                        fontWeight: "800",
+                        background: "#06283D",
+                        color: "#fff",
+                    }
+                }
+            },
+            '&>tbody': {
+                '&>tr': {
+                    '&>td': {
+                        border: "1px solid #ccc",
+                        padding: "0.5rem",
+                        fontSize: "1.5rem",
+                        fontWeight: "800",
+                        color: "#06283D",
+                        textAlign:"center"
+                    }
+                }
+            }
+
+        }
     }
 
 }))
