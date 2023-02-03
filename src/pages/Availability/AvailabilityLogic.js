@@ -19,7 +19,7 @@ export const AvailabilityLogic = () => {
     const { deleteData } = useSelector((state) => state.deleteAvailabilityByDate)
     const { availability: availabilityByDate } = useSelector((state) => state.getAvailabilityByDate)
     // const { deleteData: deleteAvailabilityData } = useSelector((state) => state.deleteAvailability)
-    const { availabilities: allAvailabilities } = useSelector((state) => state.getAllAvailability)
+    // const { availabilities: allAvailabilities } = useSelector((state) => state.getAllAvailability)
     const { users } = useSelector((state) => state.getAllUsers)
 
     const { userInfo } = useSelector((state) => state.signInUser)
@@ -28,28 +28,19 @@ export const AvailabilityLogic = () => {
     const dispatch = useDispatch()
 
     // get current date in format YYYY-MM-DD
-    const today = moment()
-    const [open, setOpen] = useState(false);
-    const [date, setDate] = useState(today)
-    const [startTime, setStartTime] = useState('12:00:AM')
+    const today = moment().format('YYYY-MM-DD')
+    const [date, setDate] = useState(today[10])
+    const [startTime, setStartTime] = useState('12:00 AM')
     const [endTime, setEndTime] = useState('12:00:AM')
     const [doctorId, setDoctorId] = useState('')
     const [availabilityOps, setAvailabilityOps] = useState('')
 
     const [show, setShow] = useState(false)
-
-    // const [events, setEvents] = useState([])
-    // const [subEvent, setSubevent] = useState([])
-    // const [temp, setTemp] = useState({})
-
     const [availabilityBy, setAvailabilityby] = useState('')
-
-
 
     // add availability
     const submitHandler = () => {
         setShow(false)
-        setOpen(false);
         const schedule = [
             {
                 date: date,
@@ -75,24 +66,13 @@ export const AvailabilityLogic = () => {
     // get availability by date if availabilityBy is date else if it is doctor then call getAvailability by user id
     const getAvailabilityHandler = () => {
         if (availabilityBy === 'date') {
-            var dateFormatted = date
-            // if availabilityBy is not in YYYY-MM-DD format then format
-            if (dateFormatted.length !== 10) {
-                dateFormatted = moment(dateFormatted).format('YYYY-MM-DD')
-            }
-            // var dateFormatted = date.format('YYYY-MM-DD')
 
-            dispatch(getAvailabilityByDate(dateFormatted))
+            dispatch(getAvailabilityByDate(date))
         }
         else if (availabilityBy === 'doctor') {
             dispatch(getAvailability(doctorId))
         }
     }
-
-    const handleOpen = () => setOpen(true);
-
-
-    const handleClose = () => setOpen(false);
 
 
     // get availability for doctor
@@ -142,8 +122,6 @@ export const AvailabilityLogic = () => {
         if (managerInfo) {
             if (availability) {
                 dispatch(getAllAvailability())
-                // refresh
-                window.location.reload()
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -178,8 +156,6 @@ export const AvailabilityLogic = () => {
         if (managerInfo) {
             if (deleteData) {
                 dispatch(getAllAvailability())
-                // refresh
-                // window.location.reload()
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -192,6 +168,7 @@ export const AvailabilityLogic = () => {
     }, [deleteData, managerInfo, dispatch])
 
 
+
     return {
         startTime,
         setStartTime,
@@ -200,26 +177,15 @@ export const AvailabilityLogic = () => {
         show,
         setShow,
         availabilities,
-        deleteHandler,
         managerInfo,
         doctorId,
         setDoctorId,
         availabilityByDate,
-        allAvailabilities,
         users,
         userInfo,
         submitHandler,
-        // events,
-        // subEvent,
-        // eventStyleGetter,
-        open,
-        handleOpen,
-        handleClose,
-        // onEventDrop,
-        // onEventResize,
         availabilityOps,
         setAvailabilityOps,
-        // temp,
         date,
         setDate,
         availabilityBy,

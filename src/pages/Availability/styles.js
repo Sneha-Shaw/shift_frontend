@@ -14,7 +14,7 @@ export default makeStyles((theme) => ({
         alignItems: "center",
         margin: "auto",
         padding: "2rem",
-        position: "relative",
+        position: "relative"
 
     },
     form: {
@@ -26,7 +26,7 @@ export default makeStyles((theme) => ({
         padding: "2rem",
         borderRadius: "10px",
         boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)",
-        // marginBottom: "2rem",
+        marginTop: "2rem",
     },
     formHeader: {
         width: "100%",
@@ -98,6 +98,11 @@ export default makeStyles((theme) => ({
     },
     calendar: {
         width: "100%",
+        marginTop:"2rem",
+        background: "#fff",
+        padding: "2rem",
+        borderRadius: "10px",
+        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)"
     },
     calendarHeader: {
         width: "100%",
@@ -127,11 +132,6 @@ export default makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        background: "#fff",
-        padding: "2rem",
-        borderRadius: "10px",
-        boxShadow: "0px 0px 10px 0px rgba(0,0,0,0.2)",
-        marginBottom: "2rem",
     },
     calendarBodyItemContainer: {
         width: "100%",
@@ -153,8 +153,14 @@ export default makeStyles((theme) => ({
         },
         '&>select':{
             width: "fit-content",
-            // width: "50%",
-            // height: "2rem",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+            padding: "0.5rem",
+            outline: "none",
+
+        },
+        '&>input':{
+            width: "fit-content",
             border: "1px solid #ccc",
             borderRadius: "5px",
             padding: "0.5rem",
@@ -172,6 +178,27 @@ export default makeStyles((theme) => ({
                 border: "1px solid #06283D",
             }
         }
+
+    },
+    back: {
+        width: "100%",
+        display: "flex",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        '&>button': {
+            background: "#fff",
+            color: "#000",
+            border: "1px solid #000",
+            borderRadius: "0.5rem",
+            padding: "0.5rem 1rem",
+            fontSize: "1rem",
+            fontWeight: "bold",
+            '&:hover': {
+                background: "#000",
+                color: "#fff",
+            },
+
+        },
 
     },
     table: {
@@ -210,6 +237,7 @@ export default makeStyles((theme) => ({
             }
 
         }
-    }
+    },
+  
 
 }))
