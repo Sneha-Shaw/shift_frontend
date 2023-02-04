@@ -176,7 +176,7 @@ const Availability = () => {
                   <label>Start Time</label>
                   <Datetime
                     value={startTime}
-                    onChange={(e) => setStartTime(e)}
+                    onChange={(e) => setStartTime(e.format('hh:mm A'))}
                     dateFormat={false}
                     timeFormat="hh:mm A"
                   />
@@ -185,7 +185,7 @@ const Availability = () => {
                   <label>End Time</label>
                   <Datetime
                     value={endTime}
-                    onChange={(e) => setEndTime(e)}
+                    onChange={(e) => setEndTime(e.format('hh:mm A'))}
                     dateFormat={false}
                     timeFormat="hh:mm A"
                   />
@@ -238,14 +238,12 @@ const Availability = () => {
               availabilityBy === "date" ?
                 <div className={classes.calendarBodyItem}>
                   <label>Date:</label>
-                  {/* <div> */}
                   <input
                     type="text"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
                     className={classes.dateInput}
                   />
-                  {/* </div> */}
                 </div>
                 :
                 availabilityBy === "doctor" ?
@@ -299,6 +297,7 @@ const Availability = () => {
                                 <th>Date</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
+                                <th>Availability</th>
                                 <th>Action</th>
                               </tr>
                             </thead>
@@ -306,11 +305,12 @@ const Availability = () => {
 
                               {
                                 // filter title=="available" in availabilities[0].schedule
-                                availabilities && availabilities[0].schedule.filter((item) => item.title === "Available").map((item) => (
+                                availabilities && availabilities[0].schedule.map((item) => (
                                   <tr key={item._id}>
                                     <td>{item.date}</td>
                                     <td>{item.start}</td>
                                     <td>{item.end}</td>
+                                    <td>{item.title}</td>
                                     <td>
                                       <Button
                                         variant="contained"
@@ -334,6 +334,7 @@ const Availability = () => {
                                   <th>Doctor</th>
                                   <th>Start Time</th>
                                   <th>End Time</th>
+                                  <th>Availability</th>
                                   <th>Action</th>
                                 </tr>
                               </thead>
@@ -347,13 +348,14 @@ const Availability = () => {
                                 {
                                   availabilityByDate && availabilityByDate?.map((user) => (
 
-                                    (user.schedule.filter((item) => item.title === "Available").map((item) => (
+                                    (user.schedule.map((item) => (
                                       // check if current date matches date then show tr
                                       item.date === date &&
                                       <tr key={item._id}>
                                         <td>{user.user.name}</td>
                                         <td>{item.start}</td>
                                         <td>{item.end}</td>
+                                        <td>{item.title}</td>
                                         <td>
                                           <Button
                                             variant="contained"
@@ -380,7 +382,6 @@ const Availability = () => {
                 }
               </div>
             </div>
-
         }
       </div>
     </div >

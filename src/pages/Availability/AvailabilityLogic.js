@@ -36,8 +36,8 @@ export const AvailabilityLogic = () => {
     const [availabilityOps, setAvailabilityOps] = useState('')
 
     const [show, setShow] = useState(false)
-    const [availabilityBy, setAvailabilityby] = useState('')
-
+    const [availabilityBy, setAvailabilityby] = useState('date')
+console.log(endTime);
     // add availability
     const submitHandler = () => {
         setShow(false)

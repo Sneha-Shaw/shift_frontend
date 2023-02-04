@@ -12,13 +12,16 @@ export default makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        justifyContent: "center",
         margin: "auto",
         padding: "2rem",
-        position: "relative"
+        position: "relative",
+        height:"90vh"
 
     },
     form: {
         width: "100%",
+        height:"70%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -42,9 +45,11 @@ export default makeStyles((theme) => ({
     },
     formBody: {
         width: "60%",
+        height:"70%",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        justifyContent: "space-between",
     },
     formBodyItem: {
         width: "100%",
@@ -98,6 +103,7 @@ export default makeStyles((theme) => ({
     },
     calendar: {
         width: "100%",
+        height:"70%",
         marginTop:"2rem",
         background: "#fff",
         padding: "2rem",
@@ -132,6 +138,8 @@ export default makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        height:"100%",
+        overflow:"auto"
     },
     calendarBodyItemContainer: {
         width: "100%",
