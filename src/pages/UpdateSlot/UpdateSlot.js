@@ -36,8 +36,6 @@ const UpdateSlot = () => {
                     (show) && (
                         <div className={classes.back}>
                             <Button
-                                // variant="contained"
-                                //    if addshow is true then setaddshow false else if updateshow is true then setupdateshow false
                                 onClick={() => setShow(!show)}
                             >
                                 Back
@@ -55,8 +53,8 @@ const UpdateSlot = () => {
                                 <div className={classes.formBodyItem}>
                                     <label>Select Date:</label>
                                     <div>
-                                        <input 
-                                            type="date"
+                                        <input
+                                            type="number"
                                             onChange={(e) => {
                                                 setDate(e.target.value)
                                             }}
@@ -150,7 +148,7 @@ const UpdateSlot = () => {
                                         slots && slots.getAllSlots.map((slot, index) => (
                                             <tbody key={index}>
                                                 {/* check if current slot is same as searchslot then map allotment */}
-                                                {(slot.slotTime === searchslot) ?
+                                                {(slot?.slotTime === searchslot) ?
                                                     slot?.Allotment?.map((allotment, index) => (
                                                         <tr key={index}>
                                                             <td>{allotment.date}</td>

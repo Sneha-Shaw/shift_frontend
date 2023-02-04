@@ -166,6 +166,10 @@ export default makeStyles((theme) => ({
                         padding: "1rem",
                         border: ".5px solid rgba(0,0,0,0.3)",
                         textAlign: "center",
+                        position:"sticky",
+                        top:0,
+                        background:"#fff",
+                        zIndex:1
                     }
                 }
             },

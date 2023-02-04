@@ -66,6 +66,7 @@ export const UpdateSlotLogic = () => {
         dispatch(getAllSlots())
     }, [dispatch])
 
+
     return {
         show,
         setShow,
