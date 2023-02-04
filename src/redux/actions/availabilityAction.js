@@ -15,9 +15,9 @@ import {
     GET_AVAILABILITY_BY_DATE_REQUEST,
     GET_AVAILABILITY_BY_DATE_SUCCESS,
     GET_AVAILABILITY_BY_DATE_FAILED,
-    DELETE_AVAILABILITY_BY_DATE_REQUEST,
-    DELETE_AVAILABILITY_BY_DATE_SUCCESS,
-    DELETE_AVAILABILITY_BY_DATE_FAILED
+    DELETE_AVAILABILITY_BY_ID_REQUEST,
+    DELETE_AVAILABILITY_BY_ID_SUCCESS,
+    DELETE_AVAILABILITY_BY_ID_FAILED
 } from '../constants/availabilityConstants'
 
 const API = process.env.REACT_APP_NODE_API
@@ -127,29 +127,24 @@ export const getAllAvailability = () => async (dispatch) => {
     }
 }
 
-// delete availability by date
-export const deleteAvailabilityByDate = (id, date, start, end) => async (dispatch) => {
+
+// delete availability by id
+export const deleteAvailabilityById = (id) => async (dispatch) => {
     try {
         dispatch({
-            type: DELETE_AVAILABILITY_BY_DATE_REQUEST
+            type: DELETE_AVAILABILITY_BY_ID_REQUEST
         })
         const config = {
             'Content-Type': 'application/json'
         }
-        const body = {
-            id,
-            date,
-            start,
-            end
-        }
-        const { data } = await axios.put(`${API}/private/availability/delete-availability-by-date`, body, config)
+        const { data } = await axios.post(`${API}/private/availability/delete-availability-by-id/${id}`, config)
         dispatch({
-            type: DELETE_AVAILABILITY_BY_DATE_SUCCESS,
+            type: DELETE_AVAILABILITY_BY_ID_SUCCESS,
             payload: data
         })
     } catch (error) {
         dispatch({
-            type: DELETE_AVAILABILITY_BY_DATE_FAILED,
+            type: DELETE_AVAILABILITY_BY_ID_FAILED,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message
@@ -157,7 +152,6 @@ export const deleteAvailabilityByDate = (id, date, start, end) => async (dispatc
         })
     }
 }
-
 // delete availability 
 export const deleteAvailability = (id) => async (dispatch) => {
     try {

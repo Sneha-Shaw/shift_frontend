@@ -14,9 +14,9 @@ import {
     GET_AVAILABILITY_BY_DATE_REQUEST,
     GET_AVAILABILITY_BY_DATE_SUCCESS,
     GET_AVAILABILITY_BY_DATE_FAILED,
-    DELETE_AVAILABILITY_BY_DATE_REQUEST,
-    DELETE_AVAILABILITY_BY_DATE_SUCCESS,
-    DELETE_AVAILABILITY_BY_DATE_FAILED
+    DELETE_AVAILABILITY_BY_ID_REQUEST,
+    DELETE_AVAILABILITY_BY_ID_SUCCESS,
+    DELETE_AVAILABILITY_BY_ID_FAILED
 } from '../constants/availabilityConstants'
 
 
@@ -91,46 +91,6 @@ export const getAvailabilityReducer = (state = getAvailabilityState, action) => 
                 ...state,
                 loading: false,
                 availabilities: null,
-                isAuthenticated: false,
-                error: action.payload
-            }
-
-        default:
-            return state
-    }
-}
-
-// delete availability by day
-const deleteAvailabilityByDateState = {
-    loading: false,
-    deleteData: null,
-    error: null,
-    isAuthenticated: false
-}
-export const deleteAvailabilityByDateReducer = (state = deleteAvailabilityByDateState, action) => {
-    switch (action.type) {
-        case DELETE_AVAILABILITY_BY_DATE_REQUEST:
-            return {
-                ...state,
-                deleteData: null,
-                error: null,
-                isAuthenticated: false,
-                loading: true
-            }
-        case DELETE_AVAILABILITY_BY_DATE_SUCCESS:
-            return {
-                ...state,
-                loading: false,
-                isAuthenticated: true,
-                error: null,
-                deleteData: action.payload
-
-            }
-        case DELETE_AVAILABILITY_BY_DATE_FAILED:
-            return {
-                ...state,
-                loading: false,
-                deleteData: null,
                 isAuthenticated: false,
                 error: action.payload
             }
@@ -251,6 +211,47 @@ export const getAllAvailabilityReducer = (state = getAllAvailabilityState, actio
                 ...state,
                 loading: false,
                 availabilities: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+// delete availability by id
+const deleteAvailabilityByIdState = {
+    loading: false,
+    deleteData: null,
+    error: null,
+    isAuthenticated: false
+}
+
+export const deleteAvailabilityByIdReducer = (state = deleteAvailabilityByIdState, action) => {
+    switch (action.type) {
+        case DELETE_AVAILABILITY_BY_ID_REQUEST:
+            return {
+                ...state,
+                deleteData: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case DELETE_AVAILABILITY_BY_ID_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                deleteData: action.payload
+
+            }
+        case DELETE_AVAILABILITY_BY_ID_FAILED:
+            return {
+                ...state,
+                loading: false,
+                deleteData: null,
                 isAuthenticated: false,
                 error: action.payload
             }

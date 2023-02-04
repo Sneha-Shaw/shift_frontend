@@ -4,9 +4,8 @@ import Swal from 'sweetalert2';
 import {
     addAvailability,
     getAvailability,
-    deleteAvailabilityByDate,
-    getAllAvailability,
-    getAvailabilityByDate
+    getAvailabilityByDate,
+    deleteAvailabilityById
 } from '../../redux/actions/availabilityAction';
 import {
     getAllUsers
@@ -16,10 +15,8 @@ import moment from 'moment'
 export const AvailabilityLogic = () => {
     const { availability } = useSelector((state) => state.addAvailability)
     const { availabilities } = useSelector((state) => state.getAvailability)
-    const { deleteData } = useSelector((state) => state.deleteAvailabilityByDate)
     const { availability: availabilityByDate } = useSelector((state) => state.getAvailabilityByDate)
-    // const { deleteData: deleteAvailabilityData } = useSelector((state) => state.deleteAvailability)
-    // const { availabilities: allAvailabilities } = useSelector((state) => state.getAllAvailability)
+    const { deleteData: deleteAvailabilityData } = useSelector((state) => state.deleteAvailabilityById)
     const { users } = useSelector((state) => state.getAllUsers)
 
     const { userInfo } = useSelector((state) => state.signInUser)
@@ -37,7 +34,7 @@ export const AvailabilityLogic = () => {
 
     const [show, setShow] = useState(false)
     const [availabilityBy, setAvailabilityby] = useState('date')
-console.log(endTime);
+
     // add availability
     const submitHandler = () => {
         setShow(false)
@@ -55,11 +52,8 @@ console.log(endTime);
 
 
     // delete availability
-    const deleteHandler = (id, date, start, end) => {
-        setShow(false)
-        const startTime = moment(start, 'HH:mm').format('hh:mm A')
-        const endTime = moment(end, 'HH:mm').format('hh:mm A')
-        managerInfo ? dispatch(deleteAvailabilityByDate(id, date, startTime, endTime)) : dispatch(deleteAvailabilityByDate(userInfo._id, date, startTime, endTime))
+    const deleteHandler = (id) => {
+      dispatch(deleteAvailabilityById(id))
     }
 
 
@@ -82,14 +76,6 @@ console.log(endTime);
         }
     }, [userInfo, dispatch])
 
-
-    // get all availability for manager
-    useEffect(() => {
-        if (managerInfo) {
-            dispatch(getAllAvailability())
-
-        }
-    }, [managerInfo, dispatch])
 
     // get all users for manager
 
@@ -116,56 +102,8 @@ console.log(endTime);
         }
     }, [availability, dispatch, userInfo])
 
-    // get all availability for manager after adding an availability
-
-    useEffect(() => {
-        if (managerInfo) {
-            if (availability) {
-                dispatch(getAllAvailability())
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: 'Availability Added',
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-        }
-    }, [availability, dispatch, managerInfo])
 
     // get availability for user after deleting an availability
-
-    useEffect(() => {
-        if (userInfo) {
-            if (deleteData) {
-                dispatch(getAvailability(userInfo._id))
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: `Date removed from your availibility`,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-        }
-    }, [deleteData, userInfo, dispatch])
-
-
-    // get all availability for manager after deleting an availability
-    useEffect(() => {
-        if (managerInfo) {
-            if (deleteData) {
-                dispatch(getAllAvailability())
-                Swal.fire({
-                    position: 'center',
-                    icon: 'success',
-                    title: `Date removed from availibility`,
-                    showConfirmButton: false,
-                    timer: 1500
-                })
-            }
-        }
-    }, [deleteData, managerInfo, dispatch])
 
 
 
@@ -190,6 +128,7 @@ console.log(endTime);
         setDate,
         availabilityBy,
         setAvailabilityby,
-        getAvailabilityHandler
+        getAvailabilityHandler,
+        deleteHandler
     }
 }

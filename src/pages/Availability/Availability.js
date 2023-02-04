@@ -31,7 +31,8 @@ const Availability = () => {
     setDate,
     availabilityBy,
     setAvailabilityby,
-    getAvailabilityHandler
+    getAvailabilityHandler,
+    deleteHandler
   } = AvailabilityLogic()
 
 
@@ -64,76 +65,6 @@ const Availability = () => {
             </Button>
           </div>
         }
-        {/* {
-          !show &&
-          <div className={classes.calendarBodyItemContainer}>
-            {
-              managerInfo &&
-              <div className={classes.calendarBodyItem}>
-                <label>Get Availability By:</label>
-                <select
-                  name="getAvailabilityBy"
-                  id="getAvailabilityBy"
-                  value={availabilityBy}
-                  onChange={(e) => setAvailabilityby(e.target.value)}
-                >
-                  <option value="">Select</option>
-                  <option value="date">Date</option>
-                  <option value="doctor">Doctor</option>
-                </select>
-              </div>
-            }
-            {
-
-              availabilityBy === "date" ?
-                <div className={classes.calendarBodyItem}>
-                  <label>Date:</label>
-                  <input
-                    type="text"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                  />
-                </div>
-                :
-                availabilityBy === "doctor" ?
-                  <div className={classes.calendarBodyItem}>
-                    <label>Doctor:</label>
-                    <select
-                      name="doctor"
-                      id="doctor"
-                      value={doctorId}
-                      onChange={(e) => setDoctorId(e.target.value)}
-                    >
-                      <option value="">Select Doctor</option>
-                      {
-                        managerInfo ?
-                          users && users.map((user) => (
-                            <option key={user._id} value={user._id}>{user.name}</option>
-                          ))
-                          :
-                          <option value={userInfo._id}>{userInfo.name}</option>
-                      }
-                    </select>
-                  </div>
-                  :
-                  null
-            }
-            {
-              availabilityBy === "date" || availabilityBy === "doctor" ?
-                <div className={classes.calendarBodyItem}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={getAvailabilityHandler}
-                  >
-                    Get Availability
-                  </Button>
-                </div>
-                :
-                null
-            }
-          </div>
-        } */}
 
         {/* form for adding availability */}
         {
@@ -216,74 +147,74 @@ const Availability = () => {
             </div>
             :
             <div className={classes.calendar}>
-                 <div className={classes.calendarBodyItemContainer}>
-            {
-              managerInfo &&
-              <div className={classes.calendarBodyItem}>
-                <label>Get Availability By:</label>
-                <select
-                  name="getAvailabilityBy"
-                  id="getAvailabilityBy"
-                  value={availabilityBy}
-                  onChange={(e) => setAvailabilityby(e.target.value)}
-                >
-                  <option value="">Select</option>
-                  <option value="date">Date</option>
-                  <option value="doctor">Doctor</option>
-                </select>
-              </div>
-            }
-            {
-
-              availabilityBy === "date" ?
-                <div className={classes.calendarBodyItem}>
-                  <label>Date:</label>
-                  <input
-                    type="text"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className={classes.dateInput}
-                  />
-                </div>
-                :
-                availabilityBy === "doctor" ?
+              <div className={classes.calendarBodyItemContainer}>
+                {
+                  managerInfo &&
                   <div className={classes.calendarBodyItem}>
-                    <label>Doctor:</label>
+                    <label>Get Availability By:</label>
                     <select
-                      name="doctor"
-                      id="doctor"
-                      value={doctorId}
-                      onChange={(e) => setDoctorId(e.target.value)}
+                      name="getAvailabilityBy"
+                      id="getAvailabilityBy"
+                      value={availabilityBy}
+                      onChange={(e) => setAvailabilityby(e.target.value)}
                     >
-                      <option value="">Select Doctor</option>
-                      {
-                        managerInfo ?
-                          users && users.map((user) => (
-                            <option key={user._id} value={user._id}>{user.name}</option>
-                          ))
-                          :
-                          <option value={userInfo._id}>{userInfo.name}</option>
-                      }
+                      <option value="">Select</option>
+                      <option value="date">Date</option>
+                      <option value="doctor">Doctor</option>
                     </select>
                   </div>
-                  :
-                  null
-            }
-            {
-              availabilityBy === "date" || availabilityBy === "doctor" ?
-                <div className={classes.calendarBodyItem}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={getAvailabilityHandler}
-                  >
-                    Get Availability
-                  </Button>
-                </div>
-                :
-                null
-            }
-          </div>
+                }
+                {
+
+                  availabilityBy === "date" ?
+                    <div className={classes.calendarBodyItem}>
+                      <label>Date:</label>
+                      <input
+                        type="text"
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                        className={classes.dateInput}
+                      />
+                    </div>
+                    :
+                    availabilityBy === "doctor" ?
+                      <div className={classes.calendarBodyItem}>
+                        <label>Doctor:</label>
+                        <select
+                          name="doctor"
+                          id="doctor"
+                          value={doctorId}
+                          onChange={(e) => setDoctorId(e.target.value)}
+                        >
+                          <option value="">Select Doctor</option>
+                          {
+                            managerInfo ?
+                              users && users.map((user) => (
+                                <option key={user._id} value={user._id}>{user.name}</option>
+                              ))
+                              :
+                              <option value={userInfo._id}>{userInfo.name}</option>
+                          }
+                        </select>
+                      </div>
+                      :
+                      null
+                }
+                {
+                  availabilityBy === "date" || availabilityBy === "doctor" ?
+                    <div className={classes.calendarBodyItem}>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={getAvailabilityHandler}
+                      >
+                        Get Availability
+                      </Button>
+                    </div>
+                    :
+                    null
+                }
+              </div>
               <div className={classes.calendarBody}>
                 {
                   managerInfo ?
@@ -293,7 +224,6 @@ const Availability = () => {
                           <table>
                             <thead>
                               <tr>
-                                {/* <th>Doctor</th> */}
                                 <th>Date</th>
                                 <th>Start Time</th>
                                 <th>End Time</th>
@@ -304,7 +234,6 @@ const Availability = () => {
                             <tbody>
 
                               {
-                                // filter title=="available" in availabilities[0].schedule
                                 availabilities && availabilities[0].schedule.map((item) => (
                                   <tr key={item._id}>
                                     <td>{item.date}</td>
@@ -315,7 +244,7 @@ const Availability = () => {
                                       <Button
                                         variant="contained"
                                         color="error"
-                                      // onClick={() => deleteAvailabilityHandler(item._id)}
+                                        onClick={() => deleteHandler(item._id)}
                                       >
                                         Delete
                                       </Button>
@@ -360,7 +289,7 @@ const Availability = () => {
                                           <Button
                                             variant="contained"
                                             color="error"
-                                          // onClick={() => deleteAvailabilityHandler(item._id)}
+                                            onClick={() => deleteHandler(item._id)}
                                           >
                                             Delete
                                           </Button>
