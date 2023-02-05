@@ -149,24 +149,33 @@ const Availability = () => {
             <div className={classes.calendar}>
               <div className={classes.calendarBodyItemContainer}>
                 {
-                  managerInfo &&
-                  <div className={classes.calendarBodyItem}>
-                    <label>Get Availability By:</label>
-                    <select
-                      name="getAvailabilityBy"
-                      id="getAvailabilityBy"
-                      value={availabilityBy}
-                      onChange={(e) => setAvailabilityby(e.target.value)}
-                    >
-                      <option value="">Select</option>
-                      <option value="date">Date</option>
-                      <option value="doctor">Doctor</option>
-                    </select>
-                  </div>
+                  managerInfo ?
+                    <div className={classes.calendarBodyItem}>
+                      <label>Get Availability By:</label>
+                      <select
+                        name="getAvailabilityBy"
+                        id="getAvailabilityBy"
+                        value={availabilityBy}
+                        onChange={(e) => setAvailabilityby(e.target.value)}
+                      >
+                        <option value="">Select</option>
+                        <option value="date">Date</option>
+                        <option value="doctor">Doctor</option>
+                      </select>
+                    </div>
+                    :
+                    <div className={classes.calendarBodyItem}>
+                      <label>Get Availability By:</label>
+                      <input
+                        type="text"
+                        value="Doctor"
+                        disabled
+                      />
+                    </div>
                 }
                 {
-
-                  availabilityBy === "date" ?
+                  managerInfo &&
+                    (availabilityBy === "date") ?
                     <div className={classes.calendarBodyItem}>
                       <label>Date:</label>
                       <input
@@ -201,7 +210,19 @@ const Availability = () => {
                       null
                 }
                 {
-                  availabilityBy === "date" || availabilityBy === "doctor" ?
+                  userInfo &&
+                  <div className={classes.calendarBodyItem}>
+                  <label>Doctor:</label>
+                  <input
+                    type="text"
+                    value={userInfo.name}
+                    disabled
+                  />
+                </div>
+                }
+                {
+                  managerInfo &&
+                    (availabilityBy === "date" || availabilityBy === "doctor") ?
                     <div className={classes.calendarBodyItem}>
                       <Button
                         variant="contained"
@@ -319,7 +340,46 @@ const Availability = () => {
                       }
                     </div>
                     :
-                    null
+                    <div className={classes.table}>
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Date</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                            <th>Availability</th>
+                            <th>Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {
+                            availabilities && availabilities[0]?.schedule?.length === 0 &&
+                            <tr>
+                              <td colSpan="5">No Availability</td>
+                            </tr>
+                          }
+                          {
+                            availabilities && availabilities[0]?.schedule?.map((item, index) => (
+                              <tr key={index}>
+                                <td>{item.date}</td>
+                                <td>{item.start}</td>
+                                <td>{item.end}</td>
+                                <td>{item.title}</td>
+                                <td>
+                                  <Button
+                                    variant="contained"
+                                    color="error"
+                                    onClick={() => deleteHandler(availabilities[0]?.user._id, item.date, item.start, item.end)}
+                                  >
+                                    Delete
+                                  </Button>
+                                </td>
+                              </tr>
+                            ))
+                          }
+                        </tbody>
+                      </table>
+                    </div>
                 }
               </div>
             </div>
