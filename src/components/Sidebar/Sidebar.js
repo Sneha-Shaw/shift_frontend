@@ -72,16 +72,20 @@ const Sidebar = () => {
                             </h3>
                         </NavLink>
                 }
-                <NavLink
-                    to='/archives'
-                    style={({ isActive }) => ({
-                        background: isActive ? '#256D85' : 'none',
-                    })} className={classes.navLink}>
-                    <ArchiveIcon fontSize="large" />
-                    <h3>
-                        Archives
-                    </h3>
-                </NavLink>
+              {
+                    managerInfo ? (
+                        <NavLink
+                        to='/archives'
+                        style={({ isActive }) => ({
+                            background: isActive ? '#256D85' : 'none',
+                        })} className={classes.navLink}>
+                        <ArchiveIcon fontSize="large" />
+                        <h3>
+                            Archives
+                        </h3>
+                    </NavLink>
+                    ) : null
+              }
 
             </div>
             {
@@ -96,7 +100,6 @@ const Sidebar = () => {
                                 </Link>
                                 {/* sub list */}
                                 <ul className={classes.subList}>
-
                                     <li className={classes.subListItem}>
                                         <NavLink to='/attendance/breaks'
                                             style={({ isActive }) => ({
@@ -231,11 +234,6 @@ const Sidebar = () => {
                                 </ul>
                             </li>
                             <li className={classes.listItem}>
-                                {/* <Link to="" className={classes.navLink} onClick={() => setShowSubList(!showSubList)}>
-                                    <span className={classes.listItemText}>Views</span>
-                                </Link>
-                                <ul className={classes.subList}>
-                                    <li className={classes.subListItem}> */}
                                 <NavLink to='/self-service/schedule'
                                     style={({ isActive }) => ({
                                         color: isActive ? '#47B5FF' : 'none',
@@ -243,9 +241,7 @@ const Sidebar = () => {
                                     <ArrowForwardIosIcon />
                                     <span className={classes.listItemText}>Your Schedule</span>
                                 </NavLink>
-                                {/* </li>
-
-                                </ul> */}
+                               
                             </li>
                         </ul>
 
