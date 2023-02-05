@@ -232,10 +232,22 @@ const Availability = () => {
                               </tr>
                             </thead>
                             <tbody>
-
                               {
-                                availabilities && availabilities[0].schedule.map((item) => (
-                                  <tr key={item._id}>
+                                // no availability
+                                availabilities && availabilities[0]?.schedule?.length === 0 &&
+                                <tr>
+                                  <td colSpan="5">No Availability</td>
+                                </tr>
+                              }
+                              {
+                                availabilities && availabilities?.length === 0 &&
+                                <tr>
+                                  <td colSpan="5">No Availability</td>
+                                </tr>
+                              }
+                              {
+                                availabilities && availabilities[0]?.schedule?.map((item, index) => (
+                                  <tr key={index}>
                                     <td>{item.date}</td>
                                     <td>{item.start}</td>
                                     <td>{item.end}</td>
@@ -244,7 +256,7 @@ const Availability = () => {
                                       <Button
                                         variant="contained"
                                         color="error"
-                                        onClick={() => deleteHandler( availabilities[0]?.user._id,item.date, item.start, item.end)}
+                                        onClick={() => deleteHandler(availabilities[0]?.user._id, item.date, item.start, item.end)}
                                       >
                                         Delete
                                       </Button>
@@ -277,10 +289,10 @@ const Availability = () => {
                                 {
                                   availabilityByDate && availabilityByDate?.map((user) => (
 
-                                    (user.schedule.map((item) => (
+                                    (user.schedule.map((item, index) => (
                                       // check if current date matches date then show tr
                                       item.date === date &&
-                                      <tr key={item._id}>
+                                      <tr key={index}>
                                         <td>{user.user.name}</td>
                                         <td>{item.start}</td>
                                         <td>{item.end}</td>
@@ -289,7 +301,7 @@ const Availability = () => {
                                           <Button
                                             variant="contained"
                                             color="error"
-                                            onClick={() => deleteHandler( user.user._id,item.date, item.start, item.end)}
+                                            onClick={() => deleteHandler(user.user._id, item.date, item.start, item.end)}
                                           >
                                             Delete
                                           </Button>

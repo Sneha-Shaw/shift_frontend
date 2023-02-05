@@ -26,7 +26,9 @@ export const AvailabilityLogic = () => {
 
     // get current date in format YYYY-MM-DD
     const today = moment().format('YYYY-MM-DD')
-    const [date, setDate] = useState(today[10])
+    // if today[8]==0 then todayDate= today[9] else today[8]+today[9]
+    const todayDate = today[8] === '0' ? today[9] : today[8] + today[9]
+    const [date, setDate] = useState(todayDate)
     const [startTime, setStartTime] = useState('12:00 AM')
     const [endTime, setEndTime] = useState('12:00:AM')
     const [doctorId, setDoctorId] = useState('')
