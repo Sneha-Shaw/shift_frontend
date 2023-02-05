@@ -99,13 +99,13 @@ export const ViewLogic = () => {
         ]
         const shiftDate = new Date(createDate)
         setShiftDay(days[shiftDate.getDay()])
-        console.log(createDate);
+      
         // check if dd contains 0 ex: if(dd in 2023-01-27 includes 0 then remove 0 and result should be 2023-1-27
-        const dd = parseInt(createDate.split("-")[2]) < 10 ? parseInt(createDate.split("-")[0]).toString().replace("0", "") : parseInt(createDate.split("-")[2])
+        const dd = parseInt(createDate.split("-")[2]) < 10 ? parseInt(createDate.split("-")[2]).toString().replace("0", "") : parseInt(createDate.split("-")[2])
         const mm = parseInt(createDate.split("-")[1]) < 10 ? parseInt(createDate.split("-")[1]).toString().replace("0", "") : parseInt(createDate.split("-")[1])
         const yyyy = createDate.split("-")[0]
         const date2 = yyyy + "-" + mm + "-" + dd
-        console.log(date2);
+       
         var domain = createDomain.toLowerCase()
         //  doctors, shiftDate, shiftDay, shiftTime, shiftDomain, slotId 
         dispatch(createShift(editdoctors, date2, days[new Date(createDate).getDay()], createSlot, domain, createId))
@@ -142,6 +142,18 @@ export const ViewLogic = () => {
     const handleSearch = (e) => {
         e.preventDefault()
         dispatch(searchDoctor(name))
+    }
+
+    // generate shift automatically
+    const generateShiftAutomatically = () => {
+        // get start Date of current month in format YYYY-MM-DD
+        const startDate = new Date().toISOString().slice(0, 7) + '-01'
+        // get end Date of current month in format YYYY-MM-DD
+        const endDate = new Date().toISOString().slice(0, 7) + '-31'
+         // for each domain dispatch generateShiftsManually(domain, startDate, endDate)
+         alldomains && alldomains.getAllDomains.forEach(domain => {
+            dispatch(generateShiftsManually(domain.domainName, startDate, endDate))
+         });
     }
 
     useEffect(() => {
@@ -292,6 +304,7 @@ export const ViewLogic = () => {
         handleSearch,
         setName,
         name,
-        searchData
+        searchData,
+        generateShiftAutomatically
     }
 }

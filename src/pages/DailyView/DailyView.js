@@ -53,7 +53,8 @@ const DailyView = () => {
         handleSearch,
         setName,
         name,
-        searchData
+        searchData,
+        generateShiftAutomatically
     } = ViewLogic()
     // console.log(editdoctors, "edit");
     // get current month's first date ex: 01-01-2023 and last date ex: 31-01-2023
@@ -101,6 +102,7 @@ const DailyView = () => {
                                     <Button
                                         variant="contained"
                                         color="primary"
+                                        onClick={() => generateShiftAutomatically()}
                                     >
                                         Generate Roster Automatically
                                     </Button>

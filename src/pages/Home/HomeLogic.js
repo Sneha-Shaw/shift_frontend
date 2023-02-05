@@ -61,7 +61,7 @@ export const HomeLogic = () => {
                 const firstDay = new Date(today.setDate(today.getDate() - today.getDay()));
                 const lastDay = new Date(today.setDate(today.getDate() - today.getDay() + 6));
 
-                if(firstDay.getFullYear()===parseInt(item.startDate[6]+item.startDate[7]+item.startDate[8]+item.startDate[9])){
+                if (firstDay.getFullYear() === parseInt(item.startDate[6] + item.startDate[7] + item.startDate[8] + item.startDate[9])) {
                     if ((firstDay.getMonth() + 1) === parseInt(item.startDate[3] + item.startDate[4])) {
                         if (firstDay.getDate() <= parseInt(item.startDate[0] + item.startDate[1])) {
                             if (lastDay.getFullYear() === parseInt(item.endDate[6] + item.endDate[7] + item.endDate[8] + item.endDate[9])) {
