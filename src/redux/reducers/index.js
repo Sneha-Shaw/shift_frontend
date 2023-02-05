@@ -52,7 +52,7 @@ import {
     deleteAvailabilityReducer,
     getAvailabilityByDateReducer,
     getAllAvailabilityReducer,
-    deleteAvailabilityByIdReducer
+    deleteAvailabilityByDateReducer
 } from './availabilityReducer'
 import {
     updateSlotReducer,
@@ -116,7 +116,7 @@ const rootReducer = combineReducers({
     deleteAvailability: deleteAvailabilityReducer,
     getAvailabilityByDate: getAvailabilityByDateReducer,
     getAllAvailability: getAllAvailabilityReducer,
-    deleteAvailabilityById: deleteAvailabilityByIdReducer,
+    deleteAvailabilityByDate: deleteAvailabilityByDateReducer,
     // password
     forgotPassword: forgotPasswordReducer,
     resetPassword: resetPasswordReducer

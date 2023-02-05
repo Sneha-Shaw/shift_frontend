@@ -5,7 +5,7 @@ import {
     addAvailability,
     getAvailability,
     getAvailabilityByDate,
-    deleteAvailabilityById
+    deleteAvailabilityByDate
 } from '../../redux/actions/availabilityAction';
 import {
     getAllUsers
@@ -16,7 +16,7 @@ export const AvailabilityLogic = () => {
     const { availability } = useSelector((state) => state.addAvailability)
     const { availabilities } = useSelector((state) => state.getAvailability)
     const { availability: availabilityByDate } = useSelector((state) => state.getAvailabilityByDate)
-    const { deleteData: deleteAvailabilityData } = useSelector((state) => state.deleteAvailabilityById)
+    const { deleteData: deleteAvailabilityData } = useSelector((state) => state.deleteAvailabilityByDate)
     const { users } = useSelector((state) => state.getAllUsers)
 
     const { userInfo } = useSelector((state) => state.signInUser)
@@ -52,8 +52,8 @@ export const AvailabilityLogic = () => {
 
 
     // delete availability
-    const deleteHandler = (id) => {
-      dispatch(deleteAvailabilityById(id))
+    const deleteHandler = (id,date,start,end) => {
+        managerInfo ? dispatch(deleteAvailabilityByDate(id,date,start,end)) : dispatch(deleteAvailabilityByDate(userInfo._id,date,start,end))
     }
 
 
@@ -104,6 +104,71 @@ export const AvailabilityLogic = () => {
 
 
     // get availability for user after deleting an availability
+    useEffect(() => {
+        if (userInfo) {
+            if (deleteAvailabilityData) {
+                dispatch(getAvailability(userInfo._id))
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Availability Deleted',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }
+    }, [deleteAvailabilityData, dispatch, userInfo])
+
+    // get availability for manager after adding an availability
+    useEffect(() => {
+        if (managerInfo) {
+            if (availability) {
+                setAvailabilityby('doctor')
+                dispatch(getAvailability(doctorId))
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Availability Added',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }
+    }, [availability, dispatch, managerInfo, doctorId])
+
+    // get availability for manager after deleting an availability
+    useEffect(() => {
+        if (managerInfo) {
+            if (deleteAvailabilityData) {
+                dispatch(getAvailability(doctorId))
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Availability Deleted',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }
+    }, [deleteAvailabilityData, dispatch, managerInfo, doctorId])
+
+    // get availability for manager after deleting an availability
+    useEffect(() => {
+        if (managerInfo) {
+            if (deleteAvailabilityData) {
+                dispatch(getAvailabilityByDate(date))
+                Swal.fire({
+                    position: 'center',
+                    icon: 'success',
+                    title: 'Availability Deleted',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            }
+        }
+    }, [deleteAvailabilityData, dispatch, managerInfo, date])
+
+    
 
 
 

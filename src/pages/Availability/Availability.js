@@ -244,7 +244,7 @@ const Availability = () => {
                                       <Button
                                         variant="contained"
                                         color="error"
-                                        onClick={() => deleteHandler(item._id)}
+                                        onClick={() => deleteHandler( availabilities[0]?.user._id,item.date, item.start, item.end)}
                                       >
                                         Delete
                                       </Button>
@@ -271,7 +271,7 @@ const Availability = () => {
                                 {
                                   (!availabilityByDate?.length && date) &&
                                   <tr>
-                                    <td colSpan="4">No Availability</td>
+                                    <td colSpan="5">No Availability</td>
                                   </tr>
                                 }
                                 {
@@ -289,7 +289,7 @@ const Availability = () => {
                                           <Button
                                             variant="contained"
                                             color="error"
-                                            onClick={() => deleteHandler(item._id)}
+                                            onClick={() => deleteHandler( user.user._id,item.date, item.start, item.end)}
                                           >
                                             Delete
                                           </Button>
