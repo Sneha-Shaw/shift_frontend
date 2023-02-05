@@ -42,9 +42,15 @@ export default makeStyles((theme) => ({
             }
         }
     },
-    domain: {
+    selectContainer:{
         width: "100%",
         height: "10%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-around",
+    },
+    select: {
+       
         '&>label': {
             fontSize: "1.5rem",
             fontWeight: "bold",

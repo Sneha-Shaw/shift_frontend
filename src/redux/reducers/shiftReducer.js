@@ -25,7 +25,10 @@ import {
     CREATE_SHIFT_FAILED,
     DELETE_SHIFT_REQUEST,
     DELETE_SHIFT_SUCCESS,
-    DELETE_SHIFT_FAILED
+    DELETE_SHIFT_FAILED,
+    GET_SHIFTS_BY_MONTH_REQUEST,
+    GET_SHIFTS_BY_MONTH_SUCCESS,
+    GET_SHIFTS_BY_MONTH_FAILED
 } from "../constants/shiftConstants";
 
 // get calender
@@ -357,6 +360,47 @@ export const deleteShiftReducer = (state = deleteShiftState, action) => {
                 ...state,
                 loading: false,
                 shift: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+// getShiftsByMonth
+const getShiftsByMonthState = {
+    loading: false,
+    shifts: null,
+    error: null,
+    isAuthenticated: false
+}
+
+export const getShiftsByMonthReducer = (state = getShiftsByMonthState, action) => {
+    switch (action.type) {
+        case GET_SHIFTS_BY_MONTH_REQUEST:
+            return {
+                ...state,
+                shifts: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case GET_SHIFTS_BY_MONTH_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                shifts: action.payload
+
+            }
+        case GET_SHIFTS_BY_MONTH_FAILED:
+            return {
+                ...state,
+                loading: false,
+                shifts: null,
                 isAuthenticated: false,
                 error: action.payload
             }

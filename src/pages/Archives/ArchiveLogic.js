@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import {
     // getAllShifts,
     getCalender,
-    getShiftsByDomain
+    getShiftsByMonth
 } from '../../redux/actions/shiftAction'
 import {
     getAllSlots
@@ -24,17 +24,36 @@ export const ArchiveLogic = () => {
     const { calender } = useSelector((state) => state.getCalender)
     const { slots } = useSelector((state) => state.getAllSlots)
     const { doctorsInfo: doctors } = useSelector((state) => state.getAllDoctors)
-    const { shifts } = useSelector((state) => state.getShiftsByDomain)
+    const { shifts } = useSelector((state) => state.getShiftsByMonth)
     const { domains: alldomains } = useSelector(state => state.getAllDomains)
-    const { doctorInfo: searchData } = useSelector((state) => state.searchDoctor)
 
     var count = null
     const dispatch = useDispatch()
-    // get current month
-    const currentMonth = useState(new Date().getMonth())
     const [domainOp, setDomainOp] = useState("")
 
+    const [month, setMonth] = useState(null)
+    const [year, setYear] = useState(null)
+    // month array
+    const months = [
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December'
+    ]
 
+    //   get list of years
+    const years = []
+    for (let i = 2000; i <= 2050; i++) {
+        years.push(i)
+    }
 
     // get all domains
     useEffect(() => {
@@ -46,14 +65,6 @@ export const ArchiveLogic = () => {
         dispatch(getAllDoctors())
     }, [dispatch])
 
-    // call   dispatch(getCalender(currentMonth[0])) once
-    useEffect(() => {
-        dispatch(getCalender(currentMonth[0]))
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-        count = 1
-    }, [count])
-
-
     useEffect(() => {
         dispatch(getAllSlots())
     }, [dispatch])
@@ -61,7 +72,13 @@ export const ArchiveLogic = () => {
     const getShifts = (domain) => {
         // uncapitalize domain
         domain = domain.toLowerCase()
-        dispatch(getShiftsByDomain(domain))
+        dispatch(getShiftsByMonth(month + 1, year, domainOp))
+    }
+
+    // get calender
+    const getCalendar = (month) => {
+        // by month and year
+        dispatch(getCalender(month))
     }
 
     useEffect(() => {
@@ -92,6 +109,13 @@ export const ArchiveLogic = () => {
         domainOp,
         setDomainOp,
         getShifts,
-        alldomains
+        alldomains,
+        month,
+        setMonth,
+        months,
+        year,
+        setYear,
+        years,
+        getCalendar
     }
 }

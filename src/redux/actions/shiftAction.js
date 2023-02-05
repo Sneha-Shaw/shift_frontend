@@ -26,7 +26,10 @@ import {
     CREATE_SHIFT_FAILED,
     DELETE_SHIFT_REQUEST,
     DELETE_SHIFT_SUCCESS,
-    DELETE_SHIFT_FAILED
+    DELETE_SHIFT_FAILED,
+    GET_SHIFTS_BY_MONTH_REQUEST,
+    GET_SHIFTS_BY_MONTH_SUCCESS,
+    GET_SHIFTS_BY_MONTH_FAILED
 } from "../constants/shiftConstants";
 
 
@@ -278,6 +281,36 @@ export const deleteShift = (id) => async (dispatch) => {
     } catch (error) {
         dispatch({
             type: DELETE_SHIFT_FAILED,
+            payload:
+                error.response && error.response.data.message
+                    ? error.response.data.message
+                    : error.message
+        })
+    }
+}
+
+// get shuifts by month
+export const getShiftsByMonth = (month, year,domain) => async (dispatch) => {
+    try {
+        dispatch({
+            type: GET_SHIFTS_BY_MONTH_REQUEST
+        })
+        const config = {
+            'Content-Type': 'application/json'
+        }
+        const body ={
+            month,
+            year,
+            domain
+        }
+        const { data } = await axios.get(`${API}/private/shift/get-shifts-by-month`,body, config)
+        dispatch({
+            type: GET_SHIFTS_BY_MONTH_SUCCESS,
+            payload: data
+        })
+    } catch (error) {
+        dispatch({
+            type: GET_SHIFTS_BY_MONTH_FAILED,
             payload:
                 error.response && error.response.data.message
                     ? error.response.data.message

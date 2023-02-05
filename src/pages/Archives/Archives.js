@@ -15,7 +15,13 @@ const Archives = () => {
     domainOp,
     setDomainOp,
     getShifts,
-    alldomains
+    alldomains,
+    setMonth,
+    months,
+    year,
+    setYear,
+    years,
+    getCalendar
   } = ArchiveLogic()
 
   return (
@@ -23,93 +29,145 @@ const Archives = () => {
       <Sidebar />
       <div className={classes.main}>
         <div className={classes.grid}>
-
-          {
-            managerInfo ?
-              <div className={classes.domain}>
-                <label
-                  htmlFor="domain"
-                  className={classes.domainLabel}
-                >
-                  Select A Domain to view Roster:
-                </label>
-                <select
-                  name="domain"
-                  id="domain"
-                  className={classes.domainSelect}
-                  onChange={(e) => {
-                    setDomainOp(e.target.value);
-                    getShifts(e.target.value);
-                    // handleDomain(e.target.value)
-                  }}
-                  value={domainOp}
-
-                >
-                  <option value="">Select Domain</option>
-                  {
-                    alldomains && alldomains.getAllDomains.map
-                      ((domain) => (
-                        <option key={domain._id} value={domain?.domainName}>{domain?.domainName}</option>
-                      ))
-                  }
-                </select>
-
-              </div>
-              :
-              <div className={classes.domain}>
-                <label
-                  htmlFor="domain"
-                  className={classes.domainLabel}
-                >
-                  Select A Domain to view Roster:
-                </label>
+          <div className={classes.selectContainer}>
+            <div className={classes.select}>
+              <label
+                htmlFor="year"
+                className={classes.yearLabel}
+              >
+                Select year to view Roster:
+              </label>
+              <select
+                name="year"
+                id="year"
+                className={classes.yearSelect}
+                onChange={(e) => {
+                  setYear(e.target.value)
+                }}
+                value={year}
+              >
+                <option value="">Select Year</option>
                 {
-                  user && user?.ecg && user?.echo ?
-                    <select
-                      name="domain"
-                      id="domain"
-                      className={classes.domainSelect}
-                      onChange={(e) => {
-                        setDomainOp(e.target.value);
-                      }}
-                      value={domainOp}
-
-                    >
-                      <option value="">Select Domain</option>
-                      {
-                        alldomains && alldomains.getAllDomains.map
-                          ((domain) => (
-                            <option key={domain._id} value={domain?.domainName}>{domain?.domainName}</option>
-                          ))
-                      }
-                    </select>
-                    :
-                    user && user?.ecg ?
-                      <input
-                        type="text"
-                        name="domain"
-                        id="domain"
-                        className={classes.domainSelect}
-                        value="ECG"
-                        disabled
-                      />
-                      :
-                      user && user?.echo &&
-                      <input
-                        type="text"
-                        name="domain"
-                        id="domain"
-                        className={classes.domainSelect}
-                        value="ECHO"
-                        disabled
-                      />
-
-
-
+                  years.map((year, index) => (
+                    <option key={index} value={year}>{year}</option>
+                  ))
                 }
+              </select>
 
-              </div>
-          }
+            </div>
+            <div className={classes.select}>
+              <label
+                htmlFor="date"
+                className={classes.dateLabel}
+              >
+                Select month to view Roster:
+              </label>
+              <select
+                name="date"
+                id="date"
+                className={classes.dateSelect}
+                onChange={(e) => {
+                  setMonth(e.target.value);
+                  getCalendar(e.target.value)
+                }}
+              >
+                <option value="">Select Month</option>
+                {
+                  months.map((month, index) => (
+                    <option key={index} value={index}>{month}</option>
+                  ))
+                }
+              </select>
+            </div>
+
+
+            {
+              managerInfo ?
+                <div className={classes.select}>
+                  <label
+                    htmlFor="domain"
+                    className={classes.domainLabel}
+                  >
+                    Select A Domain to view Roster:
+                  </label>
+                  <select
+                    name="domain"
+                    id="domain"
+                    className={classes.domainSelect}
+                    onChange={(e) => {
+                      setDomainOp(e.target.value);
+                      getShifts(e.target.value);
+                      // handleDomain(e.target.value)
+                    }}
+                    value={domainOp}
+
+                  >
+                    <option value="">Select Domain</option>
+                    {
+                      alldomains && alldomains.getAllDomains.map
+                        ((domain) => (
+                          <option key={domain._id} value={domain?.domainName}>{domain?.domainName}</option>
+                        ))
+                    }
+                  </select>
+
+                </div>
+                :
+                <div className={classes.select}>
+                  <label
+                    htmlFor="domain"
+                    className={classes.domainLabel}
+                  >
+                    Select A Domain to view Roster:
+                  </label>
+                  {
+                    user && user?.ecg && user?.echo ?
+                      <select
+                        name="domain"
+                        id="domain"
+                        className={classes.domainSelect}
+                        onChange={(e) => {
+                          setDomainOp(e.target.value);
+                        }}
+                        value={domainOp}
+
+                      >
+                        <option value="">Select Domain</option>
+                        {
+                          alldomains && alldomains.getAllDomains.map
+                            ((domain) => (
+                              <option key={domain._id} value={domain?.domainName}>{domain?.domainName}</option>
+                            ))
+                        }
+                      </select>
+                      :
+                      user && user?.ecg ?
+                        <input
+                          type="text"
+                          name="domain"
+                          id="domain"
+                          className={classes.domainSelect}
+                          value="ECG"
+                          disabled
+                        />
+                        :
+                        user && user?.echo &&
+                        <input
+                          type="text"
+                          name="domain"
+                          id="domain"
+                          className={classes.domainSelect}
+                          value="ECHO"
+                          disabled
+                        />
+
+
+
+                  }
+
+                </div>
+            }
+          </div>
           <div className={classes.tableContainer}>
             <table className={classes.table}>
               <thead>

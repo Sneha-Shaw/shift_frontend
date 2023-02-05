@@ -223,6 +223,8 @@ export const ViewLogic = () => {
 
     // call   dispatch(getCalender(currentMonth[0])) once
     useEffect(() => {
+        // get current year
+        const year = new Date().getFullYear()
         dispatch(getCalender(currentMonth[0]))
         // eslint-disable-next-line react-hooks/exhaustive-deps
         count = 1
