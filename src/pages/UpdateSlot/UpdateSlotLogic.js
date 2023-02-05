@@ -12,19 +12,18 @@ export const UpdateSlotLogic = () => {
     const [show, setShow] = useState(false)
 
     const dispatch = useDispatch()
-   
+
 
     const slotOptions =
         slots && slots?.getAllSlots?.map((slot) => {
             return slot.slotTime
         })
-    const defaultSlotOption = slotOptions && slotOptions[0]
 
     const [slot, setSlot] = useState('')
     const [date, setDate] = useState('')
     const [doctorsNeeded, setDoctorsNeeded] = useState(0)
     const [seniorNeeded, setSeniorNeeded] = useState(0)
-    const [searchslot,setSearchslot] = useState('')
+    const [searchslot, setSearchslot] = useState('')
 
     const submitHandler = (e) => {
         setShow(!show)
@@ -40,11 +39,7 @@ export const UpdateSlotLogic = () => {
                 }
             ]
             dispatch(updateSlot(allotment, slot))
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: 'Slot Updated Successfully',
-            })
+
         }
         else {
             Swal.fire({
@@ -55,9 +50,14 @@ export const UpdateSlotLogic = () => {
         }
 
     }
-  
+
     useEffect(() => {
         if (updateSlotState) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Success',
+                text: 'Slot Updated Successfully',
+            })
             dispatch(getAllSlots())
         }
     }, [updateSlotState, dispatch])
@@ -72,7 +72,6 @@ export const UpdateSlotLogic = () => {
         setShow,
         slots,
         slotOptions,
-        defaultSlotOption,
         slot,
         setSlot,
         date,
