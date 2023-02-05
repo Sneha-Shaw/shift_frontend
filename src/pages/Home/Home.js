@@ -16,7 +16,8 @@ const Home = () => {
     doctors,
     leaves,
     userData,
-    userLeaves
+    userLeaves,
+    countLeave
   } = HomeLogic()
 
   return (
@@ -67,10 +68,11 @@ const Home = () => {
                   </p>
                 </div>
                 <div className={classes.overviewItem}>
-                  <span className={classes.title}>Total Leaves</span>
+                  <span className={classes.title}>No. of Doctors leave on this week</span>
                   <p className={classes.count}>
                     {
-                      leaves && leaves.getAllLeaves.length
+                      // leaves && leaves.getAllLeaves.length
+                     countLeave>0? countLeave-1:0
                     }
                   </p>
                 </div>

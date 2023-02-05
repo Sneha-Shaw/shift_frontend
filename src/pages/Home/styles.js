@@ -193,5 +193,8 @@ export default makeStyles((theme) => ({
             }
         },
 
+    },
+    title:{
+        textAlign:"center"
     }
 }))
