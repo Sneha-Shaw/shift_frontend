@@ -6,6 +6,7 @@ import { ViewLogic } from './ViewLogic'
 import { DownloadTableExcel } from 'react-export-table-to-excel'
 import { Button, Modal } from '@mui/material'
 // import AddIcon from '@mui/icons-material/Add';
+import DoneIcon from '@mui/icons-material/Done';
 import SearchIcon from '@mui/icons-material/Search';
 
 const DailyView = () => {
@@ -653,7 +654,11 @@ const DailyView = () => {
 
                                                 }
                                             </td>
-                                            <td>
+                                            <td style={{
+                                                position: "sticky",
+                                                left: "10%",
+                                                background: "#f7f7f7"
+                                            }}>
                                                 {
                                                     doctors && doctors?.getAllDoctors?.map((doctor, docIndex) => (
                                                         <div key={doctor._id} style={{
@@ -673,7 +678,11 @@ const DailyView = () => {
                                                     ))
                                                 }
                                             </td>
-                                            <td>
+                                            <td style={{
+                                                position: "sticky",
+                                                left: "20%",
+                                                background: "#f7f7f7"
+                                            }}>
                                                 {
                                                     doctors && doctors?.getAllDoctors?.map((doctor, docIndex) => (
                                                         <div key={doctor._id} style={{
@@ -756,10 +765,14 @@ const DailyView = () => {
                                                                         {
                                                                             shifts?.data?.map((shift) => (
 
-                                                                                shift?.doctors.map((doctorShift, doctorIndex7) => (
+                                                                                shift?.doctors.map((doctorShift, doctorIndex) => (
 
-                                                                                    doctorShift === doctor._id && shift?.shiftDate === date.dayYear + '-' + date.dayMonth + '-' + date.dayNumber && shift?.shiftTime === slot.slotTime && (
-                                                                                        <div className={classes.shiftBox} key={doctorIndex7}
+                                                                                    doctorShift === doctor._id &&
+                                                                                    // new Date(shift.shiftDate).getFullYear() === date.dayYear &&
+                                                                                    new Date(shift.shiftDate).getDate() === date.dayNumber &&
+                                                                                    // new Date(shift.shiftDate).getMonth() === date.dayMonth &&
+                                                                                    shift?.shiftTime === slot.slotTime && (
+                                                                                        <div className={classes.shiftBox} key={doctorIndex}
                                                                                             style={{
                                                                                                 borderTop: ".5px solid #fff",
                                                                                                 borderLeft: ".5px solid #fff",
@@ -783,7 +796,7 @@ const DailyView = () => {
                                                                                                 )
                                                                                             }}
                                                                                         >
-                                                                                            Yes
+                                                                                            <DoneIcon fontSize="large" />
                                                                                         </div>
                                                                                     )
                                                                                     // </div>
