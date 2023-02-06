@@ -55,27 +55,28 @@ const Schedule = () => {
                 </tr>
               </thead>
               <tbody>
-                {shifts &&
-                  // filter currentmonth and year in shiftdate
-                  shifts.data.filter(
-                    (shift) =>
-                      new Date(shift.shiftDate).getMonth() === currentMonth &&
-                      new Date(shift.shiftDate).getFullYear() === currentYear
-                  )
-                    .map((shift) => (
-                      <tr key={shift._id}>
-                        <td>{shift.shiftDate}</td>
-                        <td>{shift.shiftDay}</td>
-                        <td>{shift.shiftTime}</td>
-                      </tr>
-                    ))}
-                    {
-                      shifts && shifts.data.length === 0 && <tr><td colSpan="3">No Shifts</td></tr>
-                    }
-                    {
-                      domainOp==="" &&
-                      <tr><td colSpan="3">Select Domain to view your Schedule </td></tr>
-                    }
+                {
+                  domainOp === "" ?
+                    <tr><td colSpan="3">Select Domain to view your Schedule</td></tr>
+                    :
+                    shifts &&
+                    // filter currentmonth and year in shiftdate
+                    shifts.data.filter(
+                      (shift) =>
+                        new Date(shift.shiftDate).getMonth() === currentMonth &&
+                        new Date(shift.shiftDate).getFullYear() === currentYear
+                    )
+                      .map((shift) => (
+                        <tr key={shift._id}>
+                          <td>{shift.shiftDate}</td>
+                          <td>{shift.shiftDay}</td>
+                          <td>{shift.shiftTime}</td>
+                        </tr>
+                      ))}
+                {
+                  shifts && shifts.data.length === 0 && <tr><td colSpan="3">No Shifts</td></tr>
+                }
+
               </tbody>
             </table>
           </div>
