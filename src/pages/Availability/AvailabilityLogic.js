@@ -30,7 +30,7 @@ export const AvailabilityLogic = () => {
 
     const [date, setDate] = useState(todayDate)
     const [startTime, setStartTime] = useState('12:00 AM')
-    const [endTime, setEndTime] = useState('12:00:AM')
+    const [endTime, setEndTime] = useState('12:00 AM')
     const [doctorId, setDoctorId] = useState('')
     const [availabilityOps, setAvailabilityOps] = useState('')
 
