@@ -629,7 +629,7 @@ const DailyView = () => {
                                         <tr key={calendarIndex}>
                                             <td style={{
                                                 position: "sticky",
-                                                left: 0,
+                                                left: "0",
                                                 background: "white"
                                             }}>
                                                 {
@@ -656,7 +656,7 @@ const DailyView = () => {
                                             </td>
                                             <td style={{
                                                 position: "sticky",
-                                                left: "10%",
+                                                left: "11.5%",
                                                 background: "#f7f7f7"
                                             }}>
                                                 {
@@ -680,7 +680,7 @@ const DailyView = () => {
                                             </td>
                                             <td style={{
                                                 position: "sticky",
-                                                left: "20%",
+                                                left: "23%",
                                                 background: "#f7f7f7"
                                             }}>
                                                 {

@@ -57,6 +57,8 @@ export const UpdateSlotLogic = () => {
                 icon: 'success',
                 title: 'Success',
                 text: 'Slot Updated Successfully',
+                showConfirmButton: false,
+                timer: 1000
             })
             dispatch(getAllSlots())
         }
