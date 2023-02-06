@@ -11,7 +11,7 @@ export default makeStyles((theme) => ({
     },
 
     main: {
-        width: "80%",
+        width: "55%",
         height: "fit-content",
         display: "flex",
         flexDirection: "column",
@@ -28,4 +28,92 @@ export default makeStyles((theme) => ({
             padding: "1rem 0",
         }
     },
+    schedule:{
+        width: "100%",
+        height: "fit-content",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        margin: "2rem auto",
+        padding: "1rem",
+       
+    },
+    schedule_Header:{
+        width: "100%",
+        height: "fit-content",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        margin: "2rem auto",
+        padding: "1rem",
+        '& select': {
+            width: "20%",
+            height: "fit-content",
+            padding: "0.5rem",
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            border: "none",
+            borderRadius: "0.5rem",
+            outline: "none",
+            backgroundColor: "#f2f2f2",
+            [theme.breakpoints.down("sm")]: {
+                width: "100%",
+            }
+        },
+        '& label': {
+            fontSize: "1.5rem",
+            fontWeight: "bold",
+            marginRight: "1rem",
+        },
+        [theme.breakpoints.down("sm")]: {
+            flexDirection: "column",
+        }
+    },
+    schedule_body:{
+        width: "100%",
+        height: "fit-content",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        margin: "2rem auto",
+        padding: "1rem",
+        '& table': {
+            width: "100%",
+            height: "fit-content",
+            borderCollapse: "collapse",
+            '& thead': {
+                width: "100%",
+                height: "fit-content",
+                '& th': {
+                    width: "33.33%",
+                    height: "fit-content",
+                    padding: "1rem",
+                    fontSize: "1.5rem",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    border: "1px solid #06283D",
+                    background:"#06283D",
+                    color:"#fff"
+                }
+            },
+            '& tbody': {
+                width: "100%",
+                height: "fit-content",
+                '& tr': {
+                    width: "100%",
+                    height: "fit-content",
+                    '& td': {
+                        width: "33.33%",
+                        color:"#06283D",
+                        height: "fit-content",
+                        padding: "1rem",
+                        fontSize: "1.5rem",
+                        fontWeight: "bold",
+                        textAlign: "center",
+                        border: "1px solid #06283D",
+                    }
+                }
+            }
+        },
+    }
 }))

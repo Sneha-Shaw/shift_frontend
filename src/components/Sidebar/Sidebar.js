@@ -239,7 +239,7 @@ const Sidebar = () => {
                                         color: isActive ? '#47B5FF' : 'none',
                                     })} className={classes.navLink} onClick={() => setShowSubList(!showSubList)}>
                                     <ArrowForwardIosIcon />
-                                    <span className={classes.listItemText}>Your Schedule</span>
+                                    <span className={classes.listItemText}>My Schedule</span>
                                 </NavLink>
                                
                             </li>

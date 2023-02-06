@@ -97,9 +97,9 @@ const SubSidebar = () => {
                             <NavLink
                                 to={
                                     managerInfo ?
-                                    '/attendance/shift'
-                                    :
-                                    '/self-service/requests/shift'
+                                        '/attendance/shift'
+                                        :
+                                        '/self-service/requests/shift'
                                 }
                                 style={({ isActive }) => ({
                                     color: isActive ? '#47B5FF' : 'none',
@@ -171,19 +171,12 @@ const SubSidebar = () => {
                             </ul>
                         </li>
                         <li className={classes.listItem}>
-                            {/* <Link to="" className={classes.navLink}>
-                                <span className={classes.listItemText}>Views</span>
-                            </Link>
-                            <ul className={classes.subList}>
-                                <li className={classes.subListItem}> */}
-                                    <NavLink to='/self-service/schedule'
-                                        style={({ isActive }) => ({
-                                            color: isActive ? '#47B5FF' : 'none',
-                                        })} className={classes.navLink}>
-                                        <span className={classes.listItemText}>Your Schedule</span>
-                                    </NavLink>
-                                {/* </li>
-                            </ul> */}
+                            <NavLink to='/self-service/schedule'
+                                style={({ isActive }) => ({
+                                    color: isActive ? '#47B5FF' : 'none',
+                                })} className={classes.navLink}>
+                                <span className={classes.listItemText}>My Schedule</span>
+                            </NavLink>
                         </li>
                     </ul>
             }

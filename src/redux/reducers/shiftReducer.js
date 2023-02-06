@@ -28,7 +28,10 @@ import {
     DELETE_SHIFT_FAILED,
     GET_SHIFTS_BY_MONTH_REQUEST,
     GET_SHIFTS_BY_MONTH_SUCCESS,
-    GET_SHIFTS_BY_MONTH_FAILED
+    GET_SHIFTS_BY_MONTH_FAILED,
+    GET_SHIFTS_BY_DOCTOR_REQUEST,
+    GET_SHIFTS_BY_DOCTOR_SUCCESS,
+    GET_SHIFTS_BY_DOCTOR_FAILED
 } from "../constants/shiftConstants";
 
 // get calender
@@ -397,6 +400,47 @@ export const getShiftsByMonthReducer = (state = getShiftsByMonthState, action) =
 
             }
         case GET_SHIFTS_BY_MONTH_FAILED:
+            return {
+                ...state,
+                loading: false,
+                shifts: null,
+                isAuthenticated: false,
+                error: action.payload
+            }
+
+        default:
+            return state
+    }
+}
+
+// getShiftsByDoctor
+const getShiftsByDoctorState = {
+    loading: false,
+    shifts: null,
+    error: null,
+    isAuthenticated: false
+}
+
+export const getShiftsByDoctorReducer = (state = getShiftsByDoctorState, action) => {
+    switch (action.type) {
+        case GET_SHIFTS_BY_DOCTOR_REQUEST:
+            return {
+                ...state,
+                shifts: null,
+                error: null,
+                isAuthenticated: false,
+                loading: true
+            }
+        case GET_SHIFTS_BY_DOCTOR_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                isAuthenticated: true,
+                error: null,
+                shifts: action.payload
+
+            }
+        case GET_SHIFTS_BY_DOCTOR_FAILED:
             return {
                 ...state,
                 loading: false,
