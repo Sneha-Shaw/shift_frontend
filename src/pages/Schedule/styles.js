@@ -42,12 +42,24 @@ export default makeStyles((theme) => ({
         width: "100%",
         height: "fit-content",
         display: "flex",
-        justifyContent: "center",
+        justifyContent: "space-around",
         alignItems: "center",
         margin: "2rem auto",
         padding: "1rem",
+        '&>div':{
+            width: "40%",
+            '&>button':{
+                width: "80%",
+                fontSize: "1.2rem",
+                fontWeight: "bold",
+                background: "#06283D",
+                '&:hover': {
+                    background: "rgba(6, 40, 61,0.9)"
+                }
+            }
+        },
         '& select': {
-            width: "20%",
+            width: "50%",
             height: "fit-content",
             padding: "0.5rem",
             fontSize: "1.5rem",

@@ -30,6 +30,7 @@ export const ScheduleLogic = () => {
     // const { doctorInfo: searchData } = useSelector((state) => state.searchDoctor)
     var count = null
     const [domainOp, setDomainOp] = useState("")
+    const [doctorId,setDoctorId] = useState("")
     const currentMonth = useState(new Date().getMonth())
 
     useEffect(() => {
@@ -38,6 +39,7 @@ export const ScheduleLogic = () => {
             dispatch(getSingleUser(userInfo._id))
             dispatch(getAllDomains())
             dispatch(getAllSlots())
+            setDoctorId(userInfo._id)
         }
     }, [userInfo, dispatch])
 
@@ -47,9 +49,9 @@ export const ScheduleLogic = () => {
         count = 1
     }, [count])
 
-    const handleGetShifts = (e) => {
-        setDomainOp(e.target.value)
-        dispatch(getShiftsByDoctor(userInfo._id,e.target.value))
+    const handleGetShifts = () => {
+      
+        dispatch(getShiftsByDoctor(doctorId,domainOp))
     }
 
 
@@ -65,6 +67,9 @@ export const ScheduleLogic = () => {
         shifts,
         alldomains,
         domainOp,
-        handleGetShifts
+        handleGetShifts,
+        doctorId,
+        setDoctorId,
+        setDomainOp
     }
 }
