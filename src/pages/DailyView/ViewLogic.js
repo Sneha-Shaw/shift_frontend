@@ -259,6 +259,7 @@ export const ViewLogic = () => {
             setDomainOp("echo")
         }
     }, [user])
+    
     return {
         managerInfo,
         calender,
