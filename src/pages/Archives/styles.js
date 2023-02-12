@@ -42,7 +42,7 @@ export default makeStyles((theme) => ({
             }
         }
     },
-    selectContainer:{
+    selectContainer: {
         width: "100%",
         height: "10%",
         display: "flex",
@@ -50,7 +50,7 @@ export default makeStyles((theme) => ({
         justifyContent: "space-around",
     },
     select: {
-       
+
         '&>label': {
             fontSize: "1.5rem",
             fontWeight: "bold",
@@ -80,24 +80,20 @@ export default makeStyles((theme) => ({
         borderCollapse: "collapse",
         border: ".5px solid #06283D",
         '&>thead': {
-            position:"sticky",
-            top:"-.2rem",
-            zIndex:100,
+            position: "sticky",
+            top: "-.2rem",
+            zIndex: 100,
             '&>tr': {
 
                 '&>th': {
                     fontWeight: "bold",
                     padding: "1rem",
                     fontSize: "1.5rem",
-            background: "#06283D",
-
-                    // borderRight: ".5px solid #06283D",
-                    // width: "8rem",
-                    // height: "2rem",
+                    background: "#06283D",
                     color: "#fff",
                     textAlign: "center",
                     '&>div': {
-                        width: "10rem",
+                        width: "20rem",
                     }
                 }
             }

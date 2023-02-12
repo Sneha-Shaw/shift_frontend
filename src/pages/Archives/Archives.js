@@ -229,7 +229,11 @@ const Archives = () => {
 
                         }
                       </td>
-                      <td>
+                      <td style={{
+                        position: "sticky",
+                        left: "21%",
+                        background: "white"
+                      }}>
                         {
                           doctors && doctors?.getAllDoctors?.map((doctor, docIndex) => (
                             <div key={doctor._id} style={{
@@ -249,7 +253,12 @@ const Archives = () => {
                           ))
                         }
                       </td>
-                      <td>
+
+                      <td style={{
+                        position: "sticky",
+                        left: "41%",
+                        background: "#f7f7f7"
+                      }}>
                         {
                           doctors && doctors?.getAllDoctors?.map((doctor, docIndex) => (
                             <div key={doctor._id} style={{
@@ -377,7 +386,7 @@ const Archives = () => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
