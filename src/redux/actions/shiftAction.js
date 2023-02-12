@@ -39,7 +39,7 @@ import {
 const API = process.env.REACT_APP_NODE_API
 
 // get calender
-export const getCalender = (currentMonth) => async (dispatch) => {
+export const getCalender = (currentMonth, year) => async (dispatch) => {
     try {
         dispatch({
             type: GET_CALENDER_REQUEST
@@ -48,7 +48,7 @@ export const getCalender = (currentMonth) => async (dispatch) => {
         const config = {
             'Content-Type': 'application/json'
         }
-        const { data } = await axios.get(`${API}/private/calendar/get-calendar?currentMonth=${currentMonth}`, config)
+        const { data } = await axios.get(`${API}/private/calendar/get-calendar?currentMonth=${currentMonth}&year=${year}`, config)
         dispatch({
             type: GET_CALENDER_SUCCESS,
             payload: data
@@ -293,7 +293,7 @@ export const deleteShift = (id) => async (dispatch) => {
 }
 
 // get shuifts by month
-export const getShiftsByMonth = (month, year,domain) => async (dispatch) => {
+export const getShiftsByMonth = (month, year, domain) => async (dispatch) => {
     try {
         dispatch({
             type: GET_SHIFTS_BY_MONTH_REQUEST
@@ -301,12 +301,7 @@ export const getShiftsByMonth = (month, year,domain) => async (dispatch) => {
         const config = {
             'Content-Type': 'application/json'
         }
-        const body ={
-            month,
-            year,
-            domain
-        }
-        const { data } = await axios.get(`${API}/private/shift/get-shifts-by-month`,body, config)
+        const { data } = await axios.get(`${API}/private/shift/get-shifts-by-month?month=${month}&year=${year}&domain=${domain}`, config)
         dispatch({
             type: GET_SHIFTS_BY_MONTH_SUCCESS,
             payload: data
@@ -323,7 +318,7 @@ export const getShiftsByMonth = (month, year,domain) => async (dispatch) => {
 }
 
 // get shifts by doctor
-export const getShiftsByDoctor = (id,domain) => async (dispatch) => {
+export const getShiftsByDoctor = (id, domain) => async (dispatch) => {
     try {
         dispatch({
             type: GET_SHIFTS_BY_DOCTOR_REQUEST

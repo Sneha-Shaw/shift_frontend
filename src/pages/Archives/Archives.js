@@ -2,16 +2,15 @@ import React from 'react'
 import Sidebar from '../../components/Sidebar/Sidebar'
 import useStyles from './styles'
 import { ArchiveLogic } from './ArchiveLogic'
+import { Button } from '@mui/material'
 
 const Archives = () => {
   const classes = useStyles()
   const {
-    managerInfo,
     calender,
     slots,
     shifts,
     doctors,
-    user,
     domainOp,
     setDomainOp,
     getShifts,
@@ -20,8 +19,7 @@ const Archives = () => {
     months,
     year,
     setYear,
-    years,
-    getCalendar
+    years
   } = ArchiveLogic()
 
   return (
@@ -68,7 +66,6 @@ const Archives = () => {
                 className={classes.dateSelect}
                 onChange={(e) => {
                   setMonth(e.target.value);
-                  getCalendar(e.target.value)
                 }}
               >
                 <option value="">Select Month</option>
@@ -80,93 +77,44 @@ const Archives = () => {
               </select>
             </div>
 
+            <div className={classes.select}>
+              <label
+                htmlFor="domain"
+                className={classes.domainLabel}
+              >
+                Select A Domain to view Roster:
+              </label>
+              <select
+                name="domain"
+                id="domain"
+                className={classes.domainSelect}
+                onChange={(e) => {
+                  setDomainOp(e.target.value);
+                  // getShifts(e.target.value);
+                  // handleDomain(e.target.value)
+                }}
+                value={domainOp}
+              >
+                <option value="">Select Domain</option>
+                {
+                  alldomains && alldomains.getAllDomains.map
+                    ((domain) => (
+                      <option key={domain._id} value={domain?.domainName}>{domain?.domainName}</option>
+                    ))
+                }
+              </select>
+            </div>
+            <Button
+              variant="contained"
+              color="primary"
+              className={classes.button}
+              onClick={() => {
+                getShifts()
+              }}
+            >
+              View Roster
+            </Button>
 
-            {
-              managerInfo ?
-                <div className={classes.select}>
-                  <label
-                    htmlFor="domain"
-                    className={classes.domainLabel}
-                  >
-                    Select A Domain to view Roster:
-                  </label>
-                  <select
-                    name="domain"
-                    id="domain"
-                    className={classes.domainSelect}
-                    onChange={(e) => {
-                      setDomainOp(e.target.value);
-                      getShifts(e.target.value);
-                      // handleDomain(e.target.value)
-                    }}
-                    value={domainOp}
-
-                  >
-                    <option value="">Select Domain</option>
-                    {
-                      alldomains && alldomains.getAllDomains.map
-                        ((domain) => (
-                          <option key={domain._id} value={domain?.domainName}>{domain?.domainName}</option>
-                        ))
-                    }
-                  </select>
-
-                </div>
-                :
-                <div className={classes.select}>
-                  <label
-                    htmlFor="domain"
-                    className={classes.domainLabel}
-                  >
-                    Select A Domain to view Roster:
-                  </label>
-                  {
-                    user && user?.ecg && user?.echo ?
-                      <select
-                        name="domain"
-                        id="domain"
-                        className={classes.domainSelect}
-                        onChange={(e) => {
-                          setDomainOp(e.target.value);
-                        }}
-                        value={domainOp}
-
-                      >
-                        <option value="">Select Domain</option>
-                        {
-                          alldomains && alldomains.getAllDomains.map
-                            ((domain) => (
-                              <option key={domain._id} value={domain?.domainName}>{domain?.domainName}</option>
-                            ))
-                        }
-                      </select>
-                      :
-                      user && user?.ecg ?
-                        <input
-                          type="text"
-                          name="domain"
-                          id="domain"
-                          className={classes.domainSelect}
-                          value="ECG"
-                          disabled
-                        />
-                        :
-                        user && user?.echo &&
-                        <input
-                          type="text"
-                          name="domain"
-                          id="domain"
-                          className={classes.domainSelect}
-                          value="ECHO"
-                          disabled
-                        />
-
-
-
-                  }
-
-                </div>
-            }
           </div>
           <div className={classes.tableContainer}>
             <table className={classes.table}>

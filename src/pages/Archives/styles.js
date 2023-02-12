@@ -16,7 +16,7 @@ export default makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        justifyContent: "center",
+        // justifyContent: "center",
         background: "#f7f7f7",
         padding: "0 2rem",
         margin: "0 auto",
@@ -34,7 +34,6 @@ export default makeStyles((theme) => ({
             background: "#06283D",
             fontSize: "1.4rem",
             fontWeight: "bold",
-            marginBottom: "1rem",
             color: "#fff",
             '&:hover': {
                 background: "#06283D",
@@ -48,17 +47,18 @@ export default makeStyles((theme) => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "space-around",
+        margin:"4rem 0"
     },
     select: {
-
+        display: "flex",
+        flexDirection: "column",
         '&>label': {
             fontSize: "1.5rem",
             fontWeight: "bold",
             color: "#06283D",
-            marginRight: "1rem",
+            marginBottom: "1rem",
         },
         '&>select': {
-            // width: "10%",
             fontSize: "1.5rem",
             color: "#06283D",
             border: ".5px solid #06283D",

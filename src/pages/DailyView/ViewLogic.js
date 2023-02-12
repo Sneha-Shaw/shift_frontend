@@ -167,7 +167,7 @@ export const ViewLogic = () => {
                 timer: 1500
             })
         }
-    }, [deletedShift])
+    }, [deletedShift,dispatch,domainOp])
 
     useEffect(() => {
         if (updatedShift) {
@@ -180,7 +180,7 @@ export const ViewLogic = () => {
                 timer: 1500
             })
         }
-    }, [updatedShift])
+    }, [updatedShift,dispatch,domainOp])
 
     useEffect(() => {
         if (createdShift) {
@@ -194,7 +194,7 @@ export const ViewLogic = () => {
                 timer: 1500
             })
         }
-    }, [createdShift])
+    }, [createdShift,dispatch,createDomain])
 
 
     useEffect(() => {
@@ -209,7 +209,7 @@ export const ViewLogic = () => {
                 timer: 1500
             })
         }
-    }, [generateShiftsState])
+    }, [generateShiftsState,dispatch,domain])
 
     // get all domains
     useEffect(() => {
@@ -225,7 +225,7 @@ export const ViewLogic = () => {
     useEffect(() => {
         // get current year
         const year = new Date().getFullYear()
-        dispatch(getCalender(currentMonth[0]))
+        dispatch(getCalender(currentMonth[0],year))
         // eslint-disable-next-line react-hooks/exhaustive-deps
         count = 1
     }, [count])

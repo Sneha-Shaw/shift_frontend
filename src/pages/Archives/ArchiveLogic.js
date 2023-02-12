@@ -69,16 +69,15 @@ export const ArchiveLogic = () => {
         dispatch(getAllSlots())
     }, [dispatch])
 
-    const getShifts = (domain) => {
-        // uncapitalize domain
-        domain = domain.toLowerCase()
-        dispatch(getShiftsByMonth(month + 1, year, domainOp))
+    const getShifts = () => {
+        var domain = domainOp.toLowerCase()
+        dispatch(getShiftsByMonth(Number(month) + 1, Number(year),domain ))
     }
 
     // get calender
     const getCalendar = (month) => {
         // by month and year
-        dispatch(getCalender(month))
+        dispatch(getCalender(month, year))
     }
 
     useEffect(() => {
@@ -99,6 +98,14 @@ export const ArchiveLogic = () => {
             setDomainOp("echo")
         }
     }, [user])
+
+    useEffect(() => {
+        if (count === null&&month !== null && year !== null) {
+            getCalendar(month, year)
+                count = 1
+        }
+    }, [month, year])
+
     return {
         managerInfo,
         calender,
