@@ -4,6 +4,7 @@ import useStyles from './styles'
 import { ArchiveLogic } from './ArchiveLogic'
 import { Button } from '@mui/material'
 import DoneIcon from '@mui/icons-material/Done';
+import { locale } from 'moment/moment'
 
 const Archives = () => {
   const classes = useStyles()
@@ -12,17 +13,17 @@ const Archives = () => {
     slots,
     shifts,
     doctors,
-    domainOp,
+    // domainOp,
     setDomainOp,
     getShifts,
     alldomains,
     setMonth,
     months,
-    year,
+    // year,
     setYear,
     years
   } = ArchiveLogic()
-
+  // console.log( new Date('2023-1-23').getFullYear())
   return (
     <div className={classes.root}>
       <Sidebar />
@@ -43,7 +44,7 @@ const Archives = () => {
                 onChange={(e) => {
                   setYear(e.target.value)
                 }}
-                value={year}
+                // value={year}
               >
                 <option value="">Select Year</option>
                 {
@@ -94,7 +95,7 @@ const Archives = () => {
                   // getShifts(e.target.value);
                   // handleDomain(e.target.value)
                 }}
-                value={domainOp}
+                // value={domainOp}
               >
                 <option value="">Select Domain</option>
                 {
@@ -181,7 +182,7 @@ const Archives = () => {
                       <td style={{
                         position: "sticky",
                         left: "21%",
-                        background: "white"
+                        background: "#f7f7f7"
                       }}>
                         {
                           doctors && doctors?.getAllDoctors?.map((doctor, docIndex) => (
@@ -293,9 +294,9 @@ const Archives = () => {
                                         shift?.doctors.map((doctorShift, doctorIndex) => (
 
                                           doctorShift === doctor._id &&
-                                          // new Date(shift.shiftDate).getFullYear() === date.dayYear &&
-                                          new Date(shift.shiftDate).getDate() === date.dayNumber &&
-                                          // new Date(shift.shiftDate).getMonth() === date.dayMonth &&
+                                         ( new Date(shift.shiftDate).getFullYear() === date.dayYear) &&
+                                         ( new Date(shift.shiftDate).getDate() === date.dayNumber) &&
+                                         ( new Date(shift.shiftDate).getMonth()+1 === date.dayMonth) &&
                                           shift?.shiftTime === slot.slotTime && (
                                             <div className={classes.shiftBox} key={doctorIndex}
                                               style={{
