@@ -656,7 +656,7 @@ const DailyView = () => {
                                             </td>
                                             <td style={{
                                                 position: "sticky",
-                                                left: "11.5%",
+                                                left: "21%",
                                                 background: "#f7f7f7"
                                             }}>
                                                 {
@@ -680,7 +680,7 @@ const DailyView = () => {
                                             </td>
                                             <td style={{
                                                 position: "sticky",
-                                                left: "23%",
+                                                left: "41%",
                                                 background: "#f7f7f7"
                                             }}>
                                                 {

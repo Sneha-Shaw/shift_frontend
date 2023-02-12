@@ -81,24 +81,20 @@ export default makeStyles((theme) => ({
         borderCollapse: "collapse",
         border: ".5px solid #06283D",
         '&>thead': {
-            position:"sticky",
-            top:"-.2rem",
-            zIndex:100,
+            position: "sticky",
+            top: "-.2rem",
+            zIndex: 100,
             '&>tr': {
 
                 '&>th': {
                     fontWeight: "bold",
                     padding: "1rem",
                     fontSize: "1.5rem",
-            background: "#06283D",
-
-                    // borderRight: ".5px solid #06283D",
-                    // width: "8rem",
-                    // height: "2rem",
+                    background: "#06283D",
                     color: "#fff",
                     textAlign: "center",
                     '&>div': {
-                        width: "10rem",
+                        width: "20rem",
                     }
                 }
             }
@@ -112,7 +108,7 @@ export default makeStyles((theme) => ({
                     // padding: "1rem",
                     fontSize: "1.5rem",
                     // border: ".5px solid #062 83D",
-                    width: "8rem",
+                    // width: "20rem",
                     height: "fit-content",
                     textAlign: "center",
 
@@ -240,10 +236,10 @@ export default makeStyles((theme) => ({
 
         }
     },
-    doctorList:{
-        width:"100%",
-        height:"20rem",
-        flexDirection:"column",
+    doctorList: {
+        width: "100%",
+        height: "20rem",
+        flexDirection: "column",
         overflow: 'scroll'
     },
     modalFooter: {
@@ -280,11 +276,11 @@ export default makeStyles((theme) => ({
             backgroundColor: 'transparent',
             marginLeft: '1rem',
             fontSize: '1.2rem',
-           
+
         },
     },
     searchIcon: {
-        width:"10% !important",
+        width: "10% !important",
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -293,7 +289,7 @@ export default makeStyles((theme) => ({
         '& svg': {
             color: "#06283D",
             fontSize: '2.2rem',
-            width:"100%"
+            width: "100%"
         }
     },
     shiftBox: {
