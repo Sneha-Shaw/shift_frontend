@@ -23,7 +23,7 @@ const Archives = () => {
     setYear,
     years
   } = ArchiveLogic()
-  // console.log( new Date('2023-1-23').getFullYear())
+  
   return (
     <div className={classes.root}>
       <Sidebar />

@@ -766,11 +766,10 @@ const DailyView = () => {
                                                                             shifts?.data?.map((shift) => (
 
                                                                                 shift?.doctors.map((doctorShift, doctorIndex) => (
-
                                                                                     doctorShift === doctor._id &&
-                                                                                    // new Date(shift.shiftDate).getFullYear() === date.dayYear &&
-                                                                                    new Date(shift.shiftDate).getDate() === date.dayNumber &&
-                                                                                    // new Date(shift.shiftDate).getMonth() === date.dayMonth &&
+                                                                                    ( new Date(shift.shiftDate).getFullYear() === date.dayYear) &&
+                                                                                    ( new Date(shift.shiftDate).getDate() === date.dayNumber) &&
+                                                                                    ( new Date(shift.shiftDate).getMonth()+1 === date.dayMonth) &&
                                                                                     shift?.shiftTime === slot.slotTime && (
                                                                                         <div className={classes.shiftBox} key={doctorIndex}
                                                                                             style={{

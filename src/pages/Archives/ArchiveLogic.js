@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import {
     // getAllShifts,
     getCalender,
-    getShiftsByMonth
+    getShiftsByDomain
 } from '../../redux/actions/shiftAction'
 import {
     getAllSlots
@@ -24,7 +24,7 @@ export const ArchiveLogic = () => {
     const { calender } = useSelector((state) => state.getCalender)
     const { slots } = useSelector((state) => state.getAllSlots)
     const { doctorsInfo: doctors } = useSelector((state) => state.getAllDoctors)
-    const { shifts } = useSelector((state) => state.getShiftsByMonth)
+    const { shifts } = useSelector((state) => state.getShiftsByDomain)
     const { domains: alldomains } = useSelector(state => state.getAllDomains)
 
     var count = null
@@ -71,7 +71,7 @@ export const ArchiveLogic = () => {
 
     const getShifts = () => {
         var domain = domainOp.toLowerCase()
-        dispatch(getShiftsByMonth(Number(month) + 1, Number(year), domain))
+        dispatch(getShiftsByDomain(domain))
     }
 
     // get calender
