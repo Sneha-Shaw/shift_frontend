@@ -71,7 +71,7 @@ export const ArchiveLogic = () => {
 
     const getShifts = () => {
         var domain = domainOp.toLowerCase()
-        dispatch(getShiftsByMonth(Number(month) + 1, Number(year),domain ))
+        dispatch(getShiftsByMonth(Number(month) + 1, Number(year), domain))
     }
 
     // get calender
@@ -100,9 +100,9 @@ export const ArchiveLogic = () => {
     }, [user])
 
     useEffect(() => {
-        if (count === null&&month !== null && year !== null) {
+        if (count === null && month !== null && year !== null) {
             getCalendar(month, year)
-                count = 1
+            count = 1
         }
     }, [month, year])
 

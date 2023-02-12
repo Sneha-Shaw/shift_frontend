@@ -3,6 +3,7 @@ import Sidebar from '../../components/Sidebar/Sidebar'
 import useStyles from './styles'
 import { ArchiveLogic } from './ArchiveLogic'
 import { Button } from '@mui/material'
+import DoneIcon from '@mui/icons-material/Done';
 
 const Archives = () => {
   const classes = useStyles()
@@ -289,10 +290,14 @@ const Archives = () => {
                                     {
                                       shifts?.data?.map((shift) => (
 
-                                        shift?.doctors.map((doctorShift, doctorIndex7) => (
+                                        shift?.doctors.map((doctorShift, doctorIndex) => (
 
-                                          doctorShift === doctor._id && shift?.shiftDate === date.dayYear + '-' + date.dayMonth + '-' + date.dayNumber && shift?.shiftTime === slot.slotTime && (
-                                            <div className={classes.shiftBox} key={doctorIndex7}
+                                          doctorShift === doctor._id &&
+                                          // new Date(shift.shiftDate).getFullYear() === date.dayYear &&
+                                          new Date(shift.shiftDate).getDate() === date.dayNumber &&
+                                          // new Date(shift.shiftDate).getMonth() === date.dayMonth &&
+                                          shift?.shiftTime === slot.slotTime && (
+                                            <div className={classes.shiftBox} key={doctorIndex}
                                               style={{
                                                 borderTop: ".5px solid #fff",
                                                 borderLeft: ".5px solid #fff",
@@ -305,16 +310,11 @@ const Archives = () => {
                                                 // border of last child is #000
                                                 borderBottom: docIndex === doctors?.getAllDoctors?.length - 1 ? "2px solid #000" : ".5px solid #fff"
                                               }}
-
-
                                             >
-                                              Yes
+                                              <DoneIcon fontSize="large" />
                                             </div>
                                           )
-                                          // </div>
                                         ))
-
-                                        // </div>
                                       ))
                                     }
                                   </div>

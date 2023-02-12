@@ -114,5 +114,16 @@ export default makeStyles((theme) => ({
                 }
             }
         }
+    },
+    shiftBox: {
+        background: "#06283D",
+        color: "#fff",
+        fontSize: "1.2rem",
+        outline: "none",
+        cursor: "pointer",
+        width: "100%",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center"
     }
 }))

@@ -799,10 +799,7 @@ const DailyView = () => {
                                                                                             <DoneIcon fontSize="large" />
                                                                                         </div>
                                                                                     )
-                                                                                    // </div>
                                                                                 ))
-
-                                                                                // </div>
                                                                             ))
                                                                         }
                                                                     </div>
