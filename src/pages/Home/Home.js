@@ -80,7 +80,7 @@ const Home = () => {
               <div className={classes.recent}>
                 <div className={classes.card}>
                   <div className={classes.cardHeader}>
-                    <h3>Recent Doctors</h3>
+                    <h3> Doctors</h3>
                     <Button
                       onClick={() => navigate('/attendance/doctors')}
                     >See All</Button>

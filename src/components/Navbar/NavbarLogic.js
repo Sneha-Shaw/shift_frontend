@@ -1,17 +1,18 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react'
-import { logoutManager,searchDoctor } from '../../redux/actions/managerAction';
+import { logoutManager, searchDoctor } from '../../redux/actions/managerAction';
 import { logoutUser } from '../../redux/actions/userAction'
 import { useNavigate } from 'react-router-dom';
 
 export const NavbarLogic = () => {
   const { userInfo } = useSelector((state) => state.signInUser)
   const { managerInfo } = useSelector((state) => state.signInManager)
+  const { doctorInfo: searchData } = useSelector((state) => state.searchDoctor)
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const [id, setId] = useState('')
-  const[name,setName] = useState('')
+  const [name, setName] = useState('')
 
   const handleLogout = () => {
     if (userInfo) {
@@ -64,7 +65,15 @@ export const NavbarLogic = () => {
   const handleClose = (id) => {
     setAnchorEl(null);
   };
-  
+
+  useEffect(() => {
+
+    if (managerInfo && searchData) {
+      navigate('/attendance/doctors')
+    }
+  }, [managerInfo, searchData, navigate]
+  )
+
   return {
     handleLogout,
     show,
