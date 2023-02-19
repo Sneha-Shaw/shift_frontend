@@ -50,7 +50,7 @@ const Navbar = () => {
           <input type="text" placeholder="Search Doctors" 
             value={name}
             onChange={(e) => setName(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' ? handleSearch(e) : null}
+            onKeyUp={(e) => e.key === 'Enter' ? handleSearch(e) : null}
           />
           <div className={classes.searchIcon}>
             <SearchIcon fontSize="large" />

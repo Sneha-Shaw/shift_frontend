@@ -284,7 +284,7 @@ const DailyView = () => {
                                         <input type="text" placeholder="Search Doctors"
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
-                                            onKeyPress={(e) => e.key === 'Enter' ? handleSearch(e) : null}
+                                            onKeyUp={(e) => e.key === 'Enter' ? handleSearch(e) : null}
                                         />
                                         <div className={classes.searchIcon}>
                                             <SearchIcon fontSize="large" />
@@ -421,7 +421,7 @@ const DailyView = () => {
                                         <input type="text" placeholder="Search Doctors"
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
-                                            onKeyPress={(e) => e.key === 'Enter' ? handleSearch(e) : null}
+                                            onKeyUp={(e) => e.key === 'Enter' ? handleSearch(e) : null}
                                         />
                                         <div className={classes.searchIcon}>
                                             <SearchIcon fontSize="large" />
@@ -654,11 +654,7 @@ const DailyView = () => {
 
                                                 }
                                             </td>
-                                            <td style={{
-                                                position: "sticky",
-                                                left: "21%",
-                                                background: "#f7f7f7"
-                                            }}>
+                                            <td >
                                                 {
                                                     doctors && doctors?.getAllDoctors?.map((doctor, docIndex) => (
                                                         <div key={doctor._id} style={{
@@ -678,11 +674,7 @@ const DailyView = () => {
                                                     ))
                                                 }
                                             </td>
-                                            <td style={{
-                                                position: "sticky",
-                                                left: "41%",
-                                                background: "#f7f7f7"
-                                            }}>
+                                            <td >
                                                 {
                                                     doctors && doctors?.getAllDoctors?.map((doctor, docIndex) => (
                                                         <div key={doctor._id} style={{
@@ -767,9 +759,9 @@ const DailyView = () => {
 
                                                                                 shift?.doctors.map((doctorShift, doctorIndex) => (
                                                                                     doctorShift === doctor._id &&
-                                                                                    ( new Date(shift.shiftDate).getFullYear() === date.dayYear) &&
-                                                                                    ( new Date(shift.shiftDate).getDate() === date.dayNumber) &&
-                                                                                    ( new Date(shift.shiftDate).getMonth()+1 === date.dayMonth) &&
+                                                                                    (new Date(shift.shiftDate).getFullYear() === date.dayYear) &&
+                                                                                    (new Date(shift.shiftDate).getDate() === date.dayNumber) &&
+                                                                                    (new Date(shift.shiftDate).getMonth() + 1 === date.dayMonth) &&
                                                                                     shift?.shiftTime === slot.slotTime && (
                                                                                         <div className={classes.shiftBox} key={doctorIndex}
                                                                                             style={{
