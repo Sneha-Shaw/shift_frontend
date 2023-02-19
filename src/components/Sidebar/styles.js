@@ -9,7 +9,7 @@ export default makeStyles((theme) => ({
         position: "relative",
         [theme.breakpoints.down("sm")]: {
             width: "100%",
-            height: "9vh",
+            // height: "9vh",
         },
     },
     list:{
